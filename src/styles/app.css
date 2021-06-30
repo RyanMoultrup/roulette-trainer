@@ -2,3 +2,1124 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dc-chart svg g g.axis.x path,
+.dc-chart svg g g.tick line {
+    display: none
+}
+
+.dc-chart svg g g.axis.y path, svg g g.axis.yr path {
+    display: none;
+}
+
+#win-loss-row-chart svg g g.axis {
+    display: none;
+}
+
+#win-loss-chart.dc-chart .x.axis text {
+    display: none;
+}
+
+#win-loss-chart {
+    min-height: 200px;
+}
+
+#win-loss-row-chart {
+    min-height: 200px
+}
+
+#hits-chart {
+    min-height: 200px
+}
+
+.d3-tip {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.4;
+    padding: 20px;
+    pointer-events: none !important;
+    color: #203d5d;
+    box-shadow: 0 4px 20px 4px rgba(0, 20, 60, .1), 0 4px 80px -8px rgba(0, 20, 60, .2);
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: #fff;
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Northward tooltips */
+.d3-tip.n:after {
+    content: "▼";
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+    text-align: center;
+}
+
+/* Eastward tooltips */
+.d3-tip.e:after {
+    content: "◀";
+    margin: -4px 0 0 0;
+    top: 50%;
+    left: -8px;
+}
+
+/* Southward tooltips */
+.d3-tip.s:after {
+    content: "▲";
+    margin: 0 0 1px 0;
+    top: -8px;
+    left: 0;
+    text-align: center;
+}
+
+/* Westward tooltips */
+.d3-tip.w:after {
+    content: "▶";
+    margin: -4px 0 0 -1px;
+    top: 50%;
+    left: 100%;
+}
+
+#table {
+    max-height: 350px;
+}
+
+.chip {
+    background-image: url("../assets/chips.png");
+    background-repeat: no-repeat;
+    background-size: 400px 400px;
+    height: 109px;
+    width: 109px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.chips .chip-red {
+    /* background-attachment: fixed; */
+    background-position: 50% 25%;
+}
+
+.chips .chip-blue {
+    /* background-attachment: fixed; */
+    background-position: 3% 25%;
+}
+
+.chips .chip-green {
+    /* background-attachment: fixed; */
+    background-position: 3% 75%;
+}
+
+.chips .chip-black {
+    /* background-attachment: fixed; */
+    background-position: 97% 25%;
+}
+
+.spot:hover {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.spot-h {
+    height: 1.5rem;
+    width: 1.5rem;
+    /*border: solid 1px yellow;*/
+}
+
+.dbl_3_6 {
+    left: 14%;
+    top: 7%;
+}
+
+.dbl_3_6:hover ~ ._3_6 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_6_9 {
+    left: 21%;
+    top: 7%;
+}
+
+.dbl_6_9:hover ~ ._6_9 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_9_12 {
+    left: 28%;
+    top: 7%;
+}
+
+.dbl_9_12:hover ~ ._9_12 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_12_15 {
+    left: 35.4%;
+    top: 7%;
+}
+
+.dbl_12_15:hover ~ ._12_15 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_15_18 {
+    left: 42.2%;
+    top: 7%;
+}
+
+.dbl_15_18:hover ~ ._15_18 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_18_21 {
+    left: 49.4%;
+    top: 7%;
+}
+
+.dbl_18_21:hover ~ ._18_21 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_21_24 {
+    left: 56.5%;
+    top: 7%;
+}
+
+.dbl_21_24:hover ~ ._21_24 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_24_27 {
+    left: 63.4%;
+    top: 7%;
+}
+
+.dbl_24_27:hover ~ ._24_27 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_27_30 {
+    left: 70.5%;
+    top: 7%;
+}
+
+.dbl_27_30:hover ~ ._27_30 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_30_33 {
+    left: 77.5%;
+    top: 7%;
+}
+
+.dbl_30_33:hover ~ ._30_33 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_33_36 {
+    left: 84.5%;
+    top: 7%;
+}
+
+.dbl_33_36:hover ~ ._33_36 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_3_2 {
+    left: 10.5%;
+    top: 17%;
+}
+
+.dbl_3_2:hover ~ ._3_2 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.sqr_3_6_2_5 {
+    left: 14%;
+    top: 17%;
+}
+
+.sqr_3_6_2_5:hover ~ ._3_6_2_5 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_6_5 {
+    left: 17.5%;
+    top: 17%;
+}
+
+.dbl_6_5:hover ~ ._6_5 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.sqr_6_9_5_8 {
+    left: 21.25%;
+    top: 17%;
+}
+
+.sqr_6_9_5_8:hover ~ ._6_9_5_8 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_9_8 {
+    left: 24.75%;
+    top: 17%;
+}
+
+.dbl_9_8:hover ~ ._9_8 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.sqr_9_12_8_11 {
+    left: 28.25%;
+    top: 17%;
+}
+
+.sqr_9_12_8_11:hover ~ ._9_12_8_11 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_12_11 {
+    left: 31.75%;
+    top: 17%;
+}
+
+.dbl_12_11:hover ~ ._12_11 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.sqr_12_15_11_14 {
+    left: 35.25%;
+    top: 17%;
+}
+
+.sqr_12_15_11_14:hover ~ ._12_15_11_14 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_15_14 {
+    left: 38.75%;
+    top: 17%;
+}
+
+.dbl_15_14:hover ~ ._15_14 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.sqr_15_18_14_17 {
+    left: 42.25%;
+    top: 17%;
+}
+
+.sqr_15_18_14_17:hover ~ ._15_18_14_17 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_18_17 {
+    left: 45.5%;
+    top: 17%;
+}
+
+.dbl_18_17:hover ~ ._18_17 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.sqr_18_21_17_20 {
+    left: 49.25%;
+    top: 17%;
+}
+
+.sqr_18_21_17_20:hover ~ ._18_21_17_20 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_21_20 {
+    left: 52.75%;
+    top: 17%;
+}
+
+.dbl_21_20:hover ~ ._21_20 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.sqr_21_24_20_23 {
+    left: 56.25%;
+    top: 17%;
+}
+
+.sqr_21_24_20_23:hover ~ ._21_24_20_23 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_24_23 {
+    left: 59.5%;
+    top: 17%;
+}
+
+.dbl_24_23:hover ~ ._24_23 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.sqr_24_27_23_26 {
+    left: 63.5%;
+    top: 17%;
+}
+
+.sqr_24_27_23_26:hover ~ ._24_27_23_26 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_27_26 {
+    left: 66.75%;
+    top: 17%;
+}
+
+.dbl_27_26:hover ~ ._27_26 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.sqr_27_30_26_29 {
+    left: 70.5%;
+    top: 17%;
+}
+
+.sqr_27_30_26_29:hover ~ ._27_30_26_29 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_30_29 {
+    left: 73.75%;
+    top: 17%;
+}
+
+.dbl_30_29:hover ~ ._30_29 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.sqr_30_33_29_32 {
+    left: 77.5%;
+    top: 17%;
+}
+
+.sqr_30_33_29_32:hover ~ ._30_33_29_32 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_33_32 {
+    left: 81%;
+    top: 17%;
+}
+
+.dbl_33_32:hover ~ ._33_32 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.sqr_33_36_32_35 {
+    left: 84.5%;
+    top: 17%;
+}
+
+.sqr_33_36_32_35:hover ~ ._33_36_32_35 {
+    box-shadow: inset 0px 0px 10px #fff;
+}
+
+.dbl_36_35 {
+    left: 88.25%;
+    top: 17%;
+}
+
+
+
+
+._zero {
+    height: 46%;
+    left: 3.25%;
+    top: 7.5%;
+}
+
+.dbl_0_3 {
+    left: 7.25%;
+    top: 7.5%;
+}
+
+.dbl_0_2 {
+    left: 7.25%;
+    top: 26.5%;
+}
+
+.dbl_0_1 {
+    left: 7.25%;
+    top: 46.5%;
+}
+
+.trip_0_3_2 {
+    left: 7.25%;
+    top: 16.5%;
+}
+
+.trip_0_2_1 {
+    left: 7.25%;
+    top: 36.5%;
+}
+
+.dbl_2_5 {
+    left: 14.25%;
+    top: 26.5%;
+}
+.dbl_5_8 {
+    left: 21.25%;
+    top: 26.5%;
+}
+.dbl_8_11 {
+    left: 28.25%;
+    top: 26.5%;
+}
+.dbl_11_14 {
+    left: 35.25%;
+    top: 26.5%;
+}
+.dbl_14_17 {
+    left: 42.25%;
+    top: 26.5%;
+}
+.dbl_17_20 {
+    left: 49.5%;
+    top: 26.5%;
+}
+.dbl_20_23 {
+    left: 56.5%;
+    top: 26.5%;
+}
+.dbl_23_26 {
+    left: 63.5%;
+    top: 26.5%;
+}
+.dbl_26_29 {
+    left: 70.5%;
+    top: 26.5%;
+}
+.dbl_29_32 {
+    left: 77.5%;
+    top: 26.5%;
+}
+.dbl_32_35 {
+    left: 84.5%;
+    top: 26.5%;
+}
+.dbl_2_1 {
+    left: 10.5%;
+    top: 36.5%;
+}
+.sqr_2_5_1_4 {
+    left: 14.25%;
+    top: 36.5%;
+}
+.dbl_5_4 {
+    left: 17.75%;
+    top: 36.5%;
+}
+.sqr_5_8_4_7 {
+    left: 21.25%;
+    top: 36.5%;
+}
+.dbl_8_7 {
+    left: 25%;
+    top: 36.5%;
+}
+.sqr_8_11_7_10 {
+    left: 28.25%;
+    top: 36.5%;
+}
+.dbl_11_10 {
+    left: 32%;
+    top: 36.5%;
+}
+.sqr_11_14_10_13 {
+    left: 35.25%;
+    top: 36.5%;
+}
+.dbl_14_13 {
+    left: 38.75%;
+    top: 36.5%;
+}
+.sqr_14_17_13_16 {
+    left: 42.25%;
+    top: 36.5%;
+}
+.dbl_17_16 {
+    left: 46%;
+    top: 36.5%;
+}
+.sqr_17_20_16_19 {
+    left: 49.5%;
+    top: 36.5%;
+}
+.dbl_20_19 {
+    left: 53%;
+    top: 36.5%;
+}
+.sqr_20_23_19_22 {
+    left: 56.5%;
+    top: 36.5%;
+}
+.dbl_23_22 {
+    left: 60%;
+    top: 36.5%;
+}
+.sqr_23_26_22_25 {
+    left: 63.5%;
+    top: 36.5%;
+}
+.dbl_26_25 {
+    left: 67%;
+    top: 36.5%;
+}
+.sqr_26_29_25_28 {
+    left: 70.5%;
+    top: 36.5%;
+}
+.dbl_29_28 {
+    left: 74%;
+    top: 36.5%;
+}
+.sqr_29_32_28_31 {
+    left: 77.5%;
+    top: 36.5%;
+}
+.dbl_32_31 {
+    left: 81.25%;
+    top: 36.5%;
+}
+.sqr_32_35_31_34 {
+    left: 84.75%;
+    top: 36.5%;
+}
+.dbl_35_34 {
+    left: 88.25%;
+    top: 36.5%;
+}
+.dbl_1_4 {
+    left: 14.25%;
+    top: 46.5%;
+}
+.dbl_4_7 {
+    left: 21.25%;
+    top: 46.5%;
+}
+.dbl_7_10 {
+    left: 28.25%;
+    top: 46.5%;
+}
+.dbl_10_13 {
+    left: 35.25%;
+    top: 46.5%;
+}
+.dbl_13_16 {
+    left: 42.25%;
+    top: 46.5%;
+}
+.dbl_16_19 {
+    left: 49.5%;
+    top: 46.5%;
+}
+.dbl_19_22 {
+    left: 56.5%;
+    top: 46.5%;
+}
+.dbl_22_25 {
+    left: 63.5%;
+    top: 46.5%;
+}
+.dbl_25_28 {
+    left: 70.5%;
+    top: 46.5%;
+}
+.dbl_28_31 {
+    left: 77.5%;
+    top: 46.5%;
+}
+.dbl_31_34 {
+    left: 84.5%;
+    top: 46.5%;
+}
+.str_3_2_1 {
+    left: 10.5%;
+    top: 56%
+}
+.line_3_6_2_5_1_4 {
+    left: 14.25%;
+    top: 56%
+}
+.str_6_5_4 {
+    left: 17.75%;
+    top: 56%
+}
+.line_6_9_5_8_4_7 {
+    left: 21.25%;
+    top: 56%
+}
+.str_9_8_7 {
+    left: 25%;
+    top: 56%
+}
+.line_9_12_8_11_7_10 {
+    left: 28.25%;
+    top: 56%
+}
+.str_12_11_10 {
+    left: 32%;
+    top: 56%
+}
+.line_12_15_11_14_10_13 {
+    left: 35.25%;
+    top: 56%
+}
+.str_15_14_13 {
+    left: 38.75%;
+    top: 56%
+}
+.line_15_18_14_17_13_16 {
+    left: 42.25%;
+    top: 56%
+}
+.str_18_17_16 {
+    left: 46%;
+    top: 56%
+}
+.line_18_21_17_20_16_19 {
+    left: 49.5%;
+    top: 56%
+}
+.str_21_20_19 {
+    left: 53%;
+    top: 56%
+}
+.line_21_24_20_23_19_22 {
+    left: 56.5%;
+    top: 56%
+}
+.str_24_23_22 {
+    left: 60%;
+    top: 56%
+}
+.line_24_27_23_26_22_25 {
+    left: 63.5%;
+    top: 56%
+}
+.str_27_26_25 {
+    left: 67%;
+    top: 56%
+}
+.line_27_30_26_29_25_28 {
+    left: 70.5%;
+    top: 56%
+}
+.str_30_29_28 {
+    left: 74%;
+    top: 56%
+}
+.line_30_33_29_32_28_31 {
+    left: 77.5%;
+    top: 56%
+}
+.str_33_32_31 {
+    left: 81.25%;
+    top: 56%
+}
+.line_33_36_32_35_31_34 {
+    left: 84.75%;
+    top: 56%
+}
+.str_36_35_34 {
+    left: 88.25%;
+    top: 56%
+}
+._1st_12 {
+    width: 25%;
+    left: 10.5%;
+    top: 66%
+}
+
+._2nd_12 {
+    width: 25%;
+    left: 38%;
+    top: 66%
+}
+
+._3rd_12 {
+    width: 25%;
+    left: 66%;
+    top: 66%
+}
+
+._1to18 {
+    width: 13%;
+    left: 9%;
+    top: 86%
+}
+
+._19to36 {
+    width: 12%;
+    left: 80%;
+    top: 86%
+}
+
+._odd {
+    width: 13%;
+    left: 65%;
+    top: 86%
+}
+
+._even {
+    width: 13%;
+    left: 23%;
+    top: 86%
+}
+
+._red {
+    width: 13%;
+    left: 37%;
+    top: 86%
+}
+
+._black {
+    width: 13%;
+    left: 51%;
+    top: 86%
+}
+
+._1st_row {
+    /*width: 25%;*/
+    left: 95%;
+    top: 6%
+}
+
+._2nd_row {
+    /*width: 25%;*/
+    left: 95%;
+    top: 26%
+}
+
+._3rd_row {
+    /*width: 25%;*/
+    left: 95%;
+    top: 46%
+}
+
+
+
+/* ------------- */
+
+.dbl_36_35:hover ~ ._36_35,
+.dbl_2_5:hover ~ ._2,
+.dbl_2_5:hover ~ ._5,
+.dbl_5_8:hover ~ ._5,
+.dbl_5_8:hover ~ ._8,
+.dbl_8_11:hover ~ ._8,
+.dbl_8_11:hover ~ ._11,
+.dbl_11_14:hover ~ ._11,
+.dbl_11_14:hover ~ ._14,
+.dbl_14_17:hover ~ ._14,
+.dbl_14_17:hover ~ ._17,
+.dbl_17_20:hover ~ ._17,
+.dbl_17_20:hover ~ ._20,
+.dbl_20_23:hover ~ ._20,
+.dbl_20_23:hover ~ ._23,
+.dbl_23_26:hover ~ ._23,
+.dbl_23_26:hover ~ ._26,
+.dbl_26_29:hover ~ ._26,
+.dbl_26_29:hover ~ ._29,
+.dbl_29_32:hover ~ ._29,
+.dbl_29_32:hover ~ ._32,
+.dbl_32_35:hover ~ ._32,
+.dbl_32_35:hover ~ ._35,
+.dbl_2_1:hover ~ ._2,
+.dbl_2_1:hover ~ ._1,
+.sqr_2_5_1_4:hover ~ ._2,
+.sqr_2_5_1_4:hover ~ ._5,
+.sqr_2_5_1_4:hover ~ ._1,
+.sqr_2_5_1_4:hover ~ ._4,
+.dbl_5_4:hover ~ ._5,
+.dbl_5_4:hover ~ ._4,
+.sqr_5_8_4_7:hover ~ ._5,
+.sqr_5_8_4_7:hover ~ ._8,
+.sqr_5_8_4_7:hover ~ ._4,
+.sqr_5_8_4_7:hover ~ ._7,
+.dbl_8_7:hover ~ ._8,
+.dbl_8_7:hover ~ ._7,
+.sqr_8_11_7_10:hover ~ ._8,
+.sqr_8_11_7_10:hover ~ ._11,
+.sqr_8_11_7_10:hover ~ ._7,
+.sqr_8_11_7_10:hover ~ ._10,
+.dbl_11_10:hover ~ ._11,
+.dbl_11_10:hover ~ ._10,
+.sqr_11_14_10_13:hover ~ ._11,
+.sqr_11_14_10_13:hover ~ ._14,
+.sqr_11_14_10_13:hover ~ ._10,
+.sqr_11_14_10_13:hover ~ ._13,
+.dbl_14_13:hover ~ ._14,
+.dbl_14_13:hover ~ ._13,
+.sqr_14_17_13_16:hover ~ ._14,
+.sqr_14_17_13_16:hover ~ ._17,
+.sqr_14_17_13_16:hover ~ ._13,
+.sqr_14_17_13_16:hover ~ ._16,
+.dbl_17_16:hover ~ ._17,
+.dbl_17_16:hover ~ ._16,
+.sqr_17_20_16_19:hover ~ ._17,
+.sqr_17_20_16_19:hover ~ ._20,
+.sqr_17_20_16_19:hover ~ ._16,
+.sqr_17_20_16_19:hover ~ ._19,
+.dbl_20_19:hover ~ ._20,
+.dbl_20_19:hover ~ ._19,
+.sqr_20_23_19_22:hover ~ ._20,
+.sqr_20_23_19_22:hover ~ ._23,
+.sqr_20_23_19_22:hover ~ ._19,
+.sqr_20_23_19_22:hover ~ ._22,
+.dbl_23_22:hover ~ ._23,
+.dbl_23_22:hover ~ ._22,
+.sqr_23_26_22_25:hover ~ ._23,
+.sqr_23_26_22_25:hover ~ ._26,
+.sqr_23_26_22_25:hover ~ ._22,
+.sqr_23_26_22_25:hover ~ ._25,
+.dbl_26_25:hover ~ ._26,
+.dbl_26_25:hover ~ ._25,
+.sqr_26_29_25_28:hover ~ ._26,
+.sqr_26_29_25_28:hover ~ ._29,
+.sqr_26_29_25_28:hover ~ ._25,
+.sqr_26_29_25_28:hover ~ ._28,
+.dbl_29_28:hover ~ ._29,
+.dbl_29_28:hover ~ ._28,
+.sqr_29_32_28_31:hover ~ ._29,
+.sqr_29_32_28_31:hover ~ ._32,
+.sqr_29_32_28_31:hover ~ ._28,
+.sqr_29_32_28_31:hover ~ ._31,
+.dbl_32_31:hover ~ ._32,
+.dbl_32_31:hover ~ ._31,
+.sqr_32_35_31_34:hover ~ ._32,
+.sqr_32_35_31_34:hover ~ ._35,
+.sqr_32_35_31_34:hover ~ ._31,
+.sqr_32_35_31_34:hover ~ ._34,
+.dbl_35_34:hover ~ ._35,
+.dbl_35_34:hover ~ ._34,
+.dbl_1_4:hover ~ ._1,
+.dbl_1_4:hover ~ ._4,
+.dbl_4_7:hover ~ ._4,
+.dbl_4_7:hover ~ ._7,
+.dbl_7_10:hover ~ ._7,
+.dbl_7_10:hover ~ ._10,
+.dbl_10_13:hover ~ ._10,
+.dbl_10_13:hover ~ ._13,
+.dbl_13_16:hover ~ ._13,
+.dbl_13_16:hover ~ ._16,
+.dbl_16_19:hover ~ ._16,
+.dbl_16_19:hover ~ ._19,
+.dbl_19_22:hover ~ ._19,
+.dbl_19_22:hover ~ ._22,
+.dbl_22_25:hover ~ ._22,
+.dbl_22_25:hover ~ ._25,
+.dbl_25_28:hover ~ ._25,
+.dbl_25_28:hover ~ ._28,
+.dbl_28_31:hover ~ ._28,
+.dbl_28_31:hover ~ ._31,
+.dbl_31_34:hover ~ ._31,
+.dbl_31_34:hover ~ ._34,
+.str_3_2_1:hover ~ ._3,
+.str_3_2_1:hover ~ ._2,
+.str_3_2_1:hover ~ ._1,
+.line_3_6_2_5_1_4:hover ~ ._3,
+.line_3_6_2_5_1_4:hover ~ ._6,
+.line_3_6_2_5_1_4:hover ~ ._2,
+.line_3_6_2_5_1_4:hover ~ ._5,
+.line_3_6_2_5_1_4:hover ~ ._1,
+.line_3_6_2_5_1_4:hover ~ ._4,
+.str_6_5_4:hover ~ ._6,
+.str_6_5_4:hover ~ ._5,
+.str_6_5_4:hover ~ ._4,
+.line_6_9_5_8_4_7:hover ~ ._6,
+.line_6_9_5_8_4_7:hover ~ ._9,
+.line_6_9_5_8_4_7:hover ~ ._5,
+.line_6_9_5_8_4_7:hover ~ ._8,
+.line_6_9_5_8_4_7:hover ~ ._4,
+.line_6_9_5_8_4_7:hover ~ ._7,
+.str_9_8_7:hover ~ ._9,
+.str_9_8_7:hover ~ ._8,
+.str_9_8_7:hover ~ ._7,
+.line_9_12_8_11_7_10:hover ~ ._9,
+.line_9_12_8_11_7_10:hover ~ ._12,
+.line_9_12_8_11_7_10:hover ~ ._8,
+.line_9_12_8_11_7_10:hover ~ ._11,
+.line_9_12_8_11_7_10:hover ~ ._7,
+.line_9_12_8_11_7_10:hover ~ ._10,
+.str_12_11_10:hover ~ ._12,
+.str_12_11_10:hover ~ ._11,
+.str_12_11_10:hover ~ ._10,
+.line_12_15_11_14_10_13:hover ~ ._12,
+.line_12_15_11_14_10_13:hover ~ ._15,
+.line_12_15_11_14_10_13:hover ~ ._11,
+.line_12_15_11_14_10_13:hover ~ ._14,
+.line_12_15_11_14_10_13:hover ~ ._10,
+.line_12_15_11_14_10_13:hover ~ ._13,
+.str_15_14_13:hover ~ ._15,
+.str_15_14_13:hover ~ ._14,
+.str_15_14_13:hover ~ ._13,
+.line_15_18_14_17_13_16:hover ~ ._15,
+.line_15_18_14_17_13_16:hover ~ ._18,
+.line_15_18_14_17_13_16:hover ~ ._14,
+.line_15_18_14_17_13_16:hover ~ ._17,
+.line_15_18_14_17_13_16:hover ~ ._13,
+.line_15_18_14_17_13_16:hover ~ ._16,
+.str_18_17_16:hover ~ ._18,
+.str_18_17_16:hover ~ ._17,
+.str_18_17_16:hover ~ ._16,
+.line_18_21_17_20_16_19:hover ~ ._18,
+.line_18_21_17_20_16_19:hover ~ ._21,
+.line_18_21_17_20_16_19:hover ~ ._17,
+.line_18_21_17_20_16_19:hover ~ ._20,
+.line_18_21_17_20_16_19:hover ~ ._16,
+.line_18_21_17_20_16_19:hover ~ ._19,
+.str_21_20_19:hover ~ ._21,
+.str_21_20_19:hover ~ ._20,
+.str_21_20_19:hover ~ ._19,
+.line_21_24_20_23_19_22:hover ~ ._21,
+.line_21_24_20_23_19_22:hover ~ ._24,
+.line_21_24_20_23_19_22:hover ~ ._20,
+.line_21_24_20_23_19_22:hover ~ ._23,
+.line_21_24_20_23_19_22:hover ~ ._19,
+.line_21_24_20_23_19_22:hover ~ ._22,
+.str_24_23_22:hover ~ ._24,
+.str_24_23_22:hover ~ ._23,
+.str_24_23_22:hover ~ ._22,
+.line_24_27_23_26_22_25:hover ~ ._24,
+.line_24_27_23_26_22_25:hover ~ ._27,
+.line_24_27_23_26_22_25:hover ~ ._23,
+.line_24_27_23_26_22_25:hover ~ ._26,
+.line_24_27_23_26_22_25:hover ~ ._22,
+.line_24_27_23_26_22_25:hover ~ ._25,
+.str_27_26_25:hover ~ ._27,
+.str_27_26_25:hover ~ ._26,
+.str_27_26_25:hover ~ ._25,
+.line_27_30_26_29_25_28:hover ~ ._27,
+.line_27_30_26_29_25_28:hover ~ ._30,
+.line_27_30_26_29_25_28:hover ~ ._26,
+.line_27_30_26_29_25_28:hover ~ ._29,
+.line_27_30_26_29_25_28:hover ~ ._25,
+.line_27_30_26_29_25_28:hover ~ ._28,
+.str_30_29_28:hover ~ ._30,
+.str_30_29_28:hover ~ ._29,
+.str_30_29_28:hover ~ ._28,
+.line_30_33_29_32_28_31:hover ~ ._30,
+.line_30_33_29_32_28_31:hover ~ ._33,
+.line_30_33_29_32_28_31:hover ~ ._29,
+.line_30_33_29_32_28_31:hover ~ ._32,
+.line_30_33_29_32_28_31:hover ~ ._28,
+.line_30_33_29_32_28_31:hover ~ ._31,
+.str_33_32_31:hover ~ ._33,
+.str_33_32_31:hover ~ ._32,
+.str_33_32_31:hover ~ ._31,
+.line_33_36_32_35_31_34:hover ~ ._33,
+.line_33_36_32_35_31_34:hover ~ ._36,
+.line_33_36_32_35_31_34:hover ~ ._32,
+.line_33_36_32_35_31_34:hover ~ ._35,
+.line_33_36_32_35_31_34:hover ~ ._31,
+.line_33_36_32_35_31_34:hover ~ ._34,
+.str_36_35_34:hover ~ ._36,
+.str_36_35_34:hover ~ ._35,
+.str_36_35_34:hover ~ ._34,
+._1st_12:hover ~ ._1,
+._1st_12:hover ~ ._2,
+._1st_12:hover ~ ._3,
+._1st_12:hover ~ ._4,
+._1st_12:hover ~ ._5,
+._1st_12:hover ~ ._6,
+._1st_12:hover ~ ._7,
+._1st_12:hover ~ ._8,
+._1st_12:hover ~ ._9,
+._1st_12:hover ~ ._10,
+._1st_12:hover ~ ._11,
+._1st_12:hover ~ ._12,
+._2nd_12:hover ~ ._13,
+._2nd_12:hover ~ ._14,
+._2nd_12:hover ~ ._15,
+._2nd_12:hover ~ ._16,
+._2nd_12:hover ~ ._17,
+._2nd_12:hover ~ ._18,
+._2nd_12:hover ~ ._19,
+._2nd_12:hover ~ ._20,
+._2nd_12:hover ~ ._21,
+._2nd_12:hover ~ ._22,
+._2nd_12:hover ~ ._23,
+._2nd_12:hover ~ ._24,
+._3rd_12:hover ~ ._14,
+
+._even:hover ~ ._2,
+._even:hover ~ ._4,
+._even:hover ~ ._6,
+._even:hover ~ ._8,
+._even:hover ~ ._10,
+._even:hover ~ ._12,
+._even:hover ~ ._14,
+._even:hover ~ ._16,
+._even:hover ~ ._18,
+._even:hover ~ ._20,
+._even:hover ~ ._22,
+._even:hover ~ ._24,
+._even:hover ~ ._26,
+._even:hover ~ ._28,
+._even:hover ~ ._30,
+._even:hover ~ ._32,
+._even:hover ~ ._34,
+._even:hover ~ ._36,
+
+._odd:hover ~ ._1,
+._odd:hover ~ ._3,
+._odd:hover ~ ._5,
+._odd:hover ~ ._7,
+._odd:hover ~ ._9,
+._odd:hover ~ ._11,
+._odd:hover ~ ._13,
+._odd:hover ~ ._15,
+._odd:hover ~ ._17,
+._odd:hover ~ ._19,
+._odd:hover ~ ._21,
+._odd:hover ~ ._23,
+._odd:hover ~ ._25,
+._odd:hover ~ ._27,
+._odd:hover ~ ._29,
+._odd:hover ~ ._31,
+._odd:hover ~ ._33,
+._odd:hover ~ ._35,
+
+._red:hover ~ ._1,
+._red:hover ~ ._3,
+._red:hover ~ ._5,
+._red:hover ~ ._7,
+._red:hover ~ ._9,
+._red:hover ~ ._12,
+._red:hover ~ ._14,
+._red:hover ~ ._16,
+._red:hover ~ ._18,
+._red:hover ~ ._19,
+._red:hover ~ ._21,
+._red:hover ~ ._23,
+._red:hover ~ ._25,
+._red:hover ~ ._27,
+._red:hover ~ ._30,
+._red:hover ~ ._32,
+._red:hover ~ ._34,
+._red:hover ~ ._36
+{
+    box-shadow: inset 0px 0px 9px #fff;
+    color: yellow;
+}
+
+
+#table-wheel {
+    width: 125%;
+}
