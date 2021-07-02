@@ -323,7 +323,7 @@
               <div id="win-loss-row-chart" class="flex-shrink"></div>
             </section>
 
-            <betting-table></betting-table>
+            <betting-table @runSimulation="play"></betting-table>
           </section>
 
           <spins-table></spins-table>
@@ -339,8 +339,364 @@ import SpinsTable from "@/components/SpinsTable";
 import BettingTable from "@/components/BettingTable";
 import DisplayStats from "@/components/DisplayStats";
 
+import crossfilter from 'crossfilter2';
+// import * as dc from 'dc';
+// import { bets } from './lib/table/bets'; // get
+import spots from './lib/table/spots';
+import formatter from './lib/formatter';
+import spin from './lib/table/wheel';
+import HitsChart from './lib/charts/HitsChart';
+import WinLossChart from "./lib/charts/WinLossChart";
+import WinLossBankChart from './lib/charts/WinLossBankChart';
+// import init from './lib/table/table';
+
 export default {
   name: 'App',
-  components: { SpinsTable, BettingTable, DisplayStats }
+  components: { SpinsTable, BettingTable, DisplayStats },
+  data () {
+    return {
+      won: 0,
+      loss: 0,
+      bank: 10000,
+      rounds: 5,
+      canResetBank: false,
+      outcomes: [],
+      roundOutcome: [],
+      print: false,
+      myBets: [],
+      lastRun: 0,
+      strategies: {
+        basic: {
+          bet (amt) {
+            return amt;
+          }
+        }
+      }
+    }
+  },
+  methods: {
+    updateBank (amt) {
+      this.bank = +this.bank + +amt;
+    },
+    placeBet (amt) {
+      this.bank = +this.bank - +amt;
+    },
+    resetBank () {
+      this.bank = 1000;
+    },
+    runSimulation (value) {
+      console.log('runSimulation', value);
+
+      this.myBets = value;
+
+      // const Martingale = function (options) {
+      //   console.log('options', options);
+      //   console.log('options.limit', options.limit);
+      //
+      //   let limit = options.limit || 0;
+      //   let tries = 0;
+      //   let lastBet = 0;
+      //   let maxBetOutside = options.maxBetOutside || 0;
+      //   let reverse = options.reverse || false;
+      //   let grand = options.grand || false;
+      //
+      //   let wonLast = () => {
+      //     return wonLastRound;
+      //   };
+      //
+      //   let double = (bet) => {
+      //     return bet * 2;
+      //   };
+      //
+      //   let hasLimit = () => {
+      //     return limit > 0;
+      //   };
+      //
+      //   let overLimit = () => {
+      //     return tries >= limit
+      //   };
+      //
+      //   let overTableLimit = () => {
+      //     return double(lastBet) > maxBetOutside;
+      //   };
+      //
+      //   let bet = (amt) => {
+      //     // console.log('Tries --- ', tries);
+      //     // console.log('limit --- ', limit);
+      //     if (!wonLast()) {
+      //       // console.log('We lost-----');
+      //       // console.log('overTableLimit', overTableLimit());
+      //       if ((hasLimit() && overLimit()) || overTableLimit()) {
+      //         // console.log('We are over limit---');
+      //         tries = 0;
+      //         lastBet = amt;
+      //         return amt;
+      //       }
+      //
+      //       if (roundOutcome.length === 0 ) {
+      //         // console.log('We are doubling bet---');
+      //         lastBet = double(lastBet);
+      //         tries++;
+      //       }
+      //
+      //       return lastBet;
+      //     }
+      //     // console.log('We won---');
+      //     tries = 0;
+      //     lastBet = amt;
+      //     return amt;
+      //   };
+      //
+      //   return {
+      //     bet
+      //   };
+      // };
+
+// keep doubling bet after a loss
+// double bet for x times only
+// peroni method
+// martingale - quite after tries
+
+      // let lastRun = 0;
+
+      // let outcomes = []
+
+// let outcomes = [];
+//     let wonLastRound = true;
+//       let roundOutcome = [];
+
+      // this.myBets = get();
+
+      console.log('myBets', this.myBets);
+
+      return new Promise((resolve) => {
+        console.log('Simulation is running');
+        console.log('lastRun', this.lastRun);
+
+        // const spins = [1, 3, 4, 6, 7, 9, 10, 11, 12, 14, 15, 17, 16, 18, 17];
+
+        let j;
+        for (let i = this.lastRun; i<(this.rounds+this.lastRun); i++) {
+          let hit = spin();
+
+          // let hit = spins[i];
+
+          if (print) {
+            console.log(`+++++ Round ${i+1} hit on: `, hit);
+          }
+          // let color = spots[hit].color;
+          // let type = (hit % 2 === 0) ? 'even' : 'odd';
+          // let winLose = (hit % 2 === 0) ? 'Win' : 'Lose'
+
+          // console.log(`${winLose} - ${type}`);
+          // console.log(`${color} / ${type}`);
+          // if (hit === 37) {
+          //     console.log('Zero');
+          // }
+
+          let canBet = this.myBets.every(bet => {
+            let winnings;
+            // let betAmt = this.strategies.basic.bet(bet[1]);
+            let betAmt = bet.get();
+
+            console.log('betAmt', betAmt);
+
+            // updateBank(bet[1] * -1);
+            if (this.bank < betAmt) {
+              // console.log('bank', bank);
+              // console.log('bet', bet[1]);
+              console.log(`Rounds stopped at ${i+this.lastRun} because you ran out of money`);
+              return false;
+            }
+
+            this.placeBet(betAmt);
+
+            if (print) {
+              console.log('Bet: ', betAmt);
+            }
+
+            // if (bet.length === 3) {
+            // winnings = bet[0](hit, betAmt, bet[2]);
+            winnings = bet.collect(hit);
+            // } else {
+            //     winnings = bet[0](hit, betAmt);
+            // }
+
+            console.log('winnings::++', winnings);
+
+            // console.log(`return on ${bet[0].name}`, winnings);
+            if (winnings) {
+              if (print) {
+                console.log('You Win');
+              }
+              this.won += winnings - betAmt;
+              this.updateBank(winnings);
+              // outcomes.unshift({'win': true, 'amt': winnings});
+              this.roundOutcome.push(true);
+              this.outcomes.push({
+                wonRound: 1,
+                lostRound: 0,
+                won: winnings - betAmt,
+                loss: 0,
+                bet: betAmt,
+                hit: hit,
+                color: spots[hit].color,
+                even: hit % 2 === 0,
+                bank: this.bank,
+                round: i+1,
+                outcome: 'Won'
+              })
+              // wonLastRound = true;
+            } else {
+              if (print) {
+                console.log('You Lose');
+              }
+              this.loss += betAmt;
+              this.roundOutcome.push(false);
+              this.outcomes.push({
+                wonRound: 0,
+                lostRound: 1,
+                won: 0,
+                loss: betAmt,
+                bet: betAmt,
+                hit: hit,
+                color: spots[hit].color,
+                even: hit % 2 === 0,
+                bank: this.bank,
+                round: i+1,
+                outcome: 'Lost'
+              })
+              // wonLastRound = false;
+              // outcomes.unshift({'win': false, 'amt': betAmt});
+              // if (outcomes.length >= 5) {
+              //     outcomes.pop();
+              // }
+            }
+
+            if (print) {
+              console.log('bank: ', this.bank);
+              console.log('--------------------');
+            }
+
+            return true;
+          });
+
+          if (print) {
+            console.log('====================');
+          }
+
+          // console.log('roundOutcome', roundOutcome);
+
+          // if (roundOutcome.includes(true)) {
+          //   wonLastRound = true;
+          // } else {
+          //   wonLastRound = false;
+          // }
+
+          this.roundOutcome = [];
+
+          if (!canBet) {
+            break;
+          }
+          j = i + 1;
+        }
+
+        this.lastRun = j;
+
+
+        console.log('Outcomes: ', this.outcomes);
+        console.log(`Bank after ${this.lastRun} rounds: `, this.bank);
+        console.log('Won: ', this.won);
+        console.log('Lost: ', this.loss);
+        console.log('Winnings: ', +this.bank - 10000);
+        console.log('***************************');
+        console.log('***************************');
+        resolve({
+          rounds: this.lastRun,
+          bank: this.bank,
+          won: this.won,
+          loss: this.loss,
+          winnings: +this.bank - 10000
+        });
+      });
+    },
+    play (value) {
+      console.log('play(value)', value);
+      this.runSimulation(value).then(roundResults => {
+
+        this.updateStats(roundResults);
+
+        let facts = crossfilter(this.outcomes);
+
+        console.log('facts:::::', facts.size());
+
+        let winLossBankChart = new WinLossBankChart(facts);
+        winLossBankChart.render();
+
+        let winLossChart = new WinLossChart(facts);
+        winLossChart.render();
+
+        let hitsChart = new HitsChart(facts, this.myBets);
+        hitsChart.render();
+
+        // TODO Create inside/outside bet win/loss chart
+      });
+    },
+    updateStats (roundResults) {
+      document.querySelector('#rounds span').innerHTML = formatter.number(roundResults.rounds);
+      document.querySelector('#bank span').innerHTML = formatter.money(roundResults.bank);
+      document.querySelector('#won span').innerHTML = formatter.money(roundResults.won);
+      document.querySelector('#loss span').innerHTML = formatter.money(roundResults.loss);
+      document.querySelector('#winnings span').innerHTML = formatter.money(roundResults.winnings);
+    }
+  },
+  mounted () {
+
+// let facts = crossfilter();
+
+    // document.addEventListener('click', event => {
+    //   console.log('listening for click');
+    //   let selectedRounds = document.getElementById('num-rounds');
+    //   this.rounds = +selectedRounds.value;
+    //
+    //   if (event.target.matches('.play')) {
+    //     if (this.canResetBank) {
+    //       this.resetBank();
+    //     }
+    //     this.runSimulation().then(roundResults => {
+    //
+    //       this.updateStats(roundResults);
+    //
+    //       console.log('resolved -> then()');
+    //       // facts.add(outcomes);
+    //
+    //       let facts = crossfilter(this.outcomes);
+    //
+    //       let winLossBankChart = new WinLossBankChart(facts);
+    //       winLossBankChart.render();
+    //
+    //       let winLossChart = new WinLossChart(facts);
+    //       winLossChart.render();
+    //
+    //       let hitsChart = new HitsChart(facts, myBets);
+    //       hitsChart.render();
+    //
+    //       // TODO Create inside/outside bet win/loss chart
+    //     });
+    //   }
+
+      // if (event.target.matches('.reset-game')) {
+      //   console.log('resetting game');
+      //   this.bank = 10000;
+      //   this.roundOutcome = [];
+      //   this.outcomes = [];
+      //   this.lastRun = 0;
+      //   this.won = 0;
+      //   this.loss = 0;
+      //   // facts.remove();
+      //   dc.redrawAll();
+      // }
+    // })
+  }
 }
 </script>

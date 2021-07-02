@@ -4,8 +4,11 @@
     <div class="bg-white overflow-hidden shadow">
       <div class="flex flex-row border-b border-gray-800 px-2 py-3 sm:px-6 bg-gray-700 justify-between">
         <div>
-          <button type="button"
-                  class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          <button
+            type="button"
+            class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            @click="runSimulation"
+          >
             <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"
                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                  aria-hidden="true">
@@ -48,7 +51,7 @@
       <div id="table-wheel" class="flex bg-green-900 relative right-1/4">
         <wheel></wheel>
 
-        <board></board>
+        <board @betPlaced="betPlaced"></board>
 
         <bets-display-panel></bets-display-panel>
 
@@ -63,12 +66,26 @@
 <script>
 
 import Wheel from "@/components/Wheel";
-import Board from "@/components/Table";
+import Board from "@/components/Board";
 import BetsDisplayPanel from "@/components/BetsDisplayPanel";
 import ChipSelectionPanel from "@/components/ChipSelectionPanel";
 
 export default {
-  name: 'App',
-  components: { Wheel, BetsDisplayPanel, ChipSelectionPanel, Board }
+  name: 'BettingTable',
+  components: { Wheel, BetsDisplayPanel, ChipSelectionPanel, Board },
+  data () {
+    return {
+      bets: []
+    }
+  },
+  methods: {
+    runSimulation () {
+      this.$emit('runSimulation', this.bets)
+    },
+    betPlaced(bet) {
+      this.bets.push(bet);
+      console.log('The bet:::', bet);
+    }
+  }
 }
 </script>
