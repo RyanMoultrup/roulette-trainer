@@ -36,7 +36,6 @@ export default class HitsChart {
                 return spots[d.key].color
             })
             .brushOn(false)
-            .yAxisLabel("This is the Y Axis!")
             .elasticY(true)
             .dimension(this.dimension)
             .group(this.group)

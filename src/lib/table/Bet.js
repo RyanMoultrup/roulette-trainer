@@ -3,31 +3,27 @@ import spots from "@/lib/table/spots";
 export default class {
     spots = [];
     type;
+    betPlacement;
+
+    payouts = {
+        dbl (amt) {
+            return amt * 17
+        },
+        sqr (amt) {
+            return amt * 8
+        },
+        str (amt) {
+            return amt * 11
+        },
+        line (amt) {
+            return amt * 5
+        }
+    }
 
     bets = {
         single (hit, betAmount, betPlacement) {
             if (betPlacement.includes(hit)) {
                 return betAmount * 35;
-            }
-        },
-        // dbl (betPlacement) {
-        //     let placement = betPlacement;
-        //     return (hit, betAmount) => {
-        //         console.log('payoutCallback hit', hit);
-        //         console.log('payoutCallback betAmt', betAmount);
-        //         console.log('payoutCallback placement', placement);
-        //         if (placement.includes(hit)) {
-        //             return betAmount * 17;
-        //         }
-        //     }
-        // },
-        dbl (hit) {
-            console.log('payoutCallback hit', hit);
-            console.log('this', this);
-            console.log('payoutCallback betAmt', this.get());
-            // console.log('payoutCallback placement', placement);
-            if (this.spots.includes(hit)) {
-                return this.get() * 17;
             }
         },
         street (hit, betAmount, betPlacement) {
@@ -133,15 +129,31 @@ export default class {
     }
 
     dbl (hit) {
-        console.log('payoutCallback hit', hit);
-        console.log('payoutCallback betAmt', this.get());
-        // console.log('payoutCallback placement', placement);
         if (this.spots.includes(hit)) {
             return this.get() * 17;
         }
     }
 
+    sqr (hit) {
+        if (this.spots.includes(hit)) {
+            return this.get() * 8;
+        }
+    }
+
+    str (hit) {
+        if (this.spots.includes(hit)) {
+            return this.get() * 11;
+        }
+    }
+
+    line (hit) {
+        if (this.spots.includes(hit)) {
+            return this.get() * 5;
+        }
+    }
+
     #parse (type) {
+        this.betPlacement = type;
         let placedBetArr = type.split('_');
 
         this.type = placedBetArr.shift();
@@ -157,11 +169,41 @@ export default class {
         return this.strategy.bet(this.amount);
     }
 
+    payout () {
+        return this.payouts[this.type](this.strategy.bet(this.amount));
+    }
+
+    winningSpots () {
+        return this.spots.map(s => {
+            return {
+                spot: s,
+                color: spots[s].color
+            }
+        });
+    }
+
+    name () {
+        switch (this.type) {
+            case 'dbl':
+                return 'Split 17:1';
+            case 'sqr':
+                return 'Square 8:1';
+            case 'line':
+                return 'Six Line 5:1';
+            case 'str':
+                return 'Street 11:1';
+        }
+    }
+
+    betType () {
+        return this.type;
+    }
+
+    placement () {
+        return this.betPlacement;
+    }
+
     collect (outcome) {
-        // console.log('collect', outcome);
-        // console.log('from bets', this.bets[this.type]);
-        // console.log('dynamic function', this[`#${this.type}`]);
-        console.log('collect', this[this.type](outcome))
         return this[this.type](outcome);
     }
 }

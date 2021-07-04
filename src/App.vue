@@ -311,22 +311,30 @@
         </nav>
 
         <!-- Main area -->
-        <main class="min-w-0 flex-1 border-t border-gray-200 lg:flex">
-          <section class="flex flex-col w-full">
-            <!-- Primary column -->
-            <display-stats></display-stats>
+        <main class="min-w-0 flex-grow flex border-t border-gray-200">
+          <section class="flex-col w-full">
 
-            <section class="flex flex-row justify-around items-center bg-gray-700 bg-opacity-0 pt-4 pb-4">
-              <div id="hits-chart"></div>
-              <div id="win-loss-chart"></div>
-              <br>
-              <div id="win-loss-row-chart" class="flex-shrink"></div>
+            <section class="flex" style="height:50%;">
+              <section class="flex flex-col w-full">
+                <!-- Primary column -->
+                <display-stats></display-stats>
+
+                <section class="flex flex-row justify-around items-center bg-gray-700 bg-opacity-0 pt-4 pb-4">
+                  <div id="hits-chart"></div>
+                  <div id="win-loss-chart"></div>
+                  <br>
+                  <div id="win-loss-row-chart" class="flex-shrink"></div>
+                </section>
+              </section>
+
+              <spins-table></spins-table>
             </section>
 
-            <betting-table @runSimulation="play"></betting-table>
+            <betting-table
+                @runSimulation="play"
+                :bank="bank"
+            ></betting-table>
           </section>
-
-          <spins-table></spins-table>
         </main>
       </div>
     </div>
@@ -340,15 +348,12 @@ import BettingTable from "@/components/BettingTable";
 import DisplayStats from "@/components/DisplayStats";
 
 import crossfilter from 'crossfilter2';
-// import * as dc from 'dc';
-// import { bets } from './lib/table/bets'; // get
 import spots from './lib/table/spots';
 import formatter from './lib/formatter';
 import spin from './lib/table/wheel';
 import HitsChart from './lib/charts/HitsChart';
 import WinLossChart from "./lib/charts/WinLossChart";
 import WinLossBankChart from './lib/charts/WinLossBankChart';
-// import init from './lib/table/table';
 
 export default {
   name: 'App',
@@ -365,6 +370,7 @@ export default {
       print: false,
       myBets: [],
       lastRun: 0,
+      currentBet: 0,
       strategies: {
         basic: {
           bet (amt) {
@@ -451,21 +457,6 @@ export default {
       //     bet
       //   };
       // };
-
-// keep doubling bet after a loss
-// double bet for x times only
-// peroni method
-// martingale - quite after tries
-
-      // let lastRun = 0;
-
-      // let outcomes = []
-
-// let outcomes = [];
-//     let wonLastRound = true;
-//       let roundOutcome = [];
-
-      // this.myBets = get();
 
       console.log('myBets', this.myBets);
 
@@ -649,54 +640,6 @@ export default {
       document.querySelector('#loss span').innerHTML = formatter.money(roundResults.loss);
       document.querySelector('#winnings span').innerHTML = formatter.money(roundResults.winnings);
     }
-  },
-  mounted () {
-
-// let facts = crossfilter();
-
-    // document.addEventListener('click', event => {
-    //   console.log('listening for click');
-    //   let selectedRounds = document.getElementById('num-rounds');
-    //   this.rounds = +selectedRounds.value;
-    //
-    //   if (event.target.matches('.play')) {
-    //     if (this.canResetBank) {
-    //       this.resetBank();
-    //     }
-    //     this.runSimulation().then(roundResults => {
-    //
-    //       this.updateStats(roundResults);
-    //
-    //       console.log('resolved -> then()');
-    //       // facts.add(outcomes);
-    //
-    //       let facts = crossfilter(this.outcomes);
-    //
-    //       let winLossBankChart = new WinLossBankChart(facts);
-    //       winLossBankChart.render();
-    //
-    //       let winLossChart = new WinLossChart(facts);
-    //       winLossChart.render();
-    //
-    //       let hitsChart = new HitsChart(facts, myBets);
-    //       hitsChart.render();
-    //
-    //       // TODO Create inside/outside bet win/loss chart
-    //     });
-    //   }
-
-      // if (event.target.matches('.reset-game')) {
-      //   console.log('resetting game');
-      //   this.bank = 10000;
-      //   this.roundOutcome = [];
-      //   this.outcomes = [];
-      //   this.lastRun = 0;
-      //   this.won = 0;
-      //   this.loss = 0;
-      //   // facts.remove();
-      //   dc.redrawAll();
-      // }
-    // })
   }
 }
 </script>

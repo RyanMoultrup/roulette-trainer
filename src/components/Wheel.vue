@@ -96,3 +96,7 @@
     </div>
   </div> <!-- End Wheel -->
 </template>
+
+<style>
+/*#wheel {width: 100px; overflow:hidden; position:relative;}*/
+</style>

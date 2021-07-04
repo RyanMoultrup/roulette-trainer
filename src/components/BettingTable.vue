@@ -1,13 +1,13 @@
 <template>
-  <section class="flex-grow-0" style="height: 20%;">
-    <!--            <div class="w-full mx-auto">-->
-    <div class="bg-white overflow-hidden shadow">
+  <section class="w-full" style="height: 25%">
+    <div class="bg-white overflow-hidden shadow" style="height: 400px;">
       <div class="flex flex-row border-b border-gray-800 px-2 py-3 sm:px-6 bg-gray-700 justify-between">
         <div>
           <button
             type="button"
-            class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
             @click="runSimulation"
+            :disabled="bank <= 0"
           >
             <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"
                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -18,17 +18,26 @@
             Run Simulation
           </button>
 
-          <button type="button"
-                  class="reset-game inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"
-                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                 aria-hidden="true">
-              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-            </svg>
-            Reset
-          </button>
+
+
+<!--          <button type="button"-->
+<!--                  class="reset-game inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">-->
+<!--            <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"-->
+<!--                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"-->
+<!--                 aria-hidden="true">-->
+<!--              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>-->
+<!--              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>-->
+<!--            </svg>-->
+<!--            Reset-->
+<!--          </button>-->
         </div>
+
+        <chip
+            size="md"
+            :color="selectedChip.color"
+            :chipValue="String(selectedChip.value)"
+            :emitSelection="false"
+        ></chip>
 
         <div>
           <select name="num-rounds" id="num-rounds">
@@ -42,23 +51,27 @@
             <option value="1000">1000</option>
           </select>
 
-
+          &nbsp;
           <span class="text-white " id="rounds">Spins <span>0</span></span>
-          <span class="text-white justify-self-end" id="current-bet">Current Bet: $<span>200</span></span>
+          &nbsp;
+          <span class="text-white justify-self-end" id="current-bet">
+            Current Bet Total: $<span>{{ currentBetTotal }}</span>
+          </span>
         </div>
 
       </div>
-      <div id="table-wheel" class="flex bg-green-900 relative right-1/4">
+      <div id="table-wheel" class="flex bg-green-900 justify-between relative">
         <wheel></wheel>
 
-        <board @betPlaced="betPlaced"></board>
+        <board :selected-chip-val="+selectedChip.value" @betPlaced="betPlaced"></board>
 
-        <bets-display-panel></bets-display-panel>
+        <bets-display-panel
+            :bets="bets"
+            @betRemoved="removeBet"></bets-display-panel>
 
-        <chip-selection-panel></chip-selection-panel>
+        <chip-selection-panel @chipSelected="chipSelected"></chip-selection-panel>
       </div>
     </div>
-    <!--            </div>-->
 
   </section>
 </template>
@@ -69,22 +82,50 @@ import Wheel from "@/components/Wheel";
 import Board from "@/components/Board";
 import BetsDisplayPanel from "@/components/BetsDisplayPanel";
 import ChipSelectionPanel from "@/components/ChipSelectionPanel";
+import Chip from "@/components/Chip";
 
 export default {
   name: 'BettingTable',
-  components: { Wheel, BetsDisplayPanel, ChipSelectionPanel, Board },
+  components: { Wheel, BetsDisplayPanel, ChipSelectionPanel, Board, Chip },
+  props: {
+    bank: {
+      type: Number,
+      default: () => {
+        return 0;
+      }
+    }
+  },
   data () {
     return {
-      bets: []
+      bets: [],
+      selectedChip: {
+        color: 'red',
+        value: '5'
+      }
+    }
+  },
+  computed: {
+    currentBetTotal () {
+      if (this.bets.length) {
+        return this.bets.reduce((accumulator, item) => {
+          return accumulator + +item.get();
+        }, 0);
+      }
+      return 0;
     }
   },
   methods: {
     runSimulation () {
       this.$emit('runSimulation', this.bets)
     },
-    betPlaced(bet) {
+    betPlaced (bet) {
       this.bets.push(bet);
-      console.log('The bet:::', bet);
+    },
+    removeBet (index) {
+      this.bets.splice(index, 1);
+    },
+    chipSelected (chip) {
+      this.selectedChip = chip;
     }
   }
 }

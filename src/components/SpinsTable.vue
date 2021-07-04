@@ -1,11 +1,11 @@
 <!-- Secondary column (hidden on smaller screens) -->
 <template>
-  <aside class="hidden lg:block lg:flex-shrink-0 lg:order-last">
-    <div class="h-full relative flex flex-col w-full border-l border-gray-200 bg-gray-100">
-      <div class="h-full">
+  <aside class="hidden flex-shrink-0 overflow-x-auto lg:block lg:flex-shrink-0 lg:order-last">
+    <div class="relative flex flex-col w-full border-l border-gray-200 bg-gray-100">
+      <div class="">
         <div class="flex flex-col">
-          <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="overflow-x-auto">
+            <div class="align-middle inline-block min-w-full">
               <div class="shadow overflow-hidden border-b border-gray-200">
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-50">
@@ -44,16 +44,16 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="text-sm text-gray-900">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Won
-                                </span> $100
+                        <span
+                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                          Won
+                        </span> $100
                       </div>
                       <div class="text-sm text-gray-500">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                  Lost
-                                </span> $100
+                        <span
+                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                          Lost
+                        </span> $100
                       </div>
                     </td>
                   </tr>

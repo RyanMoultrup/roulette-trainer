@@ -1,5 +1,5 @@
 <template>
-  <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 place-items-stretch font-roulette text-xl">
+  <div id="table" class="relative flex-grow-0 p-5 pl-3 grid grid-rows-5 grid-cols-14 place-items-stretch font-roulette text-xl">
     <div id="dbl_3_6" class="absolute spot-h dbl_3_6" @click="placeBet"></div>
     <div id="dbl_6_9" class="absolute spot-h dbl_6_9" @click="placeBet"></div>
     <div id="dbl_9_12" class="absolute spot-h dbl_9_12" @click="placeBet"></div>
@@ -235,9 +235,17 @@ import Bet from '../lib/table/Bet'
 
 export default {
   name: 'Board',
+  props: {
+    selectedChipVal: {
+      type: Number,
+      default: () => {
+        return 5;
+      }
+    }
+  },
   methods: {
     placeBet (event) {
-      this.$emit('betPlaced', new Bet(event.target.id, 50));
+      this.$emit('betPlaced', new Bet(event.target.id, this.selectedChipVal));
       // this.$emit('betPlaced', { bet: new Bet(event.target.id, 50) });
     },
   }

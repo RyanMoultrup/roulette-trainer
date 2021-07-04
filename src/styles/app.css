@@ -93,36 +93,6 @@
     max-height: 350px;
 }
 
-.chip {
-    background-image: url("../assets/chips.png");
-    background-repeat: no-repeat;
-    background-size: 400px 400px;
-    height: 109px;
-    width: 109px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.chips .chip-red {
-    /* background-attachment: fixed; */
-    background-position: 50% 25%;
-}
-
-.chips .chip-blue {
-    /* background-attachment: fixed; */
-    background-position: 3% 25%;
-}
-
-.chips .chip-green {
-    /* background-attachment: fixed; */
-    background-position: 3% 75%;
-}
-
-.chips .chip-black {
-    /* background-attachment: fixed; */
-    background-position: 97% 25%;
-}
-
 .spot:hover {
     box-shadow: inset 0px 0px 10px #fff;
 }
@@ -1120,6 +1090,6 @@
 }
 
 
-#table-wheel {
-    width: 125%;
-}
+/*#table-wheel {*/
+/*    width: 125%;*/
+/*}*/
