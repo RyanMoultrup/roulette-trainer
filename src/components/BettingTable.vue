@@ -60,16 +60,21 @@
         </div>
 
       </div>
-      <div id="table-wheel" class="flex bg-green-900 justify-between relative">
+      <div id="table-wheel" class="flex bg-green-900 h-full justify-between relative overflow-hidden">
         <wheel></wheel>
 
-        <board :selected-chip-val="+selectedChip.value" @betPlaced="betPlaced"></board>
+        <board
+          :selected-chip="selectedChip"
+          :bets="bets"
+          @betPlaced="betPlaced"
+        />
 
         <bets-display-panel
-            :bets="bets"
-            @betRemoved="removeBet"></bets-display-panel>
+          :bets="bets"
+          @betRemoved="removeBet"
+        />
 
-        <chip-selection-panel @chipSelected="chipSelected"></chip-selection-panel>
+        <chip-selection-panel @chipSelected="chipSelected" />
       </div>
     </div>
 
@@ -120,12 +125,14 @@ export default {
     },
     betPlaced (bet) {
       this.bets.push(bet);
+      console.log('bets:::', this.bets);
     },
     removeBet (index) {
       this.bets.splice(index, 1);
     },
     chipSelected (chip) {
       this.selectedChip = chip;
+      console.log('this.selectedChip', this.selectedChip);
     }
   }
 }

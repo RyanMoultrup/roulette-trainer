@@ -122,8 +122,10 @@ export default class {
         }
     }
 
-    constructor(type, amount) {
-        this.amount = amount;
+    constructor(type, chip) {
+        console.log('chip::',chip);
+        this.chip = chip;
+        this.amount = +chip.value;
         this.#parse(type);
         // this.payoutCallback = this.bets[type];
     }
@@ -170,6 +172,7 @@ export default class {
     }
 
     payout () {
+        console.log('this.amount', this.amount);
         return this.payouts[this.type](this.strategy.bet(this.amount));
     }
 

@@ -79,6 +79,15 @@ export default {
   width: 25px;
 }
 
+.chip.xs {
+  background-repeat: no-repeat;
+  background-size: 65px 65px;
+  height: 19px;
+  width: 19px;
+}
+
+.chip.xs .chip-value {display: none;}
+
 .chip.lg .chip-value {
   font-size: 1.25rem;
 }

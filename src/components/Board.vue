@@ -1,6 +1,17 @@
 <template>
   <div id="table" class="relative flex-grow-0 p-5 pl-3 grid grid-rows-5 grid-cols-14 place-items-stretch font-roulette text-xl">
-    <div id="dbl_3_6" class="absolute spot-h dbl_3_6" @click="placeBet"></div>
+
+    <chip v-for="bet in bets" :key="bet.betType()"
+      class="absolute spot-h"
+      :class="bet.placement()"
+      size="sm"
+      :chipValue="bet.chip.value"
+      :color="bet.chip.color"></chip>
+
+
+    <div id="dbl_3_6" class="absolute spot-h dbl_3_6" @click="placeBet">
+<!--      <chip size="sm" :chipValue="selectedChipVal" color="red"></chip>-->
+    </div>
     <div id="dbl_6_9" class="absolute spot-h dbl_6_9" @click="placeBet"></div>
     <div id="dbl_9_12" class="absolute spot-h dbl_9_12" @click="placeBet"></div>
 
@@ -231,22 +242,32 @@
 </template>
 
 <script>
-import Bet from '../lib/table/Bet'
+import Bet from '../lib/table/Bet';
+import Chip from '@/components/Chip';
 
 export default {
   name: 'Board',
+  components: { Chip },
   props: {
-    selectedChipVal: {
-      type: Number,
+    selectedChip: {
+      type: Object,
       default: () => {
-        return 5;
+        return { color: 'red', value: 5 };
+      }
+    },
+    bets: {
+      type: Array,
+      default: () => {
+        return [];
       }
     }
   },
+  mounted () {
+    console.log('bets::', this.bets);
+  },
   methods: {
     placeBet (event) {
-      this.$emit('betPlaced', new Bet(event.target.id, this.selectedChipVal));
-      // this.$emit('betPlaced', { bet: new Bet(event.target.id, 50) });
+      this.$emit('betPlaced', new Bet(event.target.id, this.selectedChip));
     },
   }
 }
