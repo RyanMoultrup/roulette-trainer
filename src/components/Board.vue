@@ -9,9 +9,7 @@
       :color="bet.chip.color"></chip>
 
 
-    <div id="dbl_3_6" class="absolute spot-h dbl_3_6" @click="placeBet">
-<!--      <chip size="sm" :chipValue="selectedChipVal" color="red"></chip>-->
-    </div>
+    <div id="dbl_3_6" class="absolute spot-h dbl_3_6" @click="placeBet"></div>
     <div id="dbl_6_9" class="absolute spot-h dbl_6_9" @click="placeBet"></div>
     <div id="dbl_9_12" class="absolute spot-h dbl_9_12" @click="placeBet"></div>
 
@@ -121,19 +119,19 @@
     <div id="line_33_36_32_35_31_34" class="absolute spot-h line_33_36_32_35_31_34" @click="placeBet"></div>
     <div id="str_36_35_34" class="absolute spot-h str_36_35_34" @click="placeBet"></div>
 
-    <div id="_1st_12" class="absolute spot-h _1st_12" @click="placeBet"></div>
-    <div id="_2nd_12" class="absolute spot-h _2nd_12" @click="placeBet"></div>
-    <div id="_3rd_12" class="absolute spot-h _3rd_12" @click="placeBet"></div>
+    <div id="twelve_first" class="absolute spot-h _1st_12" @click="placeBet"></div>
+    <div id="twelve_second" class="absolute spot-h _2nd_12" @click="placeBet"></div>
+    <div id="twelve_third" class="absolute spot-h _3rd_12" @click="placeBet"></div>
 
-    <div id="_1to18" class="absolute spot-h _1to18" @click="placeBet"></div>
-    <div id="_odd" class="absolute spot-h _odd" @click="placeBet"></div>
-    <div id="_even" class="absolute spot-h _even" @click="placeBet"></div>
-    <div id="_red" class="absolute spot-h _red" @click="placeBet"></div>
-    <div id="_black" class="absolute spot-h _black" @click="placeBet"></div>
-    <div id="_19to36" class="absolute spot-h _19to36" @click="placeBet"></div>
-    <div id="_1st_row" class="absolute spot-h _1st_row" @click="placeBet"></div>
-    <div id="_2nd_row" class="absolute spot-h _2nd_row" @click="placeBet"></div>
-    <div id="_3rd_row" class="absolute spot-h _3rd_row" @click="placeBet"></div>
+    <div id="one_18" class="absolute spot-h _1to18" @click="placeBet"></div>
+    <div id="odd" class="absolute spot-h _odd" @click="placeBet"></div>
+    <div id="even" class="absolute spot-h _even" @click="placeBet"></div>
+    <div id="red" class="absolute spot-h _red" @click="placeBet"></div>
+    <div id="black" class="absolute spot-h _black" @click="placeBet"></div>
+    <div id="nineteen_36" class="absolute spot-h _19to36" @click="placeBet"></div>
+    <div id="row_first" class="absolute spot-h _1st_row" @click="placeBet"></div>
+    <div id="row_second" class="absolute spot-h _2nd_row" @click="placeBet"></div>
+    <div id="row_third" class="absolute spot-h _3rd_row" @click="placeBet"></div>
 
     <div id="dbl_0_3" class="absolute spot-h dbl_0_3" @click="placeBet"></div>
     <div id="trip_0_3_2" class="absolute spot-h trip_0_3_2" @click="placeBet"></div>

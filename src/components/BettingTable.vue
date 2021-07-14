@@ -17,9 +17,6 @@
             </svg>
             Run Simulation
           </button>
-
-
-
 <!--          <button type="button"-->
 <!--                  class="reset-game inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">-->
 <!--            <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"-->
@@ -40,9 +37,9 @@
         ></chip>
 
         <div>
-          <select name="num-rounds" id="num-rounds">
+          <select name="num-rounds" id="num-rounds" @change="roundsSelected($event)" v-model="rounds">
             <option value="1">1</option>
-            <option value="5" selected>5</option>
+            <option value="5">5</option>
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>
@@ -106,7 +103,8 @@ export default {
       selectedChip: {
         color: 'red',
         value: '5'
-      }
+      },
+      rounds: 5,
     }
   },
   computed: {
@@ -124,15 +122,16 @@ export default {
       this.$emit('runSimulation', this.bets)
     },
     betPlaced (bet) {
-      this.bets.push(bet);
-      console.log('bets:::', this.bets);
+      this.bets.unshift(bet);
     },
     removeBet (index) {
       this.bets.splice(index, 1);
     },
     chipSelected (chip) {
       this.selectedChip = chip;
-      console.log('this.selectedChip', this.selectedChip);
+    },
+    roundsSelected (event) {
+      this.$emit('roundsSelected', +event.target.value);
     }
   }
 }

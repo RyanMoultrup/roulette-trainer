@@ -331,7 +331,8 @@
             </section>
 
             <betting-table
-                @runSimulation="play"
+                @run-simulation="play"
+                @rounds-selected="roundsSelected"
                 :bank="bank"
             ></betting-table>
           </section>
@@ -354,6 +355,7 @@ import spin from './lib/table/wheel';
 import HitsChart from './lib/charts/HitsChart';
 import WinLossChart from "./lib/charts/WinLossChart";
 import WinLossBankChart from './lib/charts/WinLossBankChart';
+import Outcomes from './lib/Outcomes';
 
 export default {
   name: 'App',
@@ -380,6 +382,9 @@ export default {
       }
     }
   },
+  mounted () {
+    console.log('*********** STARTING GAME *************');
+  },
   methods: {
     updateBank (amt) {
       this.bank = +this.bank + +amt;
@@ -390,73 +395,16 @@ export default {
     resetBank () {
       this.bank = 1000;
     },
+    roundsSelected (value) {
+      console.log('RoundsSelected', value);
+      this.rounds = value;
+    },
     runSimulation (value) {
       console.log('runSimulation', value);
 
       this.myBets = value;
 
-      // const Martingale = function (options) {
-      //   console.log('options', options);
-      //   console.log('options.limit', options.limit);
-      //
-      //   let limit = options.limit || 0;
-      //   let tries = 0;
-      //   let lastBet = 0;
-      //   let maxBetOutside = options.maxBetOutside || 0;
-      //   let reverse = options.reverse || false;
-      //   let grand = options.grand || false;
-      //
-      //   let wonLast = () => {
-      //     return wonLastRound;
-      //   };
-      //
-      //   let double = (bet) => {
-      //     return bet * 2;
-      //   };
-      //
-      //   let hasLimit = () => {
-      //     return limit > 0;
-      //   };
-      //
-      //   let overLimit = () => {
-      //     return tries >= limit
-      //   };
-      //
-      //   let overTableLimit = () => {
-      //     return double(lastBet) > maxBetOutside;
-      //   };
-      //
-      //   let bet = (amt) => {
-      //     // console.log('Tries --- ', tries);
-      //     // console.log('limit --- ', limit);
-      //     if (!wonLast()) {
-      //       // console.log('We lost-----');
-      //       // console.log('overTableLimit', overTableLimit());
-      //       if ((hasLimit() && overLimit()) || overTableLimit()) {
-      //         // console.log('We are over limit---');
-      //         tries = 0;
-      //         lastBet = amt;
-      //         return amt;
-      //       }
-      //
-      //       if (roundOutcome.length === 0 ) {
-      //         // console.log('We are doubling bet---');
-      //         lastBet = double(lastBet);
-      //         tries++;
-      //       }
-      //
-      //       return lastBet;
-      //     }
-      //     // console.log('We won---');
-      //     tries = 0;
-      //     lastBet = amt;
-      //     return amt;
-      //   };
-      //
-      //   return {
-      //     bet
-      //   };
-      // };
+
 
       console.log('myBets', this.myBets);
 
@@ -475,27 +423,12 @@ export default {
           if (print) {
             console.log(`+++++ Round ${i+1} hit on: `, hit);
           }
-          // let color = spots[hit].color;
-          // let type = (hit % 2 === 0) ? 'even' : 'odd';
-          // let winLose = (hit % 2 === 0) ? 'Win' : 'Lose'
-
-          // console.log(`${winLose} - ${type}`);
-          // console.log(`${color} / ${type}`);
-          // if (hit === 37) {
-          //     console.log('Zero');
-          // }
 
           let canBet = this.myBets.every(bet => {
             let winnings;
-            // let betAmt = this.strategies.basic.bet(bet[1]);
             let betAmt = bet.get();
 
-            console.log('betAmt', betAmt);
-
-            // updateBank(bet[1] * -1);
             if (this.bank < betAmt) {
-              // console.log('bank', bank);
-              // console.log('bet', bet[1]);
               console.log(`Rounds stopped at ${i+this.lastRun} because you ran out of money`);
               return false;
             }
@@ -506,23 +439,15 @@ export default {
               console.log('Bet: ', betAmt);
             }
 
-            // if (bet.length === 3) {
-            // winnings = bet[0](hit, betAmt, bet[2]);
             winnings = bet.collect(hit);
-            // } else {
-            //     winnings = bet[0](hit, betAmt);
-            // }
 
-            console.log('winnings::++', winnings);
-
-            // console.log(`return on ${bet[0].name}`, winnings);
             if (winnings) {
               if (print) {
                 console.log('You Win');
               }
               this.won += winnings - betAmt;
               this.updateBank(winnings);
-              // outcomes.unshift({'win': true, 'amt': winnings});
+
               this.roundOutcome.push(true);
               this.outcomes.push({
                 wonRound: 1,
@@ -536,7 +461,20 @@ export default {
                 bank: this.bank,
                 round: i+1,
                 outcome: 'Won'
-              })
+              });
+              Outcomes.add({
+                wonRound: 1,
+                lostRound: 0,
+                won: winnings - betAmt,
+                loss: 0,
+                bet: betAmt,
+                hit: hit,
+                color: spots[hit].color,
+                even: hit % 2 === 0,
+                bank: this.bank,
+                round: i+1,
+                outcome: 'Won'
+              });
               // wonLastRound = true;
             } else {
               if (print) {
@@ -556,12 +494,20 @@ export default {
                 bank: this.bank,
                 round: i+1,
                 outcome: 'Lost'
-              })
-              // wonLastRound = false;
-              // outcomes.unshift({'win': false, 'amt': betAmt});
-              // if (outcomes.length >= 5) {
-              //     outcomes.pop();
-              // }
+              });
+              Outcomes.add({
+                wonRound: 0,
+                lostRound: 1,
+                won: 0,
+                loss: betAmt,
+                bet: betAmt,
+                hit: hit,
+                color: spots[hit].color,
+                even: hit % 2 === 0,
+                bank: this.bank,
+                round: i+1,
+                outcome: 'Lost'
+              });
             }
 
             if (print) {
@@ -596,6 +542,7 @@ export default {
 
 
         console.log('Outcomes: ', this.outcomes);
+        console.log('Outcomes Object::: ', Outcomes);
         console.log(`Bank after ${this.lastRun} rounds: `, this.bank);
         console.log('Won: ', this.won);
         console.log('Lost: ', this.loss);
@@ -617,9 +564,7 @@ export default {
 
         this.updateStats(roundResults);
 
-        let facts = crossfilter(this.outcomes);
-
-        console.log('facts:::::', facts.size());
+        let facts = crossfilter(Outcomes.all());
 
         let winLossBankChart = new WinLossBankChart(facts);
         winLossBankChart.render();

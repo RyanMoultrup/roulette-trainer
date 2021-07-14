@@ -17,10 +17,11 @@
                   <div class="ml-2 flex-shrink-0 flex">
                     <p class="px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-red-800">
                       <chip
-                          class="mr-1"
+                          class="mr-1 border border-solid"
                           size="xs"
                           :chipValue="bet.chip.value"
                           :color="bet.chip.color"
+                          :class="bet.chip.color === 'black' ? `border-${bet.chip.color}` : `border-${bet.chip.color}-500`"
                       ></chip>
                       ${{ bet.get() }}
                     </p>
@@ -30,11 +31,11 @@
                   </div>
                 </div>
               </div>
-              <div class="mt-2 sm:flex sm:justify-start">
+              <div class="mt-2 grid grid-cols-9">
                 <span
                     v-for="spot in bet.winningSpots()"
                     :key="spot.spot"
-                    class="bet-spot-img pt-0.5 w-5 h-5 text-xs text-center text-white rounded-full"
+                    class="bet-spot-img pt-0.5 w-5 h-5 mb-1 text-xs text-center text-white rounded-full"
                     :class="spot.color === 'red' ? 'bg-red-800' : 'bg-black'"
                 >
                   {{ spot.spot }}

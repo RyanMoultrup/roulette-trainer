@@ -1085,7 +1085,7 @@
 ._red:hover ~ ._34,
 ._red:hover ~ ._36
 {
-    box-shadow: inset 0px 0px 9px #fff;
+    box-shadow: inset 0px 0px 9px yellow;
     color: yellow;
 }
 

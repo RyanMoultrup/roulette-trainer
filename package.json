@@ -14,7 +14,8 @@
     "crossfilter2": "^1.5.4",
     "d3-v6-tip": "^1.0.9",
     "dc": "^4.2.7",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
