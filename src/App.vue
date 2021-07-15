@@ -356,6 +356,7 @@ import HitsChart from './lib/charts/HitsChart';
 import WinLossChart from "./lib/charts/WinLossChart";
 import WinLossBankChart from './lib/charts/WinLossBankChart';
 import Outcomes from './lib/Outcomes';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'App',
@@ -386,6 +387,7 @@ export default {
     console.log('*********** STARTING GAME *************');
   },
   methods: {
+    ...mapGetters('strategy', ['getStrategy']),
     updateBank (amt) {
       this.bank = +this.bank + +amt;
     },
@@ -399,10 +401,10 @@ export default {
       console.log('RoundsSelected', value);
       this.rounds = value;
     },
-    runSimulation (value) {
-      console.log('runSimulation', value);
+    runSimulation () {
+      // console.log('runSimulation', value);
 
-      this.myBets = value;
+      this.myBets = this.getStrategy();
 
 
 

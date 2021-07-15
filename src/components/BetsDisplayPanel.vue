@@ -3,9 +3,9 @@
     <div class="bg-white bg-opacity-10 shadow overflow-y-auto flex-1">
       <ul class="divide-y divide-green-900">
 
-        <li v-for="(bet, index) in bets" :key="bet.betType()" class="group">
+        <li v-for="bet in this.getStrategy()" :key="bet.betType()" class="group">
           <a href="#" class="block hover:bg-white hover:bg-opacity-5 relative">
-            <span @click="removeBet($event, index)" class="group-hover:opacity-100 opacity-0 absolute cursor-pointer w-4 h-4 pb-1 text-xs text-center rounded-full bg-white bg-opacity-30 right-1 top-1 text-white">x</span>
+            <span @click="remove($event, bet.placement())" class="group-hover:opacity-100 opacity-0 absolute cursor-pointer w-4 h-4 pb-1 text-xs text-center rounded-full bg-white bg-opacity-30 right-1 top-1 text-white">x</span>
             <div class="px-3 py-4 ">
               <div class="flex items-center justify-between">
                 <p class="text-sm font-medium text-white truncate">
@@ -13,15 +13,15 @@
                 </p>
                 <div class="flex">
 
-
                   <div class="ml-2 flex-shrink-0 flex">
                     <p class="px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-red-800">
                       <chip
+                          v-for="chip in bet.chips" :key="chip.value"
                           class="mr-1 border border-solid"
                           size="xs"
-                          :chipValue="bet.chip.value"
-                          :color="bet.chip.color"
-                          :class="bet.chip.color === 'black' ? `border-${bet.chip.color}` : `border-${bet.chip.color}-500`"
+                          :chipValue="chip.value"
+                          :color="chip.color"
+                          :class="chip.color === 'black' ? `border-${chip.color}` : `border-${chip.color}-500`"
                       ></chip>
                       ${{ bet.get() }}
                     </p>
@@ -51,20 +51,15 @@
 
 <script>
 import Chip from '@/components/Chip';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
-  props: {
-    bets: {
-      type: Array,
-      default: () => {
-        return []
-      }
-    }
-  },
   components: { Chip },
   methods: {
-    removeBet (event, index) {
-      this.$emit('betRemoved', index);
+    ...mapGetters('strategy', ['getStrategy']),
+    ...mapMutations('strategy', ['removeBet']),
+    remove (event, index) {
+      this.removeBet(index);
     }
   }
 }

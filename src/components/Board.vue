@@ -1,144 +1,144 @@
 <template>
   <div id="table" class="relative flex-grow-0 p-5 pl-3 grid grid-rows-5 grid-cols-14 place-items-stretch font-roulette text-xl">
 
-    <chip v-for="bet in bets" :key="bet.betType()"
-      class="absolute spot-h"
-      :class="bet.placement()"
-      size="sm"
-      :chipValue="bet.chip.value"
-      :color="bet.chip.color"></chip>
+    <div v-for="bet in this.getStrategy()" :key="bet.betType()" class="absolute spot-h chip-spot hover:w-full hover:border"
+         :class="bet.placement()">
+      <chip v-for="chip in bet.chips" :key="chip.value"
+            size="sm"
+            :chipValue="chip.value"
+            :color="chip.color"></chip>
+    </div>
+
+    <div id="dbl_3_6" class="absolute spot-h dbl_3_6" @click="place"></div>
+    <div id="dbl_6_9" class="absolute spot-h dbl_6_9" @click="place"></div>
+    <div id="dbl_9_12" class="absolute spot-h dbl_9_12" @click="place"></div>
+
+    <div id="dbl_12_15" class="absolute spot-h dbl_12_15" @click="place"></div>
+    <div id="dbl_15_18" class="absolute spot-h dbl_15_18" @click="place"></div>
+    <div id="dbl_18_21" class="absolute spot-h dbl_18_21" @click="place"></div>
+    <div id="dbl_21_24" class="absolute spot-h dbl_21_24" @click="place"></div>
+    <div id="dbl_24_27" class="absolute spot-h dbl_24_27" @click="place"></div>
+    <div id="dbl_27_30" class="absolute spot-h dbl_27_30" @click="place"></div>
+    <div id="dbl_30_33" class="absolute spot-h dbl_30_33" @click="place"></div>
+    <div id="dbl_33_36" class="absolute spot-h dbl_33_36" @click="place"></div>
+
+    <div id="dbl_3_2" class="absolute spot-h dbl_3_2" @click="place"></div>
+    <div id="sqr_3_6_2_5" class="absolute spot-h sqr_3_6_2_5" @click="place"></div>
+    <div id="dbl_6_5" class="absolute spot-h dbl_6_5" @click="place"></div>
+    <div id="sqr_6_9_5_8" class="absolute spot-h sqr_6_9_5_8" @click="place"></div>
+    <div id="dbl_9_8" class="absolute spot-h dbl_9_8" @click="place"></div>
+    <div id="sqr_9_12_8_11" class="absolute spot-h sqr_9_12_8_11" @click="place"></div>
+    <div id="dbl_12_11" class="absolute spot-h dbl_12_11" @click="place"></div>
+    <div id="sqr_12_15_11_14" class="absolute spot-h sqr_12_15_11_14" @click="place"></div>
+    <div id="dbl_15_14" class="absolute spot-h dbl_15_14" @click="place"></div>
+    <div id="sqr_15_18_14_17" class="absolute spot-h sqr_15_18_14_17" @click="place"></div>
+    <div id="dbl_18_17" class="absolute spot-h dbl_18_17" @click="place"></div>
+    <div id="sqr_18_21_17_20" class="absolute spot-h sqr_18_21_17_20" @click="place"></div>
+    <div id="dbl_21_20" class="absolute spot-h dbl_21_20" @click="place"></div>
+    <div id="sqr_21_24_20_23" class="absolute spot-h sqr_21_24_20_23" @click="place"></div>
+    <div id="dbl_24_23" class="absolute spot-h dbl_24_23" @click="place"></div>
+    <div id="sqr_24_27_23_26" class="absolute spot-h sqr_24_27_23_26" @click="place"></div>
+    <div id="dbl_27_26" class="absolute spot-h dbl_27_26" @click="place"></div>
+    <div id="sqr_27_30_26_29" class="absolute spot-h sqr_27_30_26_29" @click="place"></div>
+    <div id="dbl_30_29" class="absolute spot-h dbl_30_29" @click="place"></div>
+    <div id="sqr_30_33_29_32" class="absolute spot-h sqr_30_33_29_32" @click="place"></div>
+    <div id="dbl_33_32" class="absolute spot-h dbl_33_32" @click="place"></div>
+    <div id="sqr_33_36_32_35" class="absolute spot-h sqr_33_36_32_35" @click="place"></div>
+    <div id="dbl_36_35" class="absolute spot-h dbl_36_35" @click="place"></div>
 
 
-    <div id="dbl_3_6" class="absolute spot-h dbl_3_6" @click="placeBet"></div>
-    <div id="dbl_6_9" class="absolute spot-h dbl_6_9" @click="placeBet"></div>
-    <div id="dbl_9_12" class="absolute spot-h dbl_9_12" @click="placeBet"></div>
+    <div id="dbl_2_5" class="absolute spot-h dbl_2_5" @click="place"></div>
+    <div id="dbl_5_8" class="absolute spot-h dbl_5_8" @click="place"></div>
+    <div id="dbl_8_11" class="absolute spot-h dbl_8_11" @click="place"></div>
+    <div id="dbl_11_14" class="absolute spot-h dbl_11_14" @click="place"></div>
+    <div id="dbl_14_17" class="absolute spot-h dbl_14_17" @click="place"></div>
+    <div id="dbl_17_20" class="absolute spot-h dbl_17_20" @click="place"></div>
+    <div id="dbl_20_23" class="absolute spot-h dbl_20_23" @click="place"></div>
+    <div id="dbl_23_26" class="absolute spot-h dbl_23_26" @click="place"></div>
+    <div id="dbl_26_29" class="absolute spot-h dbl_26_29" @click="place"></div>
+    <div id="dbl_29_32" class="absolute spot-h dbl_29_32" @click="place"></div>
+    <div id="dbl_32_35" class="absolute spot-h dbl_32_35" @click="place"></div>
 
-    <div id="dbl_12_15" class="absolute spot-h dbl_12_15" @click="placeBet"></div>
-    <div id="dbl_15_18" class="absolute spot-h dbl_15_18" @click="placeBet"></div>
-    <div id="dbl_18_21" class="absolute spot-h dbl_18_21" @click="placeBet"></div>
-    <div id="dbl_21_24" class="absolute spot-h dbl_21_24" @click="placeBet"></div>
-    <div id="dbl_24_27" class="absolute spot-h dbl_24_27" @click="placeBet"></div>
-    <div id="dbl_27_30" class="absolute spot-h dbl_27_30" @click="placeBet"></div>
-    <div id="dbl_30_33" class="absolute spot-h dbl_30_33" @click="placeBet"></div>
-    <div id="dbl_33_36" class="absolute spot-h dbl_33_36" @click="placeBet"></div>
+    <div id="dbl_2_1" class="absolute spot-h dbl_2_1" @click="place"></div>
+    <div id="sqr_2_5_1_4" class="absolute spot-h sqr_2_5_1_4" @click="place"></div>
+    <div id="dbl_5_4" class="absolute spot-h dbl_5_4" @click="place"></div>
+    <div id="sqr_5_8_4_7" class="absolute spot-h sqr_5_8_4_7" @click="place"></div>
+    <div id="dbl_8_7" class="absolute spot-h dbl_8_7" @click="place"></div>
+    <div id="sqr_8_11_7_10" class="absolute spot-h sqr_8_11_7_10" @click="place"></div>
+    <div id="dbl_11_10" class="absolute spot-h dbl_11_10" @click="place"></div>
+    <div id="sqr_11_14_10_13" class="absolute spot-h sqr_11_14_10_13" @click="place"></div>
+    <div id="dbl_14_13" class="absolute spot-h dbl_14_13" @click="place"></div>
+    <div id="sqr_14_17_13_16" class="absolute spot-h " @click="place"></div>
+    <div id="dbl_17_16" class="absolute spot-h dbl_17_16" @click="place"></div>
+    <div id="sqr_17_20_16_19" class="absolute spot-h sqr_17_20_16_19" @click="place"></div>
+    <div id="dbl_20_19" class="absolute spot-h dbl_20_19" @click="place"></div>
+    <div id="sqr_20_23_19_22" class="absolute spot-h sqr_20_23_19_22" @click="place"></div>
+    <div id="dbl_23_22" class="absolute spot-h dbl_23_22" @click="place"></div>
+    <div id="sqr_23_26_22_25" class="absolute spot-h sqr_23_26_22_25" @click="place"></div>
+    <div id="dbl_26_25" class="absolute spot-h dbl_26_25" @click="place"></div>
+    <div id="sqr_26_29_25_28" class="absolute spot-h sqr_26_29_25_28" @click="place"></div>
+    <div id="dbl_29_28" class="absolute spot-h dbl_29_28" @click="place"></div>
+    <div id="sqr_29_32_28_31" class="absolute spot-h sqr_29_32_28_31" @click="place"></div>
+    <div id="dbl_32_31" class="absolute spot-h dbl_32_31" @click="place"></div>
+    <div id="sqr_32_35_31_34" class="absolute spot-h sqr_32_35_31_34" @click="place"></div>
+    <div id="dbl_35_34" class="absolute spot-h dbl_35_34" @click="place"></div>
 
-    <div id="dbl_3_2" class="absolute spot-h dbl_3_2" @click="placeBet"></div>
-    <div id="sqr_3_6_2_5" class="absolute spot-h sqr_3_6_2_5" @click="placeBet"></div>
-    <div id="dbl_6_5" class="absolute spot-h dbl_6_5" @click="placeBet"></div>
-    <div id="sqr_6_9_5_8" class="absolute spot-h sqr_6_9_5_8" @click="placeBet"></div>
-    <div id="dbl_9_8" class="absolute spot-h dbl_9_8" @click="placeBet"></div>
-    <div id="sqr_9_12_8_11" class="absolute spot-h sqr_9_12_8_11" @click="placeBet"></div>
-    <div id="dbl_12_11" class="absolute spot-h dbl_12_11" @click="placeBet"></div>
-    <div id="sqr_12_15_11_14" class="absolute spot-h sqr_12_15_11_14" @click="placeBet"></div>
-    <div id="dbl_15_14" class="absolute spot-h dbl_15_14" @click="placeBet"></div>
-    <div id="sqr_15_18_14_17" class="absolute spot-h sqr_15_18_14_17" @click="placeBet"></div>
-    <div id="dbl_18_17" class="absolute spot-h dbl_18_17" @click="placeBet"></div>
-    <div id="sqr_18_21_17_20" class="absolute spot-h sqr_18_21_17_20" @click="placeBet"></div>
-    <div id="dbl_21_20" class="absolute spot-h dbl_21_20" @click="placeBet"></div>
-    <div id="sqr_21_24_20_23" class="absolute spot-h sqr_21_24_20_23" @click="placeBet"></div>
-    <div id="dbl_24_23" class="absolute spot-h dbl_24_23" @click="placeBet"></div>
-    <div id="sqr_24_27_23_26" class="absolute spot-h sqr_24_27_23_26" @click="placeBet"></div>
-    <div id="dbl_27_26" class="absolute spot-h dbl_27_26" @click="placeBet"></div>
-    <div id="sqr_27_30_26_29" class="absolute spot-h sqr_27_30_26_29" @click="placeBet"></div>
-    <div id="dbl_30_29" class="absolute spot-h dbl_30_29" @click="placeBet"></div>
-    <div id="sqr_30_33_29_32" class="absolute spot-h sqr_30_33_29_32" @click="placeBet"></div>
-    <div id="dbl_33_32" class="absolute spot-h dbl_33_32" @click="placeBet"></div>
-    <div id="sqr_33_36_32_35" class="absolute spot-h sqr_33_36_32_35" @click="placeBet"></div>
-    <div id="dbl_36_35" class="absolute spot-h dbl_36_35" @click="placeBet"></div>
+    <div id="dbl_1_4" class="absolute spot-h dbl_1_4" @click="place"></div>
+    <div id="dbl_4_7" class="absolute spot-h dbl_4_7" @click="place"></div>
+    <div id="dbl_7_10" class="absolute spot-h dbl_7_10" @click="place"></div>
+    <div id="dbl_10_13" class="absolute spot-h dbl_10_13" @click="place"></div>
+    <div id="dbl_13_16" class="absolute spot-h dbl_13_16" @click="place"></div>
+    <div id="dbl_16_19" class="absolute spot-h dbl_16_19" @click="place"></div>
+    <div id="dbl_19_22" class="absolute spot-h dbl_19_22" @click="place"></div>
+    <div id="dbl_22_25" class="absolute spot-h dbl_22_25" @click="place"></div>
+    <div id="dbl_25_28" class="absolute spot-h dbl_25_28" @click="place"></div>
+    <div id="dbl_28_31" class="absolute spot-h dbl_28_31" @click="place"></div>
+    <div id="dbl_31_34" class="absolute spot-h dbl_31_34" @click="place"></div>
 
+    <div id="str_3_2_1" class="absolute spot-h str_3_2_1" @click="place"></div>
+    <div id="line_3_6_2_5_1_4" class="absolute spot-h line_3_6_2_5_1_4" @click="place"></div>
+    <div id="str_6_5_4" class="absolute spot-h str_6_5_4" @click="place"></div>
+    <div id="line_6_9_5_8_4_7" class="absolute spot-h line_6_9_5_8_4_7" @click="place"></div>
+    <div id="str_9_8_7" class="absolute spot-h str_9_8_7" @click="place"></div>
+    <div id="line_9_12_8_11_7_10" class="absolute spot-h line_9_12_8_11_7_10" @click="place"></div>
+    <div id="str_12_11_10" class="absolute spot-h str_12_11_10" @click="place"></div>
+    <div id="line_12_15_11_14_10_13" class="absolute spot-h line_12_15_11_14_10_13" @click="place"></div>
+    <div id="str_15_14_13" class="absolute spot-h str_15_14_13" @click="place"></div>
+    <div id="line_15_18_14_17_13_16" class="absolute spot-h line_15_18_14_17_13_16" @click="place"></div>
+    <div id="str_18_17_16" class="absolute spot-h str_18_17_16" @click="place"></div>
+    <div id="line_18_21_17_20_16_19" class="absolute spot-h line_18_21_17_20_16_19" @click="place"></div>
+    <div id="str_21_20_19" class="absolute spot-h str_21_20_19" @click="place"></div>
+    <div id="line_21_24_20_23_19_22" class="absolute spot-h line_21_24_20_23_19_22" @click="place"></div>
+    <div id="str_24_23_22" class="absolute spot-h str_24_23_22" @click="place"></div>
+    <div id="line_24_27_23_26_22_25" class="absolute spot-h line_24_27_23_26_22_25" @click="place"></div>
+    <div id="str_27_26_25" class="absolute spot-h str_27_26_25" @click="place"></div>
+    <div id="line_27_30_26_29_25_28" class="absolute spot-h line_27_30_26_29_25_28" @click="place"></div>
+    <div id="str_30_29_28" class="absolute spot-h str_30_29_28" @click="place"></div>
+    <div id="line_30_33_29_32_28_31" class="absolute spot-h line_30_33_29_32_28_31" @click="place"></div>
+    <div id="str_33_32_31" class="absolute spot-h str_33_32_31" @click="place"></div>
+    <div id="line_33_36_32_35_31_34" class="absolute spot-h line_33_36_32_35_31_34" @click="place"></div>
+    <div id="str_36_35_34" class="absolute spot-h str_36_35_34" @click="place"></div>
 
-    <div id="dbl_2_5" class="absolute spot-h dbl_2_5" @click="placeBet"></div>
-    <div id="dbl_5_8" class="absolute spot-h dbl_5_8" @click="placeBet"></div>
-    <div id="dbl_8_11" class="absolute spot-h dbl_8_11" @click="placeBet"></div>
-    <div id="dbl_11_14" class="absolute spot-h dbl_11_14" @click="placeBet"></div>
-    <div id="dbl_14_17" class="absolute spot-h dbl_14_17" @click="placeBet"></div>
-    <div id="dbl_17_20" class="absolute spot-h dbl_17_20" @click="placeBet"></div>
-    <div id="dbl_20_23" class="absolute spot-h dbl_20_23" @click="placeBet"></div>
-    <div id="dbl_23_26" class="absolute spot-h dbl_23_26" @click="placeBet"></div>
-    <div id="dbl_26_29" class="absolute spot-h dbl_26_29" @click="placeBet"></div>
-    <div id="dbl_29_32" class="absolute spot-h dbl_29_32" @click="placeBet"></div>
-    <div id="dbl_32_35" class="absolute spot-h dbl_32_35" @click="placeBet"></div>
+    <div id="twelve_first" class="absolute spot-h _1st_12" @click="place"></div>
+    <div id="twelve_second" class="absolute spot-h _2nd_12" @click="place"></div>
+    <div id="twelve_third" class="absolute spot-h _3rd_12" @click="place"></div>
 
-    <div id="dbl_2_1" class="absolute spot-h dbl_2_1" @click="placeBet"></div>
-    <div id="sqr_2_5_1_4" class="absolute spot-h sqr_2_5_1_4" @click="placeBet"></div>
-    <div id="dbl_5_4" class="absolute spot-h dbl_5_4" @click="placeBet"></div>
-    <div id="sqr_5_8_4_7" class="absolute spot-h sqr_5_8_4_7" @click="placeBet"></div>
-    <div id="dbl_8_7" class="absolute spot-h dbl_8_7" @click="placeBet"></div>
-    <div id="sqr_8_11_7_10" class="absolute spot-h sqr_8_11_7_10" @click="placeBet"></div>
-    <div id="dbl_11_10" class="absolute spot-h dbl_11_10" @click="placeBet"></div>
-    <div id="sqr_11_14_10_13" class="absolute spot-h sqr_11_14_10_13" @click="placeBet"></div>
-    <div id="dbl_14_13" class="absolute spot-h dbl_14_13" @click="placeBet"></div>
-    <div id="sqr_14_17_13_16" class="absolute spot-h " @click="placeBet"></div>
-    <div id="dbl_17_16" class="absolute spot-h dbl_17_16" @click="placeBet"></div>
-    <div id="sqr_17_20_16_19" class="absolute spot-h sqr_17_20_16_19" @click="placeBet"></div>
-    <div id="dbl_20_19" class="absolute spot-h dbl_20_19" @click="placeBet"></div>
-    <div id="sqr_20_23_19_22" class="absolute spot-h sqr_20_23_19_22" @click="placeBet"></div>
-    <div id="dbl_23_22" class="absolute spot-h dbl_23_22" @click="placeBet"></div>
-    <div id="sqr_23_26_22_25" class="absolute spot-h sqr_23_26_22_25" @click="placeBet"></div>
-    <div id="dbl_26_25" class="absolute spot-h dbl_26_25" @click="placeBet"></div>
-    <div id="sqr_26_29_25_28" class="absolute spot-h sqr_26_29_25_28" @click="placeBet"></div>
-    <div id="dbl_29_28" class="absolute spot-h dbl_29_28" @click="placeBet"></div>
-    <div id="sqr_29_32_28_31" class="absolute spot-h sqr_29_32_28_31" @click="placeBet"></div>
-    <div id="dbl_32_31" class="absolute spot-h dbl_32_31" @click="placeBet"></div>
-    <div id="sqr_32_35_31_34" class="absolute spot-h sqr_32_35_31_34" @click="placeBet"></div>
-    <div id="dbl_35_34" class="absolute spot-h dbl_35_34" @click="placeBet"></div>
+    <div id="one_18" class="absolute spot-h _1to18" @click="place"></div>
+    <div id="odd" class="absolute spot-h _odd" @click="place"></div>
+    <div id="even" class="absolute spot-h _even" @click="place"></div>
+    <div id="red" class="absolute spot-h _red" @click="place"></div>
+    <div id="black" class="absolute spot-h _black" @click="place"></div>
+    <div id="nineteen_36" class="absolute spot-h _19to36" @click="place"></div>
+    <div id="row_first" class="absolute spot-h _1st_row" @click="place"></div>
+    <div id="row_second" class="absolute spot-h _2nd_row" @click="place"></div>
+    <div id="row_third" class="absolute spot-h _3rd_row" @click="place"></div>
 
-    <div id="dbl_1_4" class="absolute spot-h dbl_1_4" @click="placeBet"></div>
-    <div id="dbl_4_7" class="absolute spot-h dbl_4_7" @click="placeBet"></div>
-    <div id="dbl_7_10" class="absolute spot-h dbl_7_10" @click="placeBet"></div>
-    <div id="dbl_10_13" class="absolute spot-h dbl_10_13" @click="placeBet"></div>
-    <div id="dbl_13_16" class="absolute spot-h dbl_13_16" @click="placeBet"></div>
-    <div id="dbl_16_19" class="absolute spot-h dbl_16_19" @click="placeBet"></div>
-    <div id="dbl_19_22" class="absolute spot-h dbl_19_22" @click="placeBet"></div>
-    <div id="dbl_22_25" class="absolute spot-h dbl_22_25" @click="placeBet"></div>
-    <div id="dbl_25_28" class="absolute spot-h dbl_25_28" @click="placeBet"></div>
-    <div id="dbl_28_31" class="absolute spot-h dbl_28_31" @click="placeBet"></div>
-    <div id="dbl_31_34" class="absolute spot-h dbl_31_34" @click="placeBet"></div>
-
-    <div id="str_3_2_1" class="absolute spot-h str_3_2_1" @click="placeBet"></div>
-    <div id="line_3_6_2_5_1_4" class="absolute spot-h line_3_6_2_5_1_4" @click="placeBet"></div>
-    <div id="str_6_5_4" class="absolute spot-h str_6_5_4" @click="placeBet"></div>
-    <div id="line_6_9_5_8_4_7" class="absolute spot-h line_6_9_5_8_4_7" @click="placeBet"></div>
-    <div id="str_9_8_7" class="absolute spot-h str_9_8_7" @click="placeBet"></div>
-    <div id="line_9_12_8_11_7_10" class="absolute spot-h line_9_12_8_11_7_10" @click="placeBet"></div>
-    <div id="str_12_11_10" class="absolute spot-h str_12_11_10" @click="placeBet"></div>
-    <div id="line_12_15_11_14_10_13" class="absolute spot-h line_12_15_11_14_10_13" @click="placeBet"></div>
-    <div id="str_15_14_13" class="absolute spot-h str_15_14_13" @click="placeBet"></div>
-    <div id="line_15_18_14_17_13_16" class="absolute spot-h line_15_18_14_17_13_16" @click="placeBet"></div>
-    <div id="str_18_17_16" class="absolute spot-h str_18_17_16" @click="placeBet"></div>
-    <div id="line_18_21_17_20_16_19" class="absolute spot-h line_18_21_17_20_16_19" @click="placeBet"></div>
-    <div id="str_21_20_19" class="absolute spot-h str_21_20_19" @click="placeBet"></div>
-    <div id="line_21_24_20_23_19_22" class="absolute spot-h line_21_24_20_23_19_22" @click="placeBet"></div>
-    <div id="str_24_23_22" class="absolute spot-h str_24_23_22" @click="placeBet"></div>
-    <div id="line_24_27_23_26_22_25" class="absolute spot-h line_24_27_23_26_22_25" @click="placeBet"></div>
-    <div id="str_27_26_25" class="absolute spot-h str_27_26_25" @click="placeBet"></div>
-    <div id="line_27_30_26_29_25_28" class="absolute spot-h line_27_30_26_29_25_28" @click="placeBet"></div>
-    <div id="str_30_29_28" class="absolute spot-h str_30_29_28" @click="placeBet"></div>
-    <div id="line_30_33_29_32_28_31" class="absolute spot-h line_30_33_29_32_28_31" @click="placeBet"></div>
-    <div id="str_33_32_31" class="absolute spot-h str_33_32_31" @click="placeBet"></div>
-    <div id="line_33_36_32_35_31_34" class="absolute spot-h line_33_36_32_35_31_34" @click="placeBet"></div>
-    <div id="str_36_35_34" class="absolute spot-h str_36_35_34" @click="placeBet"></div>
-
-    <div id="twelve_first" class="absolute spot-h _1st_12" @click="placeBet"></div>
-    <div id="twelve_second" class="absolute spot-h _2nd_12" @click="placeBet"></div>
-    <div id="twelve_third" class="absolute spot-h _3rd_12" @click="placeBet"></div>
-
-    <div id="one_18" class="absolute spot-h _1to18" @click="placeBet"></div>
-    <div id="odd" class="absolute spot-h _odd" @click="placeBet"></div>
-    <div id="even" class="absolute spot-h _even" @click="placeBet"></div>
-    <div id="red" class="absolute spot-h _red" @click="placeBet"></div>
-    <div id="black" class="absolute spot-h _black" @click="placeBet"></div>
-    <div id="nineteen_36" class="absolute spot-h _19to36" @click="placeBet"></div>
-    <div id="row_first" class="absolute spot-h _1st_row" @click="placeBet"></div>
-    <div id="row_second" class="absolute spot-h _2nd_row" @click="placeBet"></div>
-    <div id="row_third" class="absolute spot-h _3rd_row" @click="placeBet"></div>
-
-    <div id="dbl_0_3" class="absolute spot-h dbl_0_3" @click="placeBet"></div>
-    <div id="trip_0_3_2" class="absolute spot-h trip_0_3_2" @click="placeBet"></div>
-    <div id="dbl_0_2" class="absolute spot-h dbl_0_2" @click="placeBet"></div>
-    <div id="trip_0_2_1" class="absolute spot-h trip_0_2_1" @click="placeBet"></div>
-    <div id="dbl_0_1" class="absolute spot-h dbl_0_1" @click="placeBet"></div>
-    <div id="_zero" class="absolute spot-h _zero" @click="placeBet"></div>
+    <div id="dbl_0_3" class="absolute spot-h dbl_0_3" @click="place"></div>
+    <div id="trip_0_3_2" class="absolute spot-h trip_0_3_2" @click="place"></div>
+    <div id="dbl_0_2" class="absolute spot-h dbl_0_2" @click="place"></div>
+    <div id="trip_0_2_1" class="absolute spot-h trip_0_2_1" @click="place"></div>
+    <div id="dbl_0_1" class="absolute spot-h dbl_0_1" @click="place"></div>
+    <div id="_zero" class="absolute spot-h _zero" @click="place"></div>
 
     <div class="spot pt-16 border border-t-3 p-4 bg-green-700 text-white text-3xl text-opacity-70 text-center align-text-middle row-span-3 rounded-tl rounded-bl border-l-4 border-b-4 border-t-4">
       0
@@ -240,8 +240,8 @@
 </template>
 
 <script>
-import Bet from '../lib/table/Bet';
 import Chip from '@/components/Chip';
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'Board',
@@ -252,20 +252,13 @@ export default {
       default: () => {
         return { color: 'red', value: 5 };
       }
-    },
-    bets: {
-      type: Array,
-      default: () => {
-        return [];
-      }
     }
   },
-  mounted () {
-    console.log('bets::', this.bets);
-  },
   methods: {
-    placeBet (event) {
-      this.$emit('betPlaced', new Bet(event.target.id, this.selectedChip));
+    ...mapMutations('strategy', ['placeBet']),
+    ...mapGetters('strategy', ['getStrategy']),
+    place (event) {
+      this.placeBet({ placement: event.target.id, chip: this.selectedChip });
     },
   }
 }

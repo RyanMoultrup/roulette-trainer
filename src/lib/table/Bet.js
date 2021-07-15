@@ -5,6 +5,7 @@ export default class {
     spots = [];
     type;
     betPlacement;
+    chips = [];
 
     oneToEighteen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
     nineteenToThirtySix = [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
@@ -68,10 +69,18 @@ export default class {
         }
     }
 
-    constructor(type, chip) {
-        this.chip = chip;
-        this.amount = +chip.value;
-        this.#parse(type);
+    constructor(bet) {
+        this.chips.unshift(bet.chip);
+        this.amount = +bet.chip.value;
+        this.#parse(bet.placement);
+    }
+
+    addChip (chip) {
+        console.log('chip:::', chip);
+        console.log('addChip this.amount before:::', this.amount);
+        this.chips.unshift(chip);
+        this.amount = this.amount + +chip.value;
+        console.log('addChip this.amount after:::', this.amount);
     }
 
     dbl (hit) {
@@ -150,11 +159,11 @@ export default class {
         this.betPlacement = type;
         let placedBetArr = type.split('_');
 
-        console.log('placementBetArr', placedBetArr);
+        // console.log('placementBetArr', placedBetArr);
 
         this.type = placedBetArr.shift();
 
-        console.log('bet placement name:::', this.type);
+        // console.log('bet placement name:::', this.type);
 
         if (this.type === 'twelve') {
             if (placedBetArr[0] === 'first') {
@@ -222,16 +231,16 @@ export default class {
     }
 
     payout () {
-        console.log('this.amount', this.amount);
-
-        console.log('*******************************');
-        console.log('Rounds============', Rounds);
+        // console.log('this.amount', this.amount);
+        //
+        // console.log('*******************************');
+        // console.log('Rounds============', Rounds);
         console.log('Rounds.last============', Rounds.last());
         return this.payouts[this.type](this.strategy.bet(this.amount));
     }
 
     winningSpots () {
-        console.log('winningSpots', this.spots);
+        // console.log('winningSpots', this.spots);
         return this.spots.map(s => {
             return {
                 spot: s,

@@ -80,11 +80,12 @@
 
 <script>
 
-import Wheel from "@/components/Wheel";
-import Board from "@/components/Board";
-import BetsDisplayPanel from "@/components/BetsDisplayPanel";
-import ChipSelectionPanel from "@/components/ChipSelectionPanel";
-import Chip from "@/components/Chip";
+import Wheel from '@/components/Wheel';
+import Board from '@/components/Board';
+import BetsDisplayPanel from '@/components/BetsDisplayPanel';
+import ChipSelectionPanel from '@/components/ChipSelectionPanel';
+import Chip from '@/components/Chip';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'BettingTable',
@@ -118,8 +119,9 @@ export default {
     }
   },
   methods: {
+    ...mapGetters('strategy', ['getStrategy']),
     runSimulation () {
-      this.$emit('runSimulation', this.bets)
+      this.$emit('runSimulation');
     },
     betPlaced (bet) {
       this.bets.unshift(bet);
