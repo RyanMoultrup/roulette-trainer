@@ -1,26 +1,26 @@
 import Bet from '../../../lib/table/Bet';
 
-const currentBetSpots = [];
+let currentBetSpots = [];
 
 const state = () => ({
     strategy: {}
 });
 
+const removeFromCurrentBets = function (value) {
+    let index = currentBetSpots.indexOf(value);
+    if (index > -1) {
+        currentBetSpots.splice(index, 1);
+    }
+}
+
 const mutations = {
     /**
-     *
      * @param state
      * @param bet {placement: string, chip: object}
      */
-    placeBet (state, bet) {
-        console.log('state', state);
-        console.log('state.strategy', state.strategy);
-
+    async placeBet (state, bet) {
         if (currentBetSpots.includes(bet.placement)) {
-
-            console.log('state.strategy[bet.placement]', state.strategy[bet.placement]);
-
-            state.strategy[bet.placement].addChip(bet.chip);
+            await state.strategy[bet.placement].addChip(bet.chip);
             return;
         }
 
@@ -28,13 +28,11 @@ const mutations = {
         state.strategy[bet.placement] = new Bet(bet);
     },
     removeBet (state, placement) {
-        // state.removeBet(index);
-        console.log('placement:::', placement);
-        console.log('removeBet:::', state.strategy[placement]);
+        removeFromCurrentBets(placement);
         delete state.strategy[placement];
     },
-    updateBet (state, index, amount) {
-        state.updateBet(index, amount);
+    removeChip (state, placement, chipIndex) {
+        state.strategy[placement].removeChip(chipIndex);
     }
 }
 

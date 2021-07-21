@@ -69,7 +69,7 @@ export default class {
         }
     }
 
-    constructor(bet) {
+    constructor (bet) {
         this.chips.unshift(bet.chip);
         this.amount = +bet.chip.value;
         this.#parse(bet.placement);
@@ -81,6 +81,14 @@ export default class {
         this.chips.unshift(chip);
         this.amount = this.amount + +chip.value;
         console.log('addChip this.amount after:::', this.amount);
+    }
+
+    removeChip (index) {
+        const chip = this.chips.splice(index, 1);
+        console.log('removeChip++++++++', chip);
+        console.log('chip.value++++++++', chip.value);
+        this.amount = this.amount - +chip[0].value;
+        console.log('this.amount=====------++++', this.amount);
     }
 
     dbl (hit) {

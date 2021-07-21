@@ -98,9 +98,34 @@
 }
 
 .spot-h {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    /*overflow: hidden;*/
+    /*max-height: 25px;*/
+    /*max-width: 25px;*/
+    /*overflow: hidden;*/
     /*border: solid 1px yellow;*/
+}
+
+.chip-spot {
+    max-height: 25px;
+    max-width: 25px;
+    overflow: hidden;
+}
+
+/*.spot-h:hover {*/
+/*    max-height: 100%;*/
+/*    max-width: 100%;*/
+/*    overflow: auto;*/
+/*    border: solid 1px red;*/
+/*}*/
+
+
+.spot-h:hover {
+    max-height: 100%;
+    max-width: 200%;
+    overflow: auto;
+    border: solid 1px red;
 }
 
 .dbl_3_6 {
