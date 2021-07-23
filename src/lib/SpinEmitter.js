@@ -5,7 +5,7 @@ let runningSpinEmitter;
 
 const spinEmitter = {
     start (interval) {
-        runningSpinEmitter = setInterval( () => {
+        runningSpinEmitter = setInterval(() => {
             store.commit('simulation/pushSpin', spin());
         }, interval * 1000)
     },

@@ -386,11 +386,17 @@ export default {
       }
     }
   },
+  watch: {
+    '$store.state.simulation.spin': function (val) {
+      console.log('THE CURRENT SPIN::::', val);
+    }
+  },
   mounted () {
     console.log('*********** STARTING GAME *************');
   },
   methods: {
     ...mapGetters('strategy', ['getStrategy']),
+    // ...mapGetters('simulation', ['getSpin']),
     updateBank (amt) {
       this.bank = +this.bank + +amt;
     },
