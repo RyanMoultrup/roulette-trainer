@@ -9,4 +9,5 @@ import './styles/wheel.less';
 const app = createApp(App);
 
 app.use(store);
+console.log('after app.use(store)==============');
 app.mount('#app');

@@ -131,19 +131,19 @@
     <div id="line_33_36_32_35_31_34" class="absolute spot-h line_33_36_32_35_31_34" @click="place" @mouseover="hoverBet"></div>
     <div id="str_36_35_34" class="absolute spot-h str_36_35_34" @click="place" @mouseover="hoverBet"></div>
 
-    <div id="twelve_first" class="absolute spot-h _1st_12" @click="place" @mouseover="hoverBet"></div>
-    <div id="twelve_second" class="absolute spot-h _2nd_12" @click="place" @mouseover="hoverBet"></div>
-    <div id="twelve_third" class="absolute spot-h _3rd_12" @click="place" @mouseover="hoverBet"></div>
+    <div id="twelve_first" class="absolute spot-h twelve_first" @click="place" @mouseover="hoverBet"></div>
+    <div id="twelve_second" class="absolute spot-h twelve_second" @click="place" @mouseover="hoverBet"></div>
+    <div id="twelve_third" class="absolute spot-h twelve_third" @click="place" @mouseover="hoverBet"></div>
 
-    <div id="one_18" class="absolute spot-h _1to18" @click="place" @mouseover="hoverBet"></div>
-    <div id="odd" class="absolute spot-h _odd" @click="place" @mouseover="hoverBet"></div>
-    <div id="even" class="absolute spot-h _even" @click="place" @mouseover="hoverBet"></div>
-    <div id="red" class="absolute spot-h _red" @click="place" @mouseover="hoverBet"></div>
-    <div id="black" class="absolute spot-h _black" @click="place" @mouseover="hoverBet"></div>
-    <div id="nineteen_36" class="absolute spot-h _19to36" @click="place" @mouseover="hoverBet"></div>
-    <div id="row_first" class="absolute spot-h _1st_row" @click="place" @mouseover="hoverBet"></div>
-    <div id="row_second" class="absolute spot-h _2nd_row" @click="place" @mouseover="hoverBet"></div>
-    <div id="row_third" class="absolute spot-h _3rd_row" @click="place" @mouseover="hoverBet"></div>
+    <div id="one_18" class="absolute spot-h one_18" @click="place" @mouseover="hoverBet"></div>
+    <div id="odd" class="absolute spot-h odd" @click="place" @mouseover="hoverBet"></div>
+    <div id="even" class="absolute spot-h even" @click="place" @mouseover="hoverBet"></div>
+    <div id="red" class="absolute spot-h red" @click="place" @mouseover="hoverBet"></div>
+    <div id="black" class="absolute spot-h black" @click="place" @mouseover="hoverBet"></div>
+    <div id="nineteen_36" class="absolute spot-h nineteen_36" @click="place" @mouseover="hoverBet"></div>
+    <div id="row_first" class="absolute spot-h row_first" @click="place" @mouseover="hoverBet"></div>
+    <div id="row_second" class="absolute spot-h row_second" @click="place" @mouseover="hoverBet"></div>
+    <div id="row_third" class="absolute spot-h row_third" @click="place" @mouseover="hoverBet"></div>
 
     <div id="dbl_0_3" class="absolute spot-h dbl_0_3" @click="place" @mouseover="hoverBet"></div>
     <div id="trip_0_3_2" class="absolute spot-h trip_0_3_2" @click="place" @mouseover="hoverBet"></div>
@@ -266,20 +266,6 @@ export default {
       }
     }
   },
-  computed: {
-    // hoverBetCSS () {
-    //   return bet => {
-    //     console.log('hoverBetCSS bet:::', bet);
-    //     return {
-    //       'chips-hover': true
-    //     }
-    //   }
-    //   // console.log('hoverBetCSS bet:::', bet);
-    //   // return {
-    //   //   'chips-hover': true
-    //   // }
-    // }
-  },
   data () {
     return {
       isHovered: ''
@@ -289,10 +275,6 @@ export default {
     ...mapMutations('strategy', ['placeBet', 'removeChip']),
     ...mapGetters('strategy', ['getStrategy']),
     hoverBetCSS (bet) {
-      // console.log('hoverBetCSS bet:::', bet);
-      // console.log('this.isHovered:::', this.isHovered);
-      // console.log('bet.placement() === this.isHovered:::', bet.placement() === this.isHovered);
-
       return {
         'chips-hover': bet.placement() === this.isHovered,
         [bet.placement()]: true,
@@ -306,19 +288,13 @@ export default {
       this.placeBet({ placement: placement, chip: this.selectedChip });
     },
     hoverBet (event) {
-      // console.log('hover el', this.$refs['sqr_6_9_5_8']);
       this.isHovered = event.target.id;
     },
     leaveHoverBet () {
       this.isHovered = '';
     },
     removeChipFromBet (betPlacement, chipIndex) {
-      console.log('betPlacement:::----', betPlacement);
-      console.log('chip:::----', chipIndex);
       this.removeChip(betPlacement, chipIndex)
-    },
-    getCSSEl (event) {
-      console.log('getCSSEl event:::', event.target);
     }
   }
 }

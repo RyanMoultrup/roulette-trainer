@@ -17,6 +17,36 @@
             </svg>
             Run Simulation
           </button>
+
+          <button
+            type="button"
+            class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
+            @click="startSpinStream"
+            :disabled="bank <= 0"
+          >
+            <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"
+                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                 aria-hidden="true">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+            </svg>
+            Start
+          </button>
+
+          <button
+            type="button"
+            class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
+            @click="stopSpinStream"
+            :disabled="bank <= 0"
+          >
+            <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"
+                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                 aria-hidden="true">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+            </svg>
+            Stop
+          </button>
 <!--          <button type="button"-->
 <!--                  class="reset-game inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">-->
 <!--            <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"-->
@@ -110,8 +140,9 @@ export default {
   },
   computed: {
     currentBetTotal () {
-      if (this.bets.length) {
-        return this.bets.reduce((accumulator, item) => {
+      let bets = this.getStrategy();
+      if (bets.length) {
+        return bets.reduce((accumulator, item) => {
           return accumulator + +item.get();
         }, 0);
       }
@@ -122,6 +153,12 @@ export default {
     ...mapGetters('strategy', ['getStrategy']),
     runSimulation () {
       this.$emit('runSimulation');
+    },
+    startSpinStream () {
+      this.$emit('startSpinStream');
+    },
+    stopSpinStream () {
+      this.$emit('stopSpinStream');
     },
     betPlaced (bet) {
       this.bets.unshift(bet);

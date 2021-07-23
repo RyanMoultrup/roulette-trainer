@@ -84,7 +84,6 @@ export default class WinLossBankChart {
     }
 
     _accumulate (group) {
-        console.log('_accumulate', group.all());
         return {
             all () {
                 let won = 0;

@@ -38,6 +38,7 @@ const mutations = {
 
 const getters = {
     getStrategy (state) {
+        console.log('getStartegy() state:::', state);
         return Object.values(state.strategy);
     }
 }

@@ -332,6 +332,8 @@
 
             <betting-table
                 @run-simulation="play"
+                @start-spin-stream="startSpinStream"
+                @stop-spin-stream="stopSpinStream"
                 @rounds-selected="roundsSelected"
                 :bank="bank"
             ></betting-table>
@@ -351,12 +353,13 @@ import DisplayStats from "@/components/DisplayStats";
 import crossfilter from 'crossfilter2';
 import spots from './lib/table/spots';
 import formatter from './lib/formatter';
-import spin from './lib/table/wheel';
+import { spin } from './lib/table/wheel';
 import HitsChart from './lib/charts/HitsChart';
 import WinLossChart from "./lib/charts/WinLossChart";
 import WinLossBankChart from './lib/charts/WinLossBankChart';
 import Outcomes from './lib/Outcomes';
 import { mapGetters } from 'vuex';
+import spinEmitter from "@/lib/SpinEmitter";
 
 export default {
   name: 'App',
@@ -401,12 +404,15 @@ export default {
       console.log('RoundsSelected', value);
       this.rounds = value;
     },
+    startSpinStream () {
+      console.log('startSpinStream::::');
+      spinEmitter.start(3);
+    },
+    stopSpinStream () {
+      spinEmitter.stop();
+    },
     runSimulation () {
-      // console.log('runSimulation', value);
-
       this.myBets = this.getStrategy();
-
-
 
       console.log('myBets', this.myBets);
 

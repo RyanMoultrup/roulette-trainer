@@ -379,3 +379,9 @@
     </div>
   </aside>
 </template>
+
+<style>
+export default {
+
+}
+</style>
