@@ -2,7 +2,8 @@ const state = () => ({
     game: {},
     outcomes: [],
     spins: [],
-    spin: null
+    spin: null,
+    rounds: 0
 });
 
 const mutations = {
@@ -10,7 +11,8 @@ const mutations = {
         console.log('pushSpin*****', number);
         console.log('state*****', state);
         state.spin = number;
-        state.spins.unshift(number);
+        state.rounds++;
+        // state.spins.unshift(number);
     }
 }
 

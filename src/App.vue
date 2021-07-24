@@ -412,7 +412,7 @@ export default {
     },
     startSpinStream () {
       console.log('startSpinStream::::');
-      spinEmitter.start(3);
+      spinEmitter.start(1);
     },
     stopSpinStream () {
       spinEmitter.stop();
@@ -593,7 +593,7 @@ export default {
       });
     },
     updateStats (roundResults) {
-      document.querySelector('#rounds span').innerHTML = formatter.number(roundResults.rounds);
+      // document.querySelector('#rounds span').innerHTML = formatter.number(roundResults.rounds);
       document.querySelector('#bank span').innerHTML = formatter.money(roundResults.bank);
       document.querySelector('#won span').innerHTML = formatter.money(roundResults.won);
       document.querySelector('#loss span').innerHTML = formatter.money(roundResults.loss);

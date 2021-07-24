@@ -21,12 +21,12 @@
 
 .loop(@from);
 
-#wheel .main {
-  width: @platesize+24;
+.main {
+  width: (@platesize+24);
   margin: 0 auto;
 }
 
-#wheel .plate {
+.plate {
   background-color: gray;
   width: @platesize;
   height: @platesize;
@@ -66,7 +66,7 @@
   }
 }
 
-#wheel .wheel-number {
+.wheel-number {
   width: @pitwidth;
   height: (@platesize/2);
   display: inline-block;
@@ -90,7 +90,7 @@
   }
 }
 
-#wheel .pit {
+.pit {
   color: #fff;
   padding-top: 12px;
   width: @pitwidth;
@@ -102,7 +102,7 @@
   left: -(@pitwidth/2);
 }
 
-#wheel .inner {
+.inner {
   display: block;
   height: @platesize;
   width: @platesize;
@@ -295,7 +295,7 @@
   }
 }
 
-#wheel .btn {
+.btn {
   background: @spinButton;
   border: 1px solid darken(@spinButton, 30%);
   border-top-color: lighten(@spinButton, 10%);
@@ -342,12 +342,12 @@
 }
 
 .spinto(@d) {
-  transform: rotateZ(((360*-@spins) + @d)+0deg);
+  transform: rotateZ(((360*(-@spins)) + @d)+0deg);
   transition: transform 9s ease-out;
   content: '\2022'; // the ball!
 }
 
-#wheel .wheel-data {
+.wheel-data {
   display: block;
   position: absolute;
   top: 30%;
@@ -360,7 +360,7 @@
   z-index: 100;
 
 
-  #wheel .data-inner {
+  .data-inner {
     position: relative;
     width: 100%;
     height: 100%;
@@ -374,8 +374,8 @@
     transform: rotateY(180deg);
   }
 
-  #wheel .mask,
-  #wheel .wheel-result {
+  .mask,
+  .wheel-result {
     top: 0;
     right: 0;
     bottom: 0;
@@ -387,7 +387,7 @@
     display: inline-block;
   }
 
-  #wheel .mask {
+  .mask {
     color: #fff;
     font-size: 24px;
     margin: auto;
@@ -395,7 +395,7 @@
     padding-top: 36px;
   }
 
-  #wheel .wheel-result {
+  .wheel-result {
     background-color: green;
     color: white;
     transform: rotateY(180deg);
@@ -403,30 +403,30 @@
     color: #fff;
   }
 
-  #wheel .result-number {
-    font-size: 72px;
+  .result-number {
+    font-size: 65px;
     font-weight: 500;
     line-height: 1.2;
     margin-top: 12px;
   }
 
-  #wheel .result-color {
+  .result-color {
     text-transform: uppercase;
-    font-size: 21px;
+    font-size: 15px;
     line-height: 1;
   }
 }
 
-#wheel .previous-results {
+.previous-results {
   max-width: @platesize;
   margin: 24px 12px;
 }
 
-#wheel .previous-list {
+.previous-list {
   perspective: 2000;
 }
 
-#wheel .previous-result {
+.previous-result {
   display: flex;
   margin: 1px;
   padding: 12px;
@@ -441,19 +441,19 @@
   }
 }
 
-#wheel .color-green {
+.color-green {
   background-color: green;
 }
 
-#wheel .color-black {
+.color-black {
   background-color: black;
 }
 
-#wheel .color-red {
+.color-red {
   background-color: #B91C1C;
 }
 
-#wheel .visuallyhidden {
+.visuallyhidden {
   position: absolute;
   overflow: hidden;
   clip: rect(0 0 0 0);

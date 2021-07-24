@@ -22,7 +22,6 @@
             type="button"
             class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
             @click="emittingSpins ? stopSpinStream() : startSpinStream()"
-            :disabled="bank <= 0"
           >
             <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"
                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -65,7 +64,7 @@
           </select>
 
           &nbsp;
-          <span class="text-white " id="rounds">Spins <span>0</span></span>
+          <span class="text-white" id="rounds">Spins <span>{{ rounds }}</span></span>
           &nbsp;
           <span class="text-white justify-self-end" id="current-bet">
             Current Bet Total: $<span>{{ currentBetTotal }}</span>
@@ -121,8 +120,13 @@ export default {
         color: 'red',
         value: '5'
       },
-      rounds: 5,
+      rounds: 0,
       emittingSpins: false
+    }
+  },
+  watch: {
+    '$store.state.simulation.rounds': function (val) {
+      this.rounds = val;
     }
   },
   computed: {
@@ -149,12 +153,12 @@ export default {
       this.$emit('stopSpinStream');
       this.emittingSpins = false;
     },
-    betPlaced (bet) {
-      this.bets.unshift(bet);
-    },
-    removeBet (index) {
-      this.bets.splice(index, 1);
-    },
+    // betPlaced (bet) {
+    //   this.bets.unshift(bet);
+    // },
+    // removeBet (index) {
+    //   this.bets.splice(index, 1);
+    // },
     chipSelected (chip) {
       this.selectedChip = chip;
     },
