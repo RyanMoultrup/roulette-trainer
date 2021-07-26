@@ -1,6 +1,9 @@
+import Outcomes from '@/lib/Outcomes';
+import game from '@/lib/game';
+
 const state = () => ({
     game: {},
-    outcomes: [],
+    outcomes: Outcomes,
     spins: [],
     spin: null,
     rounds: 0
@@ -12,7 +15,17 @@ const mutations = {
         console.log('state*****', state);
         state.spin = number;
         state.rounds++;
-        // state.spins.unshift(number);
+    },
+    addOutcome (state, outcome) {
+        state.outcomes.add(outcome);
+        console.log('Outcomes.all()', state.outcomes.all());
+    }
+}
+
+const actions = {
+     play ({ commit }, hit) {
+        game.play(hit);
+        commit('pushSpin', hit);
     }
 }
 
@@ -32,5 +45,6 @@ export default {
     namespaced: true,
     state,
     getters,
-    mutations
+    mutations,
+    actions
 }

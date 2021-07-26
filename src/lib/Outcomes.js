@@ -1,12 +1,22 @@
+import crossfilter from 'crossfilter2';
+
 class Outcomes {
     outcomes = [];
 
+    constructor (crossfilter) {
+        this.crossfilter = crossfilter();
+    }
+
     add (outcome) {
-        this.outcomes.unshift(outcome);
+        this.crossfilter.add([outcome]);
     }
 
     all () {
-        return this.outcomes;
+        return this.crossfilter.all();
+    }
+
+    get () {
+        return this.crossfilter;
     }
 
     top (num) {
@@ -30,4 +40,4 @@ class Outcomes {
     }
 }
 
-export default new Outcomes;
+export default new Outcomes(crossfilter);

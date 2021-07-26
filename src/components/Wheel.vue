@@ -149,12 +149,7 @@ export default {
       this.colorHex = spots[val].color === 'red' ? '#B91C1C' : 'black';
       this.color = spots[val].color;
       this.spin = val;
-      console.log('THE CURRENT SPIN IN WHEEL.VUE::::', val);
     }
   }
 }
 </script>
-
-<style>
-/*#wheel {width: 100px; overflow:hidden; position:relative;}*/
-</style>

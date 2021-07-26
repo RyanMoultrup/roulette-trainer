@@ -1,12 +1,12 @@
 import { spin } from '@/lib/table/wheel';
-import store from "../store/index";
+import store from "@/store/index";
 
 let runningSpinEmitter;
 
 const spinEmitter = {
     start (interval) {
         runningSpinEmitter = setInterval(() => {
-            store.commit('simulation/pushSpin', spin());
+            store.dispatch('simulation/play', spin());
         }, interval * 1000)
     },
     stop () {
