@@ -1,12 +1,13 @@
 import * as dc from 'dc';
 import * as d3 from 'd3';
-import { tip as d3tip } from "d3-v6-tip";
+// import { tip as d3tip } from "d3-v6-tip";
 
 export default class WinLossBankChart {
     chart;
     group;
     dimension;
     accumulatedGroup;
+    isRendered = false;
 
     reducer = {
         add (i, d) {
@@ -128,39 +129,39 @@ export default class WinLossBankChart {
     }
 
     render () {
-        const winTip = d3tip()
-            .attr('class', 'd3-tip')
-            .offset([-10, 0])
-            .html((d, i) => {
-                console.log('winTip', i);
-                return `<span><strong>Round ${i.data.key}</strong></span><br>
-                        <span><strong>Bets:</strong> ${i.data.value.betCount}</span><br><br>
-                        <span><strong>Total Won:</strong> $${i.data.value.won}</span><br>
-                        <span><strong>Winnings:</strong> $${i.data.value.won - i.data.value.loss}</span><br><hr>
-                        <span><strong>Total Bets:</strong> ${i.data.value.cumBets}</span><br>
-                        <span><strong>Win Percent:</strong> ${this._calculateWinPercentage(i)}%</span><br>
-                        <span><strong>Loss Percent:</strong> ${this._calculateLossPercentage(i)}%</span>`;
-            });
-
-        const lossTip = d3tip()
-            .attr('class', 'd3-tip')
-            .offset([-10, 0])
-            .html((d, i) => {
-                return `<span><strong>Round ${i.data.key}</strong></span><br>
-                        <span><strong>Bets:</strong> ${i.data.value.betCount}</span><br><br>
-                        <span><strong>Total Lost:</strong> $${i.data.value.loss}</span><br>
-                        <span><strong>Winnings:</strong> $${i.data.value.won - i.data.value.loss}</span><br><hr>
-                        <span><strong>Total Bets:</strong> ${i.data.value.cumBets}</span><br>
-                        <span><strong>Win Percent:</strong> ${this._calculateWinPercentage(i)}%</span><br>
-                        <span><strong>Loss Percent:</strong> ${this._calculateLossPercentage(i)}%</span>`;
-            });
-
-        const bankTip = d3tip()
-            .attr('class', 'd3-tip')
-            .offset([-10, 0])
-            .html((d, i) => {
-                return `<span>Bank: $${i.data.value.bank}</span>`;
-            });
+        // const winTip = d3tip()
+        //     .attr('class', 'd3-tip')
+        //     .offset([-10, 0])
+        //     .html((d, i) => {
+        //         console.log('winTip', i);
+        //         return `<span><strong>Round ${i.data.key}</strong></span><br>
+        //                 <span><strong>Bets:</strong> ${i.data.value.betCount}</span><br><br>
+        //                 <span><strong>Total Won:</strong> $${i.data.value.won}</span><br>
+        //                 <span><strong>Winnings:</strong> $${i.data.value.won - i.data.value.loss}</span><br><hr>
+        //                 <span><strong>Total Bets:</strong> ${i.data.value.cumBets}</span><br>
+        //                 <span><strong>Win Percent:</strong> ${this._calculateWinPercentage(i)}%</span><br>
+        //                 <span><strong>Loss Percent:</strong> ${this._calculateLossPercentage(i)}%</span>`;
+        //     });
+        //
+        // const lossTip = d3tip()
+        //     .attr('class', 'd3-tip')
+        //     .offset([-10, 0])
+        //     .html((d, i) => {
+        //         return `<span><strong>Round ${i.data.key}</strong></span><br>
+        //                 <span><strong>Bets:</strong> ${i.data.value.betCount}</span><br><br>
+        //                 <span><strong>Total Lost:</strong> $${i.data.value.loss}</span><br>
+        //                 <span><strong>Winnings:</strong> $${i.data.value.won - i.data.value.loss}</span><br><hr>
+        //                 <span><strong>Total Bets:</strong> ${i.data.value.cumBets}</span><br>
+        //                 <span><strong>Win Percent:</strong> ${this._calculateWinPercentage(i)}%</span><br>
+        //                 <span><strong>Loss Percent:</strong> ${this._calculateLossPercentage(i)}%</span>`;
+        //     });
+        //
+        // const bankTip = d3tip()
+        //     .attr('class', 'd3-tip')
+        //     .offset([-10, 0])
+        //     .html((d, i) => {
+        //         return `<span>Bank: $${i.data.value.bank}</span>`;
+        //     });
 
         this.chart = new dc.CompositeChart("#win-loss-chart");
 
@@ -188,25 +189,30 @@ export default class WinLossBankChart {
         this.chart.yAxis().tickFormat(d => `$${d}`);
         this.chart.rightYAxis().tickFormat(d => `$${d}`);
 
-        this.chart.render();
+        if (!this.isRendered) {
+            this.chart.render();
+            this.isRendered = true;
+        } else {
+            this.chart.redraw();
+        }
 
+        // console.log('winlossbankchart winTip', winTip);
 
+        // winChart.selectAll('g.sub._1 circle.dot').call(winTip);
+        // winChart.selectAll('g.sub._1 circle.dot')
+        //     .on('mouseover.tooltip', winTip.show)
+        //     .on('mouseout.tooltip', winTip.hide);
+        //
+        // lossChart.selectAll('g.sub._2 circle.dot').call(lossTip);
+        // lossChart.selectAll('g.sub._2 circle.dot')
+        //     .on('mouseover.tooltip', lossTip.show)
+        //     .on('mouseout.tooltip', lossTip.hide);
+        //
+        // bankChart.selectAll('g.sub._0 circle.dot').call(bankTip);
+        // bankChart.selectAll('g.sub._0 circle.dot')
+        //     .on('mouseover.tooltip', bankTip.show)
+        //     .on('mouseout.tooltip', bankTip.hide);
 
-        winChart.selectAll('g.sub._1 circle.dot').call(winTip);
-        winChart.selectAll('g.sub._1 circle.dot')
-            .on('mouseover.tooltip', winTip.show)
-            .on('mouseout.tooltip', winTip.hide);
-
-        lossChart.selectAll('g.sub._2 circle.dot').call(lossTip);
-        lossChart.selectAll('g.sub._2 circle.dot')
-            .on('mouseover.tooltip', lossTip.show)
-            .on('mouseout.tooltip', lossTip.hide);
-
-        bankChart.selectAll('g.sub._0 circle.dot').call(bankTip);
-        bankChart.selectAll('g.sub._0 circle.dot')
-            .on('mouseover.tooltip', bankTip.show)
-            .on('mouseout.tooltip', bankTip.hide);
-
-        bankChart.selectAll('path.area').style('linear-gradient(90deg, rgba(133,114,244,0.24693627450980393) 0%, rgba(94,0,255,1) 100%)')
+        // bankChart.selectAll('path.area').style('linear-gradient(90deg, rgba(133,114,244,0.24693627450980393) 0%, rgba(94,0,255,1) 100%)')
     }
 }

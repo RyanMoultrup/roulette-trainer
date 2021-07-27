@@ -118,7 +118,7 @@
         <div class="wheel-data reveal">
           <div class="data-inner">
             <div class="mask"></div>
-            <div class="wheel-result" :style="{'background-color': colorHex}">
+            <div class="wheel-result font-roulette" :style="{'background-color': colorHex}">
               <div class="result-number">{{ spin }}</div>
               <div class="result-color">{{ color }}</div>
             </div>
@@ -146,9 +146,13 @@ export default {
   },
   watch: {
     '$store.state.simulation.spin': function (val) {
-      this.colorHex = spots[val].color === 'red' ? '#B91C1C' : 'black';
+      if (spots[val].color === 'green') {
+        this.colorHex = spots[val].color;
+      } else {
+        this.colorHex = spots[val].color === 'red' ? '#B91C1C' : 'black';
+      }
       this.color = spots[val].color;
-      this.spin = val;
+      this.spin = val === 37 ? 0 : val;
     }
   }
 }

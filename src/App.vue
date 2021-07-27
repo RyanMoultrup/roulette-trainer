@@ -355,8 +355,8 @@ import DisplayStats from "@/components/DisplayStats";
 import formatter from './lib/formatter';
 // import { spin } from './lib/table/wheel';
 // import HitsChart from './lib/charts/HitsChart';
-// import WinLossChart from "./lib/charts/WinLossChart";
-// import WinLossBankChart from './lib/charts/WinLossBankChart';
+import WinLossChart from "./lib/charts/WinLossChart";
+import WinLossBankChart from './lib/charts/WinLossBankChart';
 // import Outcomes from './lib/Outcomes';
 import { mapGetters } from 'vuex';
 import spinEmitter from "@/lib/SpinEmitter";
@@ -387,16 +387,22 @@ export default {
     }
   },
   watch: {
-    '$store.state.simulation.spin': function (val) {
-      console.log('THE CURRENT SPIN::::', val);
-    }
+    '$store.state.simulation.spin': function (spin) {
+      this.play();
+      console.log('THE CURRENT SPIN::::', spin);
+    },
+    // '$store.state.simulation.outcomes': function (outcomes) {
+    //   // this.play();
+    //   console.log('THE OUTCOMES::::', outcomes);
+    // }
   },
   mounted () {
+    // this.play();
     console.log('*********** STARTING GAME *************');
   },
   methods: {
     ...mapGetters('strategy', ['getStrategy']),
-    // ...mapGetters('simulation', ['getSpin']),
+    ...mapGetters('simulation', ['getOutcomes']),
     updateBank (amt) {
       this.bank = +this.bank + +amt;
     },
@@ -411,187 +417,35 @@ export default {
       this.rounds = value;
     },
     startSpinStream () {
-      console.log('startSpinStream::::');
       spinEmitter.start(1);
     },
     stopSpinStream () {
       spinEmitter.stop();
     },
-    // runSimulation () {
-    //   this.myBets = this.getStrategy();
-    //
-    //   console.log('myBets', this.myBets);
-    //
-    //   return new Promise((resolve) => {
-    //     console.log('Simulation is running');
-    //     console.log('lastRun', this.lastRun);
-    //
-    //     // const spins = [1, 3, 4, 6, 7, 9, 10, 11, 12, 14, 15, 17, 16, 18, 17];
-    //
-    //     let j;
-    //     for (let i = this.lastRun; i<(this.rounds+this.lastRun); i++) {
-    //       let hit = spin();
-    //
-    //       // let hit = spins[i];
-    //
-    //       if (print) {
-    //         console.log(`+++++ Round ${i+1} hit on: `, hit);
-    //       }
-    //
-    //       let canBet = this.myBets.every(bet => {
-    //         let winnings;
-    //         let betAmt = bet.get();
-    //
-    //         if (this.bank < betAmt) {
-    //           console.log(`Rounds stopped at ${i+this.lastRun} because you ran out of money`);
-    //           return false;
-    //         }
-    //
-    //         this.placeBet(betAmt);
-    //
-    //         if (print) {
-    //           console.log('Bet: ', betAmt);
-    //         }
-    //
-    //         winnings = bet.collect(hit);
-    //
-    //         if (winnings) {
-    //           if (print) {
-    //             console.log('You Win');
-    //           }
-    //           this.won += winnings - betAmt;
-    //           this.updateBank(winnings);
-    //
-    //           this.roundOutcome.push(true);
-    //           this.outcomes.push({
-    //             wonRound: 1,
-    //             lostRound: 0,
-    //             won: winnings - betAmt,
-    //             loss: 0,
-    //             bet: betAmt,
-    //             hit: hit,
-    //             color: spots[hit].color,
-    //             even: hit % 2 === 0,
-    //             bank: this.bank,
-    //             round: i+1,
-    //             outcome: 'Won'
-    //           });
-    //           Outcomes.add({
-    //             wonRound: 1,
-    //             lostRound: 0,
-    //             won: winnings - betAmt,
-    //             loss: 0,
-    //             bet: betAmt,
-    //             hit: hit,
-    //             color: spots[hit].color,
-    //             even: hit % 2 === 0,
-    //             bank: this.bank,
-    //             round: i+1,
-    //             outcome: 'Won'
-    //           });
-    //           // wonLastRound = true;
-    //         } else {
-    //           if (print) {
-    //             console.log('You Lose');
-    //           }
-    //           this.loss += betAmt;
-    //           this.roundOutcome.push(false);
-    //           this.outcomes.push({
-    //             wonRound: 0,
-    //             lostRound: 1,
-    //             won: 0,
-    //             loss: betAmt,
-    //             bet: betAmt,
-    //             hit: hit,
-    //             color: spots[hit].color,
-    //             even: hit % 2 === 0,
-    //             bank: this.bank,
-    //             round: i+1,
-    //             outcome: 'Lost'
-    //           });
-    //           Outcomes.add({
-    //             wonRound: 0,
-    //             lostRound: 1,
-    //             won: 0,
-    //             loss: betAmt,
-    //             bet: betAmt,
-    //             hit: hit,
-    //             color: spots[hit].color,
-    //             even: hit % 2 === 0,
-    //             bank: this.bank,
-    //             round: i+1,
-    //             outcome: 'Lost'
-    //           });
-    //         }
-    //
-    //         if (print) {
-    //           console.log('bank: ', this.bank);
-    //           console.log('--------------------');
-    //         }
-    //
-    //         return true;
-    //       });
-    //
-    //       if (print) {
-    //         console.log('====================');
-    //       }
-    //
-    //       // console.log('roundOutcome', roundOutcome);
-    //
-    //       // if (roundOutcome.includes(true)) {
-    //       //   wonLastRound = true;
-    //       // } else {
-    //       //   wonLastRound = false;
-    //       // }
-    //
-    //       this.roundOutcome = [];
-    //
-    //       if (!canBet) {
-    //         break;
-    //       }
-    //       j = i + 1;
-    //     }
-    //
-    //     this.lastRun = j;
-    //
-    //
-    //     console.log('Outcomes: ', this.outcomes);
-    //     console.log('Outcomes Object::: ', Outcomes);
-    //     console.log(`Bank after ${this.lastRun} rounds: `, this.bank);
-    //     console.log('Won: ', this.won);
-    //     console.log('Lost: ', this.loss);
-    //     console.log('Winnings: ', +this.bank - 10000);
-    //     console.log('***************************');
-    //     console.log('***************************');
-    //     resolve({
-    //       rounds: this.lastRun,
-    //       bank: this.bank,
-    //       won: this.won,
-    //       loss: this.loss,
-    //       winnings: +this.bank - 10000
-    //     });
-    //   });
-    // },
-    // play (value) {
-    //   console.log('play(value)', value);
-    //   this.runSimulation(value).then(roundResults => {
-    //
-    //     this.updateStats(roundResults);
-    //
-    //     let facts = crossfilter(Outcomes.all());
-    //
-    //     let winLossBankChart = new WinLossBankChart(facts);
-    //     winLossBankChart.render();
-    //
-    //     let winLossChart = new WinLossChart(facts);
-    //     winLossChart.render();
-    //
-    //     let hitsChart = new HitsChart(facts, this.myBets);
-    //     hitsChart.render();
-    //
-    //     // TODO Create inside/outside bet win/loss chart
-    //   });
-    // },
+    play () {
+      // console.log('play(value)', value);
+      // this.runSimulation(value).then(roundResults => {
+
+        // this.updateStats(roundResults);
+
+        // let facts = crossfilter(Outcomes.all());
+        // let outcomes = this.getOutcomes.all();
+
+        console.log('play() this.getOutcomes:::', this.getOutcomes().get().all());
+        console.log('play() crossfilter:::', this.getOutcomes().get().groupAll());
+
+        let winLossBankChart = new WinLossBankChart(this.getOutcomes().get());
+        winLossBankChart.render();
+
+        let winLossChart = new WinLossChart(this.getOutcomes().get());
+        winLossChart.render();
+
+        // let hitsChart = new HitsChart(this.getOutcomes().get(), this.myBets);
+        // hitsChart.render();
+
+        // TODO Create inside/outside bet win/loss chart
+      // });
+    },
     updateStats (roundResults) {
       // document.querySelector('#rounds span').innerHTML = formatter.number(roundResults.rounds);
       document.querySelector('#bank span').innerHTML = formatter.money(roundResults.bank);

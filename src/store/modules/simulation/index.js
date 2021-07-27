@@ -11,26 +11,27 @@ const state = () => ({
 
 const mutations = {
     pushSpin (state, number) {
-        console.log('pushSpin*****', number);
-        console.log('state*****', state);
+        // console.log('pushSpin*****', number);
+        // console.log('state*****', state);
         state.spin = number;
         state.rounds++;
     },
     addOutcome (state, outcome) {
         state.outcomes.add(outcome);
-        console.log('Outcomes.all()', state.outcomes.all());
+        // console.log('Outcomes.all()', state.outcomes.all());
     }
 }
 
 const actions = {
-     play ({ commit }, hit) {
-        game.play(hit);
+     async play ({ commit }, hit) {
+        await game.play(hit);
         commit('pushSpin', hit);
     }
 }
 
 const getters = {
     getOutcomes (state) {
+        // console.log('getOutcomes state.outcomes:::', state.outcomes);
         return state.outcomes;
     },
     getSpin (state) {

@@ -1,15 +1,15 @@
-import spots from "@/lib/table/spots";
+import spots from '@/lib/table/spots';
 import store from '@/store/index';
 
 const game = {
   myBets: [],
   bank: 1000,
   play(hit) {
-    this.myBets =  store.getters["strategy/getStrategy"];
+    this.myBets = store.getters["strategy/getStrategy"];
 
     console.log('myBets', this.myBets);
 
-    this.myBets.every(bet => {
+    this.myBets.forEach(bet => {
       let winnings;
       let betAmt = bet.get();
 

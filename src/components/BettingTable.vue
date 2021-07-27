@@ -113,6 +113,12 @@ export default {
       }
     }
   },
+  emits: [
+    'runSimulation',
+    'startSpinStream',
+    'stopSpinStream',
+    'roundsSelected'
+  ],
   data () {
     return {
       bets: [],
@@ -153,12 +159,6 @@ export default {
       this.$emit('stopSpinStream');
       this.emittingSpins = false;
     },
-    // betPlaced (bet) {
-    //   this.bets.unshift(bet);
-    // },
-    // removeBet (index) {
-    //   this.bets.splice(index, 1);
-    // },
     chipSelected (chip) {
       this.selectedChip = chip;
     },

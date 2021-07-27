@@ -4,7 +4,8 @@ import * as d3 from 'd3';
 export default class WinLossChart {
     chart;
     dimension;
-    group
+    group;
+    isRendered = false;
 
     constructor (facts) {
         this.dimension = facts.dimension(d => d.outcome);
@@ -27,6 +28,13 @@ export default class WinLossChart {
                 })
             });
 
-        this.chart.render();
+        if (!this.isRendered) {
+            console.log('RENDERING PIE CHART:::::')
+            this.chart.render();
+            this.isRendered = true;
+        } else {
+            console.log('REDRAWING PIE CHART');
+            this.chart.redraw();
+        }
     }
 }
