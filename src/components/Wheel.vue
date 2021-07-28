@@ -136,6 +136,7 @@
 
 <script>
 import spots from '../lib/table/spots';
+
 export default {
   data () {
     return {

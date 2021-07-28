@@ -25,22 +25,22 @@
                   </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
-                  <tr>
+                  <tr v-for="outcome in outcomes()" :key="outcome.value.round" >
                     <td class="px-2 py-1 whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="flex-shrink-0 h-6 w-6 ">
-                          <span class="h-6 w-6 rounded-full bg-red-700 p-1 text-white">13</span>
+                          <span class="h-6 w-6 rounded-full bg-red-700 p-1 text-white">{{ outcome.value.hit }}</span>
                         </div>
                         <div class="ml-4">
                           <div class="text-sm font-medium text-gray-900">
-                            Spin 1
+                            Spin {{ outcome.key }}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">Bet $200</div>
-                      <div class="text-xs text-gray-500">4 bets</div>
+                      <div class="text-sm text-gray-900">Bet ${{ outcome.value.betAmt }}</div>
+                      <div class="text-xs text-gray-500">{{ outcome.value.betCount }} bets</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="text-sm text-gray-900">
@@ -57,318 +57,6 @@
                       </div>
                     </td>
                   </tr>
-
-                  <tr>
-                    <td class="px-2 py-1 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-6 w-6 ">
-                          <span class="h-6 w-6 rounded-full bg-gray-700 p-1 text-white">24</span>
-                        </div>
-                        <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
-                            Spin 2
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">Bet $200</div>
-                      <div class="text-xs text-gray-500">4 Bets</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Won
-                                </span> $0
-                      </div>
-                      <div class="text-sm text-gray-500">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                  Lost
-                                </span> $200
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-2 py-1 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-6 w-6 ">
-                          <span class="h-6 w-6 rounded-full bg-red-700 p-1 text-white">30</span>
-                        </div>
-                        <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
-                            Round: 1
-                          </div>
-                          <div class="text-sm text-gray-500">
-                            Bets: 4
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">Total Bet Amt</div>
-                      <div class="text-sm text-gray-500">$200</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Won
-                                </span> $100
-                      </div>
-                      <div class="text-sm text-gray-500">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                  Lost
-                                </span> $100
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td class="px-2 py-1 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-6 w-6 ">
-                          <span class="h-6 w-6 rounded-full bg-gray-700 p-1 text-white">14</span>
-                        </div>
-                        <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
-                            Round: 2
-                          </div>
-                          <div class="text-sm text-gray-500">
-                            Bets: 4
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">Total Bet Amt</div>
-                      <div class="text-sm text-gray-500">$200</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Won
-                                </span> $0
-                      </div>
-                      <div class="text-sm text-gray-500">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                  Lost
-                                </span> $200
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-2 py-1 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-6 w-6 ">
-                          <span class="h-6 w-6 rounded-full bg-gray-700 p-1 text-white">26</span>
-                        </div>
-                        <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
-                            Round: 2
-                          </div>
-                          <div class="text-sm text-gray-500">
-                            Bets: 4
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">Total Bet Amt</div>
-                      <div class="text-sm text-gray-500">$200</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Won
-                                </span> $0
-                      </div>
-                      <div class="text-sm text-gray-500">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                  Lost
-                                </span> $200
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td class="px-2 py-1 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-6 w-6 ">
-                          <span class="h-6 w-6 rounded-full bg-red-700 p-1 text-white">13</span>
-                        </div>
-                        <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
-                            Spin 1
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">Bet $200</div>
-                      <div class="text-xs text-gray-500">4 bets</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Won
-                                </span> $100
-                      </div>
-                      <div class="text-sm text-gray-500">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                  Lost
-                                </span> $100
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td class="px-2 py-1 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-6 w-6 ">
-                          <span class="h-6 w-6 rounded-full bg-gray-700 p-1 text-white">24</span>
-                        </div>
-                        <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
-                            Spin 2
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">Bet $200</div>
-                      <div class="text-xs text-gray-500">4 Bets</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Won
-                                </span> $0
-                      </div>
-                      <div class="text-sm text-gray-500">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                  Lost
-                                </span> $200
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-2 py-1 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-6 w-6 ">
-                          <span class="h-6 w-6 rounded-full bg-red-700 p-1 text-white">30</span>
-                        </div>
-                        <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
-                            Round: 1
-                          </div>
-                          <div class="text-sm text-gray-500">
-                            Bets: 4
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">Total Bet Amt</div>
-                      <div class="text-sm text-gray-500">$200</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Won
-                                </span> $100
-                      </div>
-                      <div class="text-sm text-gray-500">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                  Lost
-                                </span> $100
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td class="px-2 py-1 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-6 w-6 ">
-                          <span class="h-6 w-6 rounded-full bg-gray-700 p-1 text-white">14</span>
-                        </div>
-                        <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
-                            Round: 2
-                          </div>
-                          <div class="text-sm text-gray-500">
-                            Bets: 4
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">Total Bet Amt</div>
-                      <div class="text-sm text-gray-500">$200</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Won
-                                </span> $0
-                      </div>
-                      <div class="text-sm text-gray-500">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                  Lost
-                                </span> $200
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-2 py-1 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-6 w-6 ">
-                          <span class="h-6 w-6 rounded-full bg-gray-700 p-1 text-white">26</span>
-                        </div>
-                        <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
-                            Round: 2
-                          </div>
-                          <div class="text-sm text-gray-500">
-                            Bets: 4
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">Total Bet Amt</div>
-                      <div class="text-sm text-gray-500">$200</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Won
-                                </span> $0
-                      </div>
-                      <div class="text-sm text-gray-500">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                  Lost
-                                </span> $200
-                      </div>
-                    </td>
-                  </tr>
-                  <!-- More people... -->
                   </tbody>
                 </table>
               </div>
@@ -380,8 +68,66 @@
   </aside>
 </template>
 
-<style>
-export default {
+<script>
+import { mapGetters } from 'vuex';
 
+export default {
+  methods: {
+    ...mapGetters('simulation', ['getOutcomes']),
+    outcomes () {
+      let values = this.getOutcomes()
+          .get()
+          .dimension(d => d.round)
+          .group()
+          .reduce(
+              (i, d) => {
+                i.hit = d.hit;
+
+                if (d.wonRound) {
+                  i.won += +d.won;
+                  i.loss += 0;
+                }
+
+                if (d.lostRound) {
+                  i.won += 0;
+                  i.loss += +d.bet;
+                }
+
+                i.betCount++;
+                i.betAmt += +d.bet;
+                return i;
+              },
+              (i, d) => {
+                i.round = d.round;
+
+                if (d.wonRound) {
+                  i.won -= +d.won;
+                  i.loss -= 0;
+                }
+
+                if (d.lostRound) {
+                  i.won -= 0;
+                  i.loss -= d.bet;
+                }
+
+                i.betCount--;
+                i.betAmt -= +d.bet;
+
+                return i;
+              },
+              () => {
+                return {
+                  round: 0,
+                  won: 0,
+                  loss: 0,
+                  betCount: 0,
+                  betAmt: 0,
+                  hit: 0,
+                }
+              }
+          ).top(Infinity);
+      return values;
+    }
+  }
 }
-</style>
+</script>
