@@ -7,7 +7,10 @@ export default class WinLossBankChart {
     group;
     dimension;
     accumulatedGroup;
-    isRendered = false;
+    // isRendered = false;
+    winChart;
+    lossChart;
+    bankChart;
 
     reducer = {
         add (i, d) {
@@ -43,10 +46,10 @@ export default class WinLossBankChart {
         }
     };
 
-    constructor (facts) {
-        this.dimension = facts.dimension(d => d.round);
-        let group = this._group(this.dimension);
-        this.accumulatedGroup = this._accumulate(group);
+    constructor () {
+        this.chart = new dc.CompositeChart("#win-loss-chart");
+        // this.registry = dc.chartRegistry;
+        console.log('this.registry', dc.chartRegistry.list());
     }
 
     _buildWinChart () {
@@ -120,15 +123,32 @@ export default class WinLossBankChart {
         }
     }
 
-    _group (dimension) {
-        return dimension.group().reduce(
+    _group () {
+        return this.dimension.group().reduce(
             this.reducer.add,
             this.reducer.remove,
             this.reducer.init
         );
     }
 
-    render () {
+    render (facts) {
+        // if (Object.values(facts).length === 0) {
+        //     return;
+        // }
+
+        this.dimension = facts.dimension(d => d.round);
+        let group = this._group();
+        // let group = this.dimension.group().reduce(
+        //   this.reducer.add,
+        //   this.reducer.remove,
+        //   this.reducer.init
+        // );
+        this.accumulatedGroup = this._accumulate(group);
+
+        console.log('this.accumulatedGroup::::', this.accumulatedGroup.all());
+
+        console.log('this.dimension::::::::::', this.dimension);
+
         // const winTip = d3tip()
         //     .attr('class', 'd3-tip')
         //     .offset([-10, 0])
@@ -163,11 +183,9 @@ export default class WinLossBankChart {
         //         return `<span>Bank: $${i.data.value.bank}</span>`;
         //     });
 
-        this.chart = new dc.CompositeChart("#win-loss-chart");
-
-        const winChart = this._buildWinChart();
-        const lossChart = this._buildLossChart();
-        const bankChart = this._buildBankChart();
+        this.winChart = this._buildWinChart();
+        this.lossChart = this._buildLossChart();
+        this.bankChart = this._buildBankChart();
 
         this.chart
             .width(468)
@@ -179,37 +197,35 @@ export default class WinLossBankChart {
             .legend(dc.legend().x(80).y(20).itemHeight(13).gap(5))
             // .renderHorizontalGridLines(true)
             .renderTitle(false)
+            .elasticX(true)
+            .elasticY(true)
             .compose([
-                bankChart,
-                winChart,
-                lossChart
+                this.bankChart,
+                this.winChart,
+                this.lossChart
             ])
             .brushOn(false);
 
         this.chart.yAxis().tickFormat(d => `$${d}`);
         this.chart.rightYAxis().tickFormat(d => `$${d}`);
 
-        if (!this.isRendered) {
-            this.chart.render();
-            this.isRendered = true;
-        } else {
-            this.chart.redraw();
-        }
+
+        this.chart.render();
 
         // console.log('winlossbankchart winTip', winTip);
 
-        // winChart.selectAll('g.sub._1 circle.dot').call(winTip);
-        // winChart.selectAll('g.sub._1 circle.dot')
+        // this.winChart.selectAll('g.sub._1 circle.dot').call(winTip);
+        // this.winChart.selectAll('g.sub._1 circle.dot')
         //     .on('mouseover.tooltip', winTip.show)
         //     .on('mouseout.tooltip', winTip.hide);
         //
-        // lossChart.selectAll('g.sub._2 circle.dot').call(lossTip);
-        // lossChart.selectAll('g.sub._2 circle.dot')
+        // this.lossChart.selectAll('g.sub._2 circle.dot').call(lossTip);
+        // this.lossChart.selectAll('g.sub._2 circle.dot')
         //     .on('mouseover.tooltip', lossTip.show)
         //     .on('mouseout.tooltip', lossTip.hide);
         //
-        // bankChart.selectAll('g.sub._0 circle.dot').call(bankTip);
-        // bankChart.selectAll('g.sub._0 circle.dot')
+        // this.bankChart.selectAll('g.sub._0 circle.dot').call(bankTip);
+        // this.bankChart.selectAll('g.sub._0 circle.dot')
         //     .on('mouseover.tooltip', bankTip.show)
         //     .on('mouseout.tooltip', bankTip.hide);
 

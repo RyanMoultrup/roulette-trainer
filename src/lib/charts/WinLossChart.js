@@ -2,39 +2,37 @@ import * as dc from 'dc';
 import * as d3 from 'd3';
 
 export default class WinLossChart {
-    chart;
-    dimension;
-    group;
-    isRendered = false;
+  chart;
+  dimension;
+  group;
+  isRendered = false;
 
-    constructor (facts) {
-        this.dimension = facts.dimension(d => d.outcome);
-        this.group = this.dimension.group().reduceCount();
-    }
+  constructor() {
+    this.chart = new dc.PieChart('#win-loss-row-chart');
+  }
 
-    render () {
-        this.chart = new dc.PieChart('#win-loss-row-chart');
+  render(facts) {
+    // if (Object.values.length === 0) {
+    //   return;
+    // }
 
-        this.chart
-            .width(200)
-            .height(200)
-            .innerRadius(35)
-            .dimension(this.dimension)
-            .group(this.group)
-            .colors(d3.scaleOrdinal().range(['#E5550C', 'green']))
-            .on('pretransition', function(chart) {
-                chart.selectAll('text.pie-slice').text(function(d) {
-                    return d.data.key + ' ' + dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2*Math.PI) * 100) + '%';
-                })
-            });
+    this.dimension = facts.dimension(d => d.outcome);
+    this.group = this.dimension.group().reduceCount();
 
-        if (!this.isRendered) {
-            console.log('RENDERING PIE CHART:::::')
-            this.chart.render();
-            this.isRendered = true;
-        } else {
-            console.log('REDRAWING PIE CHART');
-            this.chart.redraw();
-        }
-    }
+
+    this.chart
+      .width(200)
+      .height(200)
+      .innerRadius(35)
+      .dimension(this.dimension)
+      .group(this.group)
+      .colors(d3.scaleOrdinal().range(['#E5550C', 'green']))
+      .on('pretransition', function (chart) {
+        chart.selectAll('text.pie-slice').text(function (d) {
+          return d.data.key + ' ' + Math.round(dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2 * Math.PI) * 100)) + '%';
+        })
+      });
+
+      this.chart.render();
+  }
 }

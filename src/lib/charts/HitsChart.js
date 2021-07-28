@@ -8,14 +8,15 @@ export default class HitsChart {
     dimension;
     group
 
-    constructor (facts, bets) {
-        this.bets = bets;
-        this.dimension = facts.dimension(d => +d.hit);
-        this.group = this.dimension.group().reduceCount();
+    constructor () {
+        this.chart = new dc.BarChart("#hits-chart");
     }
 
-    render () {
-        this.chart = new dc.BarChart("#hits-chart");
+    render (facts, bets) {
+        this.bets = bets;
+        console.log('this.bets:::::::::::::::::::::::::', this.bets);
+        this.dimension = facts.dimension(d => +d.hit);
+        this.group = this.dimension.group().reduceCount();
 
         this.chart
             .width(568)
@@ -37,6 +38,7 @@ export default class HitsChart {
             })
             .brushOn(false)
             .elasticY(true)
+            .elasticX(true)
             .dimension(this.dimension)
             .group(this.group)
             .valueAccessor(d => +d.value/this.bets.length);

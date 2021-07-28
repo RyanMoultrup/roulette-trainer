@@ -15,6 +15,8 @@ const game = {
 
       // this.placeBet(betAmt);
 
+      console.log('THIS ROUND IN game.js+++++++++++++++', store.state.simulation.rounds);
+
       winnings = bet.collect(hit);
 
       if (winnings) {
@@ -28,7 +30,7 @@ const game = {
           color: spots[hit].color,
           even: hit % 2 === 0,
           bank: this.bank,
-          round: store.state.simulation.rounds,
+          round: store.state.simulation.rounds + 1,
           outcome: 'Won'
         });
       } else {
@@ -42,7 +44,7 @@ const game = {
           color: spots[hit].color,
           even: hit % 2 === 0,
           bank: this.bank,
-          round: store.state.simulation.rounds,
+          round: store.state.simulation.rounds + 1,
           outcome: 'Lost'
         });
       }

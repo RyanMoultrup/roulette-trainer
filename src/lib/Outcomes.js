@@ -4,19 +4,6 @@ class Outcomes {
     outcomes = [];
 
     constructor (crossfilter) {
-        // this.crossfilter = crossfilter([{
-        //     wonRound: 0,
-        //     lostRound: 0,
-        //     won: 0,
-        //     loss: 0,
-        //     bet: 0,
-        //     hit: 0,
-        //     color: 0,
-        //     even: 0,
-        //     bank: 0,
-        //     round: 0,
-        //     outcome: 0
-        // }]);
         this.crossfilter = crossfilter();
     }
 
