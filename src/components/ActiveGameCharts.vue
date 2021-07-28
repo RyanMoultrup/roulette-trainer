@@ -8,11 +8,11 @@
 </template>
 
 <script>
+import HitsChart from "@/lib/charts/HitsChart";
 import WinLossChart from "@/lib/charts/WinLossChart";
 import WinLossBankChart from "@/lib/charts/WinLossBankChart";
 import { mapGetters } from "vuex";
 import {redrawAll} from "dc";
-import HitsChart from "@/lib/charts/HitsChart";
 
 export default {
   methods: {
@@ -30,15 +30,6 @@ export default {
 
     let winLossChart = new WinLossChart();
     winLossChart.render(this.getOutcomes().get());
-
-    // instantiate the charts
-    // add charts to DC registry
-    // render the chart when the first data comes in
-    // redraw the charts when the rest of the data comes in
-
-    // new ChartRegistry.list().forEach(chart => {
-    //
-    // });
 
     let hitsChart = new HitsChart();
     hitsChart.render(this.getOutcomes().get(), this.getStrategy());

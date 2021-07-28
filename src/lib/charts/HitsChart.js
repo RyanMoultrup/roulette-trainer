@@ -14,7 +14,7 @@ export default class HitsChart {
 
     render (facts, bets) {
         this.bets = bets;
-        console.log('this.bets:::::::::::::::::::::::::', this.bets);
+        console.log('this.bets:::::::::::::::::::::::::', this.bets.length);
         this.dimension = facts.dimension(d => +d.hit);
         this.group = this.dimension.group().reduceCount();
 
@@ -38,10 +38,11 @@ export default class HitsChart {
             })
             .brushOn(false)
             .elasticY(true)
-            .elasticX(true)
+            // .elasticX(true)
             .dimension(this.dimension)
             .group(this.group)
-            .valueAccessor(d => +d.value/this.bets.length);
+            // .valueAccessor(d => +d.value/bets.length);
+            // .valueAccessor(d => +d.value);
 
         this.chart.yAxis().tickFormat(d3.format("d"));
         this.chart.render();

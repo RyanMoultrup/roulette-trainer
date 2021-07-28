@@ -132,22 +132,9 @@ export default class WinLossBankChart {
     }
 
     render (facts) {
-        // if (Object.values(facts).length === 0) {
-        //     return;
-        // }
-
         this.dimension = facts.dimension(d => d.round);
         let group = this._group();
-        // let group = this.dimension.group().reduce(
-        //   this.reducer.add,
-        //   this.reducer.remove,
-        //   this.reducer.init
-        // );
         this.accumulatedGroup = this._accumulate(group);
-
-        console.log('this.accumulatedGroup::::', this.accumulatedGroup.all());
-
-        console.log('this.dimension::::::::::', this.dimension);
 
         // const winTip = d3tip()
         //     .attr('class', 'd3-tip')
