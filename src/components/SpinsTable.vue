@@ -47,13 +47,13 @@
                         <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           Won
-                        </span> $100
+                        </span> ${{ outcome.value.won }}
                       </div>
                       <div class="text-sm text-gray-500">
                         <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                           Lost
-                        </span> $100
+                        </span> ${{ outcome.value.loss }}
                       </div>
                     </td>
                   </tr>
