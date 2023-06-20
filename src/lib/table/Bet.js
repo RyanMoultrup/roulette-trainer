@@ -76,19 +76,20 @@ export default class {
     }
 
     addChip (chip) {
-        console.log('chip:::', chip);
-        console.log('addChip this.amount before:::', this.amount);
+        // console.log('chip:::', chip);
+        // console.log('addChip this.amount before:::', this.amount);
         this.chips.unshift(chip);
         this.amount = this.amount + +chip.value;
-        console.log('addChip this.amount after:::', this.amount);
+        // console.log('addChip this.amount after:::', this.amount);
     }
 
     removeChip (index) {
         const chip = this.chips.splice(index, 1);
-        console.log('removeChip++++++++', chip);
-        console.log('chip.value++++++++', chip.value);
+        // console.log('removeChip++++++++', chip);
+        // console.log('chip.value++++++++', chip.value);
+        // TODO THIS MIGHT BE A BUG AND MAYBE SHOULD BE THIS -> chip[index].value
         this.amount = this.amount - +chip[0].value;
-        console.log('this.amount=====------++++', this.amount);
+        // console.log('this.amount=====------++++', this.amount);
     }
 
     dbl (hit) {
@@ -99,7 +100,7 @@ export default class {
 
     sqr (hit) {
         if (this.spots.includes(hit)) {
-            return (this.get()) * 8 + this.get();
+            return (this.get() * 8) + this.get();
         }
     }
 
@@ -165,19 +166,13 @@ export default class {
 
     #parse (type) {
         this.betPlacement = type;
-        let placedBetArr = type.split('_');
-
-        // console.log('placementBetArr', placedBetArr);
+        const placedBetArr = type.split('_');
 
         this.type = placedBetArr.shift();
 
-        // console.log('bet placement name:::', this.type);
-
         if (this.type === 'twelve') {
             if (placedBetArr[0] === 'first') {
-                console.log('first twelve+++++', this.firstTwelve);
                 this.spots = this.firstTwelve;
-                console.log('checking this.spots==========', this.spots);
             }
 
             if (placedBetArr[0] === 'second') {

@@ -216,6 +216,6 @@ export default class WinLossBankChart {
         //     .on('mouseover.tooltip', bankTip.show)
         //     .on('mouseout.tooltip', bankTip.hide);
 
-        // bankChart.selectAll('path.area').style('linear-gradient(90deg, rgba(133,114,244,0.24693627450980393) 0%, rgba(94,0,255,1) 100%)')
+        // this.bankChart.selectAll('path.area').style('linear-gradient(90deg, rgba(133,114,244,0.24693627450980393) 0%, rgba(94,0,255,1) 100%)')
     }
 }

@@ -4,10 +4,11 @@ import store from '@/store/index';
 const game = {
   myBets: [],
   bank: 1000,
-  play(hit) {
+  play (hit) {
     this.myBets = store.getters["strategy/getStrategy"];
 
-    console.log('myBets', this.myBets);
+    // console.log('HERE HERE HERE HERE::::');
+    console.log('MYBETS:::', this.myBets);
 
     this.myBets.forEach(bet => {
       let winnings;
@@ -15,7 +16,7 @@ const game = {
 
       // this.placeBet(betAmt);
 
-      console.log('THIS ROUND IN game.js+++++++++++++++', store.state.simulation.rounds);
+      // console.log('THIS ROUND IN game.js+++++++++++++++', store.state.simulation.rounds);
 
       winnings = bet.collect(hit);
 

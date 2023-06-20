@@ -11,14 +11,11 @@ const state = () => ({
 
 const mutations = {
     pushSpin (state, number) {
-        // console.log('pushSpin*****', number);
-        // console.log('state*****', state);
         state.spin = number;
         state.rounds++;
     },
     addOutcome (state, outcome) {
         state.outcomes.add(outcome);
-        // console.log('Outcomes.all()', state.outcomes.all());
     }
 }
 
@@ -31,7 +28,6 @@ const actions = {
 
 const getters = {
     getOutcomes (state) {
-        // console.log('getOutcomes state.outcomes:::', state.outcomes);
         return state.outcomes;
     },
     getSpin (state) {

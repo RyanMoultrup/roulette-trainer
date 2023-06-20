@@ -113,7 +113,7 @@ export default {
                 i.betCount--;
                 i.betAmt -= +d.bet;
 
-                return i;
+                return i
               },
               () => {
                 return {
