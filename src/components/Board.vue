@@ -274,6 +274,8 @@ export default {
   methods: {
     ...mapMutations('strategy', ['placeBet', 'removeChip']),
     ...mapGetters('strategy', ['getStrategy']),
+    ...mapGetters('bank', ['canBet', 'availableBalance']),
+    ...mapMutations('bank', ['reduceAvailableBalance']),
     hoverBetCSS (bet) {
       return {
         'chips-hover': bet.placement() === this.isHovered,
@@ -282,10 +284,20 @@ export default {
       }
     },
     async place (event) {
-      await this.placeBet({ placement: event.target.id, chip: this.selectedChip });
+      console.log('SELECTED CHIP:::', this.selectedChip);
+      if (this.canBet(+this.selectedChip.value)) {
+        console.log('BEFORE:Available balance:::', this.availableBalance());
+        await this.placeBet({ placement: event.target.id, chip: this.selectedChip });
+        this.reduceAvailableBalance(+this.selectedChip.value);
+        console.log('AFTER:Available balance:::', this.availableBalance());
+      }
     },
     placeNext (placement) {
-      this.placeBet({ placement: placement, chip: this.selectedChip });
+      console.log('SELECTED CHIP NEXT:::', this.selectedChip);
+      if (this.canBet(+this.selectedChip.value)) {
+        this.placeBet({ placement: placement, chip: this.selectedChip });
+        this.reduceAvailableBalance(+this.selectedChip.value);
+      }
     },
     hoverBet (event) {
       this.isHovered = event.target.id;

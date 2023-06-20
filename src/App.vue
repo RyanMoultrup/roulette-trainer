@@ -332,7 +332,7 @@
             </section>
 
             <betting-table
-                @run-simulation="play"
+                @run-simulation="spin"
                 @start-spin-stream="startSpinStream"
                 @stop-spin-stream="stopSpinStream"
                 @rounds-selected="roundsSelected"
@@ -359,9 +359,10 @@ import formatter from './lib/formatter';
 // import WinLossChart from "./lib/charts/WinLossChart";
 // import WinLossBankChart from './lib/charts/WinLossBankChart';
 // import Outcomes from './lib/Outcomes';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import spinEmitter from "@/lib/SpinEmitter";
 import ActiveGameCharts from "@/components/ActiveGameCharts";
+import { spin } from '@/lib/table/wheel';
 // import { redrawAll } from 'dc';
 
 export default {
@@ -407,6 +408,7 @@ export default {
   methods: {
     ...mapGetters('strategy', ['getStrategy']),
     ...mapGetters('simulation', ['getOutcomes']),
+    ...mapActions('simulation', ['play']),
     updateBank (amt) {
       this.bank = +this.bank + +amt;
     },
@@ -426,7 +428,10 @@ export default {
     stopSpinStream () {
       spinEmitter.stop();
     },
-    play () {
+    spin () {
+      console.log('PLAYING:::');
+      // spinEmitter.start(1, 3);
+      this.play(spin());
       // console.log('play(value)', value);
       // this.runSimulation(value).then(roundResults => {
 

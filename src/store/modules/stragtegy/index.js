@@ -19,6 +19,7 @@ const mutations = {
      * @param bet {placement: string, chip: object}
      */
     async placeBet (state, bet) {
+        console.log('placeBet bet:::', bet);
         if (currentBetSpots.includes(bet.placement)) {
             await state.strategy[bet.placement].addChip(bet.chip);
             return;

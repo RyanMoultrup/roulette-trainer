@@ -15,7 +15,7 @@
               <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
               <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
             </svg>
-            Run Simulation
+            Spin
           </button>
 
           <button
@@ -29,7 +29,7 @@
               <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
               <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
             </svg>
-            {{ emittingSpins ? "Stop" : "Start" }}
+            {{ emittingSpins ? "Stop Emitting" : "Start Emitting" }}
           </button>
 
 <!--          <button type="button"-->
@@ -78,12 +78,10 @@
         <board
           :selected-chip="selectedChip"
           :bets="bets"
-          @betPlaced="betPlaced"
         />
 
         <bets-display-panel
           :bets="bets"
-          @betRemoved="removeBet"
         />
 
         <chip-selection-panel @chipSelected="chipSelected" />

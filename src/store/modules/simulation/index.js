@@ -21,6 +21,7 @@ const mutations = {
 
 const actions = {
      async play ({ commit }, hit) {
+         console.log('Playing action:::', hit);
         await game.play(hit);
         commit('pushSpin', hit);
     }
