@@ -36,7 +36,6 @@ export default {
   },
   computed: {
     chipColor (color) {
-      console.log('color', color.color);
       return `chip-${color.color}`;
     }
   },

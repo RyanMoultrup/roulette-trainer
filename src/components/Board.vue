@@ -2,7 +2,7 @@
   <div id="table" class="relative flex-grow-0 p-5 pl-3 grid grid-rows-5 grid-cols-14 place-items-stretch font-roulette text-xl">
 
     <div
-      v-for="bet in this.getStrategy()" :key="bet.betType()"
+      v-for="bet in this.getStrategy" :key="bet.betType()"
       class="absolute"
       v-bind:class="hoverBetCSS(bet)"
       @mouseleave="leaveHoverBet"
@@ -271,10 +271,12 @@ export default {
       isHovered: ''
     }
   },
+  computed: {
+    ...mapGetters('strategy', ['getStrategy']),
+    ...mapGetters('bank', ['canBet', 'availableBalance'])
+  },
   methods: {
     ...mapMutations('strategy', ['placeBet', 'removeChip']),
-    ...mapGetters('strategy', ['getStrategy']),
-    ...mapGetters('bank', ['canBet', 'availableBalance']),
     ...mapMutations('bank', ['reduceAvailableBalance']),
     hoverBetCSS (bet) {
       return {
@@ -284,20 +286,21 @@ export default {
       }
     },
     async place (event) {
-      console.log('SELECTED CHIP:::', this.selectedChip);
       if (this.canBet(+this.selectedChip.value)) {
-        console.log('BEFORE:Available balance:::', this.availableBalance());
         await this.placeBet({ placement: event.target.id, chip: this.selectedChip });
         this.reduceAvailableBalance(+this.selectedChip.value);
-        console.log('AFTER:Available balance:::', this.availableBalance());
+        return;
       }
+      console.log('Cannot place bet::::::::::::::::');
     },
     placeNext (placement) {
       console.log('SELECTED CHIP NEXT:::', this.selectedChip);
       if (this.canBet(+this.selectedChip.value)) {
         this.placeBet({ placement: placement, chip: this.selectedChip });
         this.reduceAvailableBalance(+this.selectedChip.value);
+        return;
       }
+      console.log('Cannot place bet::::::::::::::::');
     },
     hoverBet (event) {
       this.isHovered = event.target.id;

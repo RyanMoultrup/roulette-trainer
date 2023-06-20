@@ -8,7 +8,7 @@ const game = {
     this.myBets = store.getters["strategy/getStrategy"];
 
     // console.log('HERE HERE HERE HERE::::');
-    console.log('MYBETS:::', this.myBets);
+    // console.log('MYBETS:::', this.myBets);
 
     this.myBets.forEach(bet => {
       let winnings;

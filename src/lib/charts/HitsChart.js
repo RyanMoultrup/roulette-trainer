@@ -14,7 +14,7 @@ export default class HitsChart {
 
     render (facts, bets) {
         this.bets = bets;
-        console.log('this.bets:::::::::::::::::::::::::', this.bets.length);
+        // console.log('this.bets:::::::::::::::::::::::::', this.bets.length);
         this.dimension = facts.dimension(d => +d.hit);
         this.group = this.dimension.group().reduceCount();
 

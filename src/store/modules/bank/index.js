@@ -13,9 +13,7 @@ const mutations = {
     }
   },
   reduceAvailableBalance (state, amount) {
-    console.log('REDUCING BALANCE IN BANK::::amount', amount);
     state.available = state.available - +amount;
-    console.log('the new balance', state.available);
   },
   increaseAvailableBalance (state, amount) {
     state.available = state.available + amount;
@@ -29,9 +27,6 @@ const mutations = {
 const actions = {
   deposit ({ commit }, number) {
     commit('add', number);
-  },
-  reduceAvailableBalance ({ commit }, amount) {
-    commit('reduceAvailableBalance', amount);
   }
 }
 

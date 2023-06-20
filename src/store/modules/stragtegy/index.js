@@ -19,7 +19,6 @@ const mutations = {
      * @param bet {placement: string, chip: object}
      */
     async placeBet (state, bet) {
-        console.log('placeBet bet:::', bet);
         if (currentBetSpots.includes(bet.placement)) {
             await state.strategy[bet.placement].addChip(bet.chip);
             return;
@@ -33,13 +32,15 @@ const mutations = {
         delete state.strategy[placement];
     },
     removeChip (state, placement, chipIndex) {
+        console.log('store strategy removeChip:::', state.strategy);
         state.strategy[placement].removeChip(chipIndex);
     }
 }
 
+// TODO: find out why this is firing so many times for each action taken in app
 const getters = {
     getStrategy (state) {
-        console.log('getStartegy() state:::', state);
+        // console.log('getStartegy() state:::', state);
         return Object.values(state.strategy);
     }
 }
