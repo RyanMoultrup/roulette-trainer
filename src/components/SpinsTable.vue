@@ -25,7 +25,7 @@
                   </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
-                  <tr v-for="outcome in outcomes()" :key="outcome.value.round" >
+                  <tr v-for="outcome in outcomes" :key="outcome.value.round" >
                     <td class="px-2 py-1 whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="flex-shrink-0 h-6 w-6 ">
@@ -72,10 +72,13 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  methods: {
-    ...mapGetters('simulation', ['getOutcomes']),
+  computed: {
+    ...mapGetters('simulation', ['getOutcomes'])
+  },
+  watch: {
     outcomes () {
-      let values = this.getOutcomes()
+      console.log('we are in outcomes::::');
+      let values = this.getOutcomes
           .get()
           .dimension(d => d.round)
           .group()

@@ -88,6 +88,12 @@ export default class {
     store.commit('bank/increaseAvailableBalance', +chip[0].value);
   }
 
+  removeChips() {
+    this.chips.forEach(chip => {
+      store.commit('bank/increaseAvailableBalance', +chip.value);
+    })
+  }
+
   dbl(hit) {
     if (this.spots.includes(hit)) {
       return (this.get() * 17) + this.get();
@@ -230,16 +236,11 @@ export default class {
   }
 
   payout() {
-    // console.log('this.amount', this.amount);
-    //
-    // console.log('*******************************');
-    // console.log('Rounds============', Rounds);
     console.log('Rounds.last============', Rounds.last());
     return this.payouts[this.type](this.strategy.bet(this.amount));
   }
 
   winningSpots() {
-    // console.log('winningSpots', this.spots);
     return this.spots.map(s => {
       return {
         spot: s,
@@ -285,7 +286,7 @@ export default class {
     return this.betPlacement;
   }
 
-  collect(outcome) {
-    return this[this.type](outcome);
+  collect(hit) {
+    return this[this.type](hit);
   }
 }

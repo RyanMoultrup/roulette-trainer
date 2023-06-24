@@ -1,6 +1,11 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -12,10 +17,6 @@ module.exports = {
       }
     },
   },
-  variants: {
-    extend: {
-      backgroundColor: ['disabled']
-    },
-  },
   plugins: [],
 }
+

@@ -42,7 +42,6 @@ export default {
   methods: {
     select () {
       if (this.emitSelection) {
-        console.log('Emitting value', this.chipValue);
         this.$emit('chipSelected', {value: parseInt(this.chipValue), color: this.color});
       }
     }

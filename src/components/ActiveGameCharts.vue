@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import HitsChart from "@/lib/charts/HitsChart";
-import WinLossChart from "@/lib/charts/WinLossChart";
-import WinLossBankChart from "@/lib/charts/WinLossBankChart";
+import HitsChart from "@/lib/charts/HitsChart.js";
+import WinLossChart from "@/lib/charts/WinLossChart.js";
+import WinLossBankChart from "@/lib/charts/WinLossBankChart.js";
 import { mapGetters } from "vuex";
-import {redrawAll} from "dc";
+import { redrawAll } from "dc";
 
 export default {
   methods: {

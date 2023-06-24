@@ -104,3 +104,14 @@
     </dl>
   </section>
 </template>
+
+<script>
+import { mapGetters } from "vuex";
+
+export default {
+  name: 'Display Stats',
+  computed: {
+    ...mapGetters('bank', [])
+  }
+}
+</script>

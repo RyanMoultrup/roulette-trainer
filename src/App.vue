@@ -319,12 +319,12 @@
                 <!-- Primary column -->
                 <display-stats />
 
-<!--                <section class="flex flex-row justify-around items-center bg-gray-700 bg-opacity-0 pt-4 pb-4">-->
-<!--                  <div id="hits-chart"></div>-->
-<!--                  <div id="win-loss-chart"></div>-->
-<!--                  <br>-->
-<!--                  <div id="win-loss-row-chart" class="flex-shrink"></div>-->
-<!--                </section>-->
+                <!--                <section class="flex flex-row justify-around items-center bg-gray-700 bg-opacity-0 pt-4 pb-4">-->
+                <!--                  <div id="hits-chart"></div>-->
+                <!--                  <div id="win-loss-chart"></div>-->
+                <!--                  <br>-->
+                <!--                  <div id="win-loss-row-chart" class="flex-shrink"></div>-->
+                <!--                </section>-->
                 <active-game-charts />
               </section>
 
@@ -347,9 +347,9 @@
 
 <script>
 
-import SpinsTable from "@/components/SpinsTable";
-import BettingTable from "@/components/BettingTable";
-import DisplayStats from "@/components/DisplayStats";
+import SpinsTable from "@/components/SpinsTable.vue";
+import BettingTable from "@/components/BettingTable.vue";
+import DisplayStats from "@/components/DisplayStats.vue";
 
 // import crossfilter from 'crossfilter2';
 // import spots from './lib/table/spots';
@@ -360,9 +360,9 @@ import formatter from './lib/formatter';
 // import WinLossBankChart from './lib/charts/WinLossBankChart';
 // import Outcomes from './lib/Outcomes';
 import { mapGetters, mapActions } from 'vuex';
-import spinEmitter from "@/lib/SpinEmitter";
-import ActiveGameCharts from "@/components/ActiveGameCharts";
-import { spin } from '@/lib/table/wheel';
+import spinEmitter from "@/lib/SpinEmitter.js";
+import ActiveGameCharts from "@/components/ActiveGameCharts.vue";
+import { spin } from '@/lib/table/wheel.js';
 // import { redrawAll } from 'dc';
 
 export default {
@@ -419,7 +419,6 @@ export default {
       this.bank = 1000;
     },
     roundsSelected (value) {
-      console.log('RoundsSelected', value);
       this.rounds = value;
     },
     startSpinStream () {
@@ -430,33 +429,32 @@ export default {
     },
     spin () {
       console.log('PLAYING:::');
-      // spinEmitter.start(1, 3);
       this.play(spin());
       // console.log('play(value)', value);
       // this.runSimulation(value).then(roundResults => {
 
-        // this.updateStats(roundResults);
+      // this.updateStats(roundResults);
 
-        // let facts = crossfilter(Outcomes.all());
-        // let outcomes = this.getOutcomes.all();
+      // let facts = crossfilter(Outcomes.all());
+      // let outcomes = this.getOutcomes.all();
 
-        // console.log('play() this.getOutcomes:::', this.getOutcomes().get().all());
-        // console.log('play() crossfilter:::', this.getOutcomes().get().groupAll());
-        //
-        // let winLossBankChart = new WinLossBankChart();
-        // winLossBankChart.render(this.getOutcomes().get());
-        //
-        // let winLossChart = new WinLossChart(this.getOutcomes().get());
-        // winLossChart.render();
+      // console.log('play() this.getOutcomes:::', this.getOutcomes().get().all());
+      // console.log('play() crossfilter:::', this.getOutcomes().get().groupAll());
+      //
+      // let winLossBankChart = new WinLossBankChart();
+      // winLossBankChart.render(this.getOutcomes().get());
+      //
+      // let winLossChart = new WinLossChart(this.getOutcomes().get());
+      // winLossChart.render();
 
-        // new ChartRegistry.list().forEach(chart => {
-        //
-        // });
+      // new ChartRegistry.list().forEach(chart => {
+      //
+      // });
 
-        // let hitsChart = new HitsChart(this.getOutcomes().get(), this.myBets);
-        // hitsChart.render();
+      // let hitsChart = new HitsChart(this.getOutcomes().get(), this.myBets);
+      // hitsChart.render();
 
-        // TODO Create inside/outside bet win/loss chart
+      // TODO Create inside/outside bet win/loss chart
       // });
     },
     updateStats (roundResults) {

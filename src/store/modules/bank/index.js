@@ -1,6 +1,8 @@
 const state = () => ({
   balance: 100,
-  available: 100
+  available: 100,
+  winnings: 0,
+  losses: 0
 });
 
 const mutations = {
@@ -8,7 +10,7 @@ const mutations = {
     state.balance = state.balance + number;
   },
   subtract (state, number) {
-    if (state.balance - number > 0) {
+    if (state.balance - number >= 0) {
       state.balance = state.balance - number;
     }
   },
@@ -17,16 +19,16 @@ const mutations = {
   },
   increaseAvailableBalance (state, amount) {
     state.available = state.available + amount;
-  },
-  depositWinnings (state, amount) {
-    this.add(state, amount);
-    this.increaseAvailableBalance(state, amount);
   }
 }
 
 const actions = {
   deposit ({ commit }, number) {
     commit('add', number);
+  },
+  depositWinnings ({ commit }, payload) {
+    commit('add', payload.winnings - payload.betAmt);
+    commit('increaseAvailableBalance', payload.winnings);
   }
 }
 

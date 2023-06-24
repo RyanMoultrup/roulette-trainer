@@ -3,7 +3,7 @@
     <div class="bg-white bg-opacity-10 shadow overflow-y-auto flex-1">
       <ul class="divide-y divide-green-900">
 
-        <li v-for="bet in this.getStrategy()" :key="bet.betType()" class="group">
+        <li v-for="bet in this.getStrategy" :key="bet.betType()" class="group">
           <a href="#" class="block hover:bg-white hover:bg-opacity-5 relative">
             <span @click="remove($event, bet.placement())" class="group-hover:opacity-100 opacity-0 absolute cursor-pointer w-4 h-4 pb-1 text-xs text-center rounded-full bg-white bg-opacity-30 right-1 top-1 text-white">x</span>
             <div class="px-3 py-4 ">
@@ -50,13 +50,15 @@
 </template>
 
 <script>
-import Chip from '@/components/Chip';
+import Chip from '@/components/Chip.vue';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   components: { Chip },
+  computed: {
+    ...mapGetters('strategy', ['getStrategy'])
+  },
   methods: {
-    ...mapGetters('strategy', ['getStrategy']),
     ...mapMutations('strategy', ['removeBet']),
     remove (event, index) {
       this.removeBet(index);

@@ -93,11 +93,11 @@
 
 <script>
 
-import Wheel from '@/components/Wheel';
-import Board from '@/components/Board';
-import BetsDisplayPanel from '@/components/BetsDisplayPanel';
-import ChipSelectionPanel from '@/components/ChipSelectionPanel';
-import Chip from '@/components/Chip';
+import Wheel from '@/components/Wheel.vue';
+import Board from '@/components/Board.vue';
+import BetsDisplayPanel from '@/components/BetsDisplayPanel.vue';
+import ChipSelectionPanel from '@/components/ChipSelectionPanel.vue';
+import Chip from '@/components/Chip.vue';
 import { mapGetters } from 'vuex';
 
 export default {

@@ -28,12 +28,19 @@ const mutations = {
         state.strategy[bet.placement] = new Bet(bet);
     },
     removeBet (state, placement) {
+        console.log('placement::', placement);
+        console.log('state.strategy[placement]', state.strategy[placement]);
         removeFromCurrentBets(placement);
+        state.strategy[placement].removeChips();
         delete state.strategy[placement];
     },
     removeChip (state, placement, chipIndex) {
         console.log('store strategy removeChip:::', state.strategy);
         state.strategy[placement].removeChip(chipIndex);
+    },
+    clear (state) {
+        currentBetSpots = [];
+        state.strategy = {};
     }
 }
 

@@ -7,16 +7,9 @@ const game = {
   play (hit) {
     this.myBets = store.getters["strategy/getStrategy"];
 
-    // console.log('HERE HERE HERE HERE::::');
-    // console.log('MYBETS:::', this.myBets);
-
     this.myBets.forEach(bet => {
       let winnings;
       let betAmt = bet.get();
-
-      // this.placeBet(betAmt);
-
-      // console.log('THIS ROUND IN game.js+++++++++++++++', store.state.simulation.rounds);
 
       winnings = bet.collect(hit);
 
@@ -34,6 +27,7 @@ const game = {
           round: store.state.simulation.rounds + 1,
           outcome: 'Won'
         });
+        store.dispatch('bank/depositWinnings', { winnings, betAmt });
       } else {
         store.commit('simulation/addOutcome', {
           wonRound: 0,
@@ -48,7 +42,10 @@ const game = {
           round: store.state.simulation.rounds + 1,
           outcome: 'Lost'
         });
+        store.commit('bank/subtract', betAmt);
       }
+
+      store.commit('strategy/clear');
     });
   },
 };
