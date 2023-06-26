@@ -329,7 +329,6 @@
                 @start-spin-stream="startSpinStream"
                 @stop-spin-stream="stopSpinStream"
                 @rounds-selected="roundsSelected"
-                :bank="bank"
             ></betting-table>
           </section>
         </main>
@@ -343,73 +342,23 @@
 import SpinsTable from "@/components/SpinsTable.vue";
 import BettingTable from "@/components/BettingTable.vue";
 import DisplayStats from "@/components/DisplayStats.vue";
-
-// import crossfilter from 'crossfilter2';
-// import spots from './lib/table/spots';
-import formatter from './lib/formatter';
-// import { spin } from './lib/table/wheel';
-// import HitsChart from './lib/charts/HitsChart';
-// import WinLossChart from "./lib/charts/WinLossChart";
-// import WinLossBankChart from './lib/charts/WinLossBankChart';
-// import Outcomes from './lib/Outcomes';
 import { mapGetters, mapActions } from 'vuex';
 import spinEmitter from "@/lib/SpinEmitter.js";
 import ActiveGameCharts from "@/components/ActiveGameCharts.vue";
 import { spin } from '@/lib/table/wheel.js';
-// import { redrawAll } from 'dc';
 
 export default {
   name: 'App',
   components: { SpinsTable, BettingTable, DisplayStats, ActiveGameCharts },
-  data () {
-    return {
-      won: 0,
-      loss: 0,
-      bank: 10000,
-      rounds: 5,
-      canResetBank: false,
-      outcomes: [],
-      roundOutcome: [],
-      print: false,
-      myBets: [],
-      lastRun: 0,
-      currentBet: 0,
-      strategies: {
-        basic: {
-          bet (amt) {
-            return amt;
-          }
-        }
-      }
-    }
-  },
-  watch: {
-    '$store.state.simulation.spin': function (spin) {
-      // this.play();
-      // redrawAll();
-      console.log('THE CURRENT SPIN::::', spin);
-    },
-    // '$store.state.simulation.outcomes': function (outcomes) {
-    //   // this.play();
-    //   console.log('THE OUTCOMES::::', outcomes);
-    // }
-  },
   mounted () {
-    // this.play();
     console.log('*********** STARTING GAME *************');
   },
   methods: {
     ...mapGetters('strategy', ['getStrategy']),
     ...mapGetters('simulation', ['getOutcomes']),
     ...mapActions('simulation', ['play']),
-    updateBank (amt) {
-      this.bank = +this.bank + +amt;
-    },
     placeBet (amt) {
       this.bank = +this.bank - +amt;
-    },
-    resetBank () {
-      this.bank = 1000;
     },
     roundsSelected (value) {
       this.rounds = value;
@@ -422,13 +371,6 @@ export default {
     },
     spin () {
       this.play(spin());
-    },
-    updateStats (roundResults) {
-      // document.querySelector('#rounds span').innerHTML = formatter.number(roundResults.rounds);
-      document.querySelector('#bank span').innerHTML = formatter.money(roundResults.bank);
-      document.querySelector('#won span').innerHTML = formatter.money(roundResults.won);
-      document.querySelector('#loss span').innerHTML = formatter.money(roundResults.loss);
-      document.querySelector('#winnings span').innerHTML = formatter.money(roundResults.winnings);
     }
   }
 }
