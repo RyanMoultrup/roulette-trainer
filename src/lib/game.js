@@ -1,6 +1,8 @@
 import spots from '@/lib/table/spots';
 import store from '@/store/index';
 
+let bank;
+
 const game = {
   myBets: [],
   bank: 1000,
@@ -14,6 +16,8 @@ const game = {
       winnings = bet.collect(hit);
 
       if (winnings) {
+        store.dispatch('bank/depositWinnings', { winnings, betAmt });
+        bank = store.getters['bank/balance'];
         store.commit('simulation/addOutcome', {
           wonRound: 1,
           lostRound: 0,
@@ -23,12 +27,13 @@ const game = {
           hit: hit,
           color: spots[hit].color,
           even: hit % 2 === 0,
-          bank: this.bank,
+          bank: bank,
           round: store.state.simulation.rounds + 1,
           outcome: 'Won'
         });
-        store.dispatch('bank/depositWinnings', { winnings, betAmt });
       } else {
+        store.commit('bank/subtract', betAmt);
+        bank = store.getters['bank/balance'];
         store.commit('simulation/addOutcome', {
           wonRound: 0,
           lostRound: 1,
@@ -38,11 +43,10 @@ const game = {
           hit: hit,
           color: spots[hit].color,
           even: hit % 2 === 0,
-          bank: this.bank,
+          bank: bank,
           round: store.state.simulation.rounds + 1,
           outcome: 'Lost'
         });
-        store.commit('bank/subtract', betAmt);
       }
 
       store.commit('strategy/clear');

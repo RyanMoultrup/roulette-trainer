@@ -41,6 +41,9 @@ export default class HitsChart {
             // .elasticX(true)
             .dimension(this.dimension)
             .group(this.group)
+            .on('filtered', chart => {
+                console.log('hits chart filtered::::!!!!!!!');
+            })
             // .valueAccessor(d => +d.value/bets.length);
             // .valueAccessor(d => +d.value);
 

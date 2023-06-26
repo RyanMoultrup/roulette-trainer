@@ -1,4 +1,6 @@
-import * as dc from 'dc';
+// import * as dc from 'dc';
+import { CompositeChart, LineChart, legend } from "dc";
+
 import * as d3 from 'd3';
 // import { tip as d3tip } from "d3-v6-tip";
 
@@ -47,13 +49,11 @@ export default class WinLossBankChart {
     };
 
     constructor () {
-        this.chart = new dc.CompositeChart("#win-loss-chart");
-        // this.registry = dc.chartRegistry;
-        console.log('this.registry', dc.chartRegistry.list());
+        this.chart = new CompositeChart("#win-loss-chart");
     }
 
     _buildWinChart () {
-        return new dc.LineChart(this.chart)
+        return new LineChart(this.chart)
             .dimension(this.dimension)
             .colors('green')
             .group(this.accumulatedGroup, "Won")
@@ -61,7 +61,7 @@ export default class WinLossBankChart {
     }
 
     _buildLossChart () {
-        return new dc.LineChart(this.chart)
+        return new LineChart(this.chart)
             .dimension(this.dimension)
             .colors('red')
             .group(this.accumulatedGroup, "Loss")
@@ -69,7 +69,7 @@ export default class WinLossBankChart {
     }
 
     _buildBankChart () {
-        return new dc.LineChart(this.chart)
+        return new LineChart(this.chart)
             .dimension(this.dimension)
             .colors('#ccd3f9')
             .group(this.accumulatedGroup, "Bank")
@@ -136,6 +136,8 @@ export default class WinLossBankChart {
         let group = this._group();
         this.accumulatedGroup = this._accumulate(group);
 
+        console.log('bank chart RENDER:::::', group);
+
         // const winTip = d3tip()
         //     .attr('class', 'd3-tip')
         //     .offset([-10, 0])
@@ -181,7 +183,7 @@ export default class WinLossBankChart {
             .x(d3.scaleLinear().domain([1, this.dimension.group().size()]))
             .yAxisLabel("$ Won / Lost")
             .rightYAxisLabel('Bank')
-            .legend(dc.legend().x(80).y(20).itemHeight(13).gap(5))
+            .legend(legend().x(80).y(20).itemHeight(13).gap(5))
             // .renderHorizontalGridLines(true)
             .renderTitle(false)
             .elasticX(true)

@@ -31,6 +31,9 @@ export default class WinLossChart {
         chart.selectAll('text.pie-slice').text(function (d) {
           return d.data.key + ' ' + Math.round(dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2 * Math.PI) * 100)) + '%';
         })
+      })
+      .on('filtered', chart => {
+        console.log('winloss FILTERED::::::!!!!!!');
       });
 
       this.chart.render();

@@ -318,13 +318,6 @@
               <section class="flex flex-col w-full">
                 <!-- Primary column -->
                 <display-stats />
-
-                <!--                <section class="flex flex-row justify-around items-center bg-gray-700 bg-opacity-0 pt-4 pb-4">-->
-                <!--                  <div id="hits-chart"></div>-->
-                <!--                  <div id="win-loss-chart"></div>-->
-                <!--                  <br>-->
-                <!--                  <div id="win-loss-row-chart" class="flex-shrink"></div>-->
-                <!--                </section>-->
                 <active-game-charts />
               </section>
 
@@ -428,34 +421,7 @@ export default {
       spinEmitter.stop();
     },
     spin () {
-      console.log('PLAYING:::');
       this.play(spin());
-      // console.log('play(value)', value);
-      // this.runSimulation(value).then(roundResults => {
-
-      // this.updateStats(roundResults);
-
-      // let facts = crossfilter(Outcomes.all());
-      // let outcomes = this.getOutcomes.all();
-
-      // console.log('play() this.getOutcomes:::', this.getOutcomes().get().all());
-      // console.log('play() crossfilter:::', this.getOutcomes().get().groupAll());
-      //
-      // let winLossBankChart = new WinLossBankChart();
-      // winLossBankChart.render(this.getOutcomes().get());
-      //
-      // let winLossChart = new WinLossChart(this.getOutcomes().get());
-      // winLossChart.render();
-
-      // new ChartRegistry.list().forEach(chart => {
-      //
-      // });
-
-      // let hitsChart = new HitsChart(this.getOutcomes().get(), this.myBets);
-      // hitsChart.render();
-
-      // TODO Create inside/outside bet win/loss chart
-      // });
     },
     updateStats (roundResults) {
       // document.querySelector('#rounds span').innerHTML = formatter.number(roundResults.rounds);
