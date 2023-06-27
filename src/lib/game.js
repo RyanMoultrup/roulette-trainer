@@ -49,7 +49,9 @@ const game = {
         });
       }
 
-      store.commit('strategy/clear');
+      if (!store.getters['simulation/isEmitting']) {
+        store.commit('strategy/clear');
+      }
     });
   },
 };

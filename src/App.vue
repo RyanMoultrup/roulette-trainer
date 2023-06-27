@@ -342,7 +342,7 @@
 import SpinsTable from "@/components/SpinsTable.vue";
 import BettingTable from "@/components/BettingTable.vue";
 import DisplayStats from "@/components/DisplayStats.vue";
-import { mapGetters, mapActions } from 'vuex';
+import {mapGetters, mapActions, mapMutations} from 'vuex';
 import spinEmitter from "@/lib/SpinEmitter.js";
 import ActiveGameCharts from "@/components/ActiveGameCharts.vue";
 import { spin } from '@/lib/table/wheel.js';
@@ -357,6 +357,7 @@ export default {
     ...mapGetters('strategy', ['getStrategy']),
     ...mapGetters('simulation', ['getOutcomes']),
     ...mapActions('simulation', ['play']),
+    ...mapMutations('simulation', ['updateSpinEmit']),
     placeBet (amt) {
       this.bank = +this.bank - +amt;
     },
@@ -364,9 +365,11 @@ export default {
       this.rounds = value;
     },
     startSpinStream () {
+      this.updateSpinEmit(true);
       spinEmitter.start(1);
     },
     stopSpinStream () {
+      this.updateSpinEmit(false);
       spinEmitter.stop();
     },
     spin () {

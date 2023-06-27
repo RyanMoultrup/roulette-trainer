@@ -29,7 +29,9 @@ const mutations = {
     },
     removeBet (state, placement) {
         removeFromCurrentBets(placement);
-        state.strategy[placement].removeChips();
+        if (!state.emittingSpins) {
+            state.strategy[placement].removeChips();
+        }
         delete state.strategy[placement];
     },
     removeChip (state, placement, chipIndex) {
@@ -45,7 +47,6 @@ const mutations = {
 // TODO: find out why this is firing so many times for each action taken in app
 const getters = {
     getStrategy (state) {
-        // console.log('getStartegy() state:::', state);
         return Object.values(state.strategy);
     }
 }
