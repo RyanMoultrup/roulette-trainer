@@ -282,6 +282,9 @@ export default class {
     return this.type;
   }
 
+  /**
+   * Returns the placement of the bet on the table
+   */
   placement() {
     return this.betPlacement;
   }
