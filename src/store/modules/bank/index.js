@@ -1,8 +1,6 @@
 const state = () => ({
   balance: 100,
-  available: 100,
-  winnings: 0,
-  losses: 0
+  available: 100
 });
 
 const mutations = {

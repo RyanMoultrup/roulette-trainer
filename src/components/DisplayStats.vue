@@ -9,7 +9,7 @@
           <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
             <div class="flex items-baseline text-2xl font-semibold text-green-900">
               <div id="loss">
-                <span>$0</span>
+                <span>${{ wonLoss.loss }}</span>
               </div>
             </div>
 
@@ -35,7 +35,7 @@
           </dt>
           <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
             <div class="flex items-baseline text-2xl font-semibold text-green-900">
-              <div id="won"><span>$0</span></div>
+              <div id="won"><span>${{ wonLoss.won }}</span></div>
             </div>
             <div
                 class="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
@@ -59,7 +59,7 @@
           </dt>
           <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
             <div class="flex items-baseline text-2xl font-semibold text-green-900">
-              <div id="bank"><span>$10,000</span></div>
+              <div id="bank"><span>${{ availableBalance }}</span></div>
             </div>
 
             <div
@@ -84,7 +84,7 @@
           </dt>
           <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
             <div class="flex items-baseline text-2xl font-semibold text-red-900">
-              <div id="winnings"><span>$0</span></div>
+              <div id="winnings"><span>${{ getCurrentWinnings() }}</span></div>
             </div>
 
             <div
@@ -107,11 +107,91 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { spinHistoryTable } from "../lib/charts/SpinHistoryTable";
 
 export default {
   name: 'Display Stats',
+  data () {
+    return {
+      wonLoss: []
+    }
+  },
   computed: {
-    ...mapGetters('bank', [])
-  }
+    ...mapGetters('bank', ['availableBalance']),
+    ...mapGetters('simulation', ['getOutcomes']),
+  },
+  methods: {
+    redraw () {
+      const displayFacts = this.getOutcomes.groupAll();
+      const reducer = {
+        add (i, d) {
+          i.loss += +d.loss;
+          i.won += +d.won;
+
+          return i;
+        },
+        remove (i, d) {
+          i.loss -= +d.loss;
+          i.won -= +d.won;
+
+          return i;
+        },
+        init () {
+          return {
+            won: 0,
+            loss: 0
+          }
+        }
+      }
+
+      displayFacts.reduce(reducer.add, reducer.remove, reducer.init);
+      this.wonLoss = displayFacts.value();
+    },
+    initOutcomes () {
+      const displayFacts = this.getOutcomes.groupAll();
+      const reducer = {
+        add (i, d) {
+          i.loss += +d.loss;
+          i.won += +d.loss;
+
+          return i;
+        },
+        remove (i, d) {
+          i.loss -= +d.loss;
+          i.won -= +d.loss;
+
+          return i;
+        },
+        init () {
+          return {
+            won: 0,
+            loss: 0
+          }
+        }
+      }
+
+      displayFacts.reduce(reducer.add, reducer.remove, reducer.init);
+      this.wonLoss = displayFacts.value();
+    },
+    getCurrentWinnings () {
+      return this.wonLoss.won - this.wonLoss.loss;
+    }
+  },
+  mounted () {
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'simulation/addOutcome') {
+        this.redraw();
+      }
+    })
+
+    let spinTable = spinHistoryTable();
+    spinTable
+        .onRedraw(() => {
+          this.redraw();
+        });
+    spinTable.render();
+
+    this.initOutcomes();
+  },
 }
 </script>

@@ -1,4 +1,4 @@
-export const spinTable = (outcomes) => {
+export const spinTable = outcomes => {
     console.log('outcomes::::reduce:::', outcomes);
     return outcomes
         .dimension(d => d.round)
@@ -52,13 +52,11 @@ export const spinTable = (outcomes) => {
         )
 }
 
+// export const display = outcomes => {
+//     return outcomes
+//         .dimension(d => d.)
+// }
 export const removeEmptyBins = (fn, group) => {
-    // let check = d => {
-    //     return !(
-    //         +d.value.won === 0 &&
-    //         +d.value.loss === 0);
-    // };
-
     return {
         all: () => {
             return group.all().filter(d => {

@@ -94,6 +94,12 @@ export default class {
     })
   }
 
+  replaceBet() {
+    this.chips.forEach(chip => {
+      store.commit('bank/reduceAvailableBalance', +chip.value);
+    })
+  }
+
   dbl(hit) {
     if (this.spots.includes(hit)) {
       return (this.get() * 17) + this.get();

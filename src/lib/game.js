@@ -50,7 +50,7 @@ const game = {
       }
 
       if (!store.getters['simulation/isEmitting']) {
-        store.commit('strategy/clear');
+        store.dispatch('strategy/clear');
       }
     });
   },

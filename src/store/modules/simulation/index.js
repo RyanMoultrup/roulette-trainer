@@ -19,6 +19,7 @@ const mutations = {
   },
   addOutcome (state, outcome) {
     state.outcomes.add([outcome]);
+    console.log('state outcomes::::', state.outcomes.all());
   },
   updateSpinEmit (state, value) {
     state.emittingSpins = value;

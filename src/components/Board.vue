@@ -291,16 +291,15 @@ export default {
         this.reduceAvailableBalance(+this.selectedChip.value);
         return;
       }
-      console.log('Cannot place bet::::::::::::::::');
+      // TODO: trigger toastr message
     },
     placeNext (placement) {
-      console.log('SELECTED CHIP NEXT:::', this.selectedChip);
       if (this.canBet(+this.selectedChip.value)) {
         this.placeBet({ placement: placement, chip: this.selectedChip });
         this.reduceAvailableBalance(+this.selectedChip.value);
         return;
       }
-      console.log('Cannot place bet::::::::::::::::');
+      // TODO: trigger toastr message
     },
     hoverBet (event) {
       this.isHovered = event.target.id;

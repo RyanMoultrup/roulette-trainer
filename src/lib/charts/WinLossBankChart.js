@@ -1,7 +1,6 @@
-// import * as dc from 'dc';
 import { CompositeChart, LineChart, legend } from "dc";
-
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3-scale';
+import { curveCardinal } from 'd3-shape';
 // import { tip as d3tip } from "d3-v6-tip";
 
 export default class WinLossBankChart {
@@ -9,7 +8,6 @@ export default class WinLossBankChart {
     group;
     dimension;
     accumulatedGroup;
-    // isRendered = false;
     winChart;
     lossChart;
     bankChart;
@@ -76,7 +74,7 @@ export default class WinLossBankChart {
             .valueAccessor(d => d.value.bank)
             .useRightYAxis(true)
             .renderArea(true)
-            .curve(d3.curveCardinal);
+            .curve(curveCardinal);
     }
 
     _calculateWinPercentage (data) {
@@ -180,7 +178,7 @@ export default class WinLossBankChart {
             .width(468)
             .height(200)
             .margins({top: 15, right: 60, bottom: 10, left: 50})
-            .x(d3.scaleLinear().domain([1, this.dimension.group().size()]))
+            .x(scaleLinear().domain([1, this.dimension.group().size()]))
             .yAxisLabel("$ Won / Lost")
             .rightYAxisLabel('Bank')
             .legend(legend().x(80).y(20).itemHeight(13).gap(5))

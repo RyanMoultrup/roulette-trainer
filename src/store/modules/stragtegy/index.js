@@ -3,7 +3,8 @@ import Bet from '../../../lib/table/Bet';
 let currentBetSpots = [];
 
 const state = () => ({
-    strategy: {}
+    strategy: {},
+    lastBets: {}
 });
 
 const removeFromCurrentBets = function (value) {
@@ -35,12 +36,38 @@ const mutations = {
         delete state.strategy[placement];
     },
     removeChip (state, placement, chipIndex) {
-        console.log('store strategy removeChip:::', state.strategy);
         state.strategy[placement].removeChip(chipIndex);
     },
+    replayBet (state) {
+        state.strategy = {...state.lastBets};
+        console.log('state.strategy:::', state.strategy);
+        for (const placement in state.strategy) {
+            if (state.strategy.hasOwnProperty(placement)) {
+                console.log('the bet++++++++++++++++++++++++', state.strategy[placement]);
+                state.strategy[placement].replaceBet();
+            }
+        }
+        currentBetSpots = Object.keys(state.lastBets);
+        console.log('current BET Spots:::###$$$$$', currentBetSpots);
+    },
+    lastBet (state, bets) {
+      state.lastBets = bets;
+    },
     clear (state) {
-        currentBetSpots = [];
+        // currentBetSpots = [];
         state.strategy = {};
+    }
+}
+
+const actions = {
+    setLastBet ({ commit }, bets) {
+        commit('lastBet', bets);
+    },
+    async clear ({ dispatch, commit, state }) {
+        currentBetSpots = [];
+        // console.log('current BET spots================', currentBetSpots);
+        await dispatch('setLastBet', state.strategy);
+        commit('clear');
     }
 }
 
@@ -54,6 +81,7 @@ const getters = {
 export default {
     namespaced: true,
     state,
+    actions,
     getters,
     mutations
 }

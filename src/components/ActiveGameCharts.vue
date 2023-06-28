@@ -9,39 +9,25 @@
 </template>
 
 <script>
+import { redrawAll } from "dc";
+import { mapGetters } from "vuex";
 import HitsChart from "@/lib/charts/HitsChart.js";
 import WinLossChart from "@/lib/charts/WinLossChart.js";
 import WinLossBankChart from "@/lib/charts/WinLossBankChart.js";
-import { mapGetters } from "vuex";
-import { redrawAll } from "dc";
-import { spinHistoryTable } from "../lib/charts/SpinHistoryTable";
 
 export default {
   methods: {
     ...mapGetters('simulation', ['getOutcomes']),
     ...mapGetters('strategy', ['getStrategy'])
   },
-  // watch: {
-  //   '$store.state.simulation.spin': function () {
-  //     redrawAll();
-  //   },
-  // },
   mounted () {
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
         redrawAll();
-        console.log('Mutation callback::::::::::::', mutation);
       }
     })
 
     const outcomes = this.getOutcomes();
-
-    let spinTable = spinHistoryTable();
-    spinTable
-        .onRedraw(() => {
-          console.log('SPIN TABLE FILTERED::::', this);
-        });
-    spinTable.render();
 
     let winLossBankChart = new WinLossBankChart();
     winLossBankChart.render(outcomes);
@@ -50,7 +36,7 @@ export default {
     winLossChart.render(outcomes);
 
     let hitsChart = new HitsChart();
-    hitsChart.render(outcomes, this.getStrategy());
+    hitsChart.render(outcomes);
   }
 }
 </script>
