@@ -70,76 +70,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
-// import { redrawAll } from "dc";
-import {spinHistoryTable} from "../lib/charts/SpinHistoryTable";
+import { spinHistoryTable } from "../lib/charts/SpinHistoryTable";
+import { removeEmptyBins, spinTable } from "../lib/Reducers";
 
-const removeEmptyBins = (group) => {
-  let check = d => {
-    return !(
-        +d.value.won === 0 &&
-        +d.value.loss === 0);
-  };
-
-  return {
-    all: () => {
-      return group.all().filter(d => {
-        return check(d);
-      });
-    }
-  };
-}
-
-const reduce = (outcomes) => {
-  return outcomes
-      .dimension(d => d.round)
-      .group()
-      .reduce(
-          (i, d) => {
-            i.hit = d.hit;
-
-            if (d.wonRound) {
-              i.won += +d.won;
-              i.loss += 0;
-            }
-
-            if (d.lostRound) {
-              i.won += 0;
-              i.loss += +d.bet;
-            }
-
-            i.betCount++;
-            i.betAmt += +d.bet;
-            return i;
-          },
-          (i, d) => {
-            i.round = d.round;
-
-            if (d.wonRound) {
-              i.won -= +d.won;
-              i.loss -= 0;
-            }
-
-            if (d.lostRound) {
-              i.won -= 0;
-              i.loss -= d.bet;
-            }
-
-            i.betCount--;
-            i.betAmt -= +d.bet;
-
-            return i
-          },
-          () => {
-            return {
-              round: 0,
-              won: 0,
-              loss: 0,
-              betCount: 0,
-              betAmt: 0,
-              hit: 0,
-            }
-          }
-      )
+const spinTableEmptyBinCallback = d => {
+  return !(
+      +d.value.won === 0 &&
+      +d.value.loss === 0);
 }
 
 export default {
@@ -149,14 +86,17 @@ export default {
     }
   },
   computed: {
+    /**
+     * Returns instance of crossfilter
+     */
     ...mapGetters('simulation', ['getOutcomes']),
   },
   methods: {
     redraw () {
-      this.outcomes = removeEmptyBins(reduce(this.getOutcomes)).all();
+      this.outcomes = removeEmptyBins(spinTableEmptyBinCallback, spinTable(this.getOutcomes)).all();
     },
     initOutcomes () {
-      this.outcomes = reduce(this.getOutcomes).top(Infinity);
+      this.outcomes = spinTable(this.getOutcomes).top(Infinity);
     },
   },
   mounted () {
