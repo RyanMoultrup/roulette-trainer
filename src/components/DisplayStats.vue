@@ -107,9 +107,11 @@
 
 <script>
 import { mapGetters } from "vuex";
-import * as d3 from 'd3';
+// import * as d3 from 'd3';
+import { select } from 'd3-selection';
+// import { transition } from 'd3-transition';
 import { spinHistoryTable } from "../lib/charts/SpinHistoryTable";
-import tween from '@/lib/Tween.js';
+import { tween } from '@/lib/Tween.js';
 
 export default {
   name: 'Display Stats',
@@ -178,27 +180,42 @@ export default {
       this.updateStats(displayFacts.value());
     },
     updateStats (displayData) {
-      const transitionSpeed = 1000;
       const currentWinnings = +displayData.won - +displayData.loss;
+      // const currentWinnings = +this.won - +this.loss;
 
-      const totalWonTween = tween(this.won, val => this.won = val);
-      const totalLostTween = tween(this.loss, val => this.loss = val);
-      const currentWinningsTween = tween(currentWinnings, val => this.currentWinnings = val);
+      // const totalWonTween = tween(this.won, val => this.won = val);
+      // const totalLostTween = tween(this.loss, val => this.loss = val);
+      // const currentWinningsTween = tween(this.currentWinnings, val => this.currentWinnings = val);
 
-      d3.select('#won')
-          .transition()
-          .duration(transitionSpeed)
-          .tween('text', totalWonTween(displayData.won));
+      tween('#won')
+          .initValue(this.won)
+          .onRender(val => this.won = val)
+          .render(displayData.won);
 
-      d3.select('#loss')
-          .transition()
-          .duration(transitionSpeed)
-          .tween('text', totalLostTween(displayData.loss));
+      tween('#loss')
+          .initValue(this.loss)
+          .onRender(val => this.loss = val)
+          .render(displayData.loss);
 
-      d3.select('#winnings')
-          .transition()
-          .duration(transitionSpeed)
-          .tween('text', currentWinningsTween(currentWinnings));
+      tween('#winnings')
+          .initValue(this.currentWinnings)
+          .onRender(val => this.currentWinnings = val)
+          .render(currentWinnings);
+
+      // select('#won')
+      //     .transition()
+      //     .duration(transitionSpeed)
+      //     .tween('text', totalWonTween(displayData.won));
+      //
+      // select('#loss')
+      //     .transition()
+      //     .duration(transitionSpeed)
+      //     .tween('text', totalLostTween(displayData.loss));
+      //
+      // select('#winnings')
+      //     .transition()
+      //     .duration(transitionSpeed)
+      //     .tween('text', currentWinningsTween(currentWinnings));
     }
   },
   mounted () {
