@@ -10,7 +10,6 @@
             <div class="flex items-baseline text-2xl font-semibold text-green-900">
               <div >
                 <span id="loss">${{ loss }}</span>
-<!--                <span id="loss">$0</span>-->
               </div>
             </div>
 
@@ -108,9 +107,9 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { nextTick } from "vue";
 import * as d3 from 'd3';
 import { spinHistoryTable } from "../lib/charts/SpinHistoryTable";
+import tween from '@/lib/Tween.js';
 
 export default {
   name: 'Display Stats',
@@ -118,11 +117,7 @@ export default {
     return {
       won: 0,
       loss: 0,
-      currentWinnings: 0,
-      wonLoss: {
-        won: 0,
-        loss: 0
-      }
+      currentWinnings: 0
     }
   },
   computed: {
@@ -155,7 +150,6 @@ export default {
 
       displayFacts.reduce(reducer.add, reducer.remove, reducer.init);
       this.updateStats(displayFacts.value());
-      // this.wonLoss = displayFacts.value();
     },
     initOutcomes () {
       const displayFacts = this.getOutcomes.groupAll();
@@ -187,42 +181,19 @@ export default {
       const transitionSpeed = 1000;
       const currentWinnings = +displayData.won - +displayData.loss;
 
-      const totalLostTween = (newValue) => {
-        return () => {
-          const i = d3.interpolate(this.loss, newValue);
-          return (t) => {
-            this.loss = Math.round(i(t));
-          };
-        };
-      };
-
-      const totalWonTween = (newValue) => {
-        return () => {
-          const i = d3.interpolate(this.won, newValue);
-          return (t) => {
-            this.won = Math.round(i(t));
-          };
-        };
-      };
-
-      const currentWinningsTween = (newValue) => {
-        return () => {
-          const i = d3.interpolate(this.currentWinnings, newValue);
-          return (t) => {
-            this.currentWinnings = Math.round(i(t));
-          };
-        };
-      };
+      const totalWonTween = tween(this.won, val => this.won = val);
+      const totalLostTween = tween(this.loss, val => this.loss = val);
+      const currentWinningsTween = tween(currentWinnings, val => this.currentWinnings = val);
 
       d3.select('#won')
           .transition()
           .duration(transitionSpeed)
           .tween('text', totalWonTween(displayData.won));
 
-        d3.select('#loss')
-            .transition()
-            .duration(transitionSpeed)
-            .tween('text', totalLostTween(displayData.loss));
+      d3.select('#loss')
+          .transition()
+          .duration(transitionSpeed)
+          .tween('text', totalLostTween(displayData.loss));
 
       d3.select('#winnings')
           .transition()
