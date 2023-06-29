@@ -13,6 +13,8 @@ const game = {
       let winnings;
       let betAmt = bet.get();
 
+      console.log('betAmt:::', bet.get());
+
       winnings = bet.collect(hit);
 
       if (winnings) {

@@ -296,7 +296,7 @@ export default {
     placeNext (placement) {
       if (this.canBet(+this.selectedChip.value)) {
         this.placeBet({ placement: placement, chip: this.selectedChip });
-        this.reduceAvailableBalance(+this.selectedChip.value);
+        // this.reduceAvailableBalance(+this.selectedChip.value);
         return;
       }
       // TODO: trigger toastr message

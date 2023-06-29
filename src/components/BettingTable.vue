@@ -105,12 +105,12 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import Chip from '@/components/Chip.vue';
 import Wheel from '@/components/Wheel.vue';
 import Board from '@/components/Board.vue';
 import BetsDisplayPanel from '@/components/BetsDisplayPanel.vue';
 import ChipSelectionPanel from '@/components/ChipSelectionPanel.vue';
-import Chip from '@/components/Chip.vue';
 
 export default {
   name: 'BettingTable',
@@ -150,7 +150,7 @@ export default {
   },
   methods: {
     ...mapGetters('strategy', ['getStrategy']),
-    ...mapMutations('strategy', ['replayBet']),
+    ...mapActions('strategy', ['replayBet']),
     runSimulation () {
       this.$emit('runSimulation');
     },
@@ -169,7 +169,9 @@ export default {
       this.$emit('roundsSelected', +event.target.value);
     },
     replay () {
-      this.replayBet();
+      if (!this.replayBet()) {
+        console.log('Cannot place more bets');
+      }
     }
   }
 }

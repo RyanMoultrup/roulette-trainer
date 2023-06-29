@@ -38,17 +38,8 @@ const mutations = {
     removeChip (state, placement, chipIndex) {
         state.strategy[placement].removeChip(chipIndex);
     },
-    replayBet (state) {
-        state.strategy = {...state.lastBets};
-        console.log('state.strategy:::', state.strategy);
-        for (const placement in state.strategy) {
-            if (state.strategy.hasOwnProperty(placement)) {
-                console.log('the bet++++++++++++++++++++++++', state.strategy[placement]);
-                state.strategy[placement].replaceBet();
-            }
-        }
-        currentBetSpots = Object.keys(state.lastBets);
-        console.log('current BET Spots:::###$$$$$', currentBetSpots);
+    replayBet (state, bets) {
+        state.strategy = bets;
     },
     lastBet (state, bets) {
       state.lastBets = bets;
@@ -62,6 +53,29 @@ const mutations = {
 const actions = {
     setLastBet ({ commit }, bets) {
         commit('lastBet', bets);
+    },
+    replayBet ({ commit, state, rootGetters }) {
+        let totalBetAmount = 0;
+
+        for (const placement in state.lastBets) {
+            if (state.lastBets.hasOwnProperty(placement)) {
+                totalBetAmount += state.lastBets[placement].amount;
+            }
+        }
+
+        if (totalBetAmount < rootGetters['bank/balance']) {
+            for (const placement in state.lastBets) {
+                if (state.lastBets.hasOwnProperty(placement)) {
+                    state.lastBets[placement].replaceBet();
+                }
+            }
+
+            commit('replayBet', { ...state.lastBets })
+            currentBetSpots = Object.keys(state.lastBets);
+            return true;
+        }
+
+        return false;
     },
     async clear ({ dispatch, commit, state }) {
         currentBetSpots = [];

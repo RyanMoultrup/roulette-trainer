@@ -1,4 +1,3 @@
-import Rounds from '../Outcomes';
 import store from '@/store/index';
 import spots from "@/lib/table/spots";
 
@@ -7,6 +6,7 @@ export default class {
   type;
   betPlacement;
   chips = [];
+  _amount = 0;
 
   oneToEighteen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   nineteenToThirtySix = [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
@@ -70,109 +70,116 @@ export default class {
     }
   }
 
-  constructor(bet) {
+  constructor (bet) {
     this.chips.unshift(bet.chip);
-    this.amount = +bet.chip.value;
+    this._amount = +bet.chip.value;
     this.#parse(bet.placement);
   }
 
-  addChip(chip) {
+  addChip (chip) {
     this.chips.unshift(chip);
-    this.amount = this.amount + +chip.value;
-    store.commit('bank/reduceAvailableBalance', +chip[0].value);
+    this._amount = this._amount + +chip.value;
+    console.log('chip::::add', chip);
+    store.commit('bank/reduceAvailableBalance', +chip.value);
   }
 
-  removeChip(index) {
+  removeChip (index) {
     const chip = this.chips.splice(index, 1);
-    this.amount = this.amount - +chip[0].value;
+    this._amount = this._amount - +chip[0].value;
     store.commit('bank/increaseAvailableBalance', +chip[0].value);
   }
 
-  removeChips() {
+  removeChips () {
     this.chips.forEach(chip => {
       store.commit('bank/increaseAvailableBalance', +chip.value);
     })
   }
 
-  replaceBet() {
+  replaceBet () {
+    console.log('replace bet:::');
     this.chips.forEach(chip => {
+      console.log('replace bet chip:::', chip);
       store.commit('bank/reduceAvailableBalance', +chip.value);
     })
   }
 
-  dbl(hit) {
+  get amount () {
+    return this._amount;
+  }
+
+  dbl (hit) {
     if (this.spots.includes(hit)) {
       return (this.get() * 17) + this.get();
     }
   }
 
-  sqr(hit) {
+  sqr (hit) {
     if (this.spots.includes(hit)) {
       return (this.get() * 8) + this.get();
     }
   }
 
-  str(hit) {
+  str (hit) {
     if (this.spots.includes(hit)) {
       return (this.get() * 11) + this.get();
     }
   }
 
-  line(hit) {
+  line (hit) {
     if (this.spots.includes(hit)) {
       return (this.get() * 5) + this.get();
     }
   }
 
-  twelve(hit) {
+  twelve (hit) {
     if (this.spots.includes(hit)) {
       return this.get() * 3;
     }
   }
 
-  odd(hit) {
+  odd (hit) {
     if (this.spots.includes(hit)) {
       return this.get() * 2;
     }
   }
 
-  even(hit) {
+  even (hit) {
     if (this.spots.includes(hit)) {
       return this.get() * 2;
     }
   }
 
-  red(hit) {
+  red (hit) {
     if (this.spots.includes(hit)) {
       return this.get() * 2;
     }
   }
 
-  black(hit) {
+  black (hit) {
     if (this.spots.includes(hit)) {
       return this.get() * 2;
     }
   }
 
-  row(hit) {
+  row (hit) {
     if (this.spots.includes(hit)) {
       return this.get() * 2;
     }
   }
 
-  one(hit) {
+  one (hit) {
     if (this.spots.includes(hit)) {
       return this.get() * 2;
     }
   }
 
-  nineteen(hit) {
+  nineteen (hit) {
     if (this.spots.includes(hit)) {
       return this.get() * 2;
     }
   }
 
-  #parse(type) {
+  #parse (type) {
     this.betPlacement = type;
     const placedBetArr = type.split('_');
 
@@ -237,16 +244,15 @@ export default class {
     }
   }
 
-  get() {
-    return this.strategy.bet(this.amount);
+  get () {
+    return this.strategy.bet(this._amount);
   }
 
-  payout() {
-    console.log('Rounds.last============', Rounds.last());
-    return this.payouts[this.type](this.strategy.bet(this.amount));
+  payout () {
+    return this.payouts[this.type](this.strategy.bet(this._amount));
   }
 
-  winningSpots() {
+  winningSpots () {
     return this.spots.map(s => {
       return {
         spot: s,
@@ -255,7 +261,7 @@ export default class {
     });
   }
 
-  name() {
+  name () {
     switch (this.type) {
       case 'dbl':
         return 'Split 17:1';
@@ -284,18 +290,18 @@ export default class {
     }
   }
 
-  betType() {
+  betType () {
     return this.type;
   }
 
   /**
    * Returns the placement of the bet on the table
    */
-  placement() {
+  placement () {
     return this.betPlacement;
   }
 
-  collect(hit) {
+  collect (hit) {
     return this[this.type](hit);
   }
 }
