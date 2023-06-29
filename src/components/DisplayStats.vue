@@ -107,9 +107,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-// import * as d3 from 'd3';
-import { select } from 'd3-selection';
-// import { transition } from 'd3-transition';
 import { spinHistoryTable } from "../lib/charts/SpinHistoryTable";
 import { tween } from '@/lib/Tween.js';
 
@@ -153,39 +150,8 @@ export default {
       displayFacts.reduce(reducer.add, reducer.remove, reducer.init);
       this.updateStats(displayFacts.value());
     },
-    initOutcomes () {
-      const displayFacts = this.getOutcomes.groupAll();
-      const reducer = {
-        add (i, d) {
-          i.loss += +d.loss;
-          i.won += +d.loss;
-
-          return i;
-        },
-        remove (i, d) {
-          i.loss -= +d.loss;
-          i.won -= +d.loss;
-
-          return i;
-        },
-        init () {
-          return {
-            won: 0,
-            loss: 0
-          }
-        }
-      }
-
-      displayFacts.reduce(reducer.add, reducer.remove, reducer.init);
-      this.updateStats(displayFacts.value());
-    },
     updateStats (displayData) {
       const currentWinnings = +displayData.won - +displayData.loss;
-      // const currentWinnings = +this.won - +this.loss;
-
-      // const totalWonTween = tween(this.won, val => this.won = val);
-      // const totalLostTween = tween(this.loss, val => this.loss = val);
-      // const currentWinningsTween = tween(this.currentWinnings, val => this.currentWinnings = val);
 
       tween('#won')
           .initValue(this.won)
@@ -201,21 +167,6 @@ export default {
           .initValue(this.currentWinnings)
           .onRender(val => this.currentWinnings = val)
           .render(currentWinnings);
-
-      // select('#won')
-      //     .transition()
-      //     .duration(transitionSpeed)
-      //     .tween('text', totalWonTween(displayData.won));
-      //
-      // select('#loss')
-      //     .transition()
-      //     .duration(transitionSpeed)
-      //     .tween('text', totalLostTween(displayData.loss));
-      //
-      // select('#winnings')
-      //     .transition()
-      //     .duration(transitionSpeed)
-      //     .tween('text', currentWinningsTween(currentWinnings));
     }
   },
   mounted () {
@@ -232,7 +183,7 @@ export default {
         });
     spinTable.render();
 
-    this.initOutcomes();
+    this.redraw();
   },
 }
 </script>

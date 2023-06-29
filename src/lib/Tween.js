@@ -1,5 +1,5 @@
-import {interpolate} from 'd3-interpolate';
-import {select} from 'd3-selection';
+import { interpolate } from 'd3-interpolate';
+import { select } from 'd3-selection';
 
 export class Tween {
     constructor(anchor) {
@@ -35,5 +35,4 @@ export class Tween {
     }
 }
 
-// export default tween;
 export const tween = anchor => new Tween(anchor);
