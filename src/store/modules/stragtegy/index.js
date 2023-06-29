@@ -39,7 +39,9 @@ const mutations = {
         state.strategy[placement].removeChip(chipIndex);
     },
     replayBet (state, bets) {
+        console.log('commit replay bet::::action', bets);
         state.strategy = bets;
+        console.log('replayBet state:::::', state);
     },
     lastBet (state, bets) {
       state.lastBets = bets;
@@ -54,7 +56,7 @@ const actions = {
     setLastBet ({ commit }, bets) {
         commit('lastBet', bets);
     },
-    replayBet ({ commit, state, rootGetters }) {
+    async replayBet ({ commit, state, rootGetters }) {
         let totalBetAmount = 0;
 
         for (const placement in state.lastBets) {
@@ -70,7 +72,7 @@ const actions = {
                 }
             }
 
-            commit('replayBet', { ...state.lastBets })
+            await commit('replayBet', { ...state.lastBets })
             currentBetSpots = Object.keys(state.lastBets);
             return true;
         }
@@ -78,10 +80,12 @@ const actions = {
         return false;
     },
     async clear ({ dispatch, commit, state }) {
-        currentBetSpots = [];
-        // console.log('current BET spots================', currentBetSpots);
-        await dispatch('setLastBet', state.strategy);
-        commit('clear');
+        return new Promise(async (resolve, reject) => {
+            currentBetSpots = [];
+            await dispatch('setLastBet', state.strategy);
+            commit('clear');
+            resolve();
+        })
     }
 }
 

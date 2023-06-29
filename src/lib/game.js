@@ -4,12 +4,10 @@ import store from '@/store/index';
 let bank;
 
 const game = {
-  myBets: [],
-  bank: 1000,
   play (hit) {
-    this.myBets = store.getters["strategy/getStrategy"];
+    const myBets = store.getters["strategy/getStrategy"];
 
-    this.myBets.forEach(bet => {
+    myBets.forEach(bet => {
       let winnings;
       let betAmt = bet.get();
 
@@ -53,6 +51,10 @@ const game = {
 
       if (!store.getters['simulation/isEmitting']) {
         store.dispatch('strategy/clear');
+      } else {
+        store.dispatch('strategy/clear').then(() => {
+          store.dispatch('strategy/replayBet');
+        });
       }
     });
   },
