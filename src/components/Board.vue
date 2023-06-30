@@ -196,39 +196,90 @@
       2/1
     </div>
 
-    <div class="spot _2 _3_2 _3_6_2_5 border border-l-4 p-4 bg-black text-white text-2xl text-center align-middle">2</div>
-    <div class="spot _5 _6_5 _3_6_2_5 _6_9_5_8 border p-4 bg-red-700 text-white text-2xl text-center align-middle">5</div>
-    <div class="spot _8 _9_8 _6_9_5_8 _9_12_8_11 border p-4 bg-black text-white text-2xl text-center align-middle">8</div>
-    <div class="spot border _11 _12_11 _12_15_11_14 _9_12_8_11  p-4 bg-black text-white text-2xl text-center align-middle">11</div>
-    <div class="spot border _14 _12_15_11_14 _15_14 _15_18_14_17 p-4 bg-red-700 text-white text-2xl text-center align-middle">14</div>
-    <div class="spot border _17 _15_18_14_17 _18_17 _18_21_17_20 p-4 bg-black text-white text-2xl text-center align-middle">17</div>
-    <div class="spot border _20 _18_21_17_20 _21_20 _21_24_20_23 p-4 bg-black text-white text-2xl text-center align-middle">20</div>
-    <div class="spot border _23 _21_24_20_23 _24_23 _24_27_23_26 p-4 bg-red-700 text-white text-2xl text-center align-middle">23</div>
-    <div class="spot border _26 _24_27_23_26 _27_26 _27_30_26_29 p-4 bg-black text-white text-2xl text-center align-middle">26</div>
-    <div class="spot border _29 _27_30_26_29 _30_29 _30_33_29_32 p-4 bg-black text-white text-2xl text-center align-middle">29</div>
-    <div class="spot border _32 _30_33_29_32 _33_32 _33_36_32_35 p-4 bg-red-700 text-white text-2xl text-center align-middle">32</div>
-    <div class="spot border _35 _33_36_32_35 _36_35 border-r-4 p-4 bg-black text-white text-2xl text-center align-middle">35</div>
-    <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-base text-center align-middle text-xs border-r-4 rounded-br rounded-tr">2/1</div>
+    <div class="spot _2 _3_2 _3_6_2_5 border border-l-4 p-4 bg-black text-white text-2xl text-center align-middle">
+      2
+    </div>
+    <div class="spot _5 _6_5 _3_6_2_5 _6_9_5_8 border p-4 bg-red-700 text-white text-2xl text-center align-middle">
+      5
+    </div>
+    <div class="spot _8 _9_8 _6_9_5_8 _9_12_8_11 border p-4 bg-black text-white text-2xl text-center align-middle">
+      8
+    </div>
+    <div class="spot border _11 _12_11 _12_15_11_14 _9_12_8_11  p-4 bg-black text-white text-2xl text-center align-middle">
+      11
+    </div>
+    <div class="spot border _14 _12_15_11_14 _15_14 _15_18_14_17 p-4 bg-red-700 text-white text-2xl text-center align-middle">
+      14
+    </div>
+    <div class="spot border _17 _15_18_14_17 _18_17 _18_21_17_20 p-4 bg-black text-white text-2xl text-center align-middle">
+      17
+    </div>
+    <div class="spot border _20 _18_21_17_20 _21_20 _21_24_20_23 p-4 bg-black text-white text-2xl text-center align-middle">
+      20
+    </div>
+    <div class="spot border _23 _21_24_20_23 _24_23 _24_27_23_26 p-4 bg-red-700 text-white text-2xl text-center align-middle">
+      23
+    </div>
+    <div class="spot border _26 _24_27_23_26 _27_26 _27_30_26_29 p-4 bg-black text-white text-2xl text-center align-middle">
+      26
+    </div>
+    <div class="spot border _29 _27_30_26_29 _30_29 _30_33_29_32 p-4 bg-black text-white text-2xl text-center align-middle">
+      29
+    </div>
+    <div class="spot border _32 _30_33_29_32 _33_32 _33_36_32_35 p-4 bg-red-700 text-white text-2xl text-center align-middle">
+      32
+    </div>
+    <div class="spot border _35 _33_36_32_35 _36_35 border-r-4 p-4 bg-black text-white text-2xl text-center align-middle">
+      35
+    </div>
+    <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-base text-center align-middle text-xs border-r-4 rounded-br rounded-tr">
+      2/1
+    </div>
 
-    <div class="spot border _1 border-l-4 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">1</div>
-    <div class="spot border _4 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">4</div>
-    <div class="spot border _7 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">7</div>
-    <div class="spot border _10 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">10</div>
-    <div class="spot border _13 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">13</div>
-    <div class="spot border _16 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">16</div>
-    <div class="spot border _19 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">19</div>
-    <div class="spot border _22 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">22</div>
-    <div class="spot border _25 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">25</div>
-    <div class="spot border _28 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">28</div>
-    <div class="spot border _31 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">31</div>
-    <div class="spot border _34 border-r-4 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">34</div>
+    <div class="spot border _1 border-l-4 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">
+      1
+    </div>
+    <div class="spot border _4 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">
+      4
+    </div>
+    <div class="spot border _7 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">
+      7
+    </div>
+    <div class="spot border _10 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">
+      10
+    </div>
+    <div class="spot border _13 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">
+      13
+    </div>
+    <div class="spot border _16 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">
+      16
+    </div>
+    <div class="spot border _19 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">
+      19
+    </div>
+    <div class="spot border _22 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">
+      22
+    </div>
+    <div class="spot border _25 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">
+      25
+    </div>
+    <div class="spot border _28 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">
+      28
+    </div>
+    <div class="spot border _31 p-4 bg-black text-white text-2xl text-center align-middle border-b-4">
+      31
+    </div>
+    <div class="spot border _34 border-r-4 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">
+      34
+    </div>
     <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-base text-center align-middle rounded-br rounded-tr border-b-4 border-r-4">
       2/1
     </div>
 
     <div class="spot __1st-12 border p-4 bg-green-700 text-white text-opacity-70 text-4xl text-center align-middle col-span-4 col-start-2 border-l-4 rounded-tl">
       1ST 12</div>
-    <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-4xl text-center align-middle col-span-4">2ND 12
+    <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-4xl text-center align-middle col-span-4">
+      2ND 12
     </div>
     <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-4xl text-center align-middle col-span-4 border-r-4 rounded-tr">
       3RD 12
@@ -241,10 +292,16 @@
       EVEN
     </div>
 
-    <div class="spot border p-4 bg-red-700 text-white text-2xl text-center align-middle col-span-2 border-b-4">RED</div>
-    <div class="spot border p-2 pt-4 bg-black text-white text-2xl text-center align-middle col-span-2 border-b-4">BLACK</div>
+    <div class="spot border p-4 bg-red-700 text-white text-2xl text-center align-middle col-span-2 border-b-4">
+      RED
+    </div>
+    <div class="spot border p-2 pt-4 bg-black text-white text-2xl text-center align-middle col-span-2 border-b-4">
+      BLACK
+    </div>
 
-    <div class="spot border p-4 bg-green-700 text-white text-2xl text-opacity-70 text-center align-middle col-span-2 border-b-4">ODD</div>
+    <div class="spot border p-4 bg-green-700 text-white text-2xl text-opacity-70 text-center align-middle col-span-2 border-b-4">
+      ODD
+    </div>
     <div class="spot border p-2 pt-4 bg-green-700 text-white text-opacity-70 text-xl text-center align-middle col-span-2 rounded-br border-r-4 border-b-4">
       19 TO 36
     </div>
@@ -288,15 +345,14 @@ export default {
     async place (event) {
       if (this.canBet(+this.selectedChip.value)) {
         await this.placeBet({ placement: event.target.id, chip: this.selectedChip });
-        this.reduceAvailableBalance(+this.selectedChip.value);
         return;
       }
       // TODO: trigger toastr message
     },
     placeNext (placement) {
+      console.log('place Next:::');
       if (this.canBet(+this.selectedChip.value)) {
         this.placeBet({ placement: placement, chip: this.selectedChip });
-        // this.reduceAvailableBalance(+this.selectedChip.value);
         return;
       }
       // TODO: trigger toastr message

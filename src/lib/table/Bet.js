@@ -73,13 +73,13 @@ export default class {
   constructor (bet) {
     this.chips.unshift(bet.chip);
     this._amount = +bet.chip.value;
+    store.commit('bank/reduceAvailableBalance', +bet.chip.value);
     this.#parse(bet.placement);
   }
 
   addChip (chip) {
     this.chips.unshift(chip);
     this._amount = this._amount + +chip.value;
-    console.log('chip::::add', chip);
     store.commit('bank/reduceAvailableBalance', +chip.value);
   }
 
