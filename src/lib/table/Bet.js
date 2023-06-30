@@ -96,9 +96,7 @@ export default class {
   }
 
   replaceBet () {
-    console.log('replace bet:::');
     this.chips.forEach(chip => {
-      console.log('replace bet chip:::', chip);
       store.commit('bank/reduceAvailableBalance', +chip.value);
     })
   }

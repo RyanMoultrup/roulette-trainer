@@ -1,5 +1,4 @@
 export const spinTable = outcomes => {
-    console.log('outcomes::::reduce:::', outcomes);
     return outcomes
         .dimension(d => d.round)
         .group()

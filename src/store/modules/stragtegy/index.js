@@ -39,9 +39,7 @@ const mutations = {
         state.strategy[placement].removeChip(chipIndex);
     },
     replayBet (state, bets) {
-        console.log('commit replay bet::::action', bets);
         state.strategy = bets;
-        console.log('replayBet state:::::', state);
     },
     lastBet (state, bets) {
       state.lastBets = bets;
