@@ -29,7 +29,7 @@
                     <td class="px-2 py-1 whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="flex-shrink-0 h-6 w-6 ">
-                          <span class="h-6 w-6 rounded-full bg-red-700 p-1 text-white">{{ outcome.value.hit }}</span>
+                          <span :class="getHitCss(outcome)" class="h-6 w-6 rounded-full text-white text-center inline-block">{{ getHit(outcome) }}</span>
                         </div>
                         <div class="ml-4">
                           <div class="text-sm font-medium text-gray-900">
@@ -70,9 +70,17 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { spinHistoryTable } from "../lib/charts/SpinHistoryTable";
-import { removeEmptyBins, spinTable } from "../lib/Reducers";
+import spots from '../lib/table/spots';
+import { spinHistoryTable } from '../lib/charts/SpinHistoryTable';
+import { removeEmptyBins, spinTable } from '../lib/Reducers';
 
+/**
+ * Callback function that will find empty bins in crossfilter
+ * after filters have been applied. Each crossfilter row is
+ * passed into the function (d) where we check if the values
+ * are empty or not. If they empty they are removed
+ * from the data set.
+ */
 const spinTableEmptyBinCallback = d => {
   return !(
       +d.value.won === 0 &&
@@ -92,6 +100,17 @@ export default {
     ...mapGetters('simulation', ['getOutcomes']),
   },
   methods: {
+    getHit (outcome) {
+      return outcome.value.hit !== 37 ? outcome.value.hit : 0;
+    },
+    getHitCss (outcome) {
+      const color = spots[outcome.value.hit].color;
+      return {
+        'bg-red-700': color === 'red',
+        'bg-black': color === 'black',
+        'bg-green-700': color === 'green'
+      }
+    },
     redraw () {
       this.outcomes = removeEmptyBins(spinTableEmptyBinCallback, spinTable(this.getOutcomes)).all();
     },

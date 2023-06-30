@@ -35,7 +35,7 @@
                 <span
                     v-for="spot in bet.winningSpots()"
                     :key="spot.spot"
-                    class="bet-spot-img pt-0.5 w-5 h-5 mb-1 text-xs text-center text-white rounded-full"
+                    class="pt-0.5 w-5 h-5 mb-1 text-xs text-center text-white rounded-full"
                     :class="spot.color === 'red' ? 'bg-red-800' : 'bg-black'"
                 >
                   {{ spot.spot }}
