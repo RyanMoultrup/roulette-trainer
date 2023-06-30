@@ -46,15 +46,15 @@ const game = {
           outcome: 'Lost'
         });
       }
-
-      if (!store.getters['simulation/isEmitting']) {
-        store.dispatch('strategy/clear');
-      } else {
-        store.dispatch('strategy/clear').then(() => {
-          store.dispatch('strategy/replayBet');
-        });
-      }
     });
+
+    if (!store.getters['simulation/isEmitting']) {
+      store.dispatch('strategy/clear');
+    } else {
+      store.dispatch('strategy/clear').then(() => {
+        store.dispatch('strategy/replayBet');
+      });
+    }
   },
 };
 
