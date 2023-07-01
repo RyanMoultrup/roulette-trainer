@@ -59,7 +59,7 @@
           </dt>
           <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
             <div class="flex items-baseline text-2xl font-semibold text-green-900">
-              <div id="bank"><span>${{ availableBalance }}</span></div>
+              <div id="bank"><span>${{ balance }}</span></div>
             </div>
 
             <div
@@ -116,12 +116,21 @@ export default {
     return {
       won: 0,
       loss: 0,
-      currentWinnings: 0
+      currentWinnings: 0,
+      balance: 0
     }
   },
   computed: {
     ...mapGetters('bank', ['availableBalance']),
     ...mapGetters('simulation', ['getOutcomes']),
+  },
+  watch: {
+    availableBalance (newVal, oldVal) {
+      tween('#bank')
+          .initValue(oldVal)
+          .onRender(val => this.balance = val)
+          .render(newVal);
+    }
   },
   methods: {
     redraw () {
@@ -170,6 +179,7 @@ export default {
     }
   },
   mounted () {
+    this.balance = this.availableBalance;
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
         this.redraw();

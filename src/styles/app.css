@@ -94,7 +94,8 @@
 }
 
 .spot:hover {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .spot-h {
@@ -129,210 +130,233 @@
 }
 
 .dbl_3_6 {
-    left: 14%;
-    top: 7%;
+    left: 13%;
+    top: 9%;
 }
 
 .dbl_3_6:hover ~ ._3_6 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_6_9 {
-    left: 21%;
-    top: 7%;
+    left: 20%;
+    top: 9%;
 }
 
 .dbl_6_9:hover ~ ._6_9 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_9_12 {
-    left: 28%;
-    top: 7%;
+    left: 27%;
+    top: 9%;
 }
 
 .dbl_9_12:hover ~ ._9_12 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_12_15 {
-    left: 35.4%;
-    top: 7%;
+    left: 33.75%;
+    top: 9%;
 }
 
 .dbl_12_15:hover ~ ._12_15 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_15_18 {
-    left: 42.2%;
-    top: 7%;
+    left: 41%;
+    top: 9%;
 }
 
 .dbl_15_18:hover ~ ._15_18 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_18_21 {
-    left: 49.4%;
-    top: 7%;
+    left: 47.7%;
+    top: 9%;
 }
 
 .dbl_18_21:hover ~ ._18_21 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_21_24 {
     left: 56.5%;
-    top: 7%;
+    top: 9%;
 }
 
 .dbl_21_24:hover ~ ._21_24 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_24_27 {
     left: 63.4%;
-    top: 7%;
+    top: 9%;
 }
 
 .dbl_24_27:hover ~ ._24_27 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_27_30 {
     left: 70.5%;
-    top: 7%;
+    top: 9%;
 }
 
 .dbl_27_30:hover ~ ._27_30 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_30_33 {
     left: 77.5%;
-    top: 7%;
+    top: 9%;
 }
 
 .dbl_30_33:hover ~ ._30_33 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_33_36 {
     left: 84.5%;
-    top: 7%;
+    top: 9%;
 }
 
 .dbl_33_36:hover ~ ._33_36 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_3_2 {
-    left: 10.5%;
+    left: 10%;
     top: 17%;
 }
 
 .dbl_3_2:hover ~ ._3_2 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .sqr_3_6_2_5 {
-    left: 14%;
-    top: 17%;
+    left: 13.25%;
+    top: 17.2%;
 }
 
 .sqr_3_6_2_5:hover ~ ._3_6_2_5 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_6_5 {
-    left: 17.5%;
+    left: 16.5%;
     top: 17%;
 }
 
 .dbl_6_5:hover ~ ._6_5 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .sqr_6_9_5_8 {
-    left: 21.25%;
+    left: 20%;
     top: 17%;
 }
 
 .sqr_6_9_5_8:hover ~ ._6_9_5_8 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_9_8 {
-    left: 24.75%;
+    left: 23.5%;
     top: 17%;
 }
 
 .dbl_9_8:hover ~ ._9_8 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .sqr_9_12_8_11 {
-    left: 28.25%;
+    left: 27%;
     top: 17%;
 }
 
 .sqr_9_12_8_11:hover ~ ._9_12_8_11 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_12_11 {
-    left: 31.75%;
+    left: 30.5%;
     top: 17%;
 }
 
 .dbl_12_11:hover ~ ._12_11 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .sqr_12_15_11_14 {
-    left: 35.25%;
+    left: 33.75%;
     top: 17%;
 }
 
 .sqr_12_15_11_14:hover ~ ._12_15_11_14 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_15_14 {
-    left: 38.75%;
+    left: 37.5%;
     top: 17%;
 }
 
 .dbl_15_14:hover ~ ._15_14 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .sqr_15_18_14_17 {
-    left: 42.25%;
+    left: 41%;
     top: 17%;
 }
 
 .sqr_15_18_14_17:hover ~ ._15_18_14_17 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_18_17 {
-    left: 45.5%;
+    left: 44.1%;
     top: 17%;
 }
 
 .dbl_18_17:hover ~ ._18_17 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .sqr_18_21_17_20 {
-    left: 49.25%;
+    left: 47.7%;
     top: 17%;
 }
 
 .sqr_18_21_17_20:hover ~ ._18_21_17_20 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_21_20 {
@@ -341,7 +365,8 @@
 }
 
 .dbl_21_20:hover ~ ._21_20 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .sqr_21_24_20_23 {
@@ -350,7 +375,8 @@
 }
 
 .sqr_21_24_20_23:hover ~ ._21_24_20_23 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_24_23 {
@@ -359,7 +385,8 @@
 }
 
 .dbl_24_23:hover ~ ._24_23 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .sqr_24_27_23_26 {
@@ -368,7 +395,8 @@
 }
 
 .sqr_24_27_23_26:hover ~ ._24_27_23_26 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_27_26 {
@@ -377,7 +405,8 @@
 }
 
 .dbl_27_26:hover ~ ._27_26 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .sqr_27_30_26_29 {
@@ -386,7 +415,8 @@
 }
 
 .sqr_27_30_26_29:hover ~ ._27_30_26_29 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_30_29 {
@@ -395,7 +425,8 @@
 }
 
 .dbl_30_29:hover ~ ._30_29 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .sqr_30_33_29_32 {
@@ -404,7 +435,8 @@
 }
 
 .sqr_30_33_29_32:hover ~ ._30_33_29_32 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_33_32 {
@@ -413,7 +445,8 @@
 }
 
 .dbl_33_32:hover ~ ._33_32 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .sqr_33_36_32_35 {
@@ -422,7 +455,8 @@
 }
 
 .sqr_33_36_32_35:hover ~ ._33_36_32_35 {
-    box-shadow: inset 0px 0px 10px #fff;
+    box-shadow: inset 0px 0px 10px yellow;
+    color: yellow;
 }
 
 .dbl_36_35 {
@@ -451,7 +485,7 @@
 
 .dbl_0_1 {
     left: 7.25%;
-    top: 46.5%;
+    top: 44.5%;
 }
 
 .trip_0_3_2 {
@@ -465,27 +499,27 @@
 }
 
 .dbl_2_5 {
-    left: 14.25%;
+    left: 13%;
     top: 26.5%;
 }
 .dbl_5_8 {
-    left: 21.25%;
+    left: 20%;
     top: 26.5%;
 }
 .dbl_8_11 {
-    left: 28.25%;
+    left: 27%;
     top: 26.5%;
 }
 .dbl_11_14 {
-    left: 35.25%;
+    left: 33.75%;
     top: 26.5%;
 }
 .dbl_14_17 {
-    left: 42.25%;
+    left: 41%;
     top: 26.5%;
 }
 .dbl_17_20 {
-    left: 49.5%;
+    left: 47.7%;
     top: 26.5%;
 }
 .dbl_20_23 {
@@ -509,51 +543,51 @@
     top: 26.5%;
 }
 .dbl_2_1 {
-    left: 10.5%;
-    top: 36.5%;
+    left: 10.1%;
+    top: 36%;
 }
 .sqr_2_5_1_4 {
-    left: 14.25%;
-    top: 36.5%;
+    left: 13%;
+    top: 36%;
 }
 .dbl_5_4 {
-    left: 17.75%;
-    top: 36.5%;
+    left: 16.75%;
+    top: 36%;
 }
 .sqr_5_8_4_7 {
-    left: 21.25%;
+    left: 20%;
     top: 36.5%;
 }
 .dbl_8_7 {
-    left: 25%;
+    left: 23.5%;
     top: 36.5%;
 }
 .sqr_8_11_7_10 {
-    left: 28.25%;
+    left: 27%;
     top: 36.5%;
 }
 .dbl_11_10 {
-    left: 32%;
+    left: 30.5%;
     top: 36.5%;
 }
 .sqr_11_14_10_13 {
-    left: 35.25%;
+    left: 33.75%;
     top: 36.5%;
 }
 .dbl_14_13 {
-    left: 38.75%;
+    left: 37.5%;
     top: 36.5%;
 }
 .sqr_14_17_13_16 {
-    left: 42.25%;
+    left: 41%;
     top: 36.5%;
 }
 .dbl_17_16 {
-    left: 46%;
+    left: 44.1%;
     top: 36.5%;
 }
 .sqr_17_20_16_19 {
-    left: 49.5%;
+    left: 47.7%;
     top: 36.5%;
 }
 .dbl_20_19 {
@@ -601,216 +635,254 @@
     top: 36.5%;
 }
 .dbl_1_4 {
-    left: 14.25%;
-    top: 46.5%;
+    left: 13%;
+    top: 44.5%;
 }
 .dbl_4_7 {
-    left: 21.25%;
-    top: 46.5%;
+    left: 20%;
+    top: 44.5%;
 }
 .dbl_7_10 {
-    left: 28.25%;
-    top: 46.5%;
+    left: 27%;
+    top: 44.5%;
 }
 .dbl_10_13 {
-    left: 35.25%;
-    top: 46.5%;
+    left: 33.75%;
+    top: 44.5%;
 }
 .dbl_13_16 {
-    left: 42.25%;
-    top: 46.5%;
+    left: 41%;
+    top: 44.5%;
 }
 .dbl_16_19 {
-    left: 49.5%;
-    top: 46.5%;
+    left: 47.7%;
+    top: 44.5%;
 }
 .dbl_19_22 {
     left: 56.5%;
-    top: 46.5%;
+    top: 44.5%;
 }
 .dbl_22_25 {
     left: 63.5%;
-    top: 46.5%;
+    top: 44.5%;
 }
 .dbl_25_28 {
     left: 70.5%;
-    top: 46.5%;
+    top: 44.5%;
 }
 .dbl_28_31 {
     left: 77.5%;
-    top: 46.5%;
+    top: 44.5%;
 }
 .dbl_31_34 {
     left: 84.5%;
-    top: 46.5%;
+    top: 44.5%;
 }
 .str_3_2_1 {
-    left: 10.5%;
-    top: 56%
+    left: 10%;
+    top: 52%
 }
 .line_3_6_2_5_1_4 {
-    left: 14.25%;
-    top: 56%
+    left: 13%;
+    top: 52%
 }
 .str_6_5_4 {
-    left: 17.75%;
-    top: 56%
+    left: 16.75%;
+    top: 52%
 }
 .line_6_9_5_8_4_7 {
-    left: 21.25%;
-    top: 56%
+    left: 20%;
+    top: 52%
 }
 .str_9_8_7 {
-    left: 25%;
-    top: 56%
+    left: 23%;
+    top: 52%
 }
 .line_9_12_8_11_7_10 {
-    left: 28.25%;
-    top: 56%
+    left: 27%;
+    top: 52%
 }
 .str_12_11_10 {
-    left: 32%;
-    top: 56%
+    left: 30.5%;
+    top: 52%
 }
 .line_12_15_11_14_10_13 {
-    left: 35.25%;
-    top: 56%
+    left: 33.75%;
+    top: 52%
 }
 .str_15_14_13 {
-    left: 38.75%;
-    top: 56%
+    left: 37.5%;
+    top: 52%
 }
 .line_15_18_14_17_13_16 {
-    left: 42.25%;
-    top: 56%
+    left: 41%;
+    top: 52%
 }
 .str_18_17_16 {
-    left: 46%;
-    top: 56%
+    left: 44.1%;
+    top: 52%
 }
 .line_18_21_17_20_16_19 {
-    left: 49.5%;
-    top: 56%
+    left: 47.7%;
+    top: 52%
 }
 .str_21_20_19 {
     left: 53%;
-    top: 56%
+    top: 52%
 }
 .line_21_24_20_23_19_22 {
     left: 56.5%;
-    top: 56%
+    top: 52%
 }
 .str_24_23_22 {
     left: 60%;
-    top: 56%
+    top: 52%
 }
 .line_24_27_23_26_22_25 {
     left: 63.5%;
-    top: 56%
+    top: 52%
 }
 .str_27_26_25 {
     left: 67%;
-    top: 56%
+    top: 52%
 }
 .line_27_30_26_29_25_28 {
     left: 70.5%;
-    top: 56%
+    top: 52%
 }
 .str_30_29_28 {
     left: 74%;
-    top: 56%
+    top: 52%
 }
 .line_30_33_29_32_28_31 {
     left: 77.5%;
-    top: 56%
+    top: 52%
 }
 .str_33_32_31 {
     left: 81.25%;
-    top: 56%
+    top: 52%
 }
 .line_33_36_32_35_31_34 {
     left: 84.75%;
-    top: 56%
+    top: 52%
 }
 .str_36_35_34 {
     left: 88.25%;
-    top: 56%
+    top: 52%
 }
 .twelve_first {
     width: 25%;
     left: 10.5%;
-    top: 66%
+    top: 63.25%
 }
 
 .twelve_second {
     width: 25%;
     left: 38%;
-    top: 66%
+    top: 63.25%
 }
 
 .twelve_third {
     width: 25%;
-    left: 66%;
-    top: 66%
+    left: 65%;
+    top: 63.25%
 }
 
 .one_18 {
-    width: 13%;
+    width: 12.2%;
     left: 9%;
-    top: 86%
+    top: 80%
 }
 
 .nineteen_36 {
     width: 12%;
-    left: 80%;
-    top: 86%
+    left: 78%;
+    top: 80%
 }
 
 .odd {
     width: 13%;
-    left: 65%;
-    top: 86%
+    left: 63.75%;
+    top: 80%
 }
 
 .even {
-    width: 13%;
+    width: 12.2%;
     left: 23%;
-    top: 86%
+    top: 80%
 }
 
 .red {
-    width: 13%;
-    left: 37%;
-    top: 86%
+    width: 12.2%;
+    left: 36%;
+    top: 80%
 }
 
 .black {
     width: 13%;
-    left: 51%;
-    top: 86%
+    left: 50%;
+    top: 80%
 }
 
 .row_first {
     /*width: 25%;*/
-    left: 95%;
-    top: 6%
+    left: 92.5%;
+    top: 8.5%
 }
 
 .row_second {
     /*width: 25%;*/
-    left: 95%;
+    left: 92.5%;
     top: 26%
 }
 
 .row_third {
     /*width: 25%;*/
-    left: 95%;
-    top: 46%
+    left: 92.5%;
+    top: 44%
 }
 
 
 
 /* ------------- */
+.row_first:hover ~ ._3,
+.row_first:hover ~ ._6,
+.row_first:hover ~ ._9,
+.row_first:hover ~ ._12,
+.row_first:hover ~ ._15,
+.row_first:hover ~ ._18,
+.row_first:hover ~ ._21,
+.row_first:hover ~ ._24,
+.row_first:hover ~ ._27,
+.row_first:hover ~ ._30,
+.row_first:hover ~ ._33,
+.row_first:hover ~ ._36,
+
+.row_second:hover ~ ._2,
+.row_second:hover ~ ._5,
+.row_second:hover ~ ._8,
+.row_second:hover ~ ._11,
+.row_second:hover ~ ._14,
+.row_second:hover ~ ._17,
+.row_second:hover ~ ._20,
+.row_second:hover ~ ._23,
+.row_second:hover ~ ._26,
+.row_second:hover ~ ._29,
+.row_second:hover ~ ._32,
+.row_second:hover ~ ._35,
+
+.row_third:hover ~ ._1,
+.row_third:hover ~ ._4,
+.row_third:hover ~ ._7,
+.row_third:hover ~ ._10,
+.row_third:hover ~ ._13,
+.row_third:hover ~ ._16,
+.row_third:hover ~ ._19,
+.row_third:hover ~ ._22,
+.row_third:hover ~ ._25,
+.row_third:hover ~ ._28,
+.row_third:hover ~ ._31,
+.row_third:hover ~ ._34,
 
 .dbl_36_35:hover ~ ._36_35,
 .dbl_2_5:hover ~ ._2,
@@ -1027,6 +1099,43 @@
 .str_36_35_34:hover ~ ._36,
 .str_36_35_34:hover ~ ._35,
 .str_36_35_34:hover ~ ._34,
+.one_18:hover ~ ._1,
+.one_18:hover ~ ._2,
+.one_18:hover ~ ._3,
+.one_18:hover ~ ._4,
+.one_18:hover ~ ._5,
+.one_18:hover ~ ._6,
+.one_18:hover ~ ._7,
+.one_18:hover ~ ._8,
+.one_18:hover ~ ._9,
+.one_18:hover ~ ._10,
+.one_18:hover ~ ._11,
+.one_18:hover ~ ._12,
+.one_18:hover ~ ._13,
+.one_18:hover ~ ._14,
+.one_18:hover ~ ._15,
+.one_18:hover ~ ._16,
+.one_18:hover ~ ._17,
+.one_18:hover ~ ._18,
+
+.nineteen_36:hover ~ ._19,
+.nineteen_36:hover ~ ._20,
+.nineteen_36:hover ~ ._21,
+.nineteen_36:hover ~ ._22,
+.nineteen_36:hover ~ ._23,
+.nineteen_36:hover ~ ._24,
+.nineteen_36:hover ~ ._25,
+.nineteen_36:hover ~ ._26,
+.nineteen_36:hover ~ ._27,
+.nineteen_36:hover ~ ._28,
+.nineteen_36:hover ~ ._29,
+.nineteen_36:hover ~ ._30,
+.nineteen_36:hover ~ ._31,
+.nineteen_36:hover ~ ._32,
+.nineteen_36:hover ~ ._33,
+.nineteen_36:hover ~ ._34,
+.nineteen_36:hover ~ ._35,
+.nineteen_36:hover ~ ._36,
 ._1st_12:hover ~ ._1,
 ._1st_12:hover ~ ._2,
 ._1st_12:hover ~ ._3,
@@ -1051,7 +1160,18 @@
 ._2nd_12:hover ~ ._22,
 ._2nd_12:hover ~ ._23,
 ._2nd_12:hover ~ ._24,
-._3rd_12:hover ~ ._14,
+._3rd_12:hover ~ ._25,
+._3rd_12:hover ~ ._26,
+._3rd_12:hover ~ ._27,
+._3rd_12:hover ~ ._28,
+._3rd_12:hover ~ ._29,
+._3rd_12:hover ~ ._30,
+._3rd_12:hover ~ ._31,
+._3rd_12:hover ~ ._32,
+._3rd_12:hover ~ ._33,
+._3rd_12:hover ~ ._34,
+._3rd_12:hover ~ ._35,
+._3rd_12:hover ~ ._36,
 
 ._even:hover ~ ._2,
 ._even:hover ~ ._4,
@@ -1108,7 +1228,26 @@
 ._red:hover ~ ._30,
 ._red:hover ~ ._32,
 ._red:hover ~ ._34,
-._red:hover ~ ._36
+._red:hover ~ ._36,
+
+._black:hover ~ ._2,
+._black:hover ~ ._4,
+._black:hover ~ ._6,
+._black:hover ~ ._8,
+._black:hover ~ ._11,
+._black:hover ~ ._10,
+._black:hover ~ ._13,
+._black:hover ~ ._15,
+._black:hover ~ ._17,
+._black:hover ~ ._20,
+._black:hover ~ ._22,
+._black:hover ~ ._24,
+._black:hover ~ ._26,
+._black:hover ~ ._28,
+._black:hover ~ ._29,
+._black:hover ~ ._31,
+._black:hover ~ ._33,
+._black:hover ~ ._35
 {
     box-shadow: inset 0px 0px 9px yellow;
     color: yellow;

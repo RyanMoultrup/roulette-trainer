@@ -131,15 +131,15 @@
     <div id="line_33_36_32_35_31_34" class="absolute spot-h line_33_36_32_35_31_34" @click="place" @mouseover="hoverBet"></div>
     <div id="str_36_35_34" class="absolute spot-h str_36_35_34" @click="place" @mouseover="hoverBet"></div>
 
-    <div id="twelve_first" class="absolute spot-h twelve_first" @click="place" @mouseover="hoverBet"></div>
-    <div id="twelve_second" class="absolute spot-h twelve_second" @click="place" @mouseover="hoverBet"></div>
-    <div id="twelve_third" class="absolute spot-h twelve_third" @click="place" @mouseover="hoverBet"></div>
+    <div id="twelve_first" class="absolute spot-h twelve_first _1st_12" @click="place" @mouseover="hoverBet"></div>
+    <div id="twelve_second" class="absolute spot-h twelve_second _2nd_12" @click="place" @mouseover="hoverBet"></div>
+    <div id="twelve_third" class="absolute spot-h twelve_third _3rd_12" @click="place" @mouseover="hoverBet"></div>
 
     <div id="one_18" class="absolute spot-h one_18" @click="place" @mouseover="hoverBet"></div>
-    <div id="odd" class="absolute spot-h odd" @click="place" @mouseover="hoverBet"></div>
-    <div id="even" class="absolute spot-h even" @click="place" @mouseover="hoverBet"></div>
-    <div id="red" class="absolute spot-h red" @click="place" @mouseover="hoverBet"></div>
-    <div id="black" class="absolute spot-h black" @click="place" @mouseover="hoverBet"></div>
+    <div id="odd" class="absolute spot-h odd _odd" @click="place" @mouseover="hoverBet"></div>
+    <div id="even" class="absolute spot-h even _even" @click="place" @mouseover="hoverBet"></div>
+    <div id="red" class="absolute spot-h red _red" @click="place" @mouseover="hoverBet"></div>
+    <div id="black" class="absolute spot-h black _black" @click="place" @mouseover="hoverBet"></div>
     <div id="nineteen_36" class="absolute spot-h nineteen_36" @click="place" @mouseover="hoverBet"></div>
     <div id="row_first" class="absolute spot-h row_first" @click="place" @mouseover="hoverBet"></div>
     <div id="row_second" class="absolute spot-h row_second" @click="place" @mouseover="hoverBet"></div>
@@ -232,7 +232,7 @@
     <div class="spot border _35 _33_36_32_35 _36_35 border-r-4 p-4 bg-black text-white text-2xl text-center align-middle">
       35
     </div>
-    <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-base text-center align-middle text-xs border-r-4 rounded-br rounded-tr">
+    <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-base text-center align-middle border-r-4 rounded-br rounded-tr">
       2/1
     </div>
 
@@ -277,7 +277,8 @@
     </div>
 
     <div class="spot __1st-12 border p-4 bg-green-700 text-white text-opacity-70 text-4xl text-center align-middle col-span-4 col-start-2 border-l-4 rounded-tl">
-      1ST 12</div>
+      1ST 12
+    </div>
     <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-4xl text-center align-middle col-span-4">
       2ND 12
     </div>
@@ -350,7 +351,6 @@ export default {
       // TODO: trigger toastr message
     },
     placeNext (placement) {
-      console.log('place Next:::');
       if (this.canBet(+this.selectedChip.value)) {
         this.placeBet({ placement: placement, chip: this.selectedChip });
         return;
