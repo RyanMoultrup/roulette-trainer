@@ -23,7 +23,7 @@
 
     <div v-for="placement in placements" :id="placement" :class="placement" class="absolute spot-h" @click="place" @mouseover="hoverBet"></div>
 
-    <div class="spot pt-16 border border-t-3 p-4 bg-green-700 text-white text-3xl text-opacity-70 text-center align-text-middle row-span-3 rounded-tl rounded-bl border-l-4 border-b-4 border-t-4">
+    <div class="spot _0 pt-16 border border-t-3 p-4 bg-green-700 text-white text-3xl text-opacity-70 text-center align-text-middle row-span-3 rounded-tl rounded-bl border-l-4 border-b-4 border-t-4">
       0
     </div>
 
