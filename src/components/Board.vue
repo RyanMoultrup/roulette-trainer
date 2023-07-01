@@ -21,136 +21,7 @@
       </div>
     </div>
 
-    <div id="dbl_3_6" class="absolute spot-h dbl_3_6" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_6_9" class="absolute spot-h dbl_6_9" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_9_12" class="absolute spot-h dbl_9_12" @click="place" @mouseover="hoverBet"></div>
-
-    <div id="dbl_12_15" class="absolute spot-h dbl_12_15" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_15_18" class="absolute spot-h dbl_15_18" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_18_21" class="absolute spot-h dbl_18_21" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_21_24" class="absolute spot-h dbl_21_24" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_24_27" class="absolute spot-h dbl_24_27" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_27_30" class="absolute spot-h dbl_27_30" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_30_33" class="absolute spot-h dbl_30_33" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_33_36" class="absolute spot-h dbl_33_36" @click="place" @mouseover="hoverBet"></div>
-
-    <div id="dbl_3_2" class="absolute spot-h dbl_3_2" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_3_6_2_5" class="absolute spot-h sqr_3_6_2_5" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_6_5" class="absolute spot-h dbl_6_5" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_6_9_5_8" class="absolute spot-h sqr_6_9_5_8" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_9_8" class="absolute spot-h dbl_9_8" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_9_12_8_11" class="absolute spot-h sqr_9_12_8_11" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_12_11" class="absolute spot-h dbl_12_11" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_12_15_11_14" class="absolute spot-h sqr_12_15_11_14" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_15_14" class="absolute spot-h dbl_15_14" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_15_18_14_17" class="absolute spot-h sqr_15_18_14_17" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_18_17" class="absolute spot-h dbl_18_17" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_18_21_17_20" class="absolute spot-h sqr_18_21_17_20" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_21_20" class="absolute spot-h dbl_21_20" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_21_24_20_23" class="absolute spot-h sqr_21_24_20_23" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_24_23" class="absolute spot-h dbl_24_23" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_24_27_23_26" class="absolute spot-h sqr_24_27_23_26" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_27_26" class="absolute spot-h dbl_27_26" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_27_30_26_29" class="absolute spot-h sqr_27_30_26_29" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_30_29" class="absolute spot-h dbl_30_29" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_30_33_29_32" class="absolute spot-h sqr_30_33_29_32" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_33_32" class="absolute spot-h dbl_33_32" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_33_36_32_35" class="absolute spot-h sqr_33_36_32_35" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_36_35" class="absolute spot-h dbl_36_35" @click="place" @mouseover="hoverBet"></div>
-
-
-    <div id="dbl_2_5" class="absolute spot-h dbl_2_5" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_5_8" class="absolute spot-h dbl_5_8" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_8_11" class="absolute spot-h dbl_8_11" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_11_14" class="absolute spot-h dbl_11_14" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_14_17" class="absolute spot-h dbl_14_17" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_17_20" class="absolute spot-h dbl_17_20" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_20_23" class="absolute spot-h dbl_20_23" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_23_26" class="absolute spot-h dbl_23_26" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_26_29" class="absolute spot-h dbl_26_29" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_29_32" class="absolute spot-h dbl_29_32" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_32_35" class="absolute spot-h dbl_32_35" @click="place" @mouseover="hoverBet"></div>
-
-    <div id="dbl_2_1" class="absolute spot-h dbl_2_1" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_2_5_1_4" class="absolute spot-h sqr_2_5_1_4" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_5_4" class="absolute spot-h dbl_5_4" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_5_8_4_7" class="absolute spot-h sqr_5_8_4_7" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_8_7" class="absolute spot-h dbl_8_7" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_8_11_7_10" class="absolute spot-h sqr_8_11_7_10" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_11_10" class="absolute spot-h dbl_11_10" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_11_14_10_13" class="absolute spot-h sqr_11_14_10_13" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_14_13" class="absolute spot-h dbl_14_13" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_14_17_13_16" class="absolute spot-h " @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_17_16" class="absolute spot-h dbl_17_16" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_17_20_16_19" class="absolute spot-h sqr_17_20_16_19" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_20_19" class="absolute spot-h dbl_20_19" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_20_23_19_22" class="absolute spot-h sqr_20_23_19_22" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_23_22" class="absolute spot-h dbl_23_22" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_23_26_22_25" class="absolute spot-h sqr_23_26_22_25" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_26_25" class="absolute spot-h dbl_26_25" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_26_29_25_28" class="absolute spot-h sqr_26_29_25_28" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_29_28" class="absolute spot-h dbl_29_28" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_29_32_28_31" class="absolute spot-h sqr_29_32_28_31" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_32_31" class="absolute spot-h dbl_32_31" @click="place" @mouseover="hoverBet"></div>
-    <div id="sqr_32_35_31_34" class="absolute spot-h sqr_32_35_31_34" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_35_34" class="absolute spot-h dbl_35_34" @click="place" @mouseover="hoverBet"></div>
-
-    <div id="dbl_1_4" class="absolute spot-h dbl_1_4" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_4_7" class="absolute spot-h dbl_4_7" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_7_10" class="absolute spot-h dbl_7_10" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_10_13" class="absolute spot-h dbl_10_13" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_13_16" class="absolute spot-h dbl_13_16" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_16_19" class="absolute spot-h dbl_16_19" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_19_22" class="absolute spot-h dbl_19_22" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_22_25" class="absolute spot-h dbl_22_25" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_25_28" class="absolute spot-h dbl_25_28" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_28_31" class="absolute spot-h dbl_28_31" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_31_34" class="absolute spot-h dbl_31_34" @click="place" @mouseover="hoverBet"></div>
-
-    <div id="str_3_2_1" class="absolute spot-h str_3_2_1" @click="place" @mouseover="hoverBet"></div>
-    <div id="line_3_6_2_5_1_4" class="absolute spot-h line_3_6_2_5_1_4" @click="place" @mouseover="hoverBet"></div>
-    <div id="str_6_5_4" class="absolute spot-h str_6_5_4" @click="place" @mouseover="hoverBet"></div>
-    <div id="line_6_9_5_8_4_7" class="absolute spot-h line_6_9_5_8_4_7" @click="place" @mouseover="hoverBet"></div>
-    <div id="str_9_8_7" class="absolute spot-h str_9_8_7" @click="place" @mouseover="hoverBet"></div>
-    <div id="line_9_12_8_11_7_10" class="absolute spot-h line_9_12_8_11_7_10" @click="place" @mouseover="hoverBet"></div>
-    <div id="str_12_11_10" class="absolute spot-h str_12_11_10" @click="place" @mouseover="hoverBet"></div>
-    <div id="line_12_15_11_14_10_13" class="absolute spot-h line_12_15_11_14_10_13" @click="place" @mouseover="hoverBet"></div>
-    <div id="str_15_14_13" class="absolute spot-h str_15_14_13" @click="place" @mouseover="hoverBet"></div>
-    <div id="line_15_18_14_17_13_16" class="absolute spot-h line_15_18_14_17_13_16" @click="place" @mouseover="hoverBet"></div>
-    <div id="str_18_17_16" class="absolute spot-h str_18_17_16" @click="place" @mouseover="hoverBet"></div>
-    <div id="line_18_21_17_20_16_19" class="absolute spot-h line_18_21_17_20_16_19" @click="place" @mouseover="hoverBet"></div>
-    <div id="str_21_20_19" class="absolute spot-h str_21_20_19" @click="place" @mouseover="hoverBet"></div>
-    <div id="line_21_24_20_23_19_22" class="absolute spot-h line_21_24_20_23_19_22" @click="place" @mouseover="hoverBet"></div>
-    <div id="str_24_23_22" class="absolute spot-h str_24_23_22" @click="place" @mouseover="hoverBet"></div>
-    <div id="line_24_27_23_26_22_25" class="absolute spot-h line_24_27_23_26_22_25" @click="place" @mouseover="hoverBet"></div>
-    <div id="str_27_26_25" class="absolute spot-h str_27_26_25" @click="place" @mouseover="hoverBet"></div>
-    <div id="line_27_30_26_29_25_28" class="absolute spot-h line_27_30_26_29_25_28" @click="place" @mouseover="hoverBet"></div>
-    <div id="str_30_29_28" class="absolute spot-h str_30_29_28" @click="place" @mouseover="hoverBet"></div>
-    <div id="line_30_33_29_32_28_31" class="absolute spot-h line_30_33_29_32_28_31" @click="place" @mouseover="hoverBet"></div>
-    <div id="str_33_32_31" class="absolute spot-h str_33_32_31" @click="place" @mouseover="hoverBet"></div>
-    <div id="line_33_36_32_35_31_34" class="absolute spot-h line_33_36_32_35_31_34" @click="place" @mouseover="hoverBet"></div>
-    <div id="str_36_35_34" class="absolute spot-h str_36_35_34" @click="place" @mouseover="hoverBet"></div>
-
-    <div id="twelve_first" class="absolute spot-h twelve_first _1st_12" @click="place" @mouseover="hoverBet"></div>
-    <div id="twelve_second" class="absolute spot-h twelve_second _2nd_12" @click="place" @mouseover="hoverBet"></div>
-    <div id="twelve_third" class="absolute spot-h twelve_third _3rd_12" @click="place" @mouseover="hoverBet"></div>
-
-    <div id="one_18" class="absolute spot-h one_18" @click="place" @mouseover="hoverBet"></div>
-    <div id="odd" class="absolute spot-h odd _odd" @click="place" @mouseover="hoverBet"></div>
-    <div id="even" class="absolute spot-h even _even" @click="place" @mouseover="hoverBet"></div>
-    <div id="red" class="absolute spot-h red _red" @click="place" @mouseover="hoverBet"></div>
-    <div id="black" class="absolute spot-h black _black" @click="place" @mouseover="hoverBet"></div>
-    <div id="nineteen_36" class="absolute spot-h nineteen_36" @click="place" @mouseover="hoverBet"></div>
-    <div id="row_first" class="absolute spot-h row_first" @click="place" @mouseover="hoverBet"></div>
-    <div id="row_second" class="absolute spot-h row_second" @click="place" @mouseover="hoverBet"></div>
-    <div id="row_third" class="absolute spot-h row_third" @click="place" @mouseover="hoverBet"></div>
-
-    <div id="dbl_0_3" class="absolute spot-h dbl_0_3" @click="place" @mouseover="hoverBet"></div>
-    <div id="trip_0_3_2" class="absolute spot-h trip_0_3_2" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_0_2" class="absolute spot-h dbl_0_2" @click="place" @mouseover="hoverBet"></div>
-    <div id="trip_0_2_1" class="absolute spot-h trip_0_2_1" @click="place" @mouseover="hoverBet"></div>
-    <div id="dbl_0_1" class="absolute spot-h dbl_0_1" @click="place" @mouseover="hoverBet"></div>
-    <div id="_zero" class="absolute spot-h _zero" @click="place" @mouseover="hoverBet"></div>
+    <div v-for="placement in placements" :id="placement" :class="placement" class="absolute spot-h" @click="place" @mouseover="hoverBet"></div>
 
     <div class="spot pt-16 border border-t-3 p-4 bg-green-700 text-white text-3xl text-opacity-70 text-center align-text-middle row-span-3 rounded-tl rounded-bl border-l-4 border-b-4 border-t-4">
       0
@@ -312,6 +183,7 @@
 <script>
 import Chip from '@/components/Chip.vue';
 import { mapMutations, mapGetters } from 'vuex';
+import placements from '../lib/table/BetPlacements';
 
 export default {
   name: 'Board',
@@ -326,7 +198,8 @@ export default {
   },
   data () {
     return {
-      isHovered: ''
+      isHovered: '',
+      placements
     }
   },
   computed: {
