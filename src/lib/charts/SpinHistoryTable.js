@@ -1,9 +1,6 @@
-import {BaseMixin, registerChart} from 'dc';
+import { BaseMixin, registerChart } from 'dc';
 
-// console.log('DC::::', dc.baseMixin());
-// const baseMixin = dc.baseMixin();
 export class SpinHistoryTable extends BaseMixin {
-
     constructor () {
         super();
         this.redrawCallback = () => {};
