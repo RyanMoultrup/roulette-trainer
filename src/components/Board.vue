@@ -2,7 +2,7 @@
   <div id="table" class="relative flex-grow-0 p-5 pl-3 grid grid-rows-5 grid-cols-14 place-items-stretch font-roulette text-xl">
 
     <div
-      v-for="bet in this.getStrategy" :key="bet.betType()"
+      v-for="bet in getStrategy" :key="bet.betType()"
       class="absolute"
       v-bind:class="hoverBetCSS(bet)"
       @mouseleave="leaveHoverBet"
