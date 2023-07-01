@@ -106,9 +106,10 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { spinHistoryTable } from "../lib/charts/SpinHistoryTable";
+import { mapGetters } from 'vuex';
 import { tween } from '@/lib/Tween.js';
+import { displayReduce } from '../lib/Reducers';
+import { spinHistoryTable } from '../lib/charts/SpinHistoryTable';
 
 export default {
   name: 'Display Stats',
@@ -134,43 +135,18 @@ export default {
   },
   methods: {
     redraw () {
-      const displayFacts = this.getOutcomes.groupAll();
-      const reducer = {
-        add (i, d) {
-          i.loss += +d.loss;
-          i.won += +d.won;
-
-          return i;
-        },
-        remove (i, d) {
-          i.loss -= +d.loss;
-          i.won -= +d.won;
-
-          return i;
-        },
-        init () {
-          return {
-            won: 0,
-            loss: 0
-          }
-        }
-      }
-
-      displayFacts.reduce(reducer.add, reducer.remove, reducer.init);
-      this.updateStats(displayFacts.value());
-    },
-    updateStats (displayData) {
-      const currentWinnings = +displayData.won - +displayData.loss;
+      const displayFacts = displayReduce(this.getOutcomes);
+      const currentWinnings = +displayFacts.won - +displayFacts.loss;
 
       tween('#won')
           .initValue(this.won)
           .onRender(val => this.won = val)
-          .render(displayData.won);
+          .render(displayFacts.won);
 
       tween('#loss')
           .initValue(this.loss)
           .onRender(val => this.loss = val)
-          .render(displayData.loss);
+          .render(displayFacts.loss);
 
       tween('#winnings')
           .initValue(this.currentWinnings)

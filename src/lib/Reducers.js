@@ -51,10 +51,32 @@ export const spinTable = outcomes => {
         )
 }
 
-// export const display = outcomes => {
-//     return outcomes
-//         .dimension(d => d.)
-// }
+export const displayReduce = outcomes => {
+    const group = outcomes.groupAll();
+    const reducer = {
+        add (i, d) {
+            i.loss += +d.loss;
+            i.won += +d.won;
+
+            return i;
+        },
+        remove (i, d) {
+            i.loss -= +d.loss;
+            i.won -= +d.won;
+
+            return i;
+        },
+        init () {
+            return {
+                won: 0,
+                loss: 0
+            }
+        }
+    }
+
+    group.reduce(reducer.add, reducer.remove, reducer.init);
+    return group.value();
+}
 export const removeEmptyBins = (fn, group) => {
     return {
         all: () => {
@@ -66,5 +88,6 @@ export const removeEmptyBins = (fn, group) => {
 }
 export default {
     spinTable,
-    removeEmptyBins
+    removeEmptyBins,
+    displayReduce
 }
