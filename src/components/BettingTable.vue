@@ -65,18 +65,6 @@
         ></chip>
 
         <div>
-          <select name="num-rounds" id="num-rounds" @change="roundsSelected($event)" v-model="rounds">
-            <option value="1">1</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="500">500</option>
-            <option value="1000">1000</option>
-          </select>
-
-          &nbsp;
           <span class="text-white" id="rounds">Spins <span>{{ rounds }}</span></span>
           &nbsp;
           <span class="text-white justify-self-end" id="current-bet">
@@ -164,9 +152,6 @@ export default {
     },
     chipSelected (chip) {
       this.selectedChip = chip;
-    },
-    roundsSelected (event) {
-      this.$emit('roundsSelected', +event.target.value);
     },
     replay () {
       if (!this.replayBet()) {
