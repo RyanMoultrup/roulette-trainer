@@ -25,7 +25,7 @@ const mutations = {
             return;
         }
 
-        currentBetSpots.push(bet.placement)
+        currentBetSpots.push(bet.placement);
         state.strategy[bet.placement] = new Bet(bet);
     },
     removeBet (state, placement) {
