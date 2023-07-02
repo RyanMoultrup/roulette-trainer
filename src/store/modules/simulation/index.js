@@ -22,6 +22,16 @@ const mutations = {
   },
   updateSpinEmit (state, value) {
     state.emittingSpins = value;
+  },
+  reset (state) {
+    cxf.remove();
+    state = {
+      game: {},
+      outcomes: cxf,
+      spins: [],
+      rounds: 0,
+      emittingSpins: false
+    }
   }
 }
 
@@ -29,6 +39,9 @@ const actions = {
   async play ({ commit }, hit) {
     await game.play(hit);
     commit('pushSpin', hit);
+  },
+  reset ({ commit }) {
+    commit('reset');
   }
 }
 

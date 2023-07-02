@@ -1,4 +1,5 @@
 const state = () => ({
+  startBalance: 100,
   balance: 100,
   available: 100
 });
@@ -17,6 +18,10 @@ const mutations = {
   },
   increaseAvailableBalance (state, amount) {
     state.available = state.available + amount;
+  },
+  reset (state) {
+    state.balance = state.startBalance;
+    state.available = state.startBalance;
   }
 }
 
@@ -27,6 +32,9 @@ const actions = {
   depositWinnings ({ commit }, payload) {
     commit('add', payload.winnings - payload.betAmt);
     commit('increaseAvailableBalance', payload.winnings);
+  },
+  reset ({ commit }) {
+    commit('reset');
   }
 }
 

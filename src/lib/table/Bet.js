@@ -1,5 +1,6 @@
 import store from '@/store/index';
 import spots from "@/lib/table/spots";
+import { range } from 'd3-array';
 
 export default class {
   spots = [];
@@ -8,10 +9,12 @@ export default class {
   chips = [];
   _amount = 0;
 
-  oneToEighteen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  // oneToEighteen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  oneToEighteen = range(1, 19);
   nineteenToThirtySix = [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
 
-  firstTwelve = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  // firstTwelve = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  firstTwelve = range(1, 13);
   secondTwelve = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
   thirdTwelve = [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
 
@@ -26,46 +29,49 @@ export default class {
   thirdRow = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34];
 
   payouts = {
-    dbl(amt) {
+    dbl (amt) {
       return (amt * 17) + amt;
     },
-    sqr(amt) {
+    sqr (amt) {
       return (amt * 8) + amt;
     },
-    str(amt) {
+    str (amt) {
       return (amt * 11) + amt;
     },
-    line(amt) {
+    line (amt) {
       return (amt * 5) + amt;
     },
-    twelve(amt) {
+    twelve (amt) {
       return amt * 3;
     },
-    row(amt) {
+    row (amt) {
       return amt * 2;
     },
-    nineteen(amt) {
+    nineteen (amt) {
       return amt * 2;
     },
-    one(amt) {
+    one (amt) {
       return amt * 2;
     },
-    even(amt) {
+    even (amt) {
       return amt * 2;
     },
-    odd(amt) {
+    odd (amt) {
       return amt * 2;
     },
-    red(amt) {
+    red (amt) {
       return amt * 2;
     },
-    black(amt) {
+    black (amt) {
       return amt * 2;
+    },
+    sgl (amt) {
+      return amt * 35;
     }
   }
 
   strategy = {
-    bet(amt) {
+    bet (amt) {
       return amt;
     }
   }
@@ -177,11 +183,21 @@ export default class {
     }
   }
 
+  sgl (hit) {
+    if (this.spots.includes(hit)) {
+      return this.get() * 35;
+    }
+  }
+
   #parse (type) {
     this.betPlacement = type;
     const placedBetArr = type.split('_');
 
     this.type = placedBetArr.shift();
+
+    if (this.type === 'sgl') {
+      this.spots = [+placedBetArr[0]]
+    }
 
     if (this.type === 'twelve') {
       if (placedBetArr[0] === 'first') {
@@ -261,6 +277,8 @@ export default class {
 
   name () {
     switch (this.type) {
+      case 'sgl':
+        return 'Single 35:1';
       case 'dbl':
         return 'Split 17:1';
       case 'sqr':

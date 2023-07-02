@@ -47,6 +47,11 @@ const mutations = {
     clear (state) {
         // currentBetSpots = [];
         state.strategy = {};
+    },
+    reset (state) {
+        state.strategy = {};
+        state.lastBets = {};
+        currentBetSpots = [];
     }
 }
 
@@ -84,6 +89,9 @@ const actions = {
             commit('clear');
             resolve();
         })
+    },
+    reset ({ commit }) {
+        commit('reset');
     }
 }
 
