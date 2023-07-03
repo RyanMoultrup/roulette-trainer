@@ -70,14 +70,11 @@
           </div>
           <div class="ml-10 pr-4 flex-shrink-0 flex items-center space-x-10">
             <nav aria-label="Global" class="flex space-x-10">
-              <a href="#" class="text-sm font-medium text-gray-900">Inboxes</a>
-              <a href="#" class="text-sm font-medium text-gray-900">Reporting</a>
               <a href="#" class="text-sm font-medium text-gray-900">Settings</a>
             </nav>
             <div class="flex items-center space-x-8">
               <span class="inline-flex">
                 <a href="#" class="-mx-1 bg-white p-1 rounded-full text-gray-400 hover:text-gray-500">
-                  <span class="sr-only">View notifications</span>
                   <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                        stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -324,12 +321,9 @@
               <spins-table></spins-table>
             </section>
 
-            <betting-table
-                @run-simulation="spin"
-                @start-spin-stream="startSpinStream"
-                @stop-spin-stream="stopSpinStream"
-                @rounds-selected="roundsSelected"
-            ></betting-table>
+            <section class="w-full" style="height:50%;">
+              <betting-table></betting-table>
+            </section>
           </section>
         </main>
       </div>
@@ -342,39 +336,13 @@
 import SpinsTable from "@/components/SpinsTable.vue";
 import BettingTable from "@/components/BettingTable.vue";
 import DisplayStats from "@/components/DisplayStats.vue";
-import {mapGetters, mapActions, mapMutations} from 'vuex';
-import spinEmitter from "@/lib/SpinEmitter.js";
 import ActiveGameCharts from "@/components/ActiveGameCharts.vue";
-import { spin } from '@/lib/table/wheel.js';
 
 export default {
   name: 'App',
   components: { SpinsTable, BettingTable, DisplayStats, ActiveGameCharts },
   mounted () {
     console.log('*********** STARTING GAME *************');
-  },
-  methods: {
-    ...mapGetters('strategy', ['getStrategy']),
-    ...mapGetters('simulation', ['getOutcomes']),
-    ...mapActions('simulation', ['play']),
-    ...mapMutations('simulation', ['updateSpinEmit']),
-    placeBet (amt) {
-      this.bank = +this.bank - +amt;
-    },
-    roundsSelected (value) {
-      this.rounds = value;
-    },
-    startSpinStream () {
-      this.updateSpinEmit(true);
-      spinEmitter.start(1);
-    },
-    stopSpinStream () {
-      this.updateSpinEmit(false);
-      spinEmitter.stop();
-    },
-    spin () {
-      this.play(spin());
-    }
   }
 }
 </script>

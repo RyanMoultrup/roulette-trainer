@@ -184,6 +184,7 @@
 import Chip from '@/components/Chip.vue';
 import { mapMutations, mapGetters } from 'vuex';
 import placements from '../lib/table/BetPlacements';
+import { useToast } from "vue-toastification";
 
 export default {
   name: 'Board',
@@ -195,6 +196,10 @@ export default {
         return { color: 'red', value: 5 };
       }
     }
+  },
+  setup () {
+    const toast = useToast();
+    return { toast };
   },
   data () {
     return {
@@ -221,14 +226,14 @@ export default {
         await this.placeBet({ placement: event.target.id, chip: this.selectedChip });
         return;
       }
-      // TODO: trigger toastr message
+      this.toast.error("You don't have enough in the bank to place your bet");
     },
     placeNext (placement) {
       if (this.canBet(+this.selectedChip.value)) {
         this.placeBet({ placement: placement, chip: this.selectedChip });
         return;
       }
-      // TODO: trigger toastr message
+      this.toast.error("You don't have enough in the bank to place your bet");
     },
     hoverBet (event) {
       this.isHovered = event.target.id;
