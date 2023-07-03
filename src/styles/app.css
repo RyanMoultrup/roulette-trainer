@@ -3,6 +3,58 @@
 @tailwind components;
 @tailwind utilities;
 
+.layout-container {
+    display: grid;
+    grid-template-columns: 1.2fr 1.2fr 0.8fr 0.8fr;
+    grid-template-rows: 0.3fr 0.9fr 1.8fr;
+    gap: 0 0;
+    grid-template-areas:
+    "stats stats stats spin-table"
+    "charts charts charts spin-table"
+    "betting-area betting-area betting-area bet-display";
+}
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0 0;
+    grid-template-areas:
+    "bank-display total-won total-lost current-winnings";
+    grid-area: stats;
+}
+.bank-display { grid-area: bank-display; }
+.total-won { grid-area: total-won; }
+.total-lost { grid-area: total-lost; }
+.current-winnings { grid-area: current-winnings; }
+.spin-table { grid-area: spin-table; }
+.betting-area {
+    display: grid;
+    grid-template-columns: 0.7fr 1.7fr;
+    grid-template-rows: 1.5fr 0.5fr;
+    gap: 0 0;
+    grid-template-areas:
+    "wheel betting-table"
+    "spin-buttons chips-panel";
+    grid-area: betting-area;
+}
+.wheel { grid-area: wheel; }
+.betting-table { grid-area: betting-table; }
+.bet-display { grid-area: bet-display; }
+.spin-buttons { grid-area: spin-buttons; }
+.chips-panel { grid-area: chips-panel; }
+.charts {
+    display: grid;
+    grid-template-columns: 1.1fr 1.2fr 0.7fr;
+    grid-template-rows: 1fr;
+    gap: 0 0;
+    grid-template-areas:
+    "hits-chart win-loss-bank-chart win-loss-chart";
+    grid-area: charts;
+}
+.hits-chart { grid-area: hits-chart; }
+.win-loss-bank-chart { grid-area: win-loss-bank-chart; }
+.win-loss-chart { grid-area: win-loss-chart; }
+
 .dc-chart svg g g.axis.x path,
 .dc-chart svg g g.tick line {
     display: none

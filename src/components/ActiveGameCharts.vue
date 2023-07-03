@@ -1,10 +1,15 @@
 <template>
-  <section class="flex flex-row justify-around items-center bg-gray-700 bg-opacity-0 pt-4 pb-4">
-    <div id="hits-chart"></div>
-    <div id="win-loss-chart"></div>
+  <section class="charts flex flex-row justify-around items-center bg-gray-700 bg-opacity-0 pt-4 pb-4">
+    <div class="hits-chart">
+      <div id="hits-chart"></div>
+    </div>
+    <div class="win-loss-bank-chart">
+      <div id="win-loss-chart"></div>
+    </div>
     <br>
-    <div id="win-loss-row-chart" class="flex-shrink"></div>
-    <div id="spin-table"></div>
+    <div class="win-loss-chart">
+      <div id="win-loss-row-chart" class="flex-shrink"></div>
+    </div>
   </section>
 </template>
 

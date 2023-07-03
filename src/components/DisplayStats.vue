@@ -1,12 +1,12 @@
 <template>
-  <section class="flex-shrink-0">
-    <dl class="grid grid-cols-1 bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">
-      <div>
+  <section class="stats">
+<!--    <dl class="grid grid-cols-1 bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">-->
+      <div class="bank-display">
         <div class="px-4 py-4 sm:p-6">
-          <dt class="text-base font-normal text-gray-900">
+          <div class="text-base font-normal text-gray-900">
             Total Amount Lost
-          </dt>
-          <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
+          </div>
+          <div class="mt-1 flex justify-between items-baseline md:block lg:flex">
             <div class="flex items-baseline text-2xl font-semibold text-green-900">
               <div >
                 <span id="loss">${{ loss }}</span>
@@ -24,16 +24,16 @@
               <span class="sr-only">Increased by</span>
               12%
             </div>
-          </dd>
+          </div>
         </div>
       </div>
 
-      <div>
+      <div class="total-won">
         <div class="px-4 py-4 sm:p-6">
-          <dt class="text-base font-normal text-gray-900">
+          <div class="text-base font-normal text-gray-900">
             Total Amount Won
-          </dt>
-          <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
+          </div>
+          <div class="mt-1 flex justify-between items-baseline md:block lg:flex">
             <div class="flex items-baseline text-2xl font-semibold text-green-900">
               <div id="won"><span>${{ won }}</span></div>
             </div>
@@ -48,16 +48,16 @@
               <span class="sr-only">Increased by</span>
               2.02%
             </div>
-          </dd>
+          </div>
         </div>
       </div>
 
-      <div>
+      <div class="total-lost">
         <div class="px-4 py-4 sm:p-6">
-          <dt class="text-base font-normal text-gray-900">
+          <div class="text-base font-normal text-gray-900">
             Bank
-          </dt>
-          <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
+          </div>
+          <div class="mt-1 flex justify-between items-baseline md:block lg:flex">
             <div class="flex items-baseline text-2xl font-semibold text-green-900">
               <div id="bank"><span>${{ balance }}</span></div>
             </div>
@@ -73,16 +73,16 @@
               <span class="sr-only">Increased by</span>
               2.02%
             </div>
-          </dd>
+          </div>
         </div>
       </div>
 
-      <div>
+      <div class="current-winnings">
         <div class="px-4 py-4 sm:p-6">
-          <dt class="text-base font-normal text-gray-900">
+          <div class="text-base font-normal text-gray-900">
             Current Winnings
-          </dt>
-          <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
+          </div>
+          <div class="mt-1 flex justify-between items-baseline md:block lg:flex">
             <div class="flex items-baseline text-2xl font-semibold text-red-900">
               <div id="winnings"><span>${{ currentWinnings }}</span></div>
             </div>
@@ -98,10 +98,10 @@
               <span class="sr-only">Decreased by </span>
               4.05%
             </div>
-          </dd>
+          </div>
         </div>
       </div>
-    </dl>
+<!--    </dl>-->
   </section>
 </template>
 

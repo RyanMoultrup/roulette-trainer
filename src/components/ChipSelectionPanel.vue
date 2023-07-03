@@ -1,6 +1,7 @@
 <template>
-  <div id="chips-container" class="absolute -bottom-8 right-1/4 transition duration-500 ease-in-out transform hover:-translate-y-3/4 hover:scale-110 "> <!-- -bottom-8 -->
-    <div class="chips grid grid-cols-6">
+<!--  <div id="chips-container" class="chips-panel absolute -bottom-8 right-1/4 transition duration-500 ease-in-out transform hover:-translate-y-3/4 hover:scale-110 "> &lt;!&ndash; -bottom-8 &ndash;&gt;-->
+  <div id="chips-container" class="chips-panel"> <!-- -bottom-8 -->
+    <div class="chips grid grid-cols-4">
       <chip color="red" size="lg" chipValue="5" @chipSelected="chipSelected"></chip>
       <chip color="blue" size="lg" chipValue="10" @chipSelected="chipSelected"></chip>
       <chip color="green" size="lg" chipValue="50" @chipSelected="chipSelected"></chip>

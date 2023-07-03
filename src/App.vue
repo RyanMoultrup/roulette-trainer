@@ -237,7 +237,6 @@
 
         </div>
       </header>
-
       <!-- Bottom section -->
       <div class="min-h-0 flex-1 flex overflow-auto">
         <!-- Narrow sidebar-->
@@ -307,25 +306,13 @@
           </div>
         </nav>
 
-        <!-- Main area -->
-        <main class="min-w-0 flex-grow flex border-t border-gray-200">
-          <section class="flex-col w-full">
-
-            <section class="flex" style="height:50%;">
-              <section class="flex flex-col w-full">
-                <!-- Primary column -->
-                <display-stats />
-                <active-game-charts />
-              </section>
-
-              <spins-table></spins-table>
-            </section>
-
-            <section class="w-full" style="height:50%;">
-              <betting-table></betting-table>
-            </section>
-          </section>
-        </main>
+        <div class="layout-container flex-1">
+          <display-stats />
+          <spins-table />
+          <betting-table />
+          <bets-display-panel/>
+          <active-game-charts />
+        </div>
       </div>
     </div>
   </div>
@@ -337,12 +324,10 @@ import SpinsTable from "@/components/SpinsTable.vue";
 import BettingTable from "@/components/BettingTable.vue";
 import DisplayStats from "@/components/DisplayStats.vue";
 import ActiveGameCharts from "@/components/ActiveGameCharts.vue";
+import BetsDisplayPanel from "@/components/BetsDisplayPanel.vue";
 
 export default {
   name: 'App',
-  components: { SpinsTable, BettingTable, DisplayStats, ActiveGameCharts },
-  mounted () {
-    console.log('*********** STARTING GAME *************');
-  }
+  components: { BetsDisplayPanel, SpinsTable, BettingTable, DisplayStats, ActiveGameCharts },
 }
 </script>

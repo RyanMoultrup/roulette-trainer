@@ -1,8 +1,7 @@
 <template>
-  <div id="bets-container" class="flex-grow overflow-y-auto">
-    <div class="bg-white bg-opacity-10 shadow overflow-y-auto flex-1">
+  <div id="bets-container" class="bet-display flex-grow overflow-x-auto" style="background-color: #14532D;">
+    <div class="bg-white bg-opacity-10 shadow flex-1">
       <ul class="divide-y divide-green-900">
-
         <li v-for="bet in this.getStrategy" :key="bet.betType()" class="group">
           <a href="#" class="block hover:bg-white hover:bg-opacity-5 relative">
             <span @click="remove($event, bet.placement())" class="group-hover:opacity-100 opacity-0 absolute cursor-pointer w-4 h-4 pb-1 text-xs text-center rounded-full bg-white bg-opacity-30 right-1 top-1 text-white">x</span>

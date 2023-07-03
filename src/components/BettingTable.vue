@@ -1,6 +1,7 @@
 <template>
-  <div class="bg-white overflow-hidden shadow" style="height: 400px;">
-    <div class="flex flex-row border-b border-gray-800 px-2 py-3 sm:px-6 bg-gray-700 justify-between">
+  <div class="betting-area bg-white shadow" style="background-color: #14532D;">
+<!--    <div class="spin-buttons flex flex-row border-b border-gray-800 px-2 py-3 sm:px-6 bg-gray-700 justify-between">-->
+    <div class="spin-buttons border-b border-gray-800 px-2 py-3 sm:px-6 justify-between">
       <div class="flex gap-1">
         <button
           type="button"
@@ -19,7 +20,7 @@
         <button
           type="button"
           class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
-          @click="emittingSpins ? stopSpinStream() : startSpinStream()"
+          @click="isEmitting ? stopSpinStream() : startSpinStream()"
         >
           <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"
                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -27,7 +28,7 @@
             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
           </svg>
-          {{ emittingSpins ? "Stop Emitting" : "Start Emitting" }}
+          {{ isEmitting ? "Stop Emitting" : "Start Emitting" }}
         </button>
 
         <button
@@ -57,49 +58,32 @@
           </svg>
           New Game
         </button>
-
-<!--          <button type="button"-->
-<!--                  class="reset-game inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">-->
-<!--            <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"-->
-<!--                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"-->
-<!--                 aria-hidden="true">-->
-<!--              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>-->
-<!--              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>-->
-<!--            </svg>-->
-<!--            Reset-->
-<!--          </button>-->
       </div>
 
-      <chip
-          size="md"
-          :color="selectedChip.color"
-          :chipValue="String(selectedChip.value)"
-          :emitSelection="false"
-      ></chip>
+<!--      <chip-->
+<!--          size="md"-->
+<!--          :color="selectedChip.color"-->
+<!--          :chipValue="String(selectedChip.value)"-->
+<!--          :emitSelection="false"-->
+<!--      ></chip>-->
 
-      <div>
-        <span class="text-white" id="rounds">Spins <span>{{ rounds }}</span></span>
-        &nbsp;
-        <span class="text-white justify-self-end" id="current-bet">
-          Current Bet Total: $<span>{{ currentBetTotal }}</span>
-        </span>
-      </div>
-
+<!--      <div>-->
+<!--        <span class="text-white" id="rounds">Spins <span>{{ rounds }}</span></span>-->
+<!--        &nbsp;-->
+<!--        <span class="text-white justify-self-end" id="current-bet">-->
+<!--          Current Bet Total: $<span>{{ currentBetTotal }}</span>-->
+<!--        </span>-->
+<!--      </div>-->
     </div>
-    <div id="table-wheel" class="flex bg-green-900 h-full justify-between relative overflow-hidden">
+<!--    <div id="table-wheel" class="flex bg-green-900 h-full justify-between relative overflow-hidden">-->
       <wheel></wheel>
 
       <board
         :selected-chip="selectedChip"
-        :bets="bets"
-      />
-
-      <bets-display-panel
-        :bets="bets"
       />
 
       <chip-selection-panel @chipSelected="chipSelected" />
-    </div>
+<!--    </div>-->
   </div>
 </template>
 
@@ -145,6 +129,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('simulation', ['isEmitting']),
     currentBetTotal () {
       let bets = this.getStrategy();
       if (bets.length) {
@@ -173,7 +158,6 @@ export default {
       spinEmitter.stop();
     },
     spin () {
-      console.log('spin()::', spin());
       this.play(spin());
     },
     chipSelected (chip) {
