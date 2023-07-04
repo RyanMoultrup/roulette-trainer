@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'roulette': ['"Libre Baskerville"', 'serif']
+        'roulette': ['"Libre Baskerville"', 'serif'],
+        'lobster': ['lobster', 'serif']
       },
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))',
