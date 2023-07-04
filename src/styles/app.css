@@ -3,6 +3,30 @@
 @tailwind components;
 @tailwind utilities;
 
+g.axis.y, g.axis.x, g.axis.yr { color: white; }
+
+nav, header {
+    background-color: #082112;
+}
+
+.charts {
+    /*background-color: #0D361B;*/
+    background-color: #071C0F;
+}
+
+.stats {
+    background-color: #104224;
+}
+
+.spin-table:first-child {
+    background-color: #165C32;
+}
+
+.win-loss-bank-chart, .win-loss-chart, .hits-chart {
+    /*background-color: #165C32;*/
+    background-color: #0E3B20;
+}
+
 .layout-container {
     display: grid;
     grid-template-columns: 1.2fr 1.2fr 0.8fr 0.8fr;
@@ -29,6 +53,7 @@
 .spin-table { grid-area: spin-table; }
 .betting-area {
     display: grid;
+    place-items: center;
     grid-template-columns: 0.7fr 1.7fr;
     grid-template-rows: 1.5fr 0.5fr;
     gap: 0 0;
@@ -46,7 +71,7 @@
     display: grid;
     grid-template-columns: 1.1fr 1.2fr 0.7fr;
     grid-template-rows: 1fr;
-    gap: 0 0;
+    gap: 0 1rem;
     grid-template-areas:
     "hits-chart win-loss-bank-chart win-loss-chart";
     grid-area: charts;

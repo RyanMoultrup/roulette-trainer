@@ -1,15 +1,15 @@
 <!-- Secondary column (hidden on smaller screens) -->
 <template>
   <aside class="spin-table hidden flex-shrink-0 overflow-x-auto lg:block lg:flex-shrink-0 lg:order-last">
-    <div class="relative flex flex-col w-full border-l border-gray-200 bg-gray-100">
+    <div class="relative flex flex-col w-full border-l border-gray-200">
       <div class="">
         <div class="flex flex-col">
           <div class="overflow-x-auto">
             <div class="align-middle inline-block min-w-full">
               <div class="shadow overflow-hidden border-b border-gray-200">
-                <table class="min-w-full divide-y divide-gray-200">
+                <table class="min-w-full divide-y divide-gray-200" style="background-color: #165C32">
                   <thead class="bg-gray-50">
-                  <tr>
+                  <tr style="background-color: #165C32">
                     <th scope="col"
                         class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Round
@@ -24,7 +24,7 @@
                     </th>
                   </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="bg-white divide-y divide-gray-200" style="background-color: #165C32">
                   <tr v-for="outcome in outcomes" :key="outcome.value.round" >
                     <td class="px-2 py-1 whitespace-nowrap">
                       <div class="flex items-center">
@@ -43,13 +43,13 @@
                       <div class="text-xs text-gray-500">{{ outcome.value.betCount }} bets</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
+                      <div class="text-sm text-white">
                         <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           Won
                         </span> ${{ outcome.value.won }}
                       </div>
-                      <div class="text-sm text-gray-500">
+                      <div class="text-sm text-gray-200">
                         <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                           Lost

@@ -1,7 +1,7 @@
 <template>
   <div class="betting-area bg-white shadow" style="background-color: #14532D;">
 <!--    <div class="spin-buttons flex flex-row border-b border-gray-800 px-2 py-3 sm:px-6 bg-gray-700 justify-between">-->
-    <div class="spin-buttons border-b border-gray-800 px-2 py-3 sm:px-6 justify-between">
+    <div class="spin-buttons px-2 py-3 sm:px-6 justify-between">
       <div class="flex gap-1">
         <button
           type="button"
