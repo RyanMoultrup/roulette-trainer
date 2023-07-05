@@ -9,6 +9,10 @@ const state = () => ({
   spins: [],
   spin: null,
   rounds: 0,
+  selectedChip: {
+    color: 'red',
+    value: '5'
+  },
   emittingSpins: false
 });
 
@@ -32,6 +36,9 @@ const mutations = {
       rounds: 0,
       emittingSpins: false
     }
+  },
+  updateSelectedChip (state, chip) {
+    state.selectedChip = chip;
   }
 }
 
@@ -57,6 +64,9 @@ const getters = {
   },
   isEmitting (state) {
     return state.emittingSpins;
+  },
+  selectedChip (state) {
+    return state.selectedChip;
   }
 }
 

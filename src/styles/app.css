@@ -25,30 +25,10 @@
 @tailwind components;
 @tailwind utilities;
 
-g.axis.y, g.axis.x, g.axis.yr { color: white; }
-
-/*nav, header, .spin-table {*/
-/*    !*background-color: #082112;*!*/
-/*    background-color: #0A2916;*/
-/*}*/
-
 html, .charts {
     /*background-color: #0D361B;*/
     background-color: #071C0F;
 }
-
-/*.stats {*/
-/*    background-color: #104224;*/
-/*}*/
-
-/*.spin-table:first-child {*/
-/*    background-color: #165C32;*/
-/*}*/
-
-/*.win-loss-bank-chart, .win-loss-chart, .hits-chart, .betting-area {*/
-/*    !*background-color: #165C32;*!*/
-/*    background-color: #0E3B20;*/
-/*}*/
 
 .layout-container {
     display: grid;
@@ -120,6 +100,14 @@ html, .charts {
 
 .dc-chart .empty-chart .pie-slice path {
     fill: #14532D;
+}
+
+g.axis.y, g.axis.x, g.axis.yr { color: white; }
+
+.dc-chart text.y-axis-label.y-label,
+.dc-chart text.y-axis-label.yr-label,
+.dc-chart g.dc-legend-item text {
+    fill: white;
 }
 
 .dc-chart svg g g.axis.x path,

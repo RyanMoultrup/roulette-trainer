@@ -1,10 +1,25 @@
 <template>
   <div id="bets-container" class="relative bet-display bg-green-800 overflow-y-auto">
-    <div class="bet-display-header text-white font-lobster text-2xl content-center bg-green-400 p-2" style="position: absolute; width: 100%; top: 0; left: 0; height: 2.5rem;">
-      <span>Current Bet</span> $<span id="current-bet">{{ currentBet }}</span>
-      &nbsp;<span class="text-sm font-sans cursor-pointer" @click="clearAllBets">Clear All</span>
+    <div class="bet-display-header flex flex-col text-white font-lobster text-2xl content-center bg-green-400 p-2" style="position: absolute; width: 100%; top: 0; left: 0; height: 6rem;">
+      <div class="flex flex-row mb-2">
+        <div class="flex-1">
+          <span>Current Bet</span> $<span id="current-bet">{{ currentBet }}</span>
+        </div>
+        <span class="text-sm font-sans cursor-pointer flex-shrink-0" @click="clearAllBets">Clear All</span>
+      </div>
+      <div class="flex flex-row">
+        <span>Selected </span>
+        <span class="ml-2">
+          <chip
+              size="md"
+              :color="selectedChip.color"
+              :chipValue="String(selectedChip.value)"
+              :emitSelection="false"
+          ></chip>
+        </span>
+      </div>
     </div>
-    <div class="bet-display-table shadow overflow-y-auto mt-10">
+    <div class="bet-display-table shadow overflow-y-auto mt-24">
       <ul class="divide-y divide-green-900 bg-white bg-opacity-10 ">
         <li v-for="bet in getStrategy" :key="bet.betType()" class="group">
           <a href="#" class="block hover:bg-white hover:bg-opacity-5 relative">
@@ -61,11 +76,12 @@ export default {
   components: { Chip },
   data () {
     return {
-      currentBet: 0
+      currentBet: 0,
     }
   },
   computed: {
     ...mapGetters('strategy', ['getStrategy']),
+    ...mapGetters('simulation', ['selectedChip']),
     currentBetTotal () {
       let bets = this.getStrategy;
       if (bets.length) {

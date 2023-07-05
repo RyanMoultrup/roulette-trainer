@@ -53,7 +53,7 @@ export default class WinLossBankChart {
     _buildWinChart () {
         return new LineChart(this.chart)
             .dimension(this.dimension)
-            .colors('green')
+            .colors('#1CB052')
             .group(this.accumulatedGroup, "Won")
             .valueAccessor(d => +d.value.won);
     }
@@ -69,7 +69,7 @@ export default class WinLossBankChart {
     _buildBankChart () {
         return new LineChart(this.chart)
             .dimension(this.dimension)
-            .colors('#ccd3f9')
+            .colors('#10632F')
             .group(this.accumulatedGroup, "Bank")
             .valueAccessor(d => d.value.bank)
             .useRightYAxis(true)

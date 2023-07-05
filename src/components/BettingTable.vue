@@ -5,7 +5,7 @@
       <div class="flex gap-1">
         <button
           type="button"
-          class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
+          class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
           @click="spin"
         >
           <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"
@@ -19,7 +19,7 @@
 
         <button
           type="button"
-          class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
+          class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
           @click="isEmitting ? stopSpinStream() : startSpinStream()"
         >
           <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"
@@ -33,7 +33,7 @@
 
         <button
           type="button"
-          class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
+          class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
           @click="replay()"
         >
           <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"
@@ -47,7 +47,7 @@
 
         <button
           type="button"
-          class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
+          class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
           @click="resetGame()"
         >
           <svg class="-ml-0.5 mr-2 h-4 w-4" x-description="Heroicon name: solid/mail"
@@ -60,30 +60,12 @@
         </button>
       </div>
 
-<!--      <chip-->
-<!--          size="md"-->
-<!--          :color="selectedChip.color"-->
-<!--          :chipValue="String(selectedChip.value)"-->
-<!--          :emitSelection="false"-->
-<!--      ></chip>-->
-
-<!--      <div>-->
-<!--        <span class="text-white" id="rounds">Spins <span>{{ rounds }}</span></span>-->
-<!--        &nbsp;-->
-<!--        <span class="text-white justify-self-end" id="current-bet">-->
-<!--          Current Bet Total: $<span>{{ currentBetTotal }}</span>-->
-<!--        </span>-->
-<!--      </div>-->
     </div>
-<!--    <div id="table-wheel" class="flex bg-green-900 h-full justify-between relative overflow-hidden">-->
       <wheel></wheel>
-
       <board
         :selected-chip="selectedChip"
       />
-
       <chip-selection-panel @chipSelected="chipSelected" />
-<!--    </div>-->
   </div>
 </template>
 
@@ -102,12 +84,6 @@ import { spin } from '@/lib/table/wheel.js';
 export default {
   name: 'BettingTable',
   components: { Wheel, BetsDisplayPanel, ChipSelectionPanel, Board, Chip },
-  emits: [
-    'runSimulation',
-    'startSpinStream',
-    'stopSpinStream',
-    'roundsSelected'
-  ],
   setup () {
     const toast = useToast();
     return { toast };
@@ -115,10 +91,6 @@ export default {
   data () {
     return {
       bets: [],
-      selectedChip: {
-        color: 'red',
-        value: '5'
-      },
       rounds: 0,
       emittingSpins: false
     }
@@ -129,26 +101,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('simulation', ['isEmitting']),
-    currentBetTotal () {
-      let bets = this.getStrategy();
-      if (bets.length) {
-        return bets.reduce((accumulator, item) => {
-          return accumulator + +item.get();
-        }, 0);
-      }
-      return 0;
-    }
+    ...mapGetters('simulation', ['isEmitting', 'selectedChip']),
   },
   methods: {
     ...mapGetters('strategy', ['getStrategy']),
     ...mapActions('strategy', { replayBet: 'replayBet', resetStrategy: 'reset' }),
     ...mapActions('bank', { bankReset: 'reset' }),
     ...mapActions('simulation', { resetSimulation: 'reset', play: 'play' }),
-    ...mapMutations('simulation', ['updateSpinEmit']),
-    roundsSelected (value) {
-      this.rounds = value;
-    },
+    ...mapMutations('simulation', ['updateSpinEmit', 'updateSelectedChip']),
     startSpinStream () {
       this.updateSpinEmit(true);
       spinEmitter.start(1);
@@ -161,7 +121,7 @@ export default {
       this.play(spin());
     },
     chipSelected (chip) {
-      this.selectedChip = chip;
+      this.updateSelectedChip(chip);
     },
     async replay () {
       const canBet = await this.replayBet();
