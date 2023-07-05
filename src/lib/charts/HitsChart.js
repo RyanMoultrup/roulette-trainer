@@ -1,6 +1,7 @@
 import { BarChart, units } from 'dc';
 import { scaleOrdinal } from 'd3-scale';
 import { format } from 'd3-format';
+import { range } from 'd3-array'
 import spots from "../table/spots";
 
 export default class HitsChart {
@@ -19,13 +20,13 @@ export default class HitsChart {
         this.chart
             .width(568)
             .height(200)
-            .x(scaleOrdinal().domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37]))
+            .x(scaleOrdinal().domain(range(1, 38)))
             .xUnits(units.ordinal)
             .gap(2)
             .colors(
                 scaleOrdinal()
                     .domain(['red', 'black', 'zero'])
-                    .range(['red', 'black', 'green'])
+                    .range(['#B91C1C', 'black', 'green'])
             )
             .colorAccessor(d => {
                 if (d.key === 37) {
