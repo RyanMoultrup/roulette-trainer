@@ -1,31 +1,54 @@
 /* ./src/styles/app.css */
 @tailwind base;
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #0E3B20 #0E3B20;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #0E3B20;
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #071C0F;
+    /*border-radius: 14px;*/
+    border: 3px solid #071C0F;
+}
+
 @tailwind components;
 @tailwind utilities;
 
 g.axis.y, g.axis.x, g.axis.yr { color: white; }
 
-nav, header {
-    background-color: #082112;
-}
+/*nav, header, .spin-table {*/
+/*    !*background-color: #082112;*!*/
+/*    background-color: #0A2916;*/
+/*}*/
 
-.charts {
+html, .charts {
     /*background-color: #0D361B;*/
     background-color: #071C0F;
 }
 
-.stats {
-    background-color: #104224;
-}
+/*.stats {*/
+/*    background-color: #104224;*/
+/*}*/
 
-.spin-table:first-child {
-    background-color: #165C32;
-}
+/*.spin-table:first-child {*/
+/*    background-color: #165C32;*/
+/*}*/
 
-.win-loss-bank-chart, .win-loss-chart, .hits-chart {
-    /*background-color: #165C32;*/
-    background-color: #0E3B20;
-}
+/*.win-loss-bank-chart, .win-loss-chart, .hits-chart, .betting-area {*/
+/*    !*background-color: #165C32;*!*/
+/*    background-color: #0E3B20;*/
+/*}*/
 
 .layout-container {
     display: grid;
@@ -64,7 +87,20 @@ nav, header {
 }
 .wheel { grid-area: wheel; }
 .betting-table { grid-area: betting-table; }
-.bet-display { grid-area: bet-display; }
+
+.bet-display {
+    display: grid;
+    /*grid-template-columns: 1fr;*/
+    /*grid-template-rows: 1fr 1fr;*/
+    /*gap: 0 0;*/
+    /*grid-template-areas:*/
+    /*"bet-display-header"*/
+    /*"bet-diplay-table";*/
+    grid-area: bet-display;
+}
+/*.bet-display-header { grid-area: bet-display-header; }*/
+/*.bet-display-table { grid-area: bet-display-table; }*/
+
 .spin-buttons { grid-area: spin-buttons; }
 .chips-panel { grid-area: chips-panel; }
 .charts {

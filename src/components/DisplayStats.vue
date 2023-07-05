@@ -1,5 +1,5 @@
 <template>
-  <section class="stats">
+  <section class="stats bg-green-600">
 <!--    <dl class="grid grid-cols-1 bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">-->
       <div class="total-lost">
         <div class="px-4 py-4 sm:p-6">
@@ -8,7 +8,7 @@
               <font-awesome-icon icon="fa-solid fa-user-secret" />
               Total Lost:
             </span>
-            <span class="text-4xl font-semibold" style="color: #abd3ba">
+            <span class="text-4xl font-semibold" style="color: #ddc3c3">
               <span id="loss">${{ loss }}</span>
             </span>
           </div>
@@ -31,6 +31,7 @@
       <div class="bank-display">
         <div class="px-4 py-4 sm:p-6">
           <div class="text-3xl font-normal text-gray-300 font-lobster">
+            <font-awesome-icon icon="fa-solid fa-building-columns" />
             <span>
               Bank
             </span>
@@ -47,7 +48,7 @@
             <span>
               Current Winnings
             </span>
-            <span class="text-4xl font-semibold text-gray-900" style="color: #abd3ba">
+            <span class="text-4xl font-semibold text-gray-900" style="color: #ddc3c3">
               <span id="winnings"><span>${{ currentWinnings }}</span></span>
             </span>
           </div>

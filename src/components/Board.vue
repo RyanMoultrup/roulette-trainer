@@ -23,7 +23,7 @@
 
     <div v-for="placement in placements" :id="placement" :class="placement" class="absolute spot-h" @click="place" @mouseover="hoverBet"></div>
 
-    <div class="spot _0 pt-16 border border-t-3 p-4 bg-green-700 text-white text-3xl text-opacity-70 text-center align-text-middle row-span-3 rounded-tl rounded-bl border-l-4 border-b-4 border-t-4">
+    <div class="spot _0 pt-16 border border-t-3 p-4 bg-green-400 text-white text-3xl text-opacity-70 text-center align-text-middle row-span-3 rounded-tl rounded-bl border-l-4 border-b-4 border-t-4">
       0
     </div>
 
@@ -63,7 +63,7 @@
     <div class="spot _1st-12 _1st-row _36 _33_36 _36_35 _33_36_32_35 border border-r-4 border-t-3 p-4 bg-red-700 text-white text-2xl text-center align-middle border-t-4">
       36
     </div>
-    <div class="spot border border-t-3 p-4 bg-green-700 text-white text-opacity-70 text-base text-center align-middle rounded-tr rounded-br border-t-4 border-r-4">
+    <div class="spot border border-t-3 p-4 bg-green-400 text-white text-opacity-70 text-base text-center align-middle rounded-tr rounded-br border-t-4 border-r-4">
       2/1
     </div>
 
@@ -103,7 +103,7 @@
     <div class="spot border _35 _33_36_32_35 _36_35 border-r-4 p-4 bg-black text-white text-2xl text-center align-middle">
       35
     </div>
-    <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-base text-center align-middle border-r-4 rounded-br rounded-tr">
+    <div class="spot border p-4 bg-green-400 text-white text-opacity-70 text-base text-center align-middle border-r-4 rounded-br rounded-tr">
       2/1
     </div>
 
@@ -143,24 +143,24 @@
     <div class="spot border _34 border-r-4 p-4 bg-red-700 text-white text-2xl text-center align-middle border-b-4">
       34
     </div>
-    <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-base text-center align-middle rounded-br rounded-tr border-b-4 border-r-4">
+    <div class="spot border p-4 bg-green-400 text-white text-opacity-70 text-base text-center align-middle rounded-br rounded-tr border-b-4 border-r-4">
       2/1
     </div>
 
-    <div class="spot __1st-12 border p-4 bg-green-700 text-white text-opacity-70 text-4xl text-center align-middle col-span-4 col-start-2 border-l-4 rounded-tl">
+    <div class="spot __1st-12 border p-4 bg-green-400 text-white text-opacity-70 text-4xl text-center align-middle col-span-4 col-start-2 border-l-4 rounded-tl">
       1ST 12
     </div>
-    <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-4xl text-center align-middle col-span-4">
+    <div class="spot border p-4 bg-green-400 text-white text-opacity-70 text-4xl text-center align-middle col-span-4">
       2ND 12
     </div>
-    <div class="spot border p-4 bg-green-700 text-white text-opacity-70 text-4xl text-center align-middle col-span-4 border-r-4 rounded-tr">
+    <div class="spot border p-4 bg-green-400 text-white text-opacity-70 text-4xl text-center align-middle col-span-4 border-r-4 rounded-tr">
       3RD 12
     </div>
 
-    <div class="spot border p-2 pt-4 bg-green-700 text-white text-opacity-70 text-xl text-center align-middle col-span-2 col-start-2 rounded-bl border-b-4 border-l-4">
+    <div class="spot border p-2 pt-4 bg-green-400 text-white text-opacity-70 text-xl text-center align-middle col-span-2 col-start-2 rounded-bl border-b-4 border-l-4">
       1 TO 18
     </div>
-    <div class="spot border p-4 bg-green-700 text-white text-2xl text-opacity-70 text-center align-middle col-span-2 border-b-4">
+    <div class="spot border p-4 bg-green-400 text-white text-2xl text-opacity-70 text-center align-middle col-span-2 border-b-4">
       EVEN
     </div>
 
@@ -171,10 +171,10 @@
       BLACK
     </div>
 
-    <div class="spot border p-4 bg-green-700 text-white text-2xl text-opacity-70 text-center align-middle col-span-2 border-b-4">
+    <div class="spot border p-4 bg-green-400 text-white text-2xl text-opacity-70 text-center align-middle col-span-2 border-b-4">
       ODD
     </div>
-    <div class="spot border p-2 pt-4 bg-green-700 text-white text-opacity-70 text-xl text-center align-middle col-span-2 rounded-br border-r-4 border-b-4">
+    <div class="spot border p-2 pt-4 bg-green-400 text-white text-opacity-70 text-xl text-center align-middle col-span-2 rounded-br border-r-4 border-b-4">
       19 TO 36
     </div>
   </div>

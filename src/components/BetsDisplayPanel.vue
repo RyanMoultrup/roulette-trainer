@@ -1,13 +1,17 @@
 <template>
-  <div id="bets-container" class="bet-display flex-grow overflow-x-auto" style="background-color: #14532D;">
-    <div class="bg-white bg-opacity-10 shadow flex-1">
-      <ul class="divide-y divide-green-900">
-        <li v-for="bet in this.getStrategy" :key="bet.betType()" class="group">
+  <div id="bets-container" class="relative bet-display bg-green-800 overflow-y-auto">
+    <div class="bet-display-header text-white font-lobster text-2xl content-center bg-green-400 p-2" style="position: absolute; width: 100%; top: 0; left: 0; height: 2.5rem;">
+      <span>Current Bet</span> $<span id="current-bet">{{ currentBet }}</span>
+      &nbsp;<span class="text-sm font-sans cursor-pointer" @click="clearAllBets">Clear All</span>
+    </div>
+    <div class="bet-display-table shadow overflow-y-auto mt-10">
+      <ul class="divide-y divide-green-900 bg-white bg-opacity-10 ">
+        <li v-for="bet in getStrategy" :key="bet.betType()" class="group">
           <a href="#" class="block hover:bg-white hover:bg-opacity-5 relative">
             <span @click="remove($event, bet.placement())" class="group-hover:opacity-100 opacity-0 absolute cursor-pointer w-4 h-4 pb-1 text-xs text-center rounded-full bg-white bg-opacity-30 right-1 top-1 text-white">x</span>
             <div class="px-3 py-4 ">
               <div class="flex items-center justify-between">
-                <p class="text-sm font-medium text-white truncate">
+                <p class="text-sm font-medium text-white truncate font-lobster text-xl">
                   {{ bet.name() }}
                 </p>
                 <div class="flex">
@@ -50,17 +54,44 @@
 
 <script>
 import Chip from '@/components/Chip.vue';
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
+import { tween } from "@/lib/Tween";
 
 export default {
   components: { Chip },
+  data () {
+    return {
+      currentBet: 0
+    }
+  },
   computed: {
-    ...mapGetters('strategy', ['getStrategy'])
+    ...mapGetters('strategy', ['getStrategy']),
+    currentBetTotal () {
+      let bets = this.getStrategy;
+      if (bets.length) {
+        return bets.reduce((accumulator, item) => {
+          return accumulator + +item.get();
+        }, 0);
+      }
+      return 0;
+    }
+  },
+  watch: {
+    currentBetTotal (newVal, oldVal) {
+      tween('#current-bet')
+          .initValue(oldVal)
+          .onRender(val => this.currentBet = val)
+          .render(newVal);
+    }
   },
   methods: {
     ...mapMutations('strategy', ['removeBet']),
+    ...mapActions('strategy', ['clearAll']),
     remove (event, index) {
       this.removeBet(index);
+    },
+    clearAllBets () {
+      this.clearAll();
     }
   }
 }

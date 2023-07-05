@@ -1,30 +1,30 @@
 <!-- Secondary column (hidden on smaller screens) -->
 <template>
-  <aside class="spin-table hidden flex-shrink-0 overflow-x-auto lg:block lg:flex-shrink-0 lg:order-last">
-    <div class="relative flex flex-col w-full border-l border-gray-200">
+  <aside class="spin-table bg-green-800 hidden flex-shrink-0 overflow-x-auto lg:block lg:flex-shrink-0 lg:order-last">
+    <div class="relative flex flex-col w-full border-l border-green-700">
       <div class="">
         <div class="flex flex-col">
           <div class="overflow-x-auto">
             <div class="align-middle inline-block min-w-full">
-              <div class="shadow overflow-hidden border-b border-gray-200">
-                <table class="min-w-full divide-y divide-gray-200" style="background-color: #165C32">
-                  <thead class="bg-gray-50">
-                  <tr style="background-color: #165C32">
+              <div class="shadow overflow-hidden">
+                <table class="min-w-full text-white">
+                  <thead class="bg-green-400 font-lobster text-2xl">
+                  <tr>
                     <th scope="col"
-                        class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        class="px-3 py-3 text-left font-medium tracking-wider">
                       Round
                     </th>
                     <th scope="col"
-                        class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        class="px-3 py-3 text-left font-medium tracking-wider">
                       Bets
                     </th>
                     <th scope="col"
-                        class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        class="px-3 py-3 text-left font-medium tracking-wider">
                       Outcome
                     </th>
                   </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200" style="background-color: #165C32">
+                  <tbody class="bg-white bg-opacity-10 divide-y divide-green-800 text-white">
                   <tr v-for="outcome in outcomes" :key="outcome.value.round" >
                     <td class="px-2 py-1 whitespace-nowrap">
                       <div class="flex items-center">
@@ -32,15 +32,15 @@
                           <span :class="getHitCss(outcome)" class="h-6 w-6 rounded-full text-white text-center inline-block">{{ getHit(outcome) }}</span>
                         </div>
                         <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
+                          <div class="font-medium font-lobster text-xl">
                             Spin {{ outcome.key }}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">Bet ${{ outcome.value.betAmt }}</div>
-                      <div class="text-xs text-gray-500">{{ outcome.value.betCount }} bets</div>
+                      <div class="text-sm text-gray-100"><strong>Bet</strong> ${{ outcome.value.betAmt }}</div>
+                      <div class="text-xs text-gray-300">{{ outcome.value.betCount }} bets</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="text-sm text-white">

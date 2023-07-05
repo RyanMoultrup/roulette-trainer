@@ -1,8 +1,8 @@
 <template>
   <div style="min-height: 768px;">
-    <div class="h-screen overflow-hidden bg-gray-100 flex flex-col">
+    <div class="h-screen overflow-hidden flex flex-col">
       <!-- Top nav-->
-      <header class="flex-shrink-0 relative h-16 flex items-center">
+      <header class="flex-shrink-0 relative h-16 flex items-center bg-green-800">
         <!-- Logo area -->
         <div class="absolute inset-y-0 left-0 md:static md:flex-shrink-0">
           <a href="#"
@@ -240,7 +240,7 @@
       <!-- Bottom section -->
       <div class="min-h-0 flex-1 flex overflow-auto">
         <!-- Narrow sidebar-->
-        <nav aria-label="Sidebar" class="hidden md:block md:flex-shrink-0 md:overflow-y-auto">
+        <nav aria-label="Sidebar" class="hidden bg-green-800 md:block md:flex-shrink-0 md:overflow-y-auto">
           <div class="relative w-20 flex flex-col p-3 space-y-3">
 
             <a href="#"
@@ -306,7 +306,7 @@
           </div>
         </nav>
 
-        <div class="layout-container flex-1">
+        <div class="layout-container">
           <display-stats />
           <spins-table />
           <betting-table />

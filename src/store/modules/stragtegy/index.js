@@ -90,6 +90,11 @@ const actions = {
             resolve();
         })
     },
+    async clearAll ({ commit, state }) {
+        for (const bet in state.strategy) {
+            await commit('removeBet', bet);
+        }
+    },
     reset ({ commit }) {
         commit('reset');
     }
