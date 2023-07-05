@@ -116,6 +116,12 @@ html, .charts {
 .win-loss-bank-chart { grid-area: win-loss-bank-chart; }
 .win-loss-chart { grid-area: win-loss-chart; }
 
+
+
+.dc-chart .empty-chart .pie-slice path {
+    fill: #14532D;
+}
+
 .dc-chart svg g g.axis.x path,
 .dc-chart svg g g.tick line {
     display: none

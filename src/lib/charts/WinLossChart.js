@@ -20,7 +20,7 @@ export default class WinLossChart {
       .innerRadius(35)
       .dimension(this.dimension)
       .group(this.group)
-      .colors(scaleOrdinal().range(['green', '#B91C1C']))
+      .colors(scaleOrdinal().range(['#15803D', '#B91C1C']))
       .on('pretransition', function (chart) {
         chart.selectAll('text.pie-slice').text(function (d) {
           return d.data.key + ' ' + Math.round(utils.printSingleValue((d.endAngle - d.startAngle) / (2 * Math.PI) * 100)) + '%';
