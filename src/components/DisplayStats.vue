@@ -1,9 +1,9 @@
 <template>
-  <section class="stats bg-green-600">
+  <section class="stats bg-green-600 border border-green-400 m-4 rounded">
 <!--    <dl class="grid grid-cols-1 bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">-->
       <div class="total-lost">
-        <div class="px-4 py-4 sm:p-6">
-          <div class="text-3xl text-gray-300 font-lobster">
+        <div class="px-4 py-4 border-l border-l-green-500 border-r border-r-green-800 sm:p-6">
+          <div class="text-3xl text-gray-300  font-lobster">
             <span>
               <font-awesome-icon icon="fa-solid fa-user-secret" />
               Total Lost:
@@ -16,7 +16,7 @@
       </div>
 
       <div class="total-won">
-        <div class="px-4 py-4 sm:p-6">
+        <div class="px-4 py-4 border-l border-l-green-500 border-r border-r-green-800 sm:p-6">
           <div class="text-3xl font-normal text-gray-300 font-lobster">
             <span>
               Total Won
@@ -29,7 +29,7 @@
       </div>
 
       <div class="bank-display">
-        <div class="px-4 py-4 sm:p-6">
+        <div class="px-4 py-4 border-r border-green-800 sm:p-6">
           <div class="text-3xl font-normal text-gray-300 font-lobster">
             <font-awesome-icon icon="fa-solid fa-building-columns" />
             <span>
@@ -43,7 +43,7 @@
       </div>
 
       <div class="current-winnings">
-        <div class="px-4 py-4 sm:p-6">
+        <div class="px-4 py-4 border-l border-l-green-500 sm:p-6">
           <div class="text-3xl font-normal text-gray-300 font-lobster">
             <span>
               Current Winnings
