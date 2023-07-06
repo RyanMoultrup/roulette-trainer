@@ -1,5 +1,5 @@
 <template>
-  <section class="charts bg-opacity-0 p-4">
+  <section class="charts bg-opacity-0 mx-4 mb-2">
     <div class="hits-chart chart-border bg-green-700">
       <div id="hits-chart" class="p-4"></div>
     </div>
@@ -46,7 +46,7 @@ export default {
 </script>
 <style>
 .chart-border {
-  @apply rounded border-green-900 border
+  @apply rounded border-green-600 border
 }
 </style>
 

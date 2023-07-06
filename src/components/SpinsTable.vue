@@ -1,6 +1,6 @@
 <!-- Secondary column (hidden on smaller screens) -->
 <template>
-  <aside class="spin-table bg-green-800 hidden flex-shrink-0 overflow-x-auto lg:block lg:flex-shrink-0 lg:order-last">
+  <aside class="spin-table bg-green-800 border-t border-green-800 hidden flex-shrink-0 overflow-x-auto lg:block lg:flex-shrink-0 lg:order-last">
     <div class="relative flex flex-col w-full border-l border-green-700">
       <div class="">
         <div class="flex flex-col">
