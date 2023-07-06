@@ -60,8 +60,8 @@
 <script>
 import { mapGetters } from 'vuex';
 import { tween } from '@/lib/Tween.js';
-import { displayReduce } from '../lib/Reducers';
-import { spinHistoryTable } from '../lib/charts/SpinHistoryTable';
+import { displayReduce } from '@/lib/Reducers';
+import { spinHistoryTable } from '@/lib/charts/SpinHistoryTable';
 
 export default {
   name: 'Display Stats',

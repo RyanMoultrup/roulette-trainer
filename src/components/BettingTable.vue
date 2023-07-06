@@ -75,7 +75,6 @@ import Wheel from '@/components/Wheel.vue';
 import Board from '@/components/Board.vue';
 import BetsDisplayPanel from '@/components/BetsDisplayPanel.vue';
 import ChipSelectionPanel from '@/components/ChipSelectionPanel.vue';
-import { redrawAll } from "dc";
 import { useToast } from "vue-toastification";
 import spinEmitter from "@/lib/SpinEmitter.js";
 import { spin } from '@/lib/table/wheel.js';

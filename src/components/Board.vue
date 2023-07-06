@@ -183,7 +183,7 @@
 <script>
 import Chip from '@/components/Chip.vue';
 import { mapMutations, mapGetters } from 'vuex';
-import placements from '../lib/table/BetPlacements';
+import placements from '@/lib/table/BetPlacements';
 import { useToast } from "vue-toastification";
 
 export default {
