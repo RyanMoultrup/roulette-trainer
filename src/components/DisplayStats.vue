@@ -2,10 +2,9 @@
   <section class="stats bg-green-600 border border-green-500 m-4 rounded">
 <!--    <dl class="grid grid-cols-1 bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">-->
       <div class="total-lost">
-        <div class="px-4 py-4 border-l border-l-green-500 border-r border-r-green-800 sm:p-6">
+        <div class="px-4 py-4 border-l border-l-green-500 border-r border-r-green-800 bg-gradient-to-r from-green-600 via-green-700 to-green-700 sm:p-6">
           <div class="text-3xl text-gray-300  font-lobster">
             <span>
-              <font-awesome-icon icon="fa-solid fa-user-secret" />
               Total Lost:
             </span>
             <span class="text-4xl font-semibold" style="color: #ddc3c3">

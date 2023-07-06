@@ -4,14 +4,14 @@ import store from './store/index';
 import Toast, { POSITION } from "vue-toastification";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faGear, faBuildingColumns } from '@fortawesome/free-solid-svg-icons'
 import "vue-toastification/dist/index.css";
 import './styles/dc.css';
 import './styles/app.css';
 import './assets/main.css';
 import './styles/wheel.less';
 
-library.add(faUserSecret);
+library.add(faUserSecret, faGear, faBuildingColumns);
 
 const app = createApp(App);
 
