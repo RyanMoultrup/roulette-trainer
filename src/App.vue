@@ -53,8 +53,8 @@
 
         <!-- Desktop nav area -->
         <div class="hidden md:min-w-0 md:flex-1 md:flex md:items-center md:justify-between">
-          <div class="min-w-0 flex-1">
-<!--             Add new button here               -->
+          <div class="min-w-0 flex-1 ml-4">
+            <new-game-button />
           </div>
           <div class="ml-10 pr-4 flex-shrink-0 flex items-center space-x-10">
             <nav aria-label="Global" class="flex space-x-10">
@@ -313,9 +313,10 @@ import BettingTable from "@/components/BettingTable.vue";
 import DisplayStats from "@/components/DisplayStats.vue";
 import ActiveGameCharts from "@/components/ActiveGameCharts.vue";
 import BetsDisplayPanel from "@/components/BetsDisplayPanel.vue";
+import NewGameButton from "@/components/NewGameButton.vue";
 
 export default {
   name: 'App',
-  components: { BetsDisplayPanel, SpinsTable, BettingTable, DisplayStats, ActiveGameCharts },
+  components: {NewGameButton, BetsDisplayPanel, SpinsTable, BettingTable, DisplayStats, ActiveGameCharts },
 }
 </script>
