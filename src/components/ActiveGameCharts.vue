@@ -1,12 +1,12 @@
 <template>
   <section class="charts bg-opacity-0 mx-4 mb-2">
-    <div class="hits-chart chart-border bg-green-700">
+    <div class="hits-card card-bg-border bg-green-700">
       <div id="hits-chart" class="p-4"></div>
     </div>
-    <div class="win-loss-bank-chart chart-border bg-green-700">
+    <div class="win-loss-bank-card card-bg-border bg-green-700">
       <div id="win-loss-chart" class="p-4"></div>
     </div>
-    <div class="win-loss-chart chart-border bg-green-700">
+    <div class="win-loss-card card-bg-border bg-green-700">
       <div id="win-loss-row-chart" class="flex-shrink p-4"></div>
     </div>
   </section>
@@ -44,9 +44,3 @@ export default {
   }
 }
 </script>
-<style>
-.chart-border {
-  @apply rounded border-green-600 border
-}
-</style>
-

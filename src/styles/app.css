@@ -25,6 +25,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.card-bg-border {
+    @apply rounded bg-gradient-to-tr from-green-600 via-green-700 to-green-700 border-green-600 border;
+}
+
 html, .charts {
     /*background-color: #0D361B;*/
     background-color: #071C0F;
