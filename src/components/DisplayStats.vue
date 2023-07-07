@@ -45,7 +45,7 @@
         <div class="px-4 py-4 border-l border-l-green-500  bg-gradient-to-r from-green-600 via-green-700 to-green-700 sm:p-6">
           <div class="text-3xl font-normal text-gray-300 font-lobster">
             <span>
-              Current Winnings
+              Winnings
             </span>
             <span class="text-4xl font-semibold text-gray-900" style="color: #ddc3c3">
               <span id="winnings"><span>${{ currentWinnings }}</span></span>
