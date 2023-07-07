@@ -56,12 +56,6 @@ const getters = {
   getOutcomes (state) {
     return state.outcomes;
   },
-  getSpin (state) {
-    return state.spin;
-  },
-  getSpinHistory (state) {
-    return state.spins;
-  },
   isEmitting (state) {
     return state.emittingSpins;
   },
