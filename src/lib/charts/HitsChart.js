@@ -7,10 +7,22 @@ import spots from "../table/spots";
 export default class HitsChart {
     chart;
     dimension;
-    group
+    group;
+    _width;
+    _height;
 
     constructor () {
         this.chart = new BarChart("#hits-chart");
+    }
+
+    parentWidth (width) {
+        this._width = width;
+        return this;
+    }
+
+    parentHeight (height) {
+        this._height = height;
+        return this;
     }
 
     render (facts) {
@@ -18,8 +30,8 @@ export default class HitsChart {
         this.group = this.dimension.group().reduceCount();
 
         this.chart
-            .width(568)
-            .height(200)
+            .width(this._width)
+            .height(this._height)
             .x(scaleOrdinal().domain(range(1, 38)))
             .xUnits(units.ordinal)
             .gap(2)

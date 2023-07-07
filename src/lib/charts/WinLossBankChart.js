@@ -1,6 +1,7 @@
 import { CompositeChart, LineChart, legend } from "dc";
 import { scaleLinear } from 'd3-scale';
 import { curveCardinal } from 'd3-shape';
+import redrawChartNoTransitions from "@/lib/charts/ChartResize";
 // import { tip as d3tip } from "d3-v6-tip";
 
 export default class WinLossBankChart {
@@ -11,6 +12,8 @@ export default class WinLossBankChart {
     winChart;
     lossChart;
     bankChart;
+    _width;
+    _height;
 
     reducer = {
         add (i, d) {
@@ -129,12 +132,32 @@ export default class WinLossBankChart {
         );
     }
 
+    rescale (width, height) {
+        console.log('rescaling::::');
+        console.log('new width:::', width);
+        console.log('old _width:::', this._width);
+        this.chart.width(width-20).height(height-20);
+        // this.chart.rescale();
+        // this.chart.redraw();
+        redrawChartNoTransitions(this.chart);
+    }
+
+    parentWidth (width) {
+        this._width = width;
+        return this;
+    }
+
+    parentHeight (height) {
+        this._height = height;
+        return this;
+    }
+
     render (facts) {
+        console.log('RENDER-------');
         this.dimension = facts.dimension(d => d.round);
         let group = this._group();
         this.accumulatedGroup = this._accumulate(group);
 
-        console.log('bank chart RENDER:::::', group);
 
         // const winTip = d3tip()
         //     .attr('class', 'd3-tip')
@@ -175,8 +198,12 @@ export default class WinLossBankChart {
         this.bankChart = this._buildBankChart();
 
         this.chart
-            .width(468)
-            .height(200)
+            // .width(468)
+            // .height(200)
+            .width(this._width)
+            .height(this._height)
+            // .width(null)
+            // .height(null)
             .margins({top: 15, right: 60, bottom: 10, left: 50})
             .x(scaleLinear().domain([1, this.dimension.group().size()]))
             .yAxisLabel("$ Won / Lost")
@@ -196,7 +223,7 @@ export default class WinLossBankChart {
         this.chart.yAxis().tickFormat(d => `$${d}`);
         this.chart.rightYAxis().tickFormat(d => `$${d}`);
 
-
+        // applyResizing(this.chart, 20);
         this.chart.render();
 
         // console.log('winlossbankchart winTip', winTip);

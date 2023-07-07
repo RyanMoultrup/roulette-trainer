@@ -71,8 +71,8 @@
 <script>
 import { mapGetters } from 'vuex';
 import spots from '../lib/table/spots';
-import { spinHistoryTable } from '../lib/charts/SpinHistoryTable';
-import { removeEmptyBins, spinTable } from '../lib/Reducers';
+import { spinHistoryTable } from '@/lib/charts/SpinHistoryTable';
+import { removeEmptyBins, spinTable } from '@/lib/Reducers';
 
 /**
  * Callback function that will find empty bins in crossfilter

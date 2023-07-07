@@ -5,9 +5,21 @@ export default class WinLossChart {
   chart;
   dimension;
   group;
+  _width;
+  _height;
 
   constructor() {
     this.chart = new PieChart('#win-loss-row-chart');
+  }
+
+  parentWidth (width) {
+    this._width = width;
+    return this;
+  }
+
+  parentHeight (height) {
+    this._height = height;
+    return this;
   }
 
   render(facts) {
@@ -15,8 +27,8 @@ export default class WinLossChart {
     this.group = this.dimension.group().reduceCount();
 
     this.chart
-      .width(200)
-      .height(200)
+      .width(this._width)
+      .height(this._height)
       .innerRadius(35)
       .dimension(this.dimension)
       .group(this.group)

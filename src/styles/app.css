@@ -37,7 +37,7 @@ html, .charts {
 .layout-container {
     display: grid;
     grid-template-columns: 1.2fr 1.2fr 0.8fr 0.8fr;
-    grid-template-rows: 0.3fr 0.9fr 1.8fr;
+    grid-template-rows: 0.2fr 0.8fr 2fr;
     gap: 0 0;
     grid-template-areas:
     "stats stats stats spin-table"
@@ -89,7 +89,8 @@ html, .charts {
 .chips-panel { grid-area: chips-panel; }
 .charts {
     display: grid;
-    grid-template-columns: 1.1fr 1.2fr 0.7fr;
+    grid-template-columns: 1.3fr 1.1fr 0.6fr;
+    /*grid-template-columns: 1.3fr 1.1fr min-content;*/
     grid-template-rows: 1fr;
     gap: 0 1rem;
     grid-template-areas:

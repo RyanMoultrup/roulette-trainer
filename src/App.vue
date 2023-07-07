@@ -8,7 +8,7 @@
         <!-- Narrow sidebar-->
         <side-nav />
 
-        <div class="layout-container">
+        <div class="layout-container flex-1">
           <display-stats />
           <spins-table />
           <betting-table />
