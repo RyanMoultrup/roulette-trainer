@@ -104,7 +104,7 @@ const actions = {
 
             return true;
         }
-        console.log('return false');
+
         return false;
     },
     async clear ({ dispatch, commit, state }) {
