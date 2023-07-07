@@ -1,9 +1,9 @@
+import reductio from 'reductio';
+import spots from "../table/spots";
+import { format } from 'd3-format';
 import { BarChart, units } from 'dc';
 import { scaleOrdinal } from 'd3-scale';
-import { format } from 'd3-format';
-import { range, min, max } from 'd3-array'
-import spots from "../table/spots";
-import reductio from 'reductio';
+import { range, max } from 'd3-array'
 
 
 export default class HitsChart {
