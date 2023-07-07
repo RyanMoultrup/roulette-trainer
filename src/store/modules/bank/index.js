@@ -1,7 +1,7 @@
 const state = () => ({
-  startBalance: 100,
-  balance: 100,
-  available: 100
+  startBalance: 1000,
+  balance: 1000,
+  available: 1000
 });
 
 const mutations = {

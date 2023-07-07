@@ -20,6 +20,7 @@ const mutations = {
      * @param bet {placement: string, chip: object}
      */
     async placeBet (state, bet) {
+        console.log('the BET:::', bet);
         if (currentBetSpots.includes(bet.placement)) {
             await state.strategy[bet.placement].addChip(bet.chip);
             return;
@@ -80,6 +81,30 @@ const actions = {
             return true;
         }
 
+        return false;
+    },
+    async doubleBet ({ commit, state, rootGetters }) {
+        let totalBetAmount = 0;
+
+        for (const placement in state.strategy) {
+            if (state.strategy.hasOwnProperty(placement)) {
+                totalBetAmount += state.strategy[placement].amount;
+            }
+        }
+
+        if (totalBetAmount < rootGetters['bank/availableBalance']) {
+            for (const placement in state.strategy) {
+                if (state.strategy.hasOwnProperty(placement)) {
+                    state.strategy[placement].chips.forEach(chip => {
+                        console.log('chip:::', chip);
+                        commit('placeBet', { placement, chip });
+                    });
+                }
+            }
+
+            return true;
+        }
+        console.log('return false');
         return false;
     },
     async clear ({ dispatch, commit, state }) {

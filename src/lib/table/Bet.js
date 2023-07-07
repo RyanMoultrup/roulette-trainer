@@ -89,6 +89,15 @@ export default class {
     store.commit('bank/reduceAvailableBalance', +chip.value);
   }
 
+  doubleBet () {
+    console.log('this.chips:::', this.chips);
+    const newChips = this.chips.map(c => c);
+    console.log('newChips::', newChips);
+    newChips.forEach(chip => {
+      this.addChip(chip);
+    })
+  }
+
   removeChip (index) {
     const chip = this.chips.splice(index, 1);
     this._amount = this._amount - +chip[0].value;
@@ -111,6 +120,10 @@ export default class {
 
   get amount () {
     return this._amount;
+  }
+
+  get chips () {
+    return this.chips;
   }
 
   dbl (hit) {
