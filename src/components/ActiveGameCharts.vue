@@ -18,7 +18,8 @@ import { mapGetters } from "vuex";
 import HitsChart from "@/lib/charts/HitsChart.js";
 import WinLossChart from "@/lib/charts/WinLossChart.js";
 import WinLossBankChart from "@/lib/charts/WinLossBankChart.js";
-import { useResizeObserver} from "@vueuse/core";
+// import { useResizeObserver} from "@vueuse/core";
+// import { debounce } from "@/lib/Utils";
 
 export default {
   methods: {
@@ -59,15 +60,19 @@ export default {
         .render(outcomes);
 
     // useResizeObserver(this.$refs.winLossBankChart, entry => {
-    //   console.log('resized:::', entry);
-    //   const { width, height } = entry[0].contentRect
+    //   console.log('screen is resizing');
+    //   const debouncer = debounce(() => {
+    //     console.log('resized:::', entry);
+    //     const { width, height } = entry[0].contentRect
     //
-    //   console.log('width:::', width);
-    //   console.log('width:::', width - convertRemToPixels(0.75) - 1);
-    //   winLossBankChart.rescale(
-    //       width - convertRemToPixels(0.75) - 1,
-    //       height - convertRemToPixels(0.75) - 1
-    //   );
+    //     console.log('width:::', width);
+    //     console.log('width:::', width - convertRemToPixels(0.75) - 1);
+    //     winLossBankChart.rescale(
+    //         width - convertRemToPixels(0.75) - 1,
+    //         height - convertRemToPixels(0.75) - 1
+    //     );
+    //   }, 1000);
+    //   debouncer(entry);
     // })
   }
 }
