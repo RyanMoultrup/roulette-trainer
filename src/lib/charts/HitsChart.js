@@ -3,6 +3,8 @@ import { scaleOrdinal } from 'd3-scale';
 import { format } from 'd3-format';
 import { range } from 'd3-array'
 import spots from "../table/spots";
+import reductio from 'reductio';
+
 
 export default class HitsChart {
     chart;
@@ -25,9 +27,20 @@ export default class HitsChart {
         return this;
     }
 
+    #reduce () {
+        const reducer = reductio();
+        reducer
+            .exception(d => d.round)
+            .exceptionCount(true)
+
+        reducer(this.group);
+    }
+
     render (facts) {
         this.dimension = facts.dimension(d => +d.hit);
-        this.group = this.dimension.group().reduceCount();
+        this.group = this.dimension.group();
+
+        this.#reduce();
 
         this.chart
             .width(this._width)
@@ -48,11 +61,9 @@ export default class HitsChart {
             })
             .brushOn(false)
             .elasticY(true)
-            // .elasticX(true)
             .dimension(this.dimension)
-            .group(this.group);
-            // .valueAccessor(d => +d.value/bets.length);
-            // .valueAccessor(d => +d.value);
+            .group(this.group)
+            .valueAccessor(d => +d.value.exceptionCount)
 
         this.chart.yAxis().tickFormat(format("d"));
         this.chart.render();
