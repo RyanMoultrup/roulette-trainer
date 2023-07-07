@@ -28,6 +28,7 @@ app.use(store);
 app.use(Toast, {
     position: POSITION.TOP_CENTER,
     transition: "Vue-Toastification__fade",
+    containerClassName: 'main-message-toast'
 });
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.mount('#app');

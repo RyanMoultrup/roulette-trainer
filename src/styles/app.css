@@ -30,7 +30,6 @@
 }
 
 html, .charts {
-    /*background-color: #0D361B;*/
     background-color: #071C0F;
 }
 
@@ -74,23 +73,14 @@ html, .charts {
 
 .bet-display {
     display: grid;
-    /*grid-template-columns: 1fr;*/
-    /*grid-template-rows: 1fr 1fr;*/
-    /*gap: 0 0;*/
-    /*grid-template-areas:*/
-    /*"bet-display-header"*/
-    /*"bet-diplay-table";*/
     grid-area: bet-display;
 }
-/*.bet-display-header { grid-area: bet-display-header; }*/
-/*.bet-display-table { grid-area: bet-display-table; }*/
 
 .spin-buttons { grid-area: spin-buttons; }
 .chips-panel { grid-area: chips-panel; }
 .charts {
     display: grid;
     grid-template-columns: 1.3fr 1.1fr 0.6fr;
-    /*grid-template-columns: 1.3fr 1.1fr min-content;*/
     grid-template-rows: 1fr;
     gap: 0 1rem;
     grid-template-areas:
@@ -101,7 +91,9 @@ html, .charts {
 .win-loss-bank-chart { grid-area: win-loss-bank-chart; }
 .win-loss-chart { grid-area: win-loss-chart; }
 
-
+.main-message-toast .Vue-Toastification__toast--error {
+    background-color: #b91c1c;
+}
 
 .dc-chart .empty-chart .pie-slice path {
     fill: #14532D;
