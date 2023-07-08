@@ -16,6 +16,7 @@ const game = {
       if (winnings) {
         bank = bank + (winnings - betAmt);
         outcomes.push({
+          placement: bet.placement(),
           wonRound: 1,
           lostRound: 0,
           won: winnings - betAmt,
@@ -31,6 +32,7 @@ const game = {
       } else {
         bank = bank - betAmt;
         outcomes.push({
+          placement: bet.placement(),
           wonRound: 0,
           lostRound: 1,
           won: 0,

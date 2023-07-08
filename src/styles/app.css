@@ -141,9 +141,9 @@ g.axis.y, g.axis.x, g.axis.yr { color: white; }
     line-height: 1.4;
     padding: 20px;
     pointer-events: none !important;
-    color: #203d5d;
+    color: white;
     box-shadow: 0 4px 20px 4px rgba(0, 20, 60, .1), 0 4px 80px -8px rgba(0, 20, 60, .2);
-    background-color: #fff;
+    background-color: #0A2916;
     border-radius: 4px;
 }
 
@@ -154,7 +154,7 @@ g.axis.y, g.axis.x, g.axis.yr { color: white; }
     font-size: 10px;
     width: 100%;
     line-height: 1;
-    color: #fff;
+    color: #0A2916;
     position: absolute;
     pointer-events: none;
 }
