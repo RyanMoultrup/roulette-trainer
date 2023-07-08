@@ -1,26 +1,26 @@
 import spots from '@/lib/table/spots';
 import store from '@/store/index';
 
-const buildWinObject = (...[placement, hit, winnings, bank, betAmt]) => {
+const buildWinObject = ({ placement, hit, winnings, bank, betAmt }) => {
   return {
-    placement: placement,
+    placement,
     wonRound: 1,
     lostRound: 0,
     won: winnings,
     loss: 0,
     bet: betAmt,
-    hit: hit,
+    hit,
     color: spots[hit].color,
     even: hit % 2 === 0,
-    bank: bank,
+    bank,
     round: store.state.simulation.rounds + 1,
     outcome: 'Won'
   }
 };
 
-const buildLostObject = (...[placement, hit, , bank, betAmt]) => {
+const buildLostObject = ({ placement, hit, bank, betAmt }) => {
   return {
-    placement: placement,
+    placement,
     wonRound: 0,
     lostRound: 1,
     won: 0,
@@ -29,7 +29,7 @@ const buildLostObject = (...[placement, hit, , bank, betAmt]) => {
     hit: hit,
     color: spots[hit].color,
     even: hit % 2 === 0,
-    bank: bank,
+    bank,
     round: store.state.simulation.rounds + 1,
     outcome: 'Lost'
   }
@@ -46,11 +46,17 @@ const game = {
 
       bank = winnings ? bank + (winnings - betAmt) : bank - betAmt;
 
-      const args = [bet.placement(), hit, winnings - betAmt, bank, betAmt]
+      const args = {
+        placement: bet.placement(),
+        hit,
+        winnings: winnings - betAmt,
+        bank,
+        betAmt
+      };
 
       return winnings
-          ? buildWinObject(...args)
-          : buildLostObject(...args);
+          ? buildWinObject(args)
+          : buildLostObject(args);
     });
 
     store.commit('bank/updateBank', bank);
