@@ -1,11 +1,11 @@
 import spots from '@/lib/table/spots';
 import store from '@/store/index';
 
-let bank;
-
 const game = {
   play (hit) {
     const myBets = store.getters["strategy/getStrategy"];
+    const outcomes = [];
+    let bank = store.getters['bank/balance'];
 
     myBets.forEach(bet => {
       let winnings;
@@ -14,9 +14,8 @@ const game = {
       winnings = bet.collect(hit);
 
       if (winnings) {
-        store.dispatch('bank/depositWinnings', { winnings, betAmt });
-        bank = store.getters['bank/balance'];
-        store.commit('simulation/addOutcome', {
+        bank = bank + (winnings - betAmt);
+        outcomes.push({
           wonRound: 1,
           lostRound: 0,
           won: winnings - betAmt,
@@ -30,9 +29,8 @@ const game = {
           outcome: 'Won'
         });
       } else {
-        store.commit('bank/subtract', betAmt);
-        bank = store.getters['bank/balance'];
-        store.commit('simulation/addOutcome', {
+        bank = bank - betAmt;
+        outcomes.push({
           wonRound: 0,
           lostRound: 1,
           won: 0,
@@ -47,6 +45,9 @@ const game = {
         });
       }
     });
+
+    store.commit('bank/updateBank', bank);
+    store.commit('simulation/addOutcome', outcomes);
 
     if (!store.getters['simulation/isEmitting']) {
       store.dispatch('strategy/clear');

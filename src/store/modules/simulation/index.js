@@ -22,7 +22,7 @@ const mutations = {
     state.rounds++;
   },
   addOutcome (state, outcome) {
-    state.outcomes.add([outcome]);
+    state.outcomes.add(outcome);
   },
   updateSpinEmit (state, value) {
     state.emittingSpins = value;

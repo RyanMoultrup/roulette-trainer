@@ -22,6 +22,10 @@ const mutations = {
   reset (state) {
     state.balance = state.startBalance;
     state.available = state.startBalance;
+  },
+  updateBank (state, amount) {
+    state.balance = amount;
+    state.available = amount;
   }
 }
 
