@@ -4,7 +4,7 @@ export class SimplePie {
     constructor(selector, data) {
         this.selector = selector;
         this.data = data;
-        this.width = 170;
+        this.width = 130;
         this.height = 110;
         this.radius = Math.min(this.width, this.height) / 2;
         this.colorMap = {

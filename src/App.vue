@@ -16,6 +16,7 @@
           <active-game-charts />
         </div>
       </div>
+      <slide-panel/>
     </div>
   </div>
 </template>
@@ -29,9 +30,19 @@ import DisplayStats from "@/components/DisplayStats.vue";
 import ActiveGameCharts from "@/components/ActiveGameCharts.vue";
 import BetsDisplayPanel from "@/components/BetsDisplayPanel.vue";
 import { default as AppHeader } from "@/components/ui/Header.vue";
+import SlidePanel from "@/components/ui/SlidePanel.vue";
 
 export default {
   name: 'App',
-  components: { BetsDisplayPanel, SpinsTable, BettingTable, DisplayStats, ActiveGameCharts, AppHeader, SideNav },
+  components: {
+    SlidePanel,
+    BetsDisplayPanel,
+    SpinsTable,
+    BettingTable,
+    DisplayStats,
+    ActiveGameCharts,
+    AppHeader,
+    SideNav
+  },
 }
 </script>
