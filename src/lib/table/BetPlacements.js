@@ -157,4 +157,20 @@ export const placements = [
     '_zero'
 ];
 
+export const names = {
+    'sgl': 'Single 35:1',
+    'dbl': 'Split 17:1',
+    'sqr': 'Square 8:1',
+    'line': 'Six Line 5:1',
+    'str': 'Street 11:1',
+    'twelve': 'Twelve 2:1',
+    'row': 'Row 2:1',
+    'red': 'Red 1:1',
+    'black': 'Black 1:1',
+    'even': 'Even 1:1',
+    'odd': 'Odd 1:1',
+    'one': '1 To 18 1:1',
+    'nineteen': '19 To 36 1:1'
+}
+
 export default placements;
