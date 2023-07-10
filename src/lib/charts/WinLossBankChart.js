@@ -232,19 +232,25 @@ export default class WinLossBankChart {
                         </div>
                         
                         <div class="px-5 pb-5 flex flex-row bg-gradient-to-tr from-green-700 via-green-800 to-green-800 border border-green-800 shadow">
-                            <div class="px-2 border-r border-r-green-700">
+                            <div class="px-4 border-r border-r-green-700">
                               <div class="font-lobster text-2xl text-green-500">This Round</div>
                               <span class="mb-3"><strong>Bets:</strong> ${i.data.value.betCount}</span>
                               ${betOutcomesHTML}
                               <span class="font-lobster text-2xl">Total Won $${totalWon}</span>
                             </div>
-                            <div class="flex flex-col border-l border-l-green-900 px-2 pb-4">
-                                <div class="font-lobster text-2xl text-green-500">All Rounds</div>
-                                  <span class="mb-3"><strong>Total Bets:</strong> ${i.data.value.cumBets}</span>
-                                  <span><strong>Total Won:</strong> $${i.data.value.won}</span>
-                                  <span><strong>Total Lost:</strong> $${i.data.value.loss}</span>
-                                  <spa class="mb-2"><strong>Winnings:</strong> $${i.data.value.won - i.data.value.loss}</span>
-                                  <div id="tip-pie" class="text-gray-200 mt-2" style="height: 112px;"></div>
+                            <div class="border-l border-l-green-900 px-4 pb-4">
+                                <div class="flex flex-row items-end">
+                                    <div class="flex flex-col">
+                                        <div class="font-lobster text-2xl text-green-500">All Rounds</div>
+                                        <span class="mb-3"><strong>Total Bets:</strong> ${i.data.value.cumBets}</span>
+                                      <span><strong>Total Won:</strong> $${i.data.value.won}</span>
+                                      <span><strong>Total Lost:</strong> $${i.data.value.loss}</span>
+                                      <spa class="mb-2"><strong>Winnings:</strong> $${i.data.value.won - i.data.value.loss}</span>
+                                    </div>
+                                    <div>
+                                        <div id="tip-pie" class="text-gray-200 mt-2" style="height: 112px;"></div>
+                                    </div>
+                                </div> 
                             </div>
                         </div>
                     </div>`;
