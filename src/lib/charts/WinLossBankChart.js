@@ -179,6 +179,7 @@ export default class WinLossBankChart {
 
 
         const winTip = d3tip()
+            .direction('s')
             .attr('class', 'd3-tip')
             .offset([-10, 0])
             .html((d, i) => {
@@ -257,6 +258,7 @@ export default class WinLossBankChart {
             });
 
         const bankTip = d3tip()
+            .direction('s')
             .attr('class', 'd3-tip')
             .offset([-10, 0])
             .html((d, i) => {
