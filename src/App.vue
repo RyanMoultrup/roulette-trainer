@@ -2,7 +2,9 @@
   <div style="min-height: 768px;">
     <div class="h-screen overflow-hidden flex flex-col">
       <!-- Top nav-->
-      <app-header />
+      <app-header
+        @show="showPanel = true"
+      />
       <!-- Bottom section -->
       <div class="min-h-0 flex-1 flex overflow-auto">
         <!-- Narrow sidebar-->
@@ -16,7 +18,11 @@
           <active-game-charts />
         </div>
       </div>
-      <slide-panel/>
+      <slide-panel
+          class="relative"
+        :show="showPanel"
+        @close="showPanel = !showPanel"
+      />
     </div>
   </div>
 </template>
@@ -44,5 +50,10 @@ export default {
     AppHeader,
     SideNav
   },
+  data () {
+    return {
+      showPanel: false
+    }
+  }
 }
 </script>

@@ -31,7 +31,7 @@
       </div>
       <div class="ml-10 pr-4 flex-shrink-0 flex items-center space-x-10">
         <nav aria-label="Global" class="flex space-x-10">
-          <a href="#" class="text-xl font-medium text-gray-200"><font-awesome-icon icon="fa-solid fa-gear"></font-awesome-icon></a>
+          <a href="#" @click="showSettings" class="text-2xl font-medium text-gray-200"><font-awesome-icon icon="fa-solid fa-gear"></font-awesome-icon></a>
         </nav>
       </div>
     </div>
@@ -43,5 +43,10 @@ import NewGameButton from "@/components/NewGameButton.vue";
 export default {
   name: 'App',
   components: { NewGameButton },
+  methods: {
+    showSettings () {
+      this.$emit('show');
+    }
+  }
 }
 </script>
