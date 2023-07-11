@@ -157,8 +157,126 @@ export const placements = [
     '_zero'
 ];
 
+export const odds = {
+    sgl: {
+        name: 'Single 35:1',
+        category: 'inside',
+        payout: '35:1',
+        odds: {
+            american: 2.6,
+            european: 2.7
+        }
+    },
+    dbl: {
+        name: 'Split 17:1',
+        category: 'inside',
+        payout: '17:1',
+        odds: {
+            american: 5.3,
+            european: 5.4
+        }
+    },
+    sqr: {
+        name: 'Square 8:1',
+        category: 'inside',
+        payout: '8:1',
+        odds: {
+            american: 10.5,
+            european: 10.8
+        }
+    },
+    line: {
+        name: 'Six Line 5:1',
+        category: 'inside',
+        payout: '5:1',
+        odds: {
+            american: 15.8,
+            european: 16.2
+        }
+    },
+    str: {
+        name: 'Street 11:1',
+        category: 'inside',
+        payout: '11:1',
+        odds: {
+            american: 7.9,
+            european: 8.1
+        }
+    },
+    twelve: {
+        name: 'Twelve 2:1',
+        category: 'outside',
+        payout: '2:1',
+        odds: {
+            american: 31.6,
+            european: 32.4
+        }
+    },
+    row: {
+        name: 'Row 2:1',
+        category: 'outside',
+        odds: {
+            american: 2.6,
+            european: 2.7
+        }
+    },
+    red: {
+        name: 'Red 1:1',
+        category: 'outside',
+        payout: '1:1',
+        odds: {
+            american: 47.37,
+            european: 48.65
+        }
+    },
+    black: {
+        name: 'Black 1:1',
+        category: 'outside',
+        payout: '1:1',
+        odds: {
+            american: 47.37,
+            european: 48.65
+        }
+    },
+    even: {
+        name: 'Even 1:1',
+        category: 'outside',
+        payout: '1:1',
+        odds: {
+            american: 47.37,
+            european: 48.65
+        }
+    },
+    odd: {
+        name: 'Odd 1:1',
+        category: 'outside',
+        payout: '1:1',
+        odds: {
+            american: 47.37,
+            european: 48.65
+        }
+    },
+    one: {
+        name: '1 To 18 1:1',
+        category: 'outside',
+        payout: '1:1',
+        odds: {
+            american: 47.37,
+            european: 48.65
+        }
+    },
+    nineteen: {
+        name: '19 To 36 1:1',
+        category: 'outside',
+        payout: '1:1',
+        odds: {
+            american: 47.37,
+            european: 48.65
+        }
+    }
+}
 export const names = {
-    'sgl': 'Single 35:1',
+    'sgl': 'inside',
     'dbl': 'Split 17:1',
     'sqr': 'Square 8:1',
     'line': 'Six Line 5:1',

@@ -20,7 +20,6 @@ const mutations = {
      * @param bet {placement: string, chip: object}
      */
     async placeBet (state, bet) {
-        console.log('the BET:::', bet);
         if (currentBetSpots.includes(bet.placement)) {
             await state.strategy[bet.placement].addChip(bet.chip);
             return;
@@ -57,6 +56,9 @@ const mutations = {
 }
 
 const actions = {
+    placeBet ({ commit }, bet) {
+
+    },
     setLastBet ({ commit }, bets) {
         commit('lastBet', bets);
     },
@@ -96,7 +98,6 @@ const actions = {
             for (const placement in state.strategy) {
                 if (state.strategy.hasOwnProperty(placement)) {
                     state.strategy[placement].chips.forEach(chip => {
-                        console.log('chip:::', chip);
                         commit('placeBet', { placement, chip });
                     });
                 }
