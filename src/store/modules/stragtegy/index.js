@@ -58,7 +58,7 @@ const mutations = {
 }
 
 const actions = {
-    placeBet ({ commit, rootGetters, state }, bet) {
+    async placeBet ({ commit, rootGetters, state }, bet) {
         const tableLimit = rootGetters['settings/hasTableLimit'];
 
         if (tableLimit) {
@@ -74,14 +74,24 @@ const actions = {
             const { maxInside, maxOutside, minInside, minOutside } = rootGetters['settings/getBetLimits'];
 
             if (betCategory === 'outside') {
-                if (bet.chip.value < minOutside) {
+                const outsideBetAmount = currentBetSpots.includes(bet.placement)
+                    ? state.strategy[bet.placement].amount + +bet.chip.value
+                    : +bet.chip.value
+
+                // Check if the total bet value on the individual table spot is
+                // greater than the bet minimum. This is required when adding a
+                // chip with a value less than the min bet but are placing it
+                // on a spot that already has a bet that exceeds the minimum
+                if (outsideBetAmount < minOutside) {
                     return {
                         success: false,
                         msg: `The minimum outside bet is ${formatter.money(minOutside)}`
                     }
                 }
 
-                if (bet.chip.value > maxOutside) {
+                console.log('outside bet amount::', outsideBetAmount);
+
+                if (outsideBetAmount > maxOutside) {
                     return {
                         success: false,
                         msg: `The maximum outside bet is ${formatter.money(maxOutside)}`
