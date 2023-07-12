@@ -10,6 +10,11 @@ const allInsideBets = bets => {
         .reduce((accumulator, bet) => accumulator + bet.amount, 0);
 }
 
+const placementCategory = placement => {
+    const [placementId] = placement.split('_');
+    return odds[placementId].category;
+}
+
 const state = () => ({
     strategy: {},
     lastBets: {},
@@ -68,21 +73,13 @@ const actions = {
         const tableLimit = rootGetters['settings/hasTableLimit'];
 
         if (tableLimit) {
-            const [placementId] = bet.placement.split('_');
-            const betCategory = odds[placementId].category;
-
-            // check if it's an outside bet --> getBetCategory(bet.placement)
-            // make sure the bet meets the outside bet minimum
-            // if outside bet make sure all outside bets don't exceed outside bet max
-            // else if inside bet check that bet does not exceed maximum
-            // inside bet minimum is checked during the spin
-
+            const betCategory = placementCategory(bet.placement);
             const { maxInside, maxOutside, minInside, minOutside } = rootGetters['settings/getBetLimits'];
 
             if (betCategory === 'outside') {
                 const outsideBetAmount = currentBetSpots.includes(bet.placement)
                     ? state.strategy[bet.placement].amount + +bet.chip.value
-                    : +bet.chip.value
+                    : +bet.chip.value;
 
                 // Check if the total bet value on the individual table spot is
                 // greater than the bet minimum. This is required when adding a
@@ -104,9 +101,7 @@ const actions = {
             }
 
             if (betCategory === 'inside') {
-                const insideBetAmount = Object.values(state.strategy)
-                    .filter(bet => bet.category === 'inside')
-                    .reduce((accumulator, bet) => accumulator + bet.amount, 0);
+                const insideBetAmount = allInsideBets(state.strategy);
 
                 (+bet.chip.value + insideBetAmount < minInside)
                     ? commit('minInsideBetMet', false)
@@ -127,8 +122,7 @@ const actions = {
     async removeBet ({ commit, state, rootGetters }, placement) {
         await commit('removeBet', placement);
 
-        const [placementId] = placement.split('_');
-        const betCategory = odds[placementId].category;
+        const betCategory = placementCategory(placement);
         const { minInside } = rootGetters['settings/getBetLimits'];
 
         if (betCategory === 'inside') {
@@ -142,8 +136,7 @@ const actions = {
         }
     },
     async removeChip({ commit, state, rootGetters }, { placement, chipIndex, chip }) {
-        const [placementId] = placement.split('_');
-        const betCategory = odds[placementId].category;
+        const betCategory = placementCategory(placement);
         const placementBetAmount = state.strategy[placement].amount - +chip.value;
         const { minOutside, minInside } = rootGetters['settings/getBetLimits'];
 
@@ -215,14 +208,12 @@ const actions = {
             }
         }
 
+        Object.values(state.strategy).forEach(bet => totalBetAmount += bet.amount);
+
         if (totalBetAmount < rootGetters['bank/availableBalance']) {
-            for (const placement in state.strategy) {
-                if (state.strategy.hasOwnProperty(placement)) {
-                    state.strategy[placement].chips.forEach(chip => {
-                        commit('placeBet', { placement, chip });
-                    });
-                }
-            }
+            Object.values(state.strategy).forEach(bet => {
+                bet.chips.forEach(chip => commit('placeBet', { placement: bet.placement, chip }));
+            });
 
             return true;
         }
