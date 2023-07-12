@@ -2,11 +2,11 @@
   <div id="table" class="betting-table relative flex-grow-0 p-5 pl-3 grid grid-rows-5 grid-cols-14 place-items-stretch font-roulette text-xl opacity-90">
 
     <div
-      v-for="bet in getStrategy" :key="bet.betType()"
+      v-for="bet in getStrategy" :key="bet.type"
       class="absolute"
       v-bind:class="hoverBetCSS(bet)"
       @mouseleave="leaveHoverBet"
-      @click="placeNext(bet.placement())"
+      @click="placeNext(bet.placement)"
     >
       <div v-for="(chip, index) in bet.chips" :key="chip.value" class="board-chip flex gap-1 items-baseline">
         <chip
@@ -16,7 +16,7 @@
             :color="chip.color" />
         <span class="flex-shrink-0 font-sans text-sm flex-grow text-center py-0.5">${{ chip.value }}</span>
         <span v-if="bet.chips.length > 1" class="flex-shrink-0 relative opacity-100 cursor-pointer w-3 h-3 pb-1 text-center rounded-full bg-red-700 bg-opacity-90 text-white" style="font-size:5px;">
-          <span class="pb-1 absolute top-1" @click.stop="removeChipFromBet(bet.placement(), index)">x</span>
+          <span class="pb-1 absolute top-1" @click.stop="removeChipFromBet(bet.placement, index)">x</span>
         </span>
       </div>
     </div>
@@ -182,7 +182,7 @@
 
 <script>
 import Chip from '@/components/Chip.vue';
-import { mapMutations, mapGetters } from 'vuex';
+import { mapMutations, mapGetters, mapActions } from 'vuex';
 import placements from '@/lib/table/BetPlacements';
 import { useToast } from "vue-toastification";
 
@@ -214,15 +214,22 @@ export default {
   methods: {
     ...mapMutations('strategy', ['placeBet', 'removeChip']),
     ...mapMutations('bank', ['reduceAvailableBalance']),
+    ...mapActions('strategy', { placeBetAction: 'placeBet' }),
     hoverBetCSS (bet) {
       return {
-        'chips-hover': bet.placement() === this.isHovered,
-        [bet.placement()]: true,
-        'chip-spot': bet.placement() !== this.isHovered
+        'chips-hover': bet.placement === this.isHovered,
+        [bet.placement]: true,
+        'chip-spot': bet.placement !== this.isHovered
       }
     },
     async place (event) {
       if (this.canBet(+this.selectedChip.value)) {
+        const { success, msg } = await this.placeBetAction({ placement: event.target.id, chip: this.selectedChip });
+        console.log('success:::', success);
+        if (!success) {
+          console.log('msg:::', msg);
+          this.toast.error(msg);
+        }
         await this.placeBet({ placement: event.target.id, chip: this.selectedChip });
         return;
       }

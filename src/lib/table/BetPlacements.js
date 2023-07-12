@@ -276,7 +276,7 @@ export const odds = {
     }
 }
 export const names = {
-    'sgl': 'inside',
+    'sgl': 'Single 35:1',
     'dbl': 'Split 17:1',
     'sqr': 'Square 8:1',
     'line': 'Six Line 5:1',

@@ -1,10 +1,14 @@
-import Bet from '../../../lib/table/Bet';
+import Bet from '@/lib/table/Bet';
+import { odds } from '@/lib/table/BetPlacements';
+import formatter from "@/lib/formatter";
 
 let currentBetSpots = [];
 
 const state = () => ({
     strategy: {},
-    lastBets: {}
+    lastBets: {},
+    outsideBetAmt: 0,
+    insideBetAmt: 0
 });
 
 const removeFromCurrentBets = function (value) {
@@ -15,10 +19,6 @@ const removeFromCurrentBets = function (value) {
 }
 
 const mutations = {
-    /**
-     * @param state
-     * @param bet {placement: string, chip: object}
-     */
     async placeBet (state, bet) {
         if (currentBetSpots.includes(bet.placement)) {
             await state.strategy[bet.placement].addChip(bet.chip);
@@ -56,8 +56,70 @@ const mutations = {
 }
 
 const actions = {
-    placeBet ({ commit }, bet) {
+    countBets ({ state }) {
+        const amount = state.strategy.reduce((accumulator, bet) => accumulator + bet.amount, 0)
+        console.log('bet amount::', amount);
+    },
+    placeBet ({ commit, rootGetters, state }, bet) {
+        const tableLimit = rootGetters['settings/hasTableLimit'];
 
+        if (Object.keys(state.strategy).length) {
+            console.log('state strat::', state.strategy);
+            const amount = Object.values(state.strategy).reduce((accumulator, bet) => accumulator + bet.amount, 0)
+            console.log('THE bet amount::', amount);
+        }
+
+        return {
+            success: true,
+            msg: ''
+        };
+
+        if (tableLimit) {
+            const [placementId] = bet.placement.split('_');
+            const betCategory = odds[placementId].category;
+
+            // check if it's an outside bet --> getBetCategory(bet.placement)
+            // make sure the bet meets the outside bet minimum
+            // if outside bet make sure all outside bets don't exceed outside bet max
+            // else if inside bet check that bet does not exceed maximum
+            // inside bet minimum is checked during the spin
+
+            const { maxInside, maxOutside, minInside, minOutside } = rootGetters['settings/getBetLimits'];
+
+            if (betCategory === 'outside') {
+                if (bet.chip.value < minOutside) {
+                    return {
+                        success: false,
+                        msg: `The minimum outside bet is ${formatter.money(minOutside)}`
+                    }
+                }
+
+                if (bet.chip.value > maxOutside) {
+                    return {
+                        success: false,
+                        msg: `The maximum outside bet is ${formatter.money(maxOutside)}`
+                    }
+                }
+            }
+
+            if (betCategory === 'inside') {
+                if (bet.chip.value < minInside) {
+                    return {
+                        success: false,
+                        msg: `The minimum inside bet is ${formatter.money(minInside)}`
+                    }
+                }
+
+                if (bet.chip.value > maxInside) {
+                    return {
+                        success: false,
+                        msg: `The maximum inside bet is ${formatter.money(maxInside)}`
+                    }
+                }
+
+                return { success: true, msg: 'Bet placed' }
+            }
+        }
     },
     setLastBet ({ commit }, bets) {
         commit('lastBet', bets);
@@ -130,6 +192,9 @@ const actions = {
 const getters = {
     getStrategy (state) {
         return Object.values(state.strategy);
+    },
+    canSpin (state) {
+        return !!Object.keys(state.strategy).length
     }
 }
 

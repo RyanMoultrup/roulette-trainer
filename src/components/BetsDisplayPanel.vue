@@ -21,9 +21,9 @@
     </div>
     <div class="bet-display-table shadow overflow-y-auto mt-24">
       <ul class="divide-y divide-green-900 bg-white bg-opacity-10 ">
-        <li v-for="bet in getStrategy" :key="bet.betType()" class="group">
+        <li v-for="bet in getStrategy" :key="bet.type" class="group">
           <a href="#" class="block hover:bg-white hover:bg-opacity-5 relative">
-            <span @click="remove($event, bet.placement())" class="group-hover:opacity-100 opacity-0 absolute cursor-pointer w-4 h-4 pb-1 text-xs text-center rounded-full bg-white bg-opacity-30 right-1 top-1 text-white">x</span>
+            <span @click="remove($event, bet.placement)" class="group-hover:opacity-100 opacity-0 absolute cursor-pointer w-4 h-4 pb-1 text-xs text-center rounded-full bg-white bg-opacity-30 right-1 top-1 text-white">x</span>
             <div class="px-3 py-4 ">
               <div class="flex items-center justify-between">
                 <p class="text-sm font-medium text-white truncate font-lobster text-xl">

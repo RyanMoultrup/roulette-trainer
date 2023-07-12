@@ -1,9 +1,10 @@
 import spots from '@/lib/table/spots';
 import store from '@/store/index';
 
-const buildWinObject = ({ placement, hit, winnings, bank, betAmt }) => {
+const buildWinObject = ({ bet, hit, winnings, bank, betAmt }) => {
   return {
-    placement,
+    placement: bet.placement,
+    category: bet.category,
     wonRound: 1,
     lostRound: 0,
     won: winnings,
@@ -18,9 +19,10 @@ const buildWinObject = ({ placement, hit, winnings, bank, betAmt }) => {
   }
 };
 
-const buildLostObject = ({ placement, hit, bank, betAmt }) => {
+const buildLostObject = ({ bet, hit, bank, betAmt }) => {
   return {
-    placement,
+    placement: bet.placement,
+    category: bet.category,
     wonRound: 0,
     lostRound: 1,
     won: 0,
@@ -47,7 +49,7 @@ const game = {
       bank = winnings ? bank + (winnings - betAmt) : bank - betAmt;
 
       const args = {
-        placement: bet.placement(),
+        bet,
         hit,
         winnings: winnings - betAmt,
         bank,

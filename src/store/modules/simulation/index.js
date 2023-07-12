@@ -53,15 +53,9 @@ const actions = {
 }
 
 const getters = {
-  getOutcomes (state) {
-    return state.outcomes;
-  },
-  isEmitting (state) {
-    return state.emittingSpins;
-  },
-  selectedChip (state) {
-    return state.selectedChip;
-  }
+  getOutcomes: state => state.outcomes,
+  isEmitting: state => state.emittingSpins,
+  selectedChip: state => state.selectedChip
 }
 
 export default {

@@ -1,9 +1,9 @@
 const state = () => ({
     tableLimit: true,
-    maxOutside: null,
-    maxInside: null,
-    minOutside: null,
-    minInside: null,
+    maxOutside: 20,
+    maxInside: 20,
+    minOutside: 10,
+    minInside: 10,
     realTime: false,
     timeAtTable: null,
     timePerSpin: null
@@ -87,6 +87,14 @@ const getters = {
     },
     getTimePerSpin (state) {
         return state.timePerSpin;
+    },
+    getBetLimits (state) {
+        return {
+            maxInside: state.maxInside,
+            maxOutside: state.maxOutside,
+            minInside: state.minInside,
+            minOutside: state.minOutside
+        }
     }
 }
 

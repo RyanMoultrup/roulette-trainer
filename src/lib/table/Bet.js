@@ -1,6 +1,7 @@
 import store from '@/store/index';
 import spots from "@/lib/table/spots";
 import { range } from 'd3-array';
+import { odds } from "@/lib/table/BetPlacements";
 
 export default class {
   spots = [];
@@ -8,6 +9,7 @@ export default class {
   betPlacement;
   chips = [];
   _amount = 0;
+  _category = '';
 
   // oneToEighteen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   oneToEighteen = range(1, 19);
@@ -198,6 +200,7 @@ export default class {
     const placedBetArr = type.split('_');
 
     this.type = placedBetArr.shift();
+    this._category = odds[this.type].category;
 
     if (this.type === 'sgl') {
       this.spots = [+placedBetArr[0]]
@@ -310,14 +313,15 @@ export default class {
     }
   }
 
-  betType () {
+  get type () {
     return this.type;
   }
 
-  /**
-   * Returns the placement of the bet on the table
-   */
-  placement () {
+  get category () {
+    return this._category;
+  }
+
+  get placement () {
     return this.betPlacement;
   }
 

@@ -7,7 +7,7 @@
             <span>
               Total Lost:
             </span>
-            <span class="text-4xl font-semibold" style="color: #ddc3c3">
+            <span class="text-4xl font-semibold">
               <span id="loss">${{ loss }}</span>
             </span>
           </div>
@@ -20,7 +20,7 @@
             <span>
               Total Won
             </span>
-            <span class="text-4xl font-semibold text-green-900" style="color: #abd3ba">
+            <span class="text-4xl font-semibold text-gray-300">
               <span id="won"><span>${{ won }}</span></span>
             </span>
           </div>
@@ -34,7 +34,7 @@
             <span>
               Bank
             </span>
-            <span class="text-4xl font-semibold text-green-900" style="color: #abd3ba">
+            <span class="text-4xl font-semibold text-gray-300">
               <span id="bank"><span>${{ balance }}</span></span>
             </span>
           </div>
@@ -47,7 +47,7 @@
             <span>
               Winnings
             </span>
-            <span class="text-4xl font-semibold text-gray-900" style="color: #ddc3c3">
+            <span class="text-4xl font-semibold text-gray-300">
               <span id="winnings"><span>${{ currentWinnings }}</span></span>
             </span>
           </div>

@@ -155,10 +155,10 @@ export default {
   data () {
     return {
       bank: 1000,
-      minInsideBet: '',
-      minOutsideBet: '',
-      maxInsideBet: '',
-      maxOutsideBet: '',
+      minInsideBet: 10,
+      minOutsideBet: 10,
+      maxInsideBet: 20,
+      maxOutsideBet: 20,
       timeAtTable: '',
       timePerSpin: ''
     }
@@ -186,37 +186,38 @@ export default {
     },
     minInsideBet: {
       handler (newVal) {
-        this.debounceMinInsideBet(newVal)
+        this.debounceMinInsideBet(newVal);
       },
       deep: true
     },
     minOutsideBet: {
       handler (newVal) {
-        this.debounceMinOutsideBet(newVal)
+        this.debounceMinOutsideBet(newVal);
       },
       deep: true
     },
     maxInsideBet: {
       handler (newVal) {
-        this.debounceMaxInsideBet(newVal)
+        this.debounceMaxInsideBet(newVal);
+        this.maxInsideBet = newVal;
       },
       deep: true
     },
     maxOutsideBet: {
       handler (newVal) {
-        this.debounceMaxOutsideBet(newVal)
+        this.debounceMaxOutsideBet(newVal);
       },
       deep: true
     },
     timeAtTable: {
       handler (newVal) {
-        this.debounceTimeAtTable(newVal)
+        this.debounceTimeAtTable(newVal);
       },
       deep: true
     },
     timePerSpin: {
       handler (newVal) {
-        this.debounceTimePerSpin(newVal)
+        this.debounceTimePerSpin(newVal);
       },
       deep: true
     },
