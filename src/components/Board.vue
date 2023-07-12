@@ -225,19 +225,19 @@ export default {
     async place (event) {
       if (this.canBet(+this.selectedChip.value)) {
         const { success, msg } = await this.placeBetAction({ placement: event.target.id, chip: this.selectedChip });
-        console.log('success:::', success);
         if (!success) {
-          console.log('msg:::', msg);
           this.toast.error(msg);
         }
-        await this.placeBet({ placement: event.target.id, chip: this.selectedChip });
         return;
       }
       this.toast.error("You don't have enough in the bank to place your bet");
     },
-    placeNext (placement) {
+    async placeNext (placement) {
       if (this.canBet(+this.selectedChip.value)) {
-        this.placeBet({ placement: placement, chip: this.selectedChip });
+        const { success, msg } = await this.placeBetAction({ placement, chip: this.selectedChip });
+        if (!success) {
+          this.toast.error(msg);
+        }
         return;
       }
       this.toast.error("You don't have enough in the bank to place your bet");

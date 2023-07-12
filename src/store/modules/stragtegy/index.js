@@ -7,8 +7,7 @@ let currentBetSpots = [];
 const state = () => ({
     strategy: {},
     lastBets: {},
-    outsideBetAmt: 0,
-    insideBetAmt: 0
+    minInsideBetMet: true
 });
 
 const removeFromCurrentBets = function (value) {
@@ -52,27 +51,15 @@ const mutations = {
         state.strategy = {};
         state.lastBets = {};
         currentBetSpots = [];
+    },
+    minInsideBetMet (state, value) {
+        state.minInsideBetMet = value;
     }
 }
 
 const actions = {
-    countBets ({ state }) {
-        const amount = state.strategy.reduce((accumulator, bet) => accumulator + bet.amount, 0)
-        console.log('bet amount::', amount);
-    },
     placeBet ({ commit, rootGetters, state }, bet) {
         const tableLimit = rootGetters['settings/hasTableLimit'];
-
-        if (Object.keys(state.strategy).length) {
-            console.log('state strat::', state.strategy);
-            const amount = Object.values(state.strategy).reduce((accumulator, bet) => accumulator + bet.amount, 0)
-            console.log('THE bet amount::', amount);
-        }
-
-        return {
-            success: true,
-            msg: ''
-        };
 
         if (tableLimit) {
             const [placementId] = bet.placement.split('_');
@@ -103,23 +90,25 @@ const actions = {
             }
 
             if (betCategory === 'inside') {
-                if (bet.chip.value < minInside) {
-                    return {
-                        success: false,
-                        msg: `The minimum inside bet is ${formatter.money(minInside)}`
-                    }
-                }
+                const insideBetAmount = Object.values(state.strategy)
+                    .filter(bet => bet.category === 'inside')
+                    .reduce((accumulator, bet) => accumulator + bet.amount, 0);
 
-                if (bet.chip.value > maxInside) {
+                (+bet.chip.value + insideBetAmount < minInside)
+                    ? commit('minInsideBetMet', false)
+                    : commit('minInsideBetMet', true);
+
+                if (+bet.chip.value + insideBetAmount > maxInside) {
                     return {
                         success: false,
                         msg: `The maximum inside bet is ${formatter.money(maxInside)}`
                     }
                 }
-
-                return { success: true, msg: 'Bet placed' }
             }
         }
+
+        commit('placeBet', bet);
+        return { success: true, msg: 'Bet placed' }
     },
     setLastBet ({ commit }, bets) {
         commit('lastBet', bets);
@@ -190,12 +179,8 @@ const actions = {
 
 // TODO: find out why this is firing so many times for each action taken in app
 const getters = {
-    getStrategy (state) {
-        return Object.values(state.strategy);
-    },
-    canSpin (state) {
-        return !!Object.keys(state.strategy).length
-    }
+    getStrategy: state => Object.values(state.strategy),
+    canSpin: state => !!Object.keys(state.strategy).length && state.minInsideBetMet
 }
 
 export default {
