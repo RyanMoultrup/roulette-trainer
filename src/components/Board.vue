@@ -15,8 +15,8 @@
             :chipValue="chip.value"
             :color="chip.color" />
         <span class="flex-shrink-0 font-sans text-sm flex-grow text-center py-0.5">${{ chip.value }}</span>
-        <span v-if="bet.chips.length > 1" class="flex-shrink-0 relative opacity-100 cursor-pointer w-3 h-3 pb-1 text-center rounded-full bg-red-700 bg-opacity-90 text-white" style="font-size:5px;">
-          <span class="pb-1 absolute top-1" @click.stop="removeChipFromBet(bet.placement, index)">x</span>
+        <span class="flex-shrink-0 relative opacity-100 cursor-pointer w-3 h-3 pb-1 text-center rounded-full bg-red-700 bg-opacity-90 text-white" style="font-size:5px;">
+          <span class="p-1 absolute top-1" @click.stop="removeChipFromBet({ placement: bet.placement, chipIndex: index, chip })">x</span>
         </span>
       </div>
     </div>
@@ -212,9 +212,9 @@ export default {
     ...mapGetters('bank', ['canBet', 'availableBalance'])
   },
   methods: {
-    ...mapMutations('strategy', ['placeBet', 'removeChip']),
+    ...mapMutations('strategy', ['placeBet']),
     ...mapMutations('bank', ['reduceAvailableBalance']),
-    ...mapActions('strategy', { placeBetAction: 'placeBet' }),
+    ...mapActions('strategy', { placeBetAction: 'placeBet', removeChip: 'removeChip' }),
     hoverBetCSS (bet) {
       return {
         'chips-hover': bet.placement === this.isHovered,
@@ -248,8 +248,13 @@ export default {
     leaveHoverBet () {
       this.isHovered = '';
     },
-    removeChipFromBet (betPlacement, chipIndex) {
-      this.removeChip(betPlacement, chipIndex)
+    async removeChipFromBet () {
+      this.triggerToast(await this.removeChip(...arguments));
+    },
+    triggerToast ({ success, msg }) {
+      if (!success) {
+        this.toast.error(msg);
+      }
     }
   }
 }

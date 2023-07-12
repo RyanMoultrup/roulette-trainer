@@ -101,8 +101,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('strategy', ['removeBet']),
-    ...mapActions('strategy', ['clearAll']),
+    ...mapActions('strategy', ['clearAll', 'removeBet']),
     remove (event, index) {
       this.removeBet(index);
     },

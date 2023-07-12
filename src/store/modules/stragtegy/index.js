@@ -4,6 +4,12 @@ import formatter from "@/lib/formatter";
 
 let currentBetSpots = [];
 
+const allInsideBets = bets => {
+    return Object.values(bets)
+        .filter(bet => bet.category === 'inside')
+        .reduce((accumulator, bet) => accumulator + bet.amount, 0);
+}
+
 const state = () => ({
     strategy: {},
     lastBets: {},
@@ -34,7 +40,7 @@ const mutations = {
         }
         delete state.strategy[placement];
     },
-    removeChip (state, placement, chipIndex) {
+    removeChip (state, { placement, chipIndex }) {
         state.strategy[placement].removeChip(chipIndex);
     },
     replayBet (state, bets) {
@@ -58,7 +64,7 @@ const mutations = {
 }
 
 const actions = {
-    async placeBet ({ commit, rootGetters, state }, bet) {
+    placeBet ({ commit, rootGetters, state }, bet) {
         const tableLimit = rootGetters['settings/hasTableLimit'];
 
         if (tableLimit) {
@@ -89,8 +95,6 @@ const actions = {
                     }
                 }
 
-                console.log('outside bet amount::', outsideBetAmount);
-
                 if (outsideBetAmount > maxOutside) {
                     return {
                         success: false,
@@ -119,6 +123,62 @@ const actions = {
 
         commit('placeBet', bet);
         return { success: true, msg: 'Bet placed' }
+    },
+    async removeBet ({ commit, state, rootGetters }, placement) {
+        await commit('removeBet', placement);
+
+        const [placementId] = placement.split('_');
+        const betCategory = odds[placementId].category;
+        const { minInside } = rootGetters['settings/getBetLimits'];
+
+        if (betCategory === 'inside') {
+            // Check if the remaining bets are below the limit
+            const insideBetAmount = allInsideBets(state.strategy);
+
+            // if there are no remaining bets set the min limit met to true
+            insideBetAmount > 0 && insideBetAmount < minInside
+                ? commit('minInsideBetMet', false)
+                : commit('minInsideBetMet', true);
+        }
+    },
+    async removeChip({ commit, state, rootGetters }, { placement, chipIndex, chip }) {
+        const [placementId] = placement.split('_');
+        const betCategory = odds[placementId].category;
+        const placementBetAmount = state.strategy[placement].amount - +chip.value;
+        const { minOutside, minInside } = rootGetters['settings/getBetLimits'];
+
+        if (betCategory === 'outside') {
+            if (placementBetAmount > 0 && placementBetAmount < minOutside) {
+                return {
+                    success: false,
+                    msg: 'Cannot remove chip as that would put your bet under the Minimum Outside Bet'
+                }
+            }
+
+            placementBetAmount > 0 ? commit('removeChip', { placement, chipIndex }) : commit('removeBet', placement);
+
+            return {
+                success: true,
+                msg: ''
+            }
+        }
+
+        placementBetAmount > 0
+            ? await commit('removeChip', { placement, chipIndex })
+            : await commit('removeBet', placement);
+
+        // Need to get the total inside bets after removing the bet
+        // and compare that against the min inside bet
+        const insideBetAmount = allInsideBets(state.strategy);
+
+        insideBetAmount > 0 && insideBetAmount < minInside
+            ? commit('minInsideBetMet', false)
+            : commit('minInsideBetMet', true);
+
+        return {
+            success: true,
+            msg: ''
+        }
     },
     setLastBet ({ commit }, bets) {
         commit('lastBet', bets);
