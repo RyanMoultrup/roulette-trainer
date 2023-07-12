@@ -157,6 +157,7 @@ g.axis.y, g.axis.x, g.axis.yr { color: white; }
     color: #0A2916;
     position: absolute;
     pointer-events: none;
+    border-right: 0.25em;
 }
 
 /* Northward tooltips */

@@ -304,7 +304,7 @@ export default class WinLossBankChart {
                     })
                     .on('mouseout.tooltip', winTip.hide);
 
-                this.lossChart.selectAll('g.sub._2 circle.dot').call(lossTip);
+                this.lossChart.selectAll('g.sub._2 circle.dot').call(winTip);
                 this.lossChart.selectAll('g.sub._2 circle.dot')
                     .on('mouseover.tooltip', (d, i) => {
                         winTip.show(d, i);
