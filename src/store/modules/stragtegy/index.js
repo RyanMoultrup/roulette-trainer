@@ -1,6 +1,9 @@
 import Bet from '@/lib/table/Bet';
 import { odds } from '@/lib/table/BetPlacements';
 import formatter from "@/lib/formatter";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 let currentBetSpots = [];
 
@@ -70,6 +73,7 @@ const mutations = {
 
 const actions = {
     placeBet ({ commit, rootGetters, state }, bet) {
+        console.log('placeBet::', bet);
         const tableLimit = rootGetters['settings/hasTableLimit'];
 
         if (tableLimit) {
@@ -199,26 +203,52 @@ const actions = {
 
         return false;
     },
-    async doubleBet ({ commit, state, rootGetters }) {
+    doubleBet ({ dispatch, state, rootGetters }) {
         let totalBetAmount = 0;
+        const bets = Object.values(state.strategy);
 
-        for (const placement in state.strategy) {
-            if (state.strategy.hasOwnProperty(placement)) {
-                totalBetAmount += state.strategy[placement].amount;
-            }
+        bets.forEach(bet => totalBetAmount += bet.amount);
+
+        if (totalBetAmount > rootGetters['bank/availableBalance']) return false;
+
+        const { insideBets, outsideBets } = bets
+            .reduce((accumulator, bet) => {
+                if (bet.category === 'inside') {
+                    accumulator.insideBets.total += bet.amount
+                    accumulator.insideBets.bets.push(bet);
+                } else {
+                    accumulator.outsideBets.push(bet);
+                }
+                return accumulator;
+            }, { insideBets: { total: 0, bets: [] }, outsideBets: [] })
+
+        const { maxOutside, maxInside } = rootGetters['settings/getBetLimits'];
+
+        const { rejectedOutsideBets, goodOutsideBets } = outsideBets
+            .reduce((accumulator, bet) => {
+                bet.amount * 2 > maxOutside
+                    ? accumulator.rejectedOutsideBets.push(bet)
+                    : accumulator.goodOutsideBets.push(bet);
+                return accumulator;
+            }, { rejectedOutsideBets: [], goodOutsideBets: [] });
+
+        const allRejectedBets = insideBets.total * 2 > maxInside  ? [...insideBets.bets, ...rejectedOutsideBets] : rejectedOutsideBets;
+        const allGoodBets = insideBets.total * 2 <= maxInside  ? [...insideBets.bets, ...goodOutsideBets] : goodOutsideBets;
+
+        if (Object.keys(allRejectedBets).length) {
+            const rejectedBetsString = allRejectedBets.reduce((string, bet) => {
+                string += ` ${bet.placement} `;
+                return string;
+            }, '');
+
+            toast.error(`The following bets could not be doubled becuase they would exceed the maximum bet ${rejectedBetsString}`);
         }
 
-        Object.values(state.strategy).forEach(bet => totalBetAmount += bet.amount);
+        allGoodBets.forEach(bet => {
+            bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }));
+        });
 
-        if (totalBetAmount < rootGetters['bank/availableBalance']) {
-            Object.values(state.strategy).forEach(bet => {
-                bet.chips.forEach(chip => commit('placeBet', { placement: bet.placement, chip }));
-            });
-
-            return true;
-        }
-
-        return false;
+        return true;
     },
     async clear ({ dispatch, commit, state }) {
         return new Promise(async (resolve, reject) => {

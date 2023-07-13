@@ -1,7 +1,7 @@
 const state = () => ({
     tableLimit: true,
-    maxOutside: 5000,
-    maxInside: 1200,
+    maxOutside: 200,
+    maxInside: 30,
     minOutside: 10,
     minInside: 10,
     realTime: false,

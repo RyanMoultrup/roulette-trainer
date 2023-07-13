@@ -157,8 +157,8 @@ export default {
       bank: 1000,
       minInsideBet: 10,
       minOutsideBet: 10,
-      maxInsideBet: 1200,
-      maxOutsideBet: 5000,
+      maxInsideBet: 30,
+      maxOutsideBet: 200,
       timeAtTable: '',
       timePerSpin: ''
     }
