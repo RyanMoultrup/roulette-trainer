@@ -211,50 +211,59 @@ const actions = {
 
         if (totalBetAmount > rootGetters['bank/availableBalance']) return false;
 
-        // First all the current bets on the table must be split into the inside
-        // bets and the outside bets as each have their own rules for max bets
-        const { insideBets, outsideBets } = bets
-            .reduce((accumulator, bet) => {
-                if (bet.category === 'inside') {
-                    accumulator.insideBets.total += bet.amount
-                    accumulator.insideBets.bets.push(bet);
-                } else {
-                    accumulator.outsideBets.push(bet);
-                }
-                return accumulator;
-            }, { insideBets: { total: 0, bets: [] }, outsideBets: [] })
+        if (rootGetters['settings/hasTableLimit']) {
+            // First all the current bets on the table must be split into the inside
+            // bets and the outside bets as each have their own rules for max bets
+            const { insideBetsTotal, insideBets, outsideBets } = bets
+                .reduce((accumulator, bet) => {
+                    if (bet.category === 'inside') {
+                        accumulator.insideBetsTotal += bet.amount
+                        accumulator.insideBets.push(bet);
+                    } else {
+                        accumulator.outsideBets.push(bet);
+                    }
+                    return accumulator;
+                }, { insideBetsTotal: 0, insideBets: [], outsideBets: [] })
 
-        const { maxOutside, maxInside } = rootGetters['settings/getBetLimits'];
+            const { maxOutside, maxInside } = rootGetters['settings/getBetLimits'];
 
-        // Once the bets have been split into two arrays on with inside bet and the other
-        // with outside bets, the outside bets must be looped over again and compared against the
-        // max bet for outside bets.
-        // The outcome of this reduce is two additional arrays. The first array contains all the
-        // outside bets that were rejected for violating the max bet settings and the other the
-        // outside bets that can be doubled.
-        const [rejectedOutsideBets, goodOutsideBets] = outsideBets
-            .reduce((accumulator, bet) => {
-                bet.amount * 2 > maxOutside
-                    ? accumulator[0].push(bet)
-                    : accumulator[1].push(bet);
-                return accumulator;
-            }, [[], []]);
+            // Once the bets have been split into two arrays on with inside bet and the other
+            // with outside bets, the outside bets must be looped over again and compared against the
+            // max bet for outside bets.
+            // The outcome of this reduce is two additional arrays. The first array contains all the
+            // outside bets that were rejected for violating the max bet settings and the other the
+            // outside bets that can be doubled.
+            const [rejectedOutsideBets, goodOutsideBets] = outsideBets
+                .reduce((accumulator, bet) => {
+                    bet.amount * 2 > maxOutside
+                        ? accumulator[0].push(bet)
+                        : accumulator[1].push(bet);
+                    return accumulator;
+                }, [[], []]);
 
-        // Combine all the rejected bets, and bets allowed to be doubled, from the
-        // inside and outside bets for further processing.
-        const allRejectedBets = insideBets.total * 2 > maxInside  ? [...insideBets.bets, ...rejectedOutsideBets] : rejectedOutsideBets;
-        const allGoodBets = insideBets.total * 2 <= maxInside  ? [...insideBets.bets, ...goodOutsideBets] : goodOutsideBets;
+            // Combine all the rejected bets, and bets allowed to be doubled, from the
+            // inside and outside bets for further processing.
+            // Check that all of the inside bets added together do not exceed the inside max bet
+            const allRejectedBets = insideBetsTotal * 2 > maxInside  ? [...insideBets, ...rejectedOutsideBets] : rejectedOutsideBets;
+            const allGoodBets = insideBetsTotal * 2 <= maxInside  ? [...insideBets, ...goodOutsideBets] : goodOutsideBets;
 
-        if (Object.keys(allRejectedBets).length) {
-            const rejectedBetsString = allRejectedBets.reduce((string, bet) => {
-                string += ` ${bet.placement} `;
-                return string;
-            }, '');
+            if (Object.keys(allRejectedBets).length) {
+                const rejectedBetsString = allRejectedBets.reduce((string, bet) => {
+                    string += ` ${bet.placement} `;
+                    return string;
+                }, '');
 
-            toast.error(`The following bets could not be doubled becuase they would exceed the maximum bet ${rejectedBetsString}`);
+                toast.error(`The following bets could not be doubled because they would exceed the maximum bet ${rejectedBetsString}`);
+            }
+
+            allGoodBets.forEach(bet => {
+                bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }));
+            });
+
+            return true;
         }
 
-        allGoodBets.forEach(bet => {
+        bets.forEach(bet => {
             bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }));
         });
 
@@ -282,7 +291,11 @@ const actions = {
 const getters = {
     getStrategy: state => Object.values(state.strategy),
     hasBets: state => !!Object.keys(state.strategy).length,
-    canSpin: state => !!Object.keys(state.strategy).length && state.minInsideBetMet
+    canSpin: (state, getters, rootState) => {
+        return rootState['settings'].tableLimit
+            ? !!Object.keys(state.strategy).length && state.minInsideBetMet
+            : !!Object.keys(state.strategy).length;
+    }
 }
 
 export default {
