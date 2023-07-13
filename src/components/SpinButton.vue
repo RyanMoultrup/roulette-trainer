@@ -3,7 +3,6 @@
       type="button"
       class="play inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
       @click="spin"
-      :disabled="!canSpin"
   >
     <font-awesome-icon icon="fa-solid fa-rotate" class="mr-1" />
     Spin
@@ -20,15 +19,19 @@ export default {
     return { toast };
   },
   computed: {
-    ...mapGetters('strategy', ['canSpin'])
+    ...mapGetters('strategy', ['canSpin', 'hasBets']),
   },
   methods: {
     ...mapActions('simulation', ['play']),
     spin() {
-      // if (this.canSpin) {
-      this.play(spin());
-      // }
-
+      this.canSpin
+        ? this.play(spin())
+        : this.triggerToast()
+    },
+    triggerToast () {
+      this.hasBets
+          ? this.toast.error('Inside bet minimum has not been reached')
+          : this.toast.error('Please place a bet before you can spin');
     }
   }
 }

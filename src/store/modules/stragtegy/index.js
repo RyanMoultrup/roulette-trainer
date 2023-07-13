@@ -281,6 +281,7 @@ const actions = {
 // TODO: find out why this is firing so many times for each action taken in app
 const getters = {
     getStrategy: state => Object.values(state.strategy),
+    hasBets: state => !!Object.keys(state.strategy).length,
     canSpin: state => !!Object.keys(state.strategy).length && state.minInsideBetMet
 }
 
