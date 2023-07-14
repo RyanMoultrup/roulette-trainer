@@ -41,7 +41,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('simulation', ['selectedChip']),
+    ...mapGetters('simulation', ['selectedChip'])
   },
   methods: {
     ...mapGetters('strategy', ['getStrategy']),
