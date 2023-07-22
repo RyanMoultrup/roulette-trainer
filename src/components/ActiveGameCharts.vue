@@ -4,6 +4,7 @@
       <chart-placeholder
           icon="fa-solid fa-chart-column"
           title="Numbers Hit Each Round"
+          :show-placeholder="showPlaceholder"
       />
       <div id="hits-chart" class="p-4 h-full" ref="hitsChart"></div>
     </div>
@@ -11,6 +12,7 @@
       <chart-placeholder
         icon="fa-solid fa-chart-area"
         title="Wins Losses & Bank"
+        :show-placeholder="showPlaceholder"
       />
       <div id="win-loss-chart" class="p-4 h-full" ref="winLossBankChart"></div>
     </div>
@@ -18,6 +20,7 @@
       <chart-placeholder
           icon="fa-solid fa-chart-pie"
           title="Won & Lost"
+          :show-placeholder="showPlaceholder"
       />
       <div id="win-loss-row-chart" class="p-4 h-full w-full" ref="winLossPieChart"></div>
     </div>
@@ -36,6 +39,11 @@ import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 
 export default {
   components: { ChartPlaceholder },
+  data () {
+    return {
+      showPlaceholder: true
+    }
+  },
   methods: {
     ...mapGetters('simulation', ['getOutcomes']),
     ...mapGetters('strategy', ['getStrategy'])
@@ -43,6 +51,7 @@ export default {
   mounted () {
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
+        this.showPlaceholder = false;
         redrawAll();
       }
     })
