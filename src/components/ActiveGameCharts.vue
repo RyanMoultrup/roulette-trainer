@@ -1,12 +1,24 @@
 <template>
   <section class="charts bg-opacity-0 mx-4 mb-2">
-    <div class="hits-card card-bg-border bg-green-700" ref="hitsChart">
+    <div class="relative hits-card card-bg-border bg-green-700" ref="hitsChart">
+      <chart-placeholder
+          icon="fa-solid fa-chart-column"
+          title="Numbers Hit Each Round"
+      />
       <div id="hits-chart" class="p-4 h-full" ref="hitsChart"></div>
     </div>
-    <div class="win-loss-bank-card card-bg-border bg-green-700">
+    <div class="relative win-loss-bank-card card-bg-border bg-green-700">
+      <chart-placeholder
+        icon="fa-solid fa-chart-area"
+        title="Wins Losses & Bank"
+      />
       <div id="win-loss-chart" class="p-4 h-full" ref="winLossBankChart"></div>
     </div>
-    <div class="win-loss-card card-bg-border bg-green-700">
+    <div class="relative win-loss-card card-bg-border bg-green-700">
+      <chart-placeholder
+          icon="fa-solid fa-chart-pie"
+          title="Won & Lost"
+      />
       <div id="win-loss-row-chart" class="p-4 h-full w-full" ref="winLossPieChart"></div>
     </div>
   </section>
@@ -18,10 +30,12 @@ import { mapGetters } from "vuex";
 import HitsChart from "@/lib/charts/HitsChart.js";
 import WinLossChart from "@/lib/charts/WinLossChart.js";
 import WinLossBankChart from "@/lib/charts/WinLossBankChart.js";
+import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 // import { useResizeObserver} from "@vueuse/core";
 // import { debounce } from "@/lib/Utils";
 
 export default {
+  components: { ChartPlaceholder },
   methods: {
     ...mapGetters('simulation', ['getOutcomes']),
     ...mapGetters('strategy', ['getStrategy'])
