@@ -1,7 +1,6 @@
 import { CompositeChart, LineChart, legend } from "dc";
 import { scaleLinear } from 'd3-scale';
 import { curveCardinal } from 'd3-shape';
-import redrawChartNoTransitions from "@/lib/charts/ChartResize";
 import { tip as d3tip } from "d3-v6-tip";
 import spots from "@/lib/table/spots";
 import { names } from '@/lib/table/BetPlacements'
@@ -153,13 +152,9 @@ export default class WinLossBankChart {
     }
 
     rescale (width, height) {
-        console.log('rescaling::::');
-        console.log('new width:::', width);
-        console.log('old _width:::', this._width);
-        this.chart.width(width-20).height(height-20);
-        // this.chart.rescale();
-        // this.chart.redraw();
-        redrawChartNoTransitions(this.chart);
+        this.chart.width(width-30).height(height-20);
+        this.chart.rescale();
+        this.chart.redraw();
     }
 
     parentWidth (width) {
