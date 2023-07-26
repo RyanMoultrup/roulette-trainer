@@ -77,6 +77,49 @@ This example would be a bet only on red, also played out over 30 rounds.
 
 Finally, a high payout inside bet also played out over 30 rounds.
 
+## Game Play Dashboard
+The game play dashboard gives real time feedback about the game, past spins and the total amount won and lost round over round.
+### Charts
+
+There are three main charts on the game play dashboard that will display data about the current game you're playing. The charts
+will update in real time as you play. 
+
+#### Spin Chart
+This chart displays the frequency of which value hit for all the spins. This chart is useful for determining "hot" numbers or "hot"
+parts of the board such as the 1st 12. 
+
+![alt text](assets/hits-chart.png?raw=true)
+
+#### Won, Lost & Bank Chart
+This chart is actually two charts in one. The first chart with its <code>y axis</code> on the left displays the cumulative amount
+of money won and lost round over round. After each round the total winnings (and losses) from the previous rounds are added 
+to the total of the current round and charted. 
+
+The charts lets you easily see if a strategy is actually a winning strategy over any number of spins. 
+
+![alt text](assets/win-loss-bank-chart.png?raw=true)
+
+By hovering the mouse over one of the lines in this chart will reveal more information about that specific round. This includes
+information about the round, number of bets and winnings and losses, as well as the cumulative information for all rounds up-to the round hovered 
+over in the chart. 
+
+![alt text](assets/round-modal.png?raw=true)
+
+#### Wins and Losses Chart
+The wins and losses chart represents the percentage of bets places that have wither won or lost. This is not the number of rounds
+won or lost but is charting each individual bet placed on the board. When there are multiple bets on the board often times only one of
+those bets wins and has a payout whereas the other bets are losers. 
+
+![alt text](assets/pie-chart.png?raw=true)
+
+### Filtering Charts
+Any of the charts in the game play dashboard can be filtered by clicking on them. This will filter the rest of the charts
+and the spins display table to show only data related to the filter. For example in the image below the "Won" section of the
+<code>Wins & Losses</code> pie chart was clicked. This in turn filtered the other charts to only show winning activity. In the 
+Spin charts you will see that now only the winning spins are showing in the chart.
+
+![alt text](assets/charts-filtered.png?raw=true)
+
 ## About Roulette Trainer
 
 This mini Vue.js application is something I started as a way to get better at Vue and better understand the reactive paradigm
