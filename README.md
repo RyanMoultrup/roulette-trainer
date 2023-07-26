@@ -5,6 +5,25 @@ so that you can better determine which roulette strategies are better than other
 
 ![alt text](assets/roulette-trainer.png?raw=true)
 
+### [Demo](https://roulettetrainer.io)
+
+* [Installation](#installation)
+* [Basic Usage](#basic-usage)
+  * [Game Play](#game-play)
+  * [Placing a Bet](#placing-a-bet)
+  * [Removing a Bet](#removing-a-bet)
+  * [Playing a Round](#playing-a-round)
+  * [Last Bet](#last-bet)
+  * [Double Bet](#double-bet)
+* [Emitting Spins](#spin-emitting)
+* [Game Play Dashboard](#game-play-dashboard)
+  * [Charts](#charts)
+    * [Spin Chart](#spin-chart)
+    * [Won, Lost & Bank Chart](#won-lost--bank-chart)
+    * [Wins & Losses Chart](#wins-and-losses-chart)
+  * [Filtering Charts](#filtering-charts)
+* [About Roulette Trainer](#about-roulette-trainer)
+
 ## Installation
 ### Compile and Hot-Reload with Docker for Development
 
@@ -122,10 +141,26 @@ Spin charts you will see that now only the winning spins are showing in the char
 
 ## About Roulette Trainer
 
-This mini Vue.js application is something I started as a way to get better at Vue and better understand the reactive paradigm
+This mini Vue.js application is something I started as a way to get better at Vue and better understand the [reactive paradigm](https://en.wikipedia.org/wiki/Reactive_programming)
 as I moved away from jQuery and starting using the modern approach. 
 
-The idea was to integrate Vue3, Crossfilter and DC.js in order to create a real time dashboard that is able to 
-graph the results of the game in progress as well as live filter the charts while the board is emitting (more on this later)
+The idea was to integrate [Vue3](https://vuejs.org/), [Crossfilter](https://github.com/crossfilter/crossfilter) and [DC.js](https://dc-js.github.io/dc.js/) in order to create a real time dashboard that is able to 
+graph the results of the game in progress as well as live filter the charts while the board is emitting.
 
+Some features are outside of actual roulette game play and were added simply to create a more sophisticated reactive envinronment 
+while learning. For example it is possible to place a bet and start emitting spins. You can then continue to "play" the game while spins are
+being emitted. This includes adding more bets, doubling your bet or removing bets from the table. All the actions you take 
+during spin emitting will be displayed in real time as you make the changes. 
 
+### Known Issues
+Because this is a personal project that I work on in my free time, it is not production ready yet. The following are known 
+issues that will be addressed when I can get around to it. 
+
+- Placing a bet on the zero will not work
+- Resizing is a little sketchy. The charts will adapt to the size of their parent container and will resize when the screen is resized. But when making the screen smaller the charts take multiple steps to resize which is very visible in the UI
+- The roulette board is not responsive (yet) and much of the dashboard does not size well on smaller screens
+  - I recently rewrote the CSS to use grids and still need to work on the media queries for different screen sizes 
+- If you click on the multiple charts to filter the results (yes you can do this) the <code>spins table</code> will show all the rounds individually rather than aggregated when the filters are removed from the charts
+- If table limits are active it is possible to place an inside bet above the <code>inside bet min</code>, start emitting spins and then remove enough chips that the total <code>inside bet</code> is less than the table min
+- If you play a game and then want to start a new game by clicking the <code>New Game</code> button, the count of the number of rounds does not reset. So if you finished your fist game on round 23, you're next game will start on round 24
+- Most of the Vue code is still using the Options API because this project started a pure javascript and roulette was played in the console. It was then moved to Vue2 and eventually upgraded to Vue3
