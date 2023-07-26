@@ -264,5 +264,4 @@ export default {
 .chips-hover {
   @apply border bg-gray-100 bg-opacity-90 p-1 rounded z-40;
 }
-//#table {min-width: 900px;}
 </style>

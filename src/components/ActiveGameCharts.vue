@@ -56,10 +56,6 @@ export default {
       }
     })
 
-    function convertRemToPixels(rem) {
-      return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
-    }
-
     const outcomes = this.getOutcomes();
 
     const winLossBankChart = new WinLossBankChart();
