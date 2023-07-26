@@ -164,3 +164,5 @@ issues that will be addressed when I can get around to it.
 - If table limits are active it is possible to place an inside bet above the <code>inside bet min</code>, start emitting spins and then remove enough chips that the total <code>inside bet</code> is less than the table min
 - If you play a game and then want to start a new game by clicking the <code>New Game</code> button, the count of the number of rounds does not reset. So if you finished your fist game on round 23, you're next game will start on round 24
 - Most of the Vue code is still using the Options API because this project started a pure javascript and roulette was played in the console. It was then moved to Vue2 and eventually upgraded to Vue3
+- If table limits are enabled the limits are not displayed anywhere on the screen
+- Number of rounds played is not currently displayed on the screen
