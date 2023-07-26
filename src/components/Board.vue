@@ -1,5 +1,5 @@
 <template>
-  <div id="table" class="betting-table relative flex-grow-0 p-5 pl-3 grid grid-rows-5 grid-cols-14 place-items-stretch font-roulette text-xl opacity-90">
+  <div id="table" class="betting-table relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-90">
 
     <div
       v-for="bet in getStrategy" :key="bet.type"
@@ -264,4 +264,5 @@ export default {
 .chips-hover {
   @apply border bg-gray-100 bg-opacity-90 p-1 rounded z-40;
 }
+//#table {min-width: 900px;}
 </style>
