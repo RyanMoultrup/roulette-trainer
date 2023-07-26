@@ -1,0 +1,10 @@
+version: '3'
+services:
+  roulette_trainer_dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - '5173:5173'
+    volumes:
+      - .:/app

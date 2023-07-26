@@ -8,6 +8,8 @@ so that you can better determine which roulette strategies are better than other
 ### [Demo](https://roulettetrainer.io)
 
 * [Installation](#installation)
+  * [Docker](#docker)
+  * [Localhost](#localhost)
 * [Basic Usage](#basic-usage)
   * [Game Play](#game-play)
   * [Placing a Bet](#placing-a-bet)
@@ -25,17 +27,44 @@ so that you can better determine which roulette strategies are better than other
 * [About Roulette Trainer](#about-roulette-trainer)
 
 ## Installation
-### Compile and Hot-Reload with Docker for Development
+### Docker
+#### Compile and Hot-Reload with Docker for Development
+First the Docker image needs to get built
+
+```sh
+docker build --target development -t roulette_trainer_dev .
+```
+Once the image is done building run this to start the container and access the app in your browser
+
+```sh
+docker run -it -p 5173:5173 -v $(pwd):/app roulette_trainer_dev
+```
+#### Or if you're using Docker Compose
+```sh
+docker-compose up
+```
+
+#### Compile with Docker for Production
+
+```sh
+docker build --target production -t roulette_trainer .
+```
+
+```sh
+docker run -p 8080:80 -d roulette_trainer
+```
+### Localhost
+#### Development
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify with Docker for Production
-
+#### Production
 ```sh
 npm run build
 ```
+
 ## Basic Usage
 
 Roulette trainer is designed to simulate real roulette play as closely as can be done with software. 
