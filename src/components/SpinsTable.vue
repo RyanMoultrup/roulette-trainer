@@ -8,7 +8,7 @@
             <div class="align-middle inline-block min-w-full">
               <div class="shadow overflow-hidden">
                 <table class="min-w-full text-white">
-                  <thead class="bg-green-400 font-lobster text-2xl">
+                  <thead class="bg-green-400 bg-gradient-to-r from-green-500 via-green-500 to-green-600 font-lobster text-2xl">
                   <tr>
                     <th scope="col"
                         class="px-3 py-3 text-left font-medium tracking-wider">

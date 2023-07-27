@@ -22,6 +22,11 @@ export default class WinLossChart {
     return this;
   }
 
+  rescale (width, height) {
+    this.chart.width(width-20).height(height-20);
+    this.chart.redraw();
+  }
+
   render(facts) {
     this.dimension = facts.dimension(d => d.outcome);
     this.group = this.dimension.group().reduceCount();

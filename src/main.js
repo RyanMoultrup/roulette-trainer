@@ -12,7 +12,10 @@ import {
     faExplosion,
     faAnglesUp,
     faRotateLeft,
-    faPlus
+    faPlus,
+    faChartPie,
+    faChartArea,
+    faChartColumn
 } from '@fortawesome/free-solid-svg-icons'
 import "vue-toastification/dist/index.css";
 import './styles/dc.css';
@@ -20,7 +23,19 @@ import './styles/app.css';
 import './assets/main.css';
 import './styles/wheel.less';
 
-library.add(faGear, faBuildingColumns, faCirclePlay, faRotate, faExplosion, faAnglesUp, faRotateLeft, faPlus);
+library.add(
+    faGear,
+    faBuildingColumns,
+    faCirclePlay,
+    faRotate,
+    faExplosion,
+    faAnglesUp,
+    faRotateLeft,
+    faPlus,
+    faChartPie,
+    faChartArea,
+    faChartColumn
+);
 
 const app = createApp(App);
 

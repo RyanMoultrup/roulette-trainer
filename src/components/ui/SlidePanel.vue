@@ -128,7 +128,7 @@ import SlideInFromRightTransition from "@/components/ui/Transitions/SlideInFromR
 
 const debounceTimeout = 1000;
 export default {
-  components: {SlideInFromRightTransition, FadeInTransition},
+  components: { SlideInFromRightTransition, FadeInTransition },
   setup () {
     const toast = useToast();
     return { toast };

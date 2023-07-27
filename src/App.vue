@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height: 768px;">
+  <div>
     <div class="h-screen overflow-hidden flex flex-col">
       <!-- Top nav-->
       <app-header
@@ -19,7 +19,7 @@
         </div>
       </div>
       <slide-panel
-          class="relative"
+        class="relative"
         :show="showPanel"
         @close="showPanel = !showPanel"
       />
