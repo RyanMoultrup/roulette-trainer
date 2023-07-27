@@ -1,15 +1,19 @@
 <template>
 <!--  <div id="chips-container" class="chips-panel absolute -bottom-8 right-1/4 transition duration-500 ease-in-out transform hover:-translate-y-3/4 hover:scale-110 "> &lt;!&ndash; -bottom-8 &ndash;&gt;-->
   <div id="chips-container" class="chips-panel flex flex-row justify-start w-full px-4"> <!-- -bottom-8 -->
-    <div class="flex flex-col justify-around p-2 mr-2">
+
+    <div class="flex flex-col justify-end gap-3 p-2 mr-2">
       <double-bet-button />
       <replay-last-bet-button />
     </div>
-    <div class="chips grid grid-cols-4">
-      <chip color="red" size="lg" chipValue="5" @chipSelected="chipSelected"></chip>
-      <chip color="blue" size="lg" chipValue="10" @chipSelected="chipSelected"></chip>
-      <chip color="green" size="lg" chipValue="50" @chipSelected="chipSelected"></chip>
-      <chip color="black" size="lg" chipValue="100" @chipSelected="chipSelected"></chip>
+    <div>
+      <selected-chip class="font-lobster mb-4 text-gray-300 text-xl"/>
+      <div class="chips grid grid-cols-4">
+        <chip color="red" size="lg" chipValue="5" @chipSelected="chipSelected"></chip>
+        <chip color="blue" size="lg" chipValue="10" @chipSelected="chipSelected"></chip>
+        <chip color="green" size="lg" chipValue="50" @chipSelected="chipSelected"></chip>
+        <chip color="black" size="lg" chipValue="100" @chipSelected="chipSelected"></chip>
+      </div>
     </div>
 
   </div>
@@ -19,9 +23,10 @@
 import Chip from '@/components/Chip.vue';
 import DoubleBetButton from "@/components/DoubleBetButton.vue";
 import ReplayLastBetButton from "@/components/ReplayLastBetButton.vue";
+import SelectedChip from "@/components/SelectedChip.vue";
 
 export default {
-  components: { Chip, DoubleBetButton, ReplayLastBetButton },
+  components: { SelectedChip, Chip, DoubleBetButton, ReplayLastBetButton },
   methods: {
     chipSelected (chip) {
       this.$emit('chipSelected', chip);

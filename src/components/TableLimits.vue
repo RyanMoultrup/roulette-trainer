@@ -1,15 +1,15 @@
 <template>
   <div class="font-lobster text-2xl text-gray-300 opacity-80 flex flex-row justify-between">
     <div class="flex flex-col">
-      <span class="mr-4">Min Inside Bet: {{ formatter.money(getBetLimits.minInside) }}</span>
-      <span class="mr-4">Max Inside Bet: {{ formatter.money(getBetLimits.maxInside) }}</span>
+      <span>Min Inside Bet: {{ formatter.money(getBetLimits.minInside) }}</span>
+      <span>Max Inside Bet: {{ formatter.money(getBetLimits.maxInside) }}</span>
     </div>
-    <div class="flex items-end">
+    <div class="flex items-center">
       <current-bet class="text-gray-200" />
     </div>
     <div class="flex flex-col">
       <span>Min Outside Bet: {{ formatter.money(getBetLimits.minOutside) }}</span>
-      <span class="mr-4">Max Outside Bet: {{ formatter.money(getBetLimits.maxOutside) }}</span>
+      <span>Max Outside Bet: {{ formatter.money(getBetLimits.maxOutside) }}</span>
     </div>
   </div>
 </template>
@@ -17,9 +17,10 @@
 import { mapGetters } from "vuex";
 import formatter from "../lib/formatter";
 import CurrentBet from '@/components/CurrentBet.vue';
+import SelectedChip from "@/components/SelectedChip.vue";
 
 export default {
-  components: { CurrentBet },
+  components: { SelectedChip, CurrentBet },
   computed: {
     formatter () {
       return formatter;

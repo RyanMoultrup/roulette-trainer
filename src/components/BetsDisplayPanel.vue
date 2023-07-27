@@ -1,23 +1,12 @@
 <template>
   <div id="bets-container" class="relative bet-display bg-green-800 overflow-y-auto">
-    <div class="bet-display-header flex flex-col text-white font-lobster text-2xl content-center bg-green-400 p-2 bg-gradient-to-r from-green-500 via-green-500 to-green-600" style="position: absolute; width: 100%; top: 0; left: 0; height: 6rem;">
-      <div class="flex flex-row mb-2">
-        <current-bet />
+    <div class="bet-display-header flex flex-col text-white font-lobster text-2xl content-center bg-green-400 p-2 bg-gradient-to-r from-green-500 via-green-500 to-green-600" style="position: absolute; width: 100%; top: 0; left: 0;">
+      <div class="flex flex-row justify-between">
+        <h3>Current Bets</h3>
         <span class="text-sm font-sans cursor-pointer flex-shrink-0" @click="clearAllBets">Clear All</span>
       </div>
-      <div class="flex flex-row">
-        <span>Selected </span>
-        <span class="ml-2">
-          <chip
-              size="md"
-              :color="selectedChip.color"
-              :chipValue="String(selectedChip.value)"
-              :emitSelection="false"
-          ></chip>
-        </span>
-      </div>
     </div>
-    <div class="bet-display-table shadow overflow-y-auto mt-24">
+    <div class="bet-display-table shadow overflow-y-auto mt-12">
       <ul class="divide-y divide-green-900 bg-white bg-opacity-10 ">
         <li v-for="bet in getStrategy" :key="bet.type" class="group">
           <a href="#" class="block hover:bg-white hover:bg-opacity-5 relative">
@@ -67,12 +56,11 @@
 
 <script>
 import Chip from '@/components/Chip.vue';
-import CurrentBet from '@/components/CurrentBet.vue';
 import { mapGetters, mapActions } from 'vuex';
-import { tween } from "@/lib/Tween";
+import SelectedChip from "@/components/SelectedChip.vue";
 
 export default {
-  components: { Chip },
+  components: { SelectedChip, Chip },
   computed: {
     ...mapGetters('strategy', ['getStrategy']),
     ...mapGetters('simulation', ['selectedChip']),

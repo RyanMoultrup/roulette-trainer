@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1">
+  <div class="flex-0">
     <span>Current Bet</span> $<span id="current-bet">{{ currentBet }}</span>
   </div>
 </template>
