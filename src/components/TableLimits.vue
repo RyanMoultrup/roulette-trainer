@@ -1,13 +1,13 @@
 <template>
   <div class="font-lobster text-xl text-gray-300 opacity-80 flex flex-row justify-between">
-    <div class="flex flex-col">
+    <div  v-if="hasTableLimit"  class="flex flex-col">
       <span>Min Inside Bet: {{ formatter.money(getBetLimits.minInside) }}</span>
       <span>Max Inside Bet: {{ formatter.money(getBetLimits.maxInside) }}</span>
     </div>
     <div class="flex items-end">
       <current-bet class="text-gray-200 text-3xl" />
     </div>
-    <div class="flex flex-col">
+    <div  v-if="hasTableLimit"  class="flex flex-col">
       <span>Min Outside Bet: {{ formatter.money(getBetLimits.minOutside) }}</span>
       <span>Max Outside Bet: {{ formatter.money(getBetLimits.maxOutside) }}</span>
     </div>
@@ -25,7 +25,7 @@ export default {
     formatter () {
       return formatter;
     },
-    ...mapGetters('settings', ['getBetLimits'])
+    ...mapGetters('settings', ['getBetLimits', 'hasTableLimit'])
   }
 }
 </script>

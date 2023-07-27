@@ -1,7 +1,6 @@
 <template>
   <div class="betting-table">
-    <table-limits v-if="hasTableLimit" />
-
+    <table-limits />
     <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-90">
       <div
           v-for="bet in getStrategy" :key="bet.type"
@@ -214,7 +213,6 @@ export default {
   computed: {
     ...mapGetters('strategy', ['getStrategy']),
     ...mapGetters('bank', ['canBet', 'availableBalance']),
-    ...mapGetters('settings', ['hasTableLimit'])
   },
   methods: {
     ...mapMutations('strategy', ['placeBet']),
