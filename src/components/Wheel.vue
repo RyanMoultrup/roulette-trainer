@@ -131,13 +131,16 @@
         </ol>
       </div>
     </div>
+    <rounds-display class="flex justify-center gap-2" />
   </div> <!-- End Wheel -->
 </template>
 
 <script>
 import spots from '../lib/table/spots';
+import RoundsDisplay from "@/components/RoundsDisplay.vue";
 
 export default {
+  components: { RoundsDisplay },
   data () {
     return {
       spin: null,
