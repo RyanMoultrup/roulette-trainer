@@ -2,9 +2,7 @@
   <div id="bets-container" class="relative bet-display bg-green-800 overflow-y-auto">
     <div class="bet-display-header flex flex-col text-white font-lobster text-2xl content-center bg-green-400 p-2 bg-gradient-to-r from-green-500 via-green-500 to-green-600" style="position: absolute; width: 100%; top: 0; left: 0; height: 6rem;">
       <div class="flex flex-row mb-2">
-        <div class="flex-1">
-          <span>Current Bet</span> $<span id="current-bet">{{ currentBet }}</span>
-        </div>
+        <current-bet />
         <span class="text-sm font-sans cursor-pointer flex-shrink-0" @click="clearAllBets">Clear All</span>
       </div>
       <div class="flex flex-row">
@@ -69,36 +67,15 @@
 
 <script>
 import Chip from '@/components/Chip.vue';
-import { mapGetters, mapMutations, mapActions } from 'vuex';
+import CurrentBet from '@/components/CurrentBet.vue';
+import { mapGetters, mapActions } from 'vuex';
 import { tween } from "@/lib/Tween";
 
 export default {
   components: { Chip },
-  data () {
-    return {
-      currentBet: 0,
-    }
-  },
   computed: {
     ...mapGetters('strategy', ['getStrategy']),
     ...mapGetters('simulation', ['selectedChip']),
-    currentBetTotal () {
-      let bets = this.getStrategy;
-      if (bets.length) {
-        return bets.reduce((accumulator, item) => {
-          return accumulator + +item.get();
-        }, 0);
-      }
-      return 0;
-    }
-  },
-  watch: {
-    currentBetTotal (newVal, oldVal) {
-      tween('#current-bet')
-          .initValue(oldVal)
-          .onRender(val => this.currentBet = val)
-          .render(newVal);
-    }
   },
   methods: {
     ...mapActions('strategy', ['clearAll', 'removeBet']),

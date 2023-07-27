@@ -212,12 +212,9 @@ export default {
     }
   },
   computed: {
-    formatter () {
-      return formatter
-    },
     ...mapGetters('strategy', ['getStrategy']),
     ...mapGetters('bank', ['canBet', 'availableBalance']),
-    ...mapGetters('settings', ['getBetLimits', 'hasTableLimit'])
+    ...mapGetters('settings', ['hasTableLimit'])
   },
   methods: {
     ...mapMutations('strategy', ['placeBet']),
