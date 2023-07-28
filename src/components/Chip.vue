@@ -1,14 +1,10 @@
 <template>
-<!--  <div class="pokerchip md black-chip"></div>-->
-
-    <div class="sm dashed-circle"><span class="chip-value">500</span></div>
-
-<!--  <img style="g fill: red; color: red;" src="../assets/poker-green.svg" />-->
-<!--  <div-->
-<!--    class="shadow-md chip cursor-pointer flex"-->
-<!--    :class="[size, chipColor]"-->
-<!--    @click="select"-->
-<!--  ><span class="chip-value m-auto">{{ chipValue }}</span></div>-->
+   <div
+        class="dashed-circle cursor-pointer"
+        :class="[size, chipColor]"
+        @click="select"
+    ><span class="chip-value">{{ chipValue }}</span>
+    </div>
 </template>
 
 <script>
@@ -17,7 +13,7 @@ export default {
     size: {
       type: String,
       default: () => {
-        return 'chip-sm';
+        return 'sm';
       }
     },
     color: {
@@ -39,11 +35,6 @@ export default {
       }
     }
   },
-  computed: {
-    chipColor (color) {
-      return `chip-${color.color}`;
-    }
-  },
   methods: {
     select () {
       if (this.emitSelection) {
@@ -58,7 +49,6 @@ export default {
 .dashed-circle {
   position: relative;
   display: block;
-
   width: 100px;
   height: 100px;
   border: 13px dashed white;
@@ -77,7 +67,6 @@ export default {
   left: 0;
   margin: -16px;
   border-radius: 50%;
-  background: steelblue;
   background: orange;
   content: '';
   box-shadow: 0 0 0 5px #282828 inset, 0 0 0 10px #969696 inset, 0 0 6px rgba(255, 255, 255, 0.2);
@@ -97,7 +86,6 @@ export default {
 }
 
 .md.dashed-circle {
-
   width: 50px;
   height: 50px;
   border: 7px dashed white;
@@ -118,13 +106,13 @@ export default {
 .sm .chip-value { display: none }
 
 .sm.dashed-circle {
-
   width: 25px;
   height: 25px;
   border: 3px dashed white;
   border-radius: 50%;
   line-height: 17px;
 }
+
 .sm.dashed-circle:before {
   margin: -4px;
   border-radius: 50%;
@@ -136,6 +124,12 @@ export default {
   border: 1px dashed white;
   border-radius: 50%;
 }
+
+.dashed-circle:before {
+  background: v-bind(color);
+}
+
+
 
 
 

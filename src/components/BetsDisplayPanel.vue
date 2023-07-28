@@ -19,11 +19,11 @@
                 <div class="flex">
 
                   <div class="ml-2 flex-shrink-0 flex">
-                    <p class="px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-red-800">
+                    <p class="px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-red-800 z-0">
                       <chip
                           v-for="chip in bet.chips" :key="chip.value"
                           class="mr-1 border border-solid"
-                          size="xs"
+                          size="sm"
                           :chipValue="chip.value"
                           :color="chip.color"
                           :class="chip.color === 'black' ? `border-${chip.color}` : `border-${chip.color}-500`"

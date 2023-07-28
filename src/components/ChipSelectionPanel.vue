@@ -9,10 +9,7 @@
     <div>
       <selected-chip class="font-lobster mb-4 text-gray-300 text-xl"/>
       <div class="chips grid grid-cols-4 gap-4">
-        <chip color="red" size="lg" chipValue="5" @chipSelected="chipSelected"></chip>
-        <chip color="blue" size="lg" chipValue="10" @chipSelected="chipSelected"></chip>
-        <chip color="green" size="lg" chipValue="50" @chipSelected="chipSelected"></chip>
-        <chip color="black" size="lg" chipValue="100" @chipSelected="chipSelected"></chip>
+        <chip v-for="chip in chips()" :color="chip.color" size="lg" :chipValue="chip.value" @chipSelected="chipSelected"></chip>
       </div>
     </div>
 
@@ -24,10 +21,14 @@ import Chip from '@/components/Chip.vue';
 import DoubleBetButton from "@/components/DoubleBetButton.vue";
 import ReplayLastBetButton from "@/components/ReplayLastBetButton.vue";
 import SelectedChip from "@/components/SelectedChip.vue";
+import chips from '@/lib/table/chips';
 
 export default {
   components: { SelectedChip, Chip, DoubleBetButton, ReplayLastBetButton },
   methods: {
+    chips() {
+      return chips
+    },
     chipSelected (chip) {
       this.$emit('chipSelected', chip);
     }
