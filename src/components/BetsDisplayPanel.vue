@@ -28,10 +28,10 @@
                           :color="chip.color"
                           :class="chip.color === 'black' ? `border-${chip.color}` : `border-${chip.color}-500`"
                       ></chip>
-                      ${{ bet.get() }}
+                      {{ formatter.money(bet.get()) }}
                     </p>
                     <p class="px-2 py-0.5 ml-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                      ${{ bet.payout() }}
+                      {{ formatter.money(bet.payout()) }}
                     </p>
                   </div>
                 </div>
@@ -58,12 +58,16 @@
 import Chip from '@/components/Chip.vue';
 import { mapGetters, mapActions } from 'vuex';
 import SelectedChip from "@/components/SelectedChip.vue";
+import formatter from "@/lib/formatter";
 
 export default {
   components: { SelectedChip, Chip },
   computed: {
     ...mapGetters('strategy', ['getStrategy']),
     ...mapGetters('simulation', ['selectedChip']),
+    formatter () {
+      return formatter;
+    }
   },
   methods: {
     ...mapActions('strategy', ['clearAll', 'removeBet']),

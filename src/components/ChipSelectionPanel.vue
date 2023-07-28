@@ -41,9 +41,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('bank', ['startBalance']),
+    ...mapGetters('bank', ['balance']),
     chips () {
-      return this.allChips.filter(c => c.value <= this.startBalance);
+      return this.allChips.filter(c => c.value <= this.balance);
     }
   },
   methods: {

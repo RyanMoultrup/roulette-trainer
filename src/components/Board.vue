@@ -4,7 +4,7 @@
     <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-90">
       <div
           v-for="bet in getStrategy" :key="bet.type"
-          class="absolute z-0"
+          class="absolute"
           v-bind:class="hoverBetCSS(bet)"
           @mouseleave="leaveHoverBet"
           @click="placeNext(bet.placement)"
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div v-for="placement in placements" :id="placement" :class="placement" class="absolute spot-h" @click="place" @mouseover="hoverBet"></div>
+      <div v-for="placement in placements" :id="placement" :class="placement" class="absolute spot-h z-0" @click="place" @mouseover="hoverBet"></div>
 
       <div class="spot _0 pt-16 border border-t-3 p-4 bg-green-400 text-white text-3xl text-opacity-70 text-center align-text-middle row-span-3 rounded-tl rounded-bl border-l-4 border-b-4 border-t-4">
         0

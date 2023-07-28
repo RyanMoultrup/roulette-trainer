@@ -1,10 +1,12 @@
 <template>
-   <div
+  <div class="relative z-0">
+    <div
         class="dashed-circle cursor-pointer"
         :class="[size]"
         @click="select"
     ><span class="chip-value">{{ formatChipValue() }}</span>
     </div>
+  </div>
 </template>
 
 <script>

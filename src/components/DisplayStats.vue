@@ -8,7 +8,7 @@
               Total Lost:
             </span>
             <span class="text-4xl font-semibold">
-              <span id="loss">${{ loss }}</span>
+              <span id="loss">{{ formatter.money(loss) }}</span>
             </span>
           </div>
         </div>
@@ -21,7 +21,7 @@
               Total Won
             </span>
             <span class="text-4xl font-semibold text-gray-300">
-              <span id="won"><span>${{ won }}</span></span>
+              <span id="won"><span>{{ formatter.money(won) }}</span></span>
             </span>
           </div>
         </div>
@@ -35,7 +35,7 @@
               Bank
             </span>
             <span class="text-4xl font-semibold text-gray-300">
-              <span id="bank"><span>${{ balance }}</span></span>
+              <span id="bank"><span>{{ formatter.money(balance) }}</span></span>
             </span>
           </div>
         </div>
@@ -48,7 +48,7 @@
               Winnings
             </span>
             <span class="text-4xl font-semibold text-gray-300">
-              <span id="winnings"><span>${{ currentWinnings }}</span></span>
+              <span id="winnings"><span>{{ formatter.money(currentWinnings) }}</span></span>
             </span>
           </div>
         </div>
@@ -62,6 +62,7 @@ import { mapGetters } from 'vuex';
 import { tween } from '@/lib/Tween.js';
 import { displayReduce } from '@/lib/Reducers';
 import { spinHistoryTable } from '@/lib/charts/SpinHistoryTable';
+import formatter from "@/lib/formatter";
 
 export default {
   name: 'Display Stats',
@@ -76,6 +77,9 @@ export default {
   computed: {
     ...mapGetters('bank', ['availableBalance']),
     ...mapGetters('simulation', ['getOutcomes']),
+    formatter () {
+      return formatter;
+    },
   },
   watch: {
     availableBalance (newVal, oldVal) {
