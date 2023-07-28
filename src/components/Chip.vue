@@ -3,7 +3,7 @@
         class="dashed-circle cursor-pointer"
         :class="[size]"
         @click="select"
-    ><span class="chip-value">{{ chipValue }}</span>
+    ><span class="chip-value">{{ formatChipValue() }}</span>
     </div>
 </template>
 
@@ -36,6 +36,13 @@ export default {
     }
   },
   methods: {
+    formatChipValue () {
+      if (this.chipValue < 10000) return this.chipValue;
+      if (this.chipValue >= 10000 && this.chipValue < 100000) return `${this.chipValue.toString().slice(0, 2)}K`;
+      if (this.chipValue >= 100000 && this.chipValue < 1000000) return `${this.chipValue.toString().slice(0, 3)}K`;
+      if (this.chipValue === 1000000) return '1mil'
+      else return this.chipValue;
+    },
     select () {
       if (this.emitSelection) {
         this.$emit('chipSelected', {value: parseInt(this.chipValue), color: this.color});

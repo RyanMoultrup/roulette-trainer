@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-row">
-    <span>Selected </span>
+  <div class="flex flex-row items-center">
+    <span class="text-2xl">Selected </span>
     <span class="ml-2">
       <chip
           size="md"
           :color="selectedChip.color"
-          :chipValue="String(selectedChip.value)"
+          :chipValue="selectedChip.value"
           :emitSelection="false"
       ></chip>
     </span>

@@ -30,6 +30,42 @@ const chips =  [
     {
         value: 1000,
         color: 'deeppink'
+    },
+    {
+        value: 2500,
+        color: 'darkred'
+    },
+    {
+        value: 5000,
+        color: 'steelblue'
+    },
+    {
+        value: 10000,
+        color: 'orange'
+    },
+    {
+        value: 25000,
+        color: 'yellowgreen'
+    },
+    {
+        value: 50000,
+        color: 'darkslategray'
+    },
+    {
+        value: 100000,
+        color: 'orangered'
+    },
+    {
+        value: 250000,
+        color: 'deeppink'
+    },
+    {
+        value: 500000,
+        color: 'orangered'
+    },
+    {
+        value: 1000000,
+        color: 'deeppink'
     }
 ]
 
