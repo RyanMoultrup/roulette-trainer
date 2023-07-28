@@ -1,7 +1,7 @@
 <template>
 <!--  <div class="pokerchip md black-chip"></div>-->
 
-    <div class="dashed-circle">500</div>
+    <div class="sm dashed-circle"><span class="chip-value">500</span></div>
 
 <!--  <img style="g fill: red; color: red;" src="../assets/poker-green.svg" />-->
 <!--  <div-->
@@ -58,7 +58,7 @@ export default {
 .dashed-circle {
   position: relative;
   display: block;
-  margin: 30px auto;
+
   width: 100px;
   height: 100px;
   border: 13px dashed white;
@@ -97,21 +97,43 @@ export default {
 }
 
 .md.dashed-circle {
-  margin: 30px auto;
-  width: 100px;
-  height: 100px;
-  border: 13px dashed white;
+
+  width: 50px;
+  height: 50px;
+  border: 7px dashed white;
   border-radius: 50%;
-  line-height: 75px;
+  line-height: 37px;
 }
 .md.dashed-circle:before {
-  margin: -16px;
+  margin: -9px;
   border-radius: 50%;
 }
 
 .md.dashed-circle:after {
   margin: 5px;
+  border: 1px dashed white;
+  border-radius: 50%;
+}
+
+.sm .chip-value { display: none }
+
+.sm.dashed-circle {
+
+  width: 25px;
+  height: 25px;
   border: 3px dashed white;
+  border-radius: 50%;
+  line-height: 17px;
+}
+.sm.dashed-circle:before {
+  margin: -4px;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+.sm.dashed-circle:after {
+  margin: 2px;
+  border: 1px dashed white;
   border-radius: 50%;
 }
 

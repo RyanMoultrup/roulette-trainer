@@ -4,7 +4,7 @@
     <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-90">
       <div
           v-for="bet in getStrategy" :key="bet.type"
-          class="absolute"
+          class="absolute z-0"
           v-bind:class="hoverBetCSS(bet)"
           @mouseleave="leaveHoverBet"
           @click="placeNext(bet.placement)"

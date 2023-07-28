@@ -10,6 +10,7 @@
     <wheel></wheel>
     <board
       :selected-chip="selectedChip"
+      style="z-index: 0;"
     />
     <chip-selection-panel @chipSelected="chipSelected" />
   </div>
