@@ -43,7 +43,7 @@ export default {
   computed: {
     ...mapGetters('bank', ['balance']),
     chips () {
-      return this.allChips.filter(c => c.value <= this.balance);
+      return this.allChips.filter(c => c.value <= this.balance || c.value <= 100);
     }
   },
   methods: {
