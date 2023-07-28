@@ -4,12 +4,12 @@
     <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-90">
       <div
           v-for="bet in getStrategy" :key="bet.type"
-          class="absolute"
+          class="absolute w-28 mt-1 ml-1"
           v-bind:class="hoverBetCSS(bet)"
           @mouseleave="leaveHoverBet"
           @click="placeNext(bet.placement)"
       >
-        <div v-for="(chip, index) in bet.chips" :key="chip.value" class="board-chip flex gap-1 items-baseline">
+        <div v-for="(chip, index) in bet.chips" :key="chip.value" class="board-chip flex gap-1 items-start">
           <chip
               class="mb-2 flex-shrink-0"
               size="sm"
@@ -265,6 +265,6 @@ export default {
 
 <style>
 .chips-hover {
-  @apply border bg-gray-100 bg-opacity-90 p-1 rounded z-40;
+  @apply border bg-gray-100 bg-opacity-90 p-1 rounded z-50;
 }
 </style>

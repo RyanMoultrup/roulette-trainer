@@ -1,5 +1,5 @@
 <template>
-  <div id="chips-container" class="chips-panel flex flex-row justify-start w-full px-4" style="min-width: 0;"> <!-- -bottom-8 -->
+  <div id="chips-container" class="chips-panel flex flex-row justify-start w-full px-4 -z-10" style="min-width: 0;"> <!-- -bottom-8 -->
     <div class="flex flex-col shrink-0 justify-end gap-3 p-2 mr-2">
       <double-bet-button />
       <replay-last-bet-button />

@@ -599,9 +599,12 @@ g.axis.y, g.axis.x, g.axis.yr { color: white; }
 }
 
 .twelve_first {
-    width: 25%;
     left: 10.5%;
     top: 63.25%
+}
+
+.spot-h.twelve_first {
+    width: 25%;
 }
 
 .twelve_second {
