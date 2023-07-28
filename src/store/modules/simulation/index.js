@@ -10,7 +10,7 @@ const state = () => ({
   spin: null,
   rounds: 0,
   selectedChip: {
-    color: 'red',
+    color: 'darkred',
     value: '5'
   },
   emittingSpins: false
