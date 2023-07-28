@@ -1,7 +1,7 @@
 <template>
    <div
         class="dashed-circle cursor-pointer"
-        :class="[size, chipColor]"
+        :class="[size]"
         @click="select"
     ><span class="chip-value">{{ chipValue }}</span>
     </div>
@@ -23,7 +23,7 @@ export default {
       }
     },
     chipValue: {
-      type: String,
+      type: Number,
       default: () => {
         return '5000';
       }
