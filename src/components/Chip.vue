@@ -21,7 +21,7 @@ export default {
     color: {
       type: String,
       default: () => {
-        return 'red';
+        return 'darkred';
       }
     },
     chipValue: {
@@ -97,9 +97,10 @@ export default {
 .md.dashed-circle {
   width: 50px;
   height: 50px;
-  border: 7px dashed white;
+  border: 6px dashed white;
   border-radius: 50%;
   line-height: 37px;
+
 }
 .md.dashed-circle:before {
   margin: -9px;
