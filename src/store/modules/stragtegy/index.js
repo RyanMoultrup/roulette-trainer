@@ -34,7 +34,6 @@ const removeFromCurrentBets = function (value) {
 const mutations = {
     async placeBet (state, bet) {
         if (currentBetSpots.includes(bet.placement)) {
-            console.log()
             await state.strategy[bet.placement].addChip(bet.chip);
             return;
         }
