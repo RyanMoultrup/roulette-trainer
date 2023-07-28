@@ -1,6 +1,5 @@
 <template>
   <div class="flex flex-row items-center">
-    <span class="text-2xl">Selected </span>
     <span class="ml-2">
       <chip
           size="md"
@@ -9,6 +8,7 @@
           :emitSelection="false"
       ></chip>
     </span>
+    <span class="text-2xl">Selected </span>
   </div>
 </template>
 <script>

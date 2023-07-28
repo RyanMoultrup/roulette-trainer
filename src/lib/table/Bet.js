@@ -2,6 +2,7 @@ import store from '@/store/index';
 import spots from "@/lib/table/spots";
 import { range } from 'd3-array';
 import { odds } from "@/lib/table/BetPlacements";
+import chipAggregator from "@/lib/table/ChipAggregator";
 
 export default class {
   spots = [];
@@ -87,6 +88,7 @@ export default class {
 
   addChip (chip) {
     this.chips.unshift(chip);
+    this.chips = chipAggregator(this.chips)
     this._amount = this._amount + +chip.value;
     store.commit('bank/reduceAvailableBalance', +chip.value);
   }

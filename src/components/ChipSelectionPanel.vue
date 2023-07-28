@@ -4,11 +4,10 @@
       <double-bet-button />
       <replay-last-bet-button />
     </div>
-    <div style="min-width: 0;">
-      <selected-chip class="font-lobster mb-4 text-gray-300 text-xl"/>
-      <div class="bg-green-500 border border-green-800 border-1 p-3 rounded">
+    <div style="min-width: 0;" class="max-w-[75%]">
+      <div class="bg-green-500 border border-green-800 border-1 p-3 rounded-md">
         <swiper
-            :slidesPerView="6"
+            :slidesPerView="5"
             :spaceBetween="2"
             class="mySwiper"
         >
@@ -18,6 +17,7 @@
         </swiper>
       </div>
     </div>
+    <selected-chip class="font-lobster mb-4 text-gray-300 text-2xl self-start flex flex-col self-end ml-4"/>
   </div>
 </template>
 
