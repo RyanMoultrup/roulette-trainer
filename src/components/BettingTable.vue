@@ -1,5 +1,5 @@
 <template>
-  <div class="betting-area mx-4 mb-4 mt-2 p-4 card-bg-border">
+  <div class="betting-area mx-4 mb-4 mt-2 p-4 card-bg-border" style="z-index: 0;">
     <div class="spin-buttons px-2 py-3 sm:px-6 justify-between">
       <div class="flex gap-1">
         <spin-button />

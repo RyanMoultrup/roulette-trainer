@@ -8,7 +8,7 @@
     </div>
     <div>
       <selected-chip class="font-lobster mb-4 text-gray-300 text-xl"/>
-      <div class="chips grid grid-cols-4">
+      <div class="chips grid grid-cols-4 gap-4">
         <chip color="red" size="lg" chipValue="5" @chipSelected="chipSelected"></chip>
         <chip color="blue" size="lg" chipValue="10" @chipSelected="chipSelected"></chip>
         <chip color="green" size="lg" chipValue="50" @chipSelected="chipSelected"></chip>
