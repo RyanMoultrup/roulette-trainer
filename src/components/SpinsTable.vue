@@ -39,7 +39,7 @@
                       </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-100"><strong>Bet</strong> ${{ outcome.value.betAmt }}</div>
+                      <div class="text-sm text-gray-100"><strong>Bet</strong> {{ formatter.money(outcome.value.betAmt) }}</div>
                       <div class="text-xs text-gray-300">{{ outcome.value.betCount }} bets</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -47,13 +47,13 @@
                         <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           Won
-                        </span> ${{ outcome.value.won }}
+                        </span> {{ formatter.money(outcome.value.won) }}
                       </div>
                       <div class="text-sm text-gray-200">
                         <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                           Lost
-                        </span> ${{ outcome.value.loss }}
+                        </span> {{ formatter.money(outcome.value.loss) }}
                       </div>
                     </td>
                   </tr>
@@ -71,6 +71,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import spots from '../lib/table/spots';
+import formatter from "@/lib/formatter";
 import { spinHistoryTable } from '@/lib/charts/SpinHistoryTable';
 import { removeEmptyBins, spinTable } from '@/lib/Reducers';
 
@@ -88,6 +89,9 @@ const spinTableEmptyBinCallback = d => {
 }
 
 export default {
+  setup () {
+    return { formatter }
+  },
   data () {
     return {
       outcomes: []

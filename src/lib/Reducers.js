@@ -57,13 +57,11 @@ export const displayReduce = outcomes => {
         add (i, d) {
             i.loss += +d.loss;
             i.won += +d.won;
-
             return i;
         },
         remove (i, d) {
             i.loss -= +d.loss;
             i.won -= +d.won;
-
             return i;
         },
         init () {
@@ -77,6 +75,7 @@ export const displayReduce = outcomes => {
     group.reduce(reducer.add, reducer.remove, reducer.init);
     return group.value();
 }
+
 export const removeEmptyBins = (fn, group) => {
     return {
         all: () => {
