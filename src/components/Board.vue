@@ -15,10 +15,10 @@
               size="sm"
               :chipValue="chip.value"
               :color="chip.color" />
-          <span class="flex-shrink-0 font-sans text-sm flex-grow text-center py-0.5">${{ chip.value }}</span>
-          <span class="flex-shrink-0 relative opacity-100 cursor-pointer w-3 h-3 pb-1 text-center rounded-full bg-red-700 bg-opacity-90 text-white" style="font-size:5px;">
-          <span class="p-1 absolute top-1" @click.stop="removeChipFromBet({ placement: bet.placement, chipIndex: index, chip })">x</span>
-        </span>
+          <span class="flex-shrink-0 font-sans text-sm flex-grow text-center py-0.5">{{ formatter.money(chip.value) }}</span>
+          <span class="text-black self-start text-sm font-red-800" @click.stop="removeChipFromBet({ placement: bet.placement, chipIndex: index, chip })">
+            <font-awesome-icon :stlye="{ color: 'red' }" icon="fa-regular fa-circle-xmark" />
+          </span>
         </div>
       </div>
 
@@ -188,6 +188,7 @@ import { mapMutations, mapGetters, mapActions } from 'vuex';
 import placements from '@/lib/table/BetPlacements';
 import { useToast } from "vue-toastification";
 import TableLimits from "@/components/TableLimits.vue";
+import formatter from "@/lib/formatter";
 
 export default {
   name: 'Board',
@@ -202,7 +203,7 @@ export default {
   },
   setup () {
     const toast = useToast();
-    return { toast };
+    return { toast, formatter };
   },
   data () {
     return {
