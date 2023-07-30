@@ -5,10 +5,12 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: { sans: ['inter'] },
     extend: {
       fontFamily: {
         'roulette': ['"Libre Baskerville"', 'serif'],
-        'lobster': ['lobster', 'serif']
+        'lobster': ['lobster', 'serif'],
+        'inter': ['inter', 'san-serif']
       },
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))',

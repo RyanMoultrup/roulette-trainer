@@ -239,9 +239,9 @@ export default class WinLossBankChart {
                                     <div class="flex flex-col">
                                         <div class="font-lobster text-2xl text-green-500">All Rounds</div>
                                         <span class="mb-3"><strong>Total Bets:</strong> ${i.data.value.cumBets}</span>
-                                      <span><strong>Total Won:</strong> $${i.data.value.won}</span>
-                                      <span><strong>Total Lost:</strong> $${i.data.value.loss}</span>
-                                      <spa class="mb-2"><strong>Winnings:</strong> $${i.data.value.won - i.data.value.loss}</span>
+                                        <span><strong>Total Won:</strong> $${i.data.value.won}</span>
+                                        <span><strong>Total Lost:</strong> $${i.data.value.loss}</span>
+                                        <span class="mb-2"><strong>Winnings:</strong> $${i.data.value.won - i.data.value.loss}</span>
                                     </div>
                                     <div>
                                         <div id="tip-pie" class="text-gray-200 mt-2" style="height: 112px;"></div>

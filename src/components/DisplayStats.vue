@@ -1,58 +1,47 @@
 <template>
   <section class="stats bg-green-600 border border-green-500 m-4 rounded">
 <!--    <dl class="grid grid-cols-1 bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">-->
-      <div class="total-lost">
-        <div class="px-4 py-4 border-l border-l-green-500 border-r border-r-green-800 bg-gradient-to-r from-green-600 via-green-700 to-green-700 sm:p-6">
-          <div class="text-3xl text-gray-300  font-lobster">
+
+          <div class="text-xl text-gray-300  font-inter">
             <span>
               Total Lost:
             </span>
-            <span class="text-4xl font-semibold">
+            <span class="text-xl font-semibold">
               <span id="loss">{{ formatter.money(loss) }}</span>
             </span>
           </div>
-        </div>
-      </div>
 
-      <div class="total-won">
-        <div class="px-4 py-4 border-l border-l-green-500 border-r border-r-green-800  bg-gradient-to-r from-green-600 via-green-700 to-green-700 sm:p-6">
-          <div class="text-3xl font-normal text-gray-300 font-lobster">
+
+
+          <div class="text-xl font-normal text-gray-300 font-inter">
             <span>
               Total Won
             </span>
-            <span class="text-4xl font-semibold text-gray-300">
+            <span class="text-xl font-semibold text-gray-300">
               <span id="won"><span>{{ formatter.money(won) }}</span></span>
             </span>
           </div>
-        </div>
-      </div>
 
-      <div class="bank-display">
-        <div class="px-4 py-4 border-r border-green-800 sm:p-6 bg-gradient-to-r from-green-600 via-green-700 to-green-700">
-          <div class="text-3xl font-normal text-gray-300 font-lobster">
+          <div class="text-xl font-normal text-gray-300 font-inter">
             <font-awesome-icon icon="fa-solid fa-building-columns" />
             <span>
               Bank
             </span>
-            <span class="text-4xl font-semibold text-gray-300">
+            <span class="text-xl font-semibold text-gray-300">
               <span id="bank"><span>{{ formatter.money(balance) }}</span></span>
             </span>
           </div>
-        </div>
-      </div>
 
-      <div class="current-winnings">
-        <div class="px-4 py-4 border-l border-l-green-500  bg-gradient-to-r from-green-600 via-green-700 to-green-700 sm:p-6">
-          <div class="text-3xl font-normal text-gray-300 font-lobster">
+
+          <div class="text-xl font-normal text-gray-300 font-inter">
             <span>
               Winnings
             </span>
-            <span class="text-4xl font-semibold text-gray-300">
+            <span class="text-xl font-semibold text-gray-300">
               <span id="winnings"><span>{{ formatter.money(currentWinnings) }}</span></span>
             </span>
           </div>
-        </div>
-      </div>
+
 <!--    </dl>-->
   </section>
 </template>

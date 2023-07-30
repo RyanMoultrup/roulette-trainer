@@ -11,7 +11,7 @@
         <side-nav />
 
         <div class="layout-container flex-1">
-          <display-stats />
+<!--          <display-stats />-->
           <spins-table />
           <betting-table />
           <bets-display-panel/>
