@@ -15,7 +15,8 @@ import {
     faPlus,
     faChartPie,
     faChartArea,
-    faChartColumn
+    faChartColumn,
+    faTriangleExclamation
 } from '@fortawesome/free-solid-svg-icons'
 import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
 import "vue-toastification/dist/index.css";
@@ -25,18 +26,13 @@ import './assets/main.css';
 import './styles/wheel.less';
 
 library.add(
-    faGear,
-    faBuildingColumns,
-    faCirclePlay,
-    faRotate,
-    faExplosion,
-    faAnglesUp,
-    faRotateLeft,
-    faPlus,
-    faChartPie,
-    faChartArea,
-    faChartColumn,
-    faXmarkCircle
+    faGear, faBuildingColumns,
+    faCirclePlay, faRotate,
+    faExplosion, faAnglesUp,
+    faRotateLeft, faPlus,
+    faChartPie, faChartArea,
+    faChartColumn, faXmarkCircle,
+    faTriangleExclamation
 );
 
 const app = createApp(App);
