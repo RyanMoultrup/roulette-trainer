@@ -1,46 +1,44 @@
 <template>
-  <section class="stats bg-green-600 border border-green-500 m-4 rounded">
+  <section class="stats p-4 flex flex-col">
 <!--    <dl class="grid grid-cols-1 bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">-->
+    <div class="flex text-3xl font-normal text-gray-300 font-lobster gap-4">
+      <div>
+        <font-awesome-icon icon="fa-solid fa-building-columns mr-2" />
+        <span class="ml-3">Bank</span>
+      </div>
+      <span class="text-gray-300">
+        <span id="bank"><span>{{ formatter.money(balance) }}</span></span>
+      </span>
+    </div>
 
-          <div class="text-xl text-gray-300  font-inter">
-            <span>
-              Total Lost:
-            </span>
-            <span class="text-xl font-semibold">
-              <span id="loss">{{ formatter.money(loss) }}</span>
-            </span>
-          </div>
-
-
-
-          <div class="text-xl font-normal text-gray-300 font-inter">
-            <span>
-              Total Won
-            </span>
-            <span class="text-xl font-semibold text-gray-300">
-              <span id="won"><span>{{ formatter.money(won) }}</span></span>
-            </span>
-          </div>
-
-          <div class="text-xl font-normal text-gray-300 font-inter">
-            <font-awesome-icon icon="fa-solid fa-building-columns" />
-            <span>
-              Bank
-            </span>
-            <span class="text-xl font-semibold text-gray-300">
-              <span id="bank"><span>{{ formatter.money(balance) }}</span></span>
-            </span>
-          </div>
+    <div class="text-sm text-gray-300  font-inter">
+      <span>
+        Total Lost:
+      </span>
+      <span class="text-sm">
+        <span id="loss">{{ formatter.money(loss) }}</span>
+      </span>
+    </div>
 
 
-          <div class="text-xl font-normal text-gray-300 font-inter">
-            <span>
-              Winnings
-            </span>
-            <span class="text-xl font-semibold text-gray-300">
-              <span id="winnings"><span>{{ formatter.money(currentWinnings) }}</span></span>
-            </span>
-          </div>
+
+    <div class="text-sm font-normal text-gray-300 font-inter">
+      <span>
+        Total Won
+      </span>
+      <span class="text-sm text-gray-300">
+        <span id="won"><span>{{ formatter.money(won) }}</span></span>
+      </span>
+    </div>
+
+    <div class="text-sm font-normal text-gray-300 font-inter">
+      <span>
+        Winnings
+      </span>
+      <span class="text-sm text-gray-300">
+        <span id="winnings"><span>{{ formatter.money(currentWinnings) }}</span></span>
+      </span>
+    </div>
 
 <!--    </dl>-->
   </section>

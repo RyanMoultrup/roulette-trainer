@@ -4,7 +4,7 @@
     <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-90">
       <div
           v-for="bet in getStrategy" :key="bet.type"
-          class="absolute w-28 mt-1 ml-1"
+          class="absolute w-28 mt-1 ml-1 backdrop-blur-sm"
           v-bind:class="hoverBetCSS(bet)"
           @mouseleave="leaveHoverBet"
           @click="placeNext(bet.placement)"
@@ -266,6 +266,6 @@ export default {
 
 <style>
 .chips-hover {
-  @apply border bg-gray-100 bg-opacity-90 p-1 rounded z-50;
+  @apply border bg-gray-100 bg-opacity-75 p-1 rounded z-50;
 }
 </style>

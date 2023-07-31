@@ -14,9 +14,6 @@
       <div class="min-w-0 flex-1 ml-4">
         <new-game-button />
       </div>
-      <div>
-        <display-stats />
-      </div>
       <div class="ml-10 pr-4 flex-shrink-0 flex items-center space-x-10">
         <nav aria-label="Global" class="flex space-x-10">
           <a href="#" @click="showSettings" class="text-2xl font-medium text-gray-200"><font-awesome-icon icon="fa-solid fa-gear"></font-awesome-icon></a>

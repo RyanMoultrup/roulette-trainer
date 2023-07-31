@@ -36,22 +36,21 @@ html, .charts {
 .layout-container {
     display: grid;
     grid-template-columns: 1.2fr 1.2fr 0.8fr 0.8fr;
-    grid-template-rows: 0.2fr 0.8fr 2fr;
+    grid-template-rows: 0.2fr 1.7fr;
     gap: 0 0;
     grid-template-areas:
-    "stats stats stats spin-table"
     "charts charts charts spin-table"
     "betting-area betting-area betting-area bet-display";
 }
-.stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    gap: 0 0;
-    grid-template-areas:
-    "bank-display total-won total-lost current-winnings";
-    grid-area: stats;
-}
+/*.stats {*/
+/*    display: grid;*/
+/*    grid-template-columns: 1fr 1fr 1fr 1fr;*/
+/*    grid-template-rows: 1fr;*/
+/*    gap: 0 0;*/
+/*    grid-template-areas:*/
+/*    "bank-display total-won total-lost current-winnings";*/
+/*    grid-area: stats;*/
+/*}*/
 .bank-display { grid-area: bank-display; }
 .total-won { grid-area: total-won; }
 .total-lost { grid-area: total-lost; }
@@ -80,16 +79,18 @@ html, .charts {
 .chips-panel { grid-area: chips-panel; }
 .charts {
     display: grid;
-    grid-template-columns: 1.3fr 1.1fr 0.6fr;
+    grid-template-columns: 1.1fr 1.3fr 0.6fr;
     grid-template-rows: 1fr;
     gap: 0 1rem;
     grid-template-areas:
-    "hits-chart win-loss-bank-chart win-loss-chart";
+    "win-loss-bank-chart this-round this-round";
     grid-area: charts;
 }
-.hits-chart { grid-area: hits-chart; }
+.hits-chart { grid-area: chips-panel; }
 .win-loss-bank-chart { grid-area: win-loss-bank-chart; }
 .win-loss-chart { grid-area: win-loss-chart; }
+
+.this-round { grid-area: this-round }
 
 .main-message-toast .Vue-Toastification__toast--error {
     background-color: #b91c1c;
