@@ -8,7 +8,9 @@
 <!--      />-->
 <!--      <div id="hits-chart" class="p-4 h-full" ref="hitsChart"></div>-->
 <!--    </div>-->
-    <this-round-display class="relative hits-card card-bg-border bg-green-700 overflow-hidden z-0 h-full" />
+    <base-card class="hits-cart this-round">
+      <this-round-display class="relative overflow-hidden z-0 h-full" />
+    </base-card>
 
     <div class="relative win-loss-bank-card card-bg-border bg-green-700 overflow-hidden">
       <display-stats />
@@ -44,9 +46,10 @@ import { debounce } from "@/lib/Utils";
 import { useResizeObserver} from "@vueuse/core";
 import ThisRoundDisplay from "@/components/display/ThisRoundDisplay.vue";
 import DisplayStats from "@/components/DisplayStats.vue";
+import BaseCard from "@/components/ui/Base/BaseCard.vue";
 
 export default {
-  components: { ChartPlaceholder, ThisRoundDisplay, DisplayStats },
+  components: {BaseCard, ChartPlaceholder, ThisRoundDisplay, DisplayStats },
   data () {
     return {
       showPlaceholder: true,

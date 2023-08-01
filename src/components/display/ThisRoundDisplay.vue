@@ -1,9 +1,9 @@
 <template>
-  <div class="this-round flex rounded text-gray-400">
+  <div class="rounded text-gray-400">
 
-    <div class="p-5 flex flex-col justify-between bg-gradient-to-tr from-green-700 via-green-800 to-green-800 border border-green-800 shadow h-full w-full">
+    <div class="flex flex-col justify-between">
       <div class="flex flex-row">
-        <div class="px-4 border-r border-r-green-700 grow">
+        <div class="border-r border-r-green-700 grow pr-4">
           <div class="font-lobster text-2xl">This Round</div>
           <span class="mb-3">Bets: {{ getStrategy.length }}</span>
 
