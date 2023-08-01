@@ -12,17 +12,20 @@
       <this-round-display class="relative overflow-hidden z-0 h-full" />
     </base-card>
 
-    <div class="relative win-loss-bank-card card-bg-border bg-green-700 overflow-hidden">
-      <display-stats />
-      <div class="relative">
-        <chart-placeholder
-            icon="fa-solid fa-chart-area"
-            title="Wins Losses & Bank"
-            :show-placeholder="showPlaceholder"
-        />
-        <div id="win-loss-chart" class="p-4 h-full" ref="winLossBankChart"></div>
+    <base-card>
+      <div class="relative win-loss-bank-card overflow-hidden">
+        <display-stats />
+        <div class="relative">
+          <chart-placeholder
+              icon="fa-solid fa-chart-area"
+              title="Wins Losses & Bank"
+              :show-placeholder="showPlaceholder"
+          />
+          <div id="win-loss-chart" class="p-4 h-full" ref="winLossBankChart"></div>
+        </div>
       </div>
-    </div>
+    </base-card>
+
 
 <!--    <div class="relative win-loss-card card-bg-border bg-green-700 overflow-hidden">-->
 <!--      <chart-placeholder-->

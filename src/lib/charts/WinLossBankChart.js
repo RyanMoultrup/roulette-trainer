@@ -282,8 +282,8 @@ export default class WinLossBankChart {
             ])
             .brushOn(false);
 
-        this.chart.yAxis().tickFormat(d => `$${d}`).ticks(10);
-        this.chart.rightYAxis().tickFormat(d => `$${d}`).ticks(10);
+        this.chart.yAxis().tickFormat(d => `$${d}`).ticks(4);
+        this.chart.rightYAxis().tickFormat(d => `$${d}`).ticks(4);
 
         this.chart
             .on('postRedraw', chart => {

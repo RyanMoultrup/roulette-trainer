@@ -1,7 +1,6 @@
 <template>
   <div class="rounded text-gray-400">
-
-    <div class="flex flex-col justify-between">
+    <div class="flex flex-col justify-between h-full">
       <div class="flex flex-row">
         <div class="border-r border-r-green-700 grow pr-4">
           <div class="font-lobster text-2xl">This Round</div>
@@ -43,7 +42,6 @@
             <span>Profit</span>
           </div>
           <div class="w-80 p-2 max-h-40 overflow-y-auto">
-            <!--        <div class="flex flex-row items-end">-->
             <div v-for="spot in getHighestPayouts" :key="spot" class="flex flex-col border-b border-b-green-600 py-0.5">
               <div class="grid grid-cols-3 justify-between">
                 <span

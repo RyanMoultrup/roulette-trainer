@@ -1,5 +1,5 @@
 <template>
-  <section class="stats p-4 flex flex-col">
+  <section class="stats flex flex-col">
 <!--    <dl class="grid grid-cols-1 bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">-->
     <div class="flex text-3xl font-normal text-gray-300 font-lobster gap-4">
       <div>
@@ -11,31 +11,31 @@
       </span>
     </div>
 
-    <div class="text-sm text-gray-300  font-inter">
+    <div class="text-base text-gray-400  font-inter">
       <span>
         Total Lost:
       </span>
-      <span class="text-sm">
+      <span class="text-base">
         <span id="loss">{{ formatter.money(loss) }}</span>
       </span>
     </div>
 
 
 
-    <div class="text-sm font-normal text-gray-300 font-inter">
+    <div class="text-base font-normal text-gray-400 font-inter">
       <span>
         Total Won
       </span>
-      <span class="text-sm text-gray-300">
+      <span class="text-base text-gray-400">
         <span id="won"><span>{{ formatter.money(won) }}</span></span>
       </span>
     </div>
 
-    <div class="text-sm font-normal text-gray-300 font-inter">
+    <div class="text-base font-normal text-gray-400 font-inter">
       <span>
         Winnings
       </span>
-      <span class="text-sm text-gray-300">
+      <span>
         <span id="winnings"><span>{{ formatter.money(currentWinnings) }}</span></span>
       </span>
     </div>
