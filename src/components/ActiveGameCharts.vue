@@ -13,15 +13,16 @@
     </base-card>
 
     <base-card>
-      <div class="relative win-loss-bank-card overflow-hidden">
+      <div class="relative win-loss-bank-card overflow-hidden flex flex-col gap-3">
         <display-stats />
         <div class="relative">
           <chart-placeholder
               icon="fa-solid fa-chart-area"
               title="Wins Losses & Bank"
               :show-placeholder="showPlaceholder"
-          />
-          <div id="win-loss-chart" class="p-4 h-full" ref="winLossBankChart"></div>
+          >
+              <win-loss-bank-chart />
+          </chart-placeholder>
         </div>
       </div>
     </base-card>
@@ -43,16 +44,17 @@ import { redrawAll } from "dc";
 import { mapGetters } from "vuex";
 import HitsChart from "@/lib/charts/HitsChart.js";
 import WinLossChart from "@/lib/charts/WinLossChart.js";
-import WinLossBankChart from "@/lib/charts/WinLossBankChart.js";
+// import WinLossBankChart from "@/lib/charts/WinLossBankChart.js";
 import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 import { debounce } from "@/lib/Utils";
 import { useResizeObserver} from "@vueuse/core";
 import ThisRoundDisplay from "@/components/display/ThisRoundDisplay.vue";
 import DisplayStats from "@/components/DisplayStats.vue";
 import BaseCard from "@/components/ui/Base/BaseCard.vue";
+import WinLossBankChart from "@/components/charts/WinLossBankChart.vue";
 
 export default {
-  components: {BaseCard, ChartPlaceholder, ThisRoundDisplay, DisplayStats },
+  components: { BaseCard, ChartPlaceholder, ThisRoundDisplay, DisplayStats, WinLossBankChart },
   data () {
     return {
       showPlaceholder: true,
@@ -72,14 +74,14 @@ export default {
 
     const outcomes = this.getOutcomes();
 
-    const winLossBankChart = new WinLossBankChart();
-    const winLossBankRef = this.$refs.winLossBankChart;
-    winLossBankChart
-        // .parentHeight(winLossBankRef.clientHeight - 20)
-        // .parentWidth(winLossBankRef.clientWidth - 20)
-        .parentHeight(125)
-        .parentWidth(null)
-        .render(outcomes);
+    // const winLossBankChart = new WinLossBankChart();
+    // const winLossBankRef = this.$refs.winLossBankChart;
+    // winLossBankChart
+    //     // .parentHeight(winLossBankRef.clientHeight - 20)
+    //     // .parentWidth(winLossBankRef.clientWidth - 20)
+    //     .parentHeight(125)
+    //     .parentWidth(null)
+    //     .render(outcomes);
 
     const winLossChart = new WinLossChart();
     winLossChart
@@ -100,7 +102,7 @@ export default {
 
     // useResizeObserver(this.$refs.winLossBankChart, debounceChartResize(winLossBankChart));
     // useResizeObserver(this.$refs.hitsChart, debounceChartResize(hitsChart));
-    useResizeObserver(this.$refs.winLossPieChart, debounceChartResize(winLossChart));
+    // useResizeObserver(this.$refs.winLossPieChart, debounceChartResize(winLossChart));
   }
 }
 </script>
