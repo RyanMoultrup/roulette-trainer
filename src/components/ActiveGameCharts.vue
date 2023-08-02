@@ -15,15 +15,7 @@
     <base-card>
       <div class="relative win-loss-bank-card overflow-hidden flex flex-col gap-3">
         <display-stats />
-        <div class="relative">
-          <chart-placeholder
-              icon="fa-solid fa-chart-area"
-              title="Wins Losses & Bank"
-              :show-placeholder="showPlaceholder"
-          >
-              <win-loss-bank-chart />
-          </chart-placeholder>
-        </div>
+        <win-loss-bank-chart />
       </div>
     </base-card>
 
@@ -72,7 +64,7 @@ export default {
       }
     })
 
-    const outcomes = this.getOutcomes();
+    // const outcomes = this.getOutcomes();
 
     // const winLossBankChart = new WinLossBankChart();
     // const winLossBankRef = this.$refs.winLossBankChart;
@@ -83,13 +75,13 @@ export default {
     //     .parentWidth(null)
     //     .render(outcomes);
 
-    const winLossChart = new WinLossChart();
-    winLossChart
-        // .parentHeight(this.$refs.winLossPieChart.clientHeight - 30)
-        // .parentWidth(this.$refs.winLossPieChart.clientWidth - 30)
-        .parentHeight(100)
-        .parentWidth(null)
-        .render(outcomes);
+    // const winLossChart = new WinLossChart();
+    // winLossChart
+    //     // .parentHeight(this.$refs.winLossPieChart.clientHeight - 30)
+    //     // .parentWidth(this.$refs.winLossPieChart.clientWidth - 30)
+    //     .parentHeight(100)
+    //     .parentWidth(null)
+    //     .render(outcomes);
 
 
     // const hitsChart = new HitsChart();
@@ -98,7 +90,7 @@ export default {
     //     .parentWidth(this.$refs.hitsChart.clientWidth - 40)
     //     .render(outcomes);
 
-    const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
+    // const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
 
     // useResizeObserver(this.$refs.winLossBankChart, debounceChartResize(winLossBankChart));
     // useResizeObserver(this.$refs.hitsChart, debounceChartResize(hitsChart));

@@ -1,13 +1,23 @@
 <template>
-  <div id="win-loss-chart" class="p-4 h-full" ref="winLossBankChart"></div>
+  <div class="relative">
+    <chart-placeholder
+        icon="fa-solid fa-chart-area"
+        title="Wins Losses & Bank"
+        :show-placeholder="showPlaceholder"
+    >
+      <div id="win-loss-chart" class="h-full" ref="winLossBankChart"></div>
+    </chart-placeholder>
+  </div>
 </template>
 <script>
 import {mapGetters} from "vuex";
 import {redrawAll} from "dc";
 import WinLossBankChart from "@/lib/charts/WinLossBankChart";
 import {debounce} from "@/lib/Utils";
+import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 
 export default {
+  components: { ChartPlaceholder },
   data () {
     return {
       showPlaceholder: true,

@@ -1,5 +1,5 @@
 <template>
-  <div id="bets-container" class="relative bet-display bg-green-800 overflow-y-auto">
+  <div id="bets-container" class="relative bg-green-800 overflow-y-auto">
     <div class="bet-display-header flex flex-col text-white font-lobster text-2xl content-center bg-green-400 p-2 bg-gradient-to-r from-green-500 via-green-500 to-green-600" style="position: absolute; width: 100%; top: 0; left: 0;">
       <div class="flex flex-row justify-between">
         <h3>Current Bets</h3>
