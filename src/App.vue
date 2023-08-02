@@ -13,6 +13,7 @@
         <div class="layout-container flex-1">
           <spins-table />
           <betting-table />
+
           <div class="flex flex-col justify-between bg-green-800">
             <div class="font-lobster text-2xl pt-2 pl-2 text-gray-400">Spin History</div>
             <div class="flex flex-col">

@@ -108,6 +108,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
     fill: white;
 }
 
+.dc-chart svg g g.axis path,
 .dc-chart svg g g.axis.x path,
 .dc-chart svg g g.tick line {
     display: none
