@@ -1,8 +1,7 @@
 <template>
   <fade-out-transition>
-    <div v-show="showPlaceholder" :key="showPlaceholder" class="skeleton absolute top-0 left-0 rounded-md text-sm w-full py-2 flex flex-col justify-center items-center text-green-400 bg-green-600  h-full">
-    <font-awesome-icon class="text-4xl icon-shadow" :icon="icon" />
-
+    <div v-show="showPlaceholder" :key="showPlaceholder" class="skeleton absolute top-0 left-0 rounded-md text-sm w-full py-2 flex flex-col justify-center items-center text-green-500 bg-green-600  h-full">
+      <font-awesome-icon class="text-5xl icon-shadow" :icon="icon" />
     </div>
   </fade-out-transition>
   <slot></slot>
@@ -46,7 +45,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.icon-shadow { filter:drop-shadow(5px 7px rgba(10,41,22,.75)) }
+.icon-shadow { filter:drop-shadow(5px 5px rgba(10,41,22,.75)) }
 .gradient {
   @apply bg-gradient-to-tr from-green-700 via-green-600 to-green-700
 }

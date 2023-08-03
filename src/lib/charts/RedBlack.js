@@ -82,7 +82,6 @@ export default class RedBlack {
             .on('preRender', this.#adjustYAxisTicks(this.group))
             .on('preRedraw', this.#adjustYAxisTicks(this.group))
             .on('renderlet', function(chart) {
-                console.log('renderlet', chart)
                 selectAll(".dc-chart g.row svg.icon").remove();
                 selectAll(".dc-chart g.row").each(function(d) {
                     // Check condition for displaying the icon.
@@ -95,8 +94,10 @@ export default class RedBlack {
                             .attr("width", 12)  // Set the viewport dimensions.
                             .attr("height", 12)
                             .attr("viewBox", "0 0 16 16")
-                            .attr("fill", 'indianred')
-                            .attr("opacity", opacity)
+                            // .attr("fill", 'indianred')
+                            .attr("fill", '#753310')
+                            // .attr("opacity", opacity)
+                            .attr("opacity", 1)
                             .attr("class", "icon")
                             .html(fire)  // `fire` is the SVG string for the icon.
                             .attr("x", -17)  // Position it to the left of the bar.
