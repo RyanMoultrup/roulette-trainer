@@ -15,38 +15,22 @@
     <base-card>
       <div class="relative win-loss-bank-card overflow-hidden flex flex-col gap-3">
         <display-stats />
-        <win-loss-bank-chart />
+        <win-loss-bank-chart class="justify-self-center" />
       </div>
     </base-card>
-
-
-<!--    <div class="relative win-loss-card card-bg-border bg-green-700 overflow-hidden">-->
-<!--      <chart-placeholder-->
-<!--          icon="fa-solid fa-chart-pie"-->
-<!--          title="Won & Lost"-->
-<!--          :show-placeholder="showPlaceholder"-->
-<!--      />-->
-<!--      <div id="win-loss-row-chart" class="p-4 h-full w-full" ref="winLossPieChart"></div>-->
-<!--    </div>-->
   </section>
 </template>
 
 <script>
 import { redrawAll } from "dc";
 import { mapGetters } from "vuex";
-import HitsChart from "@/lib/charts/HitsChart.js";
-import WinLossChart from "@/lib/charts/WinLossChart.js";
-// import WinLossBankChart from "@/lib/charts/WinLossBankChart.js";
-import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
-import { debounce } from "@/lib/Utils";
-import { useResizeObserver} from "@vueuse/core";
-import ThisRoundDisplay from "@/components/display/ThisRoundDisplay.vue";
 import DisplayStats from "@/components/DisplayStats.vue";
 import BaseCard from "@/components/ui/Base/BaseCard.vue";
 import WinLossBankChart from "@/components/charts/WinLossBankChart.vue";
+import ThisRoundDisplay from "@/components/display/ThisRoundDisplay.vue";
 
 export default {
-  components: { BaseCard, ChartPlaceholder, ThisRoundDisplay, DisplayStats, WinLossBankChart },
+  components: { BaseCard, ThisRoundDisplay, DisplayStats, WinLossBankChart },
   data () {
     return {
       showPlaceholder: true,
