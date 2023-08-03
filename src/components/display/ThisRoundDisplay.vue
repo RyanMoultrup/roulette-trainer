@@ -4,7 +4,7 @@
       <div class="flex flex-row">
         <div class="border-r border-r-green-700 grow pr-4">
           <div class="font-lobster text-2xl">This Round</div>
-          <div class="flex items-center gap-3 mb-3 group">
+          <div class="flex items-center gap-3 group">
             <span>Bets: {{ getStrategy.length }}</span>
             <base-pill class="hidden group-hover:block"><span class="text-xs cursor-pointer flex-shrink-0" @click="clearAllBets">Clear All</span></base-pill>
           </div>

@@ -1,82 +1,42 @@
 <!-- Secondary column (hidden on smaller screens) -->
 <template>
-  <aside class="spin-table bg-green-800 border-t border-green-800 hidden flex-shrink-0 overflow-x-auto lg:block lg:flex-shrink-0 lg:order-last">
-    <div class="relative flex flex-col w-full border-l border-green-700">
-      <div class="">
-        <div class="flex flex-col">
-          <div class="overflow-x-auto">
-            <div class="align-middle inline-block min-w-full">
-              <div class="shadow overflow-hidden">
+  <aside class="spin-table bg-green-800 border-t border-green-800 hidden text-gray-400 lg:block lg:flex-shrink-0 lg:order-last flex flex-col h-full overflow-hidden">
 
-                <div class="relative">
-                  <div class="grid grid-cols-[1.3fr,0.9fr,0.9fr,0.9fr] top-0 left-0 w-full px-2 pt-2 border-b border-b-green-400">
-                    <span>Round</span>
-                    <span>Bet</span>
-                    <span>Outcome</span>
-                  </div>
-                  <div class="relative px-2 pb-2 pt-1 max-h-40 overflow-y-auto border-t border-t-green-600">
-                    <div v-for="bet in allBets" :key="bet.type" class="border-b border-b-green-600">
-                      <div class="grid grid-cols-[1fr,1fr,1fr] justify-between">
-                        <span style="color: #D49228;" class="mr-2 ">{{ bet.name() }}</span>
-                        <span>{{ bet.odds }}%</span>
-                        <span class="mr-2 ">{{ formatter.money(bet.amount) }}</span>
-                      </div>
-                    </div>
-                  </div>
+      <div class="grid grid-cols-[1fr,1fr,1fr] top-0 left-0 w-full px-2 pt-2 border-b border-b-green-400">
+        <span>Round</span>
+        <span>Bet</span>
+        <span>Outcome</span>
+      </div>
+      <div class="relative px-2 pb-2 pt-1 overflow-y-auto border-t border-t-green-600 h-full">
+        <div v-for="outcome in outcomes" :key="outcome.value.round" class="border-b border-b-green-600">
+          <div class="grid grid-cols-[1fr,1fr,1fr] justify-between">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 h-6 w-6 ">
+                <span :class="getHitCss(outcome)" class="h-6 w-6 rounded-full text-white text-center inline-block">{{ getHit(outcome) }}</span>
+              </div>
+              <div class="ml-2">
+                <div class="font-medium font-lobster text-xl">
+                  Spin {{ outcome.key }}
                 </div>
+              </div>
+            </div>
 
-                <table class="min-w-full text-white">
-                  <thead class="bg-green-400 bg-gradient-to-r from-green-500 via-green-500 to-green-600 font-lobster text-2xl">
-                  <tr>
-                    <th scope="col"
-                        class="px-3 py-3 text-left font-medium tracking-wider">
-                      Round
-                    </th>
-                    <th scope="col"
-                        class="px-3 py-3 text-left font-medium tracking-wider">
-                      Bets
-                    </th>
-                    <th scope="col"
-                        class="px-3 py-3 text-left font-medium tracking-wider">
-                      Outcome
-                    </th>
-                  </tr>
-                  </thead>
-                  <tbody class="bg-white bg-opacity-10 divide-y divide-green-800 text-white">
-                  <tr v-for="outcome in outcomes" :key="outcome.value.round" >
-                    <td class="px-2 py-1 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-6 w-6 ">
-                          <span :class="getHitCss(outcome)" class="h-6 w-6 rounded-full text-white text-center inline-block">{{ getHit(outcome) }}</span>
-                        </div>
-                        <div class="ml-4">
-                          <div class="font-medium font-lobster text-xl">
-                            Spin {{ outcome.key }}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-100"><strong>Bet</strong> {{ formatter.money(outcome.value.betAmt) }}</div>
-                      <div class="text-xs text-gray-300">{{ outcome.value.betCount }} bets</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-white">
-                        <base-pill>Won</base-pill> {{ formatter.money(outcome.value.won) }}
-                      </div>
-                      <div class="text-sm text-gray-200">
-                        <base-pill>Lost</base-pill> {{ formatter.money(outcome.value.loss) }}
-                      </div>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
+            <div class="px-6 py-2 whitespace-nowrap">
+              <div class="text-sm text-gray-100"><strong>Bet</strong> {{ formatter.money(outcome.value.betAmt) }}</div>
+              <div class="text-xs text-gray-300">{{ outcome.value.betCount }} bets</div>
+            </div>
+
+            <div class="px-6 py-2 whitespace-nowrap">
+              <div class="text-sm text-white">
+                <base-pill>Won</base-pill> {{ formatter.money(outcome.value.won) }}
+              </div>
+              <div class="text-sm text-gray-200">
+                <base-pill>Lost</base-pill> {{ formatter.money(outcome.value.loss) }}
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </aside>
 </template>
 

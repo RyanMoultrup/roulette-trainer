@@ -62,7 +62,6 @@ export default class EvenOdd {
         this.chart
             .width(this._width)
             .height(this._height)
-            .x(scaleOrdinal().domain(range(1, 38)))
             .gap(2)
             .colors(
                 scaleOrdinal()
