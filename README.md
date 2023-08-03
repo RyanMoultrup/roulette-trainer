@@ -191,9 +191,9 @@ issues that will be addressed when I can get around to it.
   - I recently rewrote the CSS to use grids and still need to work on the media queries for different screen sizes 
 - If you click on the multiple charts to filter the results (yes you can do this) the <code>spins table</code> will show all the rounds individually rather than aggregated when the filters are removed from the charts
 - If table limits are active it is possible to place an inside bet above the <code>inside bet min</code>, start emitting spins and then remove enough chips that the total <code>inside bet</code> is less than the table min
-- If you play a game and then want to start a new game by clicking the <code>New Game</code> button, the count of the number of rounds does not reset. So if you finished your fist game on round 23, you're next game will start on round 24
-- If you keep doubling your bet, the bet display panel will just keep adding the same chips over and over again not aggregating to higher value chips. Eventually the list of chips grows out of its container
+- ~~If you play a game and then want to start a new game by clicking the <code>New Game</code> button, the count of the number of rounds does not reset. So if you finished your fist game on round 23, you're next game will start on round 24~~
+- ~~If you keep doubling your bet, the bet display panel will just keep adding the same chips over and over again not aggregating to higher value chips. Eventually the list of chips grows out of its container~~
 - Most of the Vue code is still using the Options API because this project started a pure javascript and roulette was played in the console. It was then moved to Vue2 and eventually upgraded to Vue3
-- Chip values only go upto $100 which is limiting with larger starting bank values
+- ~~Chip values only go upto $100 which is limiting with larger starting bank values~~
 - ~~If table limits are enabled the limits are not displayed anywhere on the screen~~
 - ~~Number of rounds played is not currently displayed on the screen~~

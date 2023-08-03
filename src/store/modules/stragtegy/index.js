@@ -73,7 +73,6 @@ const mutations = {
 
 const actions = {
     placeBet ({ commit, rootGetters, state }, bet) {
-        console.log('placeBet::', bet);
         const tableLimit = rootGetters['settings/hasTableLimit'];
 
         if (tableLimit) {
@@ -88,7 +87,8 @@ const actions = {
                 // Check if the total bet value on the individual table spot is
                 // greater than the bet minimum. This is required when adding a
                 // chip with a value less than the min bet but are placing it
-                // on a spot that already has a bet that exceeds the minimum
+                // on a spot that already has a bet that exceeds the minimum.
+                // This only applies to outside bets
                 if (outsideBetAmount < minOutside) {
                     return {
                         success: false,
