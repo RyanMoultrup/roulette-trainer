@@ -2,7 +2,6 @@
   <div class="relative">
     <chart-placeholder
         icon="fa-solid fa-chart-column"
-        title="Numbers Hit Each Round"
         :show-placeholder="showPlaceholder" >
       <div id="red-black-chart" class="h-full" ref="redBlackChart"></div>
     </chart-placeholder>
@@ -19,7 +18,7 @@ export default {
   components: { ChartPlaceholder },
   data () {
     return {
-      showPlaceholder: false,
+      showPlaceholder: true,
     }
   },
   methods: {

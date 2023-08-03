@@ -38,7 +38,7 @@ export default class RedBlack {
     #adjustYAxisTicks (group) {
         return (chart) => {
             const maxHits = max(group.all(), d => d.value.exceptionCount)
-            let numberOfTicks = maxHits > 3 ? 3 : maxHits || 1
+            let numberOfTicks = maxHits > 2 ? 2 : maxHits || 1
             chart.xAxis().tickFormat(format("d")).ticks(numberOfTicks)
 
             if (this.group.all().length) total = this.group.all().reduce((r, i) => r + i.value.exceptionCount, 0)

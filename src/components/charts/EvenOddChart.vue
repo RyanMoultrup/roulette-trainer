@@ -2,7 +2,6 @@
   <div class="relative">
     <chart-placeholder
         icon="fa-solid fa-chart-column"
-        title="Numbers Hit Each Round"
         :show-placeholder="showPlaceholder" >
       <div id="even-odd-chart" class="h-full" ref="evenOddChart"></div>
     </chart-placeholder>
@@ -19,7 +18,7 @@ export default {
   components: { ChartPlaceholder },
   data () {
     return {
-      showPlaceholder: false,
+      showPlaceholder: true,
     }
   },
   methods: {
@@ -28,20 +27,20 @@ export default {
   mounted () {
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
-        this.showPlaceholder = false;
+        this.showPlaceholder = false
         redrawAll()
       }
     })
 
-    const outcomes = this.getOutcomes();
+    const outcomes = this.getOutcomes()
 
-    const evenOddChart = new EvenOdd();
+    const evenOddChart = new EvenOdd()
     evenOddChart
         .parentHeight(100)
         .parentWidth(150)
         // .parentHeight(this.$refs.hitsChart.clientHeight - 30)
         // .parentWidth(this.$refs.hitsChart.clientWidth - 40)
-        .render(outcomes);
+        .render(outcomes)
 
     // const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
     // useResizeObserver(this.$refs.hitsChart, debounceChartResize(hitsChart));
