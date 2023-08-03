@@ -60,6 +60,7 @@ export default class HitsChart {
         this.chart
             .width(this._width)
             .height(this._height)
+            .margins({top: 10, right: 10, bottom: 20, left: 30})
             .x(scaleOrdinal().domain(range(1, 38)))
             .xUnits(units.ordinal)
             .gap(1)

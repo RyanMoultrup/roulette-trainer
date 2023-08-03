@@ -62,16 +62,10 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="text-sm text-white">
-                        <span
-                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          Won
-                        </span> {{ formatter.money(outcome.value.won) }}
+                        <base-pill>Won</base-pill> {{ formatter.money(outcome.value.won) }}
                       </div>
                       <div class="text-sm text-gray-200">
-                        <span
-                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                          Lost
-                        </span> {{ formatter.money(outcome.value.loss) }}
+                        <base-pill>Lost</base-pill> {{ formatter.money(outcome.value.loss) }}
                       </div>
                     </td>
                   </tr>
@@ -92,6 +86,7 @@ import spots from '../lib/table/spots';
 import formatter from "@/lib/formatter";
 import { spinHistoryTable } from '@/lib/charts/SpinHistoryTable';
 import { removeEmptyBins, spinTable } from '@/lib/Reducers';
+import BasePill from "@/components/ui/Base/BasePill.vue";
 
 /**
  * Callback function that will find empty bins in crossfilter
@@ -107,6 +102,7 @@ const spinTableEmptyBinCallback = d => {
 }
 
 export default {
+  components: {BasePill},
   setup () {
     return { formatter }
   },

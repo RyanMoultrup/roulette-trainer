@@ -4,7 +4,10 @@
       <div class="flex flex-row">
         <div class="border-r border-r-green-700 grow pr-4">
           <div class="font-lobster text-2xl">This Round</div>
-          <span class="mb-3">Bets: {{ getStrategy.length }}</span>
+          <div class="flex items-center gap-3 mb-3 group">
+            <span>Bets: {{ getStrategy.length }}</span>
+            <base-pill class="hidden group-hover:block"><span class="text-xs cursor-pointer flex-shrink-0" @click="clearAllBets">Clear All</span></base-pill>
+          </div>
 
           <div class="relative">
             <div class="grid grid-cols-[1.3fr,0.9fr,0.9fr,0.9fr] top-0 left-0 w-full px-2 pt-2 border-b border-b-green-400">
@@ -68,11 +71,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import formatter from "@/lib/formatter";
 import highestPayout from "@/lib/stats/HighestPayoutSpots";
+import BasePill from "@/components/ui/Base/BasePill.vue";
 
 export default {
+  components: {BasePill},
   setup () {
     return { formatter }
   },
@@ -105,6 +110,12 @@ export default {
       this.min =  positiveWinningSpots[positiveWinningSpots.length - 1]?.profit ?? 0;
       this.positiveProfit = positiveWinningSpots.length;
       this.negativeProfit = highestPay.length - positiveWinningSpots.length;
+    }
+  },
+  methods: {
+    ...mapActions('strategy', ['clearAll', 'removeBet']),
+    clearAllBets () {
+      this.clearAll();
     }
   }
 }
