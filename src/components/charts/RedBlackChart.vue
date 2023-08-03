@@ -12,7 +12,8 @@ import { mapGetters } from "vuex";
 import { debounce } from "@/lib/Utils";
 import RedBlack from "@/lib/charts/RedBlack.js";
 import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
-import {redrawAll} from "dc";
+import { redrawAll } from "dc";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default {
   components: { ChartPlaceholder },

@@ -14,14 +14,14 @@
           <spins-table />
           <betting-table />
 
-          <div class="flex flex-col justify-between bg-green-800">
-            <div class="font-lobster text-2xl pt-2 pl-2 text-gray-400">Spin History</div>
-            <div class="flex flex-row">
-              <div class="flex flex-col">
+          <div class="flex flex-col justify-between bg-green-800 gap-2 p-3">
+            <div class="font-lobster text-2xl text-gray-400">Spin History</div>
+            <div class="flex flex-row gap-2">
+              <div class="flex flex-col gap-2">
                 <red-black-chart />
                 <even-odd-chart />
               </div>
-              <div class="flex flex-col">
+              <div class="flex flex-col gap-2">
                 <twelves-chart />
                 <half-board-chart />
               </div>
