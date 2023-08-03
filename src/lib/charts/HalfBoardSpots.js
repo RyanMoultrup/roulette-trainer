@@ -1,14 +1,13 @@
-import reductio from 'reductio';
-import spots from "../table/spots";
-import { format } from 'd3-format';
-import { RowChart, BarChart, units } from 'dc';
-import { scaleOrdinal } from 'd3-scale';
+import reductio from 'reductio'
+import spots from "../table/spots"
+import { format } from 'd3-format'
+import { RowChart, units } from 'dc'
+import { scaleOrdinal } from 'd3-scale'
 import { range, max } from 'd3-array'
-import { select } from 'd3-selection'
 
-let total = 0
+let total = 0;
 
-export default class Twelves {
+export default class HalfBoardSpots {
     chart
     dimension
     group
@@ -16,7 +15,7 @@ export default class Twelves {
     _height
 
     constructor () {
-        this.chart = new RowChart("#twelves-chart")
+        this.chart = new RowChart("#half-board-chart");
     }
 
     parentWidth (width) {
@@ -30,7 +29,7 @@ export default class Twelves {
     }
 
     #reduce () {
-        const reducer = reductio()
+        const reducer = reductio();
         reducer
             .exception(d => d.round)
             .exceptionCount(true)
@@ -48,17 +47,19 @@ export default class Twelves {
     }
 
     rescale (width, height) {
-        this.chart.width(width-20).height(height-20)
-        this.chart.rescale()
-        this.chart.redraw()
+        this.chart.width(width-20).height(height-20);
+        this.chart.rescale();
+        this.chart.redraw();
     }
 
     render (facts) {
         this.dimension = facts.dimension(d => {
-            if (d.hit >= 1 && d.hit <= 12) return '1st 12'
-            else if (d.hit >= 13 && d.hit <= 24) return '2nd 12'
-            else if (d.hit > 24) return '3rd 12'
-        })
+            if (d.hit >= 1 && d.hit <= 18) {
+                return '1 to 18';
+            } else if (d.hit >= 19 && d.hit <= 36) {
+                return '18 to 36';
+            }
+        });
 
         this.group = this.dimension.group();
 
@@ -80,14 +81,14 @@ export default class Twelves {
             .dimension(this.dimension)
             .group(this.group)
             .label(d => {
-                const percent = Math.round((d.value.exceptionCount / total) * 100)
-                return `${d.key} - ${percent}%`
+                const percent = Math.round((d.value.exceptionCount / total) * 100);
+                return `${d.key} - ${percent}%`;
             })
-            .valueAccessor(d => +d.value.exceptionCount)
+            .valueAccessor(d => +d.value.exceptionCount);
 
         this.chart
             .on('preRender', this.#adjustYAxisTicks(this.group))
-            .on('preRedraw', this.#adjustYAxisTicks(this.group))
+            .on('preRedraw', this.#adjustYAxisTicks(this.group));
 
         this.chart.render();
     }

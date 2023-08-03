@@ -16,10 +16,17 @@
 
           <div class="flex flex-col justify-between bg-green-800">
             <div class="font-lobster text-2xl pt-2 pl-2 text-gray-400">Spin History</div>
-            <div class="flex flex-col">
-              <red-black-chart />
-              <even-odd-chart />
+            <div class="flex flex-row">
+              <div class="flex flex-col">
+                <red-black-chart />
+                <even-odd-chart />
+              </div>
+              <div class="flex flex-col">
+                <twelves-chart />
+                <half-board-chart />
+              </div>
             </div>
+
             <hits-chart class="bet-display" />
           </div>
 
@@ -49,10 +56,14 @@ import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 import HitsChart from "@/components/charts/HitsChart.vue";
 import RedBlackChart from "@/components/charts/RedBlackChart.vue";
 import EvenOddChart from "@/components/charts/EvenOddChart.vue";
+import TwelvesChart from "@/components/charts/TwelvesChart.vue";
+import HalfBoardChart from "@/components/charts/HalfBoardChart.vue";
 
 export default {
   name: 'App',
   components: {
+    HalfBoardChart,
+    TwelvesChart,
     EvenOddChart,
     RedBlackChart,
     ChartPlaceholder,

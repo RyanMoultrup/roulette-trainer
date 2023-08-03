@@ -4,14 +4,14 @@
         icon="fa-solid fa-chart-column"
         title="Numbers Hit Each Round"
         :show-placeholder="showPlaceholder" >
-      <div id="red-black-chart" class="h-full" ref="redBlackChart"></div>
+      <div id="half-board-chart" class="h-full" ref="evenOddChart"></div>
     </chart-placeholder>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
 import { debounce } from "@/lib/Utils";
-import RedBlack from "@/lib/charts/RedBlack.js";
+import HalfBoardSpots from "@/lib/charts/HalfBoardSpots.js";
 import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 import {redrawAll} from "dc";
 
@@ -35,8 +35,8 @@ export default {
 
     const outcomes = this.getOutcomes();
 
-    const redBlackChart = new RedBlack();
-    redBlackChart
+    const evenOddChart = new HalfBoardSpots();
+    evenOddChart
         .parentHeight(100)
         .parentWidth(175)
         // .parentHeight(this.$refs.hitsChart.clientHeight - 30)

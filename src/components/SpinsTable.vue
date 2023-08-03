@@ -7,6 +7,24 @@
           <div class="overflow-x-auto">
             <div class="align-middle inline-block min-w-full">
               <div class="shadow overflow-hidden">
+
+                <div class="relative">
+                  <div class="grid grid-cols-[1.3fr,0.9fr,0.9fr,0.9fr] top-0 left-0 w-full px-2 pt-2 border-b border-b-green-400">
+                    <span>Round</span>
+                    <span>Bet</span>
+                    <span>Outcome</span>
+                  </div>
+                  <div class="relative px-2 pb-2 pt-1 max-h-40 overflow-y-auto border-t border-t-green-600">
+                    <div v-for="bet in allBets" :key="bet.type" class="border-b border-b-green-600">
+                      <div class="grid grid-cols-[1fr,1fr,1fr] justify-between">
+                        <span style="color: #D49228;" class="mr-2 ">{{ bet.name() }}</span>
+                        <span>{{ bet.odds }}%</span>
+                        <span class="mr-2 ">{{ formatter.money(bet.amount) }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <table class="min-w-full text-white">
                   <thead class="bg-green-400 bg-gradient-to-r from-green-500 via-green-500 to-green-600 font-lobster text-2xl">
                   <tr>
