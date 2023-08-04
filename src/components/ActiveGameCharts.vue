@@ -1,13 +1,5 @@
 <template>
   <section class="charts bg-opacity-0 mx-4 mt-4 mb-2">
-<!--    <div class="hits-chart relative hits-card card-bg-border bg-green-700 overflow-hidden">-->
-<!--      <chart-placeholder-->
-<!--          icon="fa-solid fa-chart-column"-->
-<!--          title="Numbers Hit Each Round"-->
-<!--          :show-placeholder="showPlaceholder"-->
-<!--      />-->
-<!--      <div id="hits-chart" class="p-4 h-full" ref="hitsChart"></div>-->
-<!--    </div>-->
     <base-card class="hits-cart this-round">
       <this-round-display class="relative overflow-hidden z-0 h-full" />
     </base-card>
@@ -48,17 +40,6 @@ export default {
       }
     })
 
-    // const outcomes = this.getOutcomes();
-
-    // const winLossBankChart = new WinLossBankChart();
-    // const winLossBankRef = this.$refs.winLossBankChart;
-    // winLossBankChart
-    //     // .parentHeight(winLossBankRef.clientHeight - 20)
-    //     // .parentWidth(winLossBankRef.clientWidth - 20)
-    //     .parentHeight(125)
-    //     .parentWidth(null)
-    //     .render(outcomes);
-
     // const winLossChart = new WinLossChart();
     // winLossChart
     //     // .parentHeight(this.$refs.winLossPieChart.clientHeight - 30)
@@ -66,19 +47,6 @@ export default {
     //     .parentHeight(100)
     //     .parentWidth(null)
     //     .render(outcomes);
-
-
-    // const hitsChart = new HitsChart();
-    // hitsChart
-    //     .parentHeight(this.$refs.hitsChart.clientHeight - 30)
-    //     .parentWidth(this.$refs.hitsChart.clientWidth - 40)
-    //     .render(outcomes);
-
-    // const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
-
-    // useResizeObserver(this.$refs.winLossBankChart, debounceChartResize(winLossBankChart));
-    // useResizeObserver(this.$refs.hitsChart, debounceChartResize(hitsChart));
-    // useResizeObserver(this.$refs.winLossPieChart, debounceChartResize(winLossChart));
   }
 }
 </script>
