@@ -1,7 +1,7 @@
 import reductio from 'reductio';
 import spots from "../table/spots";
 import { format } from 'd3-format';
-import { BarChart, units } from 'dc';
+import { RowChart, BarChart, units } from 'dc';
 import { scaleOrdinal } from 'd3-scale';
 import { range, max } from 'd3-array'
 
@@ -39,8 +39,9 @@ export default class HitsChart {
     #adjustYAxisTicks (group) {
         return (chart) => {
             const maxHits = max(group.all(), d => d.value.exceptionCount);
-            let numberOfTicks = maxHits > 10 ? 10 : maxHits || 1;
+            let numberOfTicks = maxHits > 3 ? 3 : maxHits || 1;
             chart.yAxis().tickFormat(format("d")).ticks(numberOfTicks);
+            chart.xAxis().ticks(8)
         }
     }
 
@@ -59,9 +60,10 @@ export default class HitsChart {
         this.chart
             .width(this._width)
             .height(this._height)
+            .margins({top: 10, right: 10, bottom: 20, left: 30})
             .x(scaleOrdinal().domain(range(1, 38)))
             .xUnits(units.ordinal)
-            .gap(2)
+            .gap(1)
             .colors(
                 scaleOrdinal()
                     .domain(['red', 'black', 'zero'])
@@ -73,7 +75,7 @@ export default class HitsChart {
                 }
                 return spots[d.key].color
             })
-            .brushOn(false)
+            // .brushOn(false)
             .elasticY(true)
             .dimension(this.dimension)
             .group(this.group)

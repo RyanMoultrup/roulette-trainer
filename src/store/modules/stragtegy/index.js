@@ -14,8 +14,10 @@ const allInsideBets = bets => {
 }
 
 const placementCategory = placement => {
-    const [placementId] = placement.split('_');
-    return odds[placementId].category;
+    console.log('placement::', placement)
+    const [placementId] = placement.split('_')
+    console.log('placementId::', placementId)
+    return odds[placementId].category
 }
 
 const state = () => ({
@@ -25,37 +27,37 @@ const state = () => ({
 });
 
 const removeFromCurrentBets = function (value) {
-    let index = currentBetSpots.indexOf(value);
+    let index = currentBetSpots.indexOf(value)
     if (index > -1) {
-        currentBetSpots.splice(index, 1);
+        currentBetSpots.splice(index, 1)
     }
 }
 
 const mutations = {
     async placeBet (state, bet) {
         if (currentBetSpots.includes(bet.placement)) {
-            await state.strategy[bet.placement].addChip(bet.chip);
-            return;
+            await state.strategy[bet.placement].addChip(bet.chip)
+            return
         }
 
         currentBetSpots.push(bet.placement);
-        state.strategy[bet.placement] = new Bet(bet);
+        state.strategy[bet.placement] = new Bet(bet)
     },
     removeBet (state, placement) {
-        removeFromCurrentBets(placement);
+        removeFromCurrentBets(placement)
         if (!state.emittingSpins) {
-            state.strategy[placement].removeChips();
+            state.strategy[placement].removeChips()
         }
         delete state.strategy[placement];
     },
     removeChip (state, { placement, chipIndex }) {
-        state.strategy[placement].removeChip(chipIndex);
+        state.strategy[placement].removeChip(chipIndex)
     },
     replayBet (state, bets) {
-        state.strategy = bets;
+        state.strategy = bets
     },
     lastBet (state, bets) {
-      state.lastBets = bets;
+      state.lastBets = bets
     },
     clear (state) {
         // currentBetSpots = [];
@@ -67,13 +69,12 @@ const mutations = {
         currentBetSpots = [];
     },
     minInsideBetMet (state, value) {
-        state.minInsideBetMet = value;
+        state.minInsideBetMet = value
     }
 }
 
 const actions = {
     placeBet ({ commit, rootGetters, state }, bet) {
-        console.log('placeBet::', bet);
         const tableLimit = rootGetters['settings/hasTableLimit'];
 
         if (tableLimit) {
@@ -83,12 +84,13 @@ const actions = {
             if (betCategory === 'outside') {
                 const outsideBetAmount = currentBetSpots.includes(bet.placement)
                     ? state.strategy[bet.placement].amount + +bet.chip.value
-                    : +bet.chip.value;
+                    : +bet.chip.value
 
                 // Check if the total bet value on the individual table spot is
                 // greater than the bet minimum. This is required when adding a
                 // chip with a value less than the min bet but are placing it
-                // on a spot that already has a bet that exceeds the minimum
+                // on a spot that already has a bet that exceeds the minimum.
+                // This only applies to outside bets
                 if (outsideBetAmount < minOutside) {
                     return {
                         success: false,
@@ -192,24 +194,24 @@ const actions = {
         if (totalBetAmount < rootGetters['bank/balance']) {
             for (const placement in state.lastBets) {
                 if (state.lastBets.hasOwnProperty(placement)) {
-                    state.lastBets[placement].replaceBet();
+                    state.lastBets[placement].replaceBet()
                 }
             }
 
             await commit('replayBet', { ...state.lastBets })
-            currentBetSpots = Object.keys(state.lastBets);
-            return true;
+            currentBetSpots = Object.keys(state.lastBets)
+            return true
         }
 
         return false;
     },
     doubleBet ({ dispatch, state, rootGetters }) {
-        let totalBetAmount = 0;
-        const bets = Object.values(state.strategy);
+        let totalBetAmount = 0
+        const bets = Object.values(state.strategy)
 
-        bets.forEach(bet => totalBetAmount += bet.amount);
+        bets.forEach(bet => totalBetAmount += bet.amount)
 
-        if (totalBetAmount > rootGetters['bank/availableBalance']) return false;
+        if (totalBetAmount > rootGetters['bank/availableBalance']) return false
 
         if (rootGetters['settings/hasTableLimit']) {
             // First all the current bets on the table must be split into the inside
@@ -218,14 +220,14 @@ const actions = {
                 .reduce((accumulator, bet) => {
                     if (bet.category === 'inside') {
                         accumulator.insideBetsTotal += bet.amount
-                        accumulator.insideBets.push(bet);
+                        accumulator.insideBets.push(bet)
                     } else {
-                        accumulator.outsideBets.push(bet);
+                        accumulator.outsideBets.push(bet)
                     }
                     return accumulator;
                 }, { insideBetsTotal: 0, insideBets: [], outsideBets: [] })
 
-            const { maxOutside, maxInside } = rootGetters['settings/getBetLimits'];
+            const { maxOutside, maxInside } = rootGetters['settings/getBetLimits']
 
             // Once the bets have been split into two arrays on with inside bet and the other
             // with outside bets, the outside bets must be looped over again and compared against the
@@ -237,53 +239,53 @@ const actions = {
                 .reduce((accumulator, bet) => {
                     bet.amount * 2 > maxOutside
                         ? accumulator[0].push(bet)
-                        : accumulator[1].push(bet);
-                    return accumulator;
-                }, [[], []]);
+                        : accumulator[1].push(bet)
+                    return accumulator
+                }, [[], []])
 
             // Combine all the rejected bets, and bets allowed to be doubled, from the
             // inside and outside bets for further processing.
             // Check that all of the inside bets added together do not exceed the inside max bet
-            const allRejectedBets = insideBetsTotal * 2 > maxInside  ? [...insideBets, ...rejectedOutsideBets] : rejectedOutsideBets;
-            const allGoodBets = insideBetsTotal * 2 <= maxInside  ? [...insideBets, ...goodOutsideBets] : goodOutsideBets;
+            const allRejectedBets = insideBetsTotal * 2 > maxInside  ? [...insideBets, ...rejectedOutsideBets] : rejectedOutsideBets
+            const allGoodBets = insideBetsTotal * 2 <= maxInside  ? [...insideBets, ...goodOutsideBets] : goodOutsideBets
 
             if (Object.keys(allRejectedBets).length) {
                 const rejectedBetsString = allRejectedBets.reduce((string, bet) => {
-                    string += ` ${bet.placement} `;
-                    return string;
+                    string += ` ${bet.placement} `
+                    return string
                 }, '');
 
-                toast.error(`The following bets could not be doubled because they would exceed the maximum bet ${rejectedBetsString}`);
+                toast.error(`The following bets could not be doubled because they would exceed the maximum bet ${rejectedBetsString}`)
             }
 
             allGoodBets.forEach(bet => {
-                bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }));
-            });
+                bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
+            })
 
-            return true;
+            return true
         }
 
         bets.forEach(bet => {
-            bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }));
+            bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
         });
 
-        return true;
+        return true
     },
     async clear ({ dispatch, commit, state }) {
         return new Promise(async (resolve, reject) => {
-            currentBetSpots = [];
-            await dispatch('setLastBet', state.strategy);
-            commit('clear');
-            resolve();
+            currentBetSpots = []
+            await dispatch('setLastBet', state.strategy)
+            commit('clear')
+            resolve()
         })
     },
     async clearAll ({ commit, state }) {
         for (const bet in state.strategy) {
-            await commit('removeBet', bet);
+            await commit('removeBet', bet)
         }
     },
     reset ({ commit }) {
-        commit('reset');
+        commit('reset')
     }
 }
 
@@ -294,7 +296,7 @@ const getters = {
     canSpin: (state, getters, rootState) => {
         return rootState['settings'].tableLimit
             ? !!Object.keys(state.strategy).length && state.minInsideBetMet
-            : !!Object.keys(state.strategy).length;
+            : !!Object.keys(state.strategy).length
     }
 }
 

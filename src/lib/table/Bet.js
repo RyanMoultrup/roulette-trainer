@@ -11,6 +11,7 @@ export default class {
   chips = [];
   _amount = 0;
   _category = '';
+  _odds = 0;
 
   // oneToEighteen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   oneToEighteen = range(1, 19);
@@ -203,6 +204,7 @@ export default class {
 
     this.type = placedBetArr.shift();
     this._category = odds[this.type].category;
+    this._odds = odds[this.type].odds.european;
 
     if (this.type === 'sgl') {
       this.spots = [+placedBetArr[0]]
@@ -260,11 +262,15 @@ export default class {
       this.spots = this.nineteenToThirtySix;
     }
 
-    if (this.type === 'dbl' || this.type === 'str' || this.type === 'line' || this.type === 'sqr' || this.type === 'trip') {
+    if (this.type === 'dbl' || this.type === 'str' || this.type === 'line' || this.type === 'sqr') {
       placedBetArr.forEach(item => {
-        this.spots.push(parseInt(item));
+        this.spots.push(parseInt(item === '0' ? '37' : item));
       });
     }
+  }
+
+  get odds () {
+    return this._odds;
   }
 
   get () {
@@ -282,6 +288,10 @@ export default class {
         color: spots[s].color
       }
     });
+  }
+
+  get winningNumbers () {
+    return Object.values(this.spots);
   }
 
   name () {

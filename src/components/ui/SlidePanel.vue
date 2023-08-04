@@ -1,7 +1,7 @@
 <template>
   <div class="fixed top-0 right-0 z-10 h-full max-w-2xl">
     <slide-in-from-right-transition>
-      <div v-if="show" class="slider-panel h-full bg-green-700 bg-gradient-to-tr from-green-600 via-green-700 to-green-700 ">
+      <div v-if="show" class="slider-panel h-full bg-green-700 bg-gradient-to-tr from-green-600 via-green-700 to-green-700">
         <div>
           <header class="p-5 bg-green-500 bg-gradient-to-r from-green-500 via-green-500 to-green-600">
             <div>

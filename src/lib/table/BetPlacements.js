@@ -150,11 +150,11 @@ export const placements = [
     'row_second',
     'row_third',
     'dbl_0_3',
-    'trip_0_3_2',
+    'str_0_3_2',
     'dbl_0_2',
-    'trip_0_2_1',
+    'str_0_2_1',
     'dbl_0_1',
-    '_zero'
+    'sgl_37'
 ];
 
 export const odds = {

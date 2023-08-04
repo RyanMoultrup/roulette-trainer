@@ -36,22 +36,21 @@ html, .charts {
 .layout-container {
     display: grid;
     grid-template-columns: 1.2fr 1.2fr 0.8fr 0.8fr;
-    grid-template-rows: 0.2fr 0.8fr 2fr;
+    grid-template-rows: 0.2fr 1.7fr;
     gap: 0 0;
     grid-template-areas:
-    "stats stats stats spin-table"
-    "charts charts charts spin-table"
-    "betting-area betting-area betting-area bet-display";
+    "charts charts charts bet-display"
+    "betting-area betting-area betting-area spin-table";
 }
-.stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    gap: 0 0;
-    grid-template-areas:
-    "bank-display total-won total-lost current-winnings";
-    grid-area: stats;
-}
+/*.stats {*/
+/*    display: grid;*/
+/*    grid-template-columns: 1fr 1fr 1fr 1fr;*/
+/*    grid-template-rows: 1fr;*/
+/*    gap: 0 0;*/
+/*    grid-template-areas:*/
+/*    "bank-display total-won total-lost current-winnings";*/
+/*    grid-area: stats;*/
+/*}*/
 .bank-display { grid-area: bank-display; }
 .total-won { grid-area: total-won; }
 .total-lost { grid-area: total-lost; }
@@ -80,16 +79,18 @@ html, .charts {
 .chips-panel { grid-area: chips-panel; }
 .charts {
     display: grid;
-    grid-template-columns: 1.3fr 1.1fr 0.6fr;
+    grid-template-columns: 1.1fr 1.3fr 0.6fr;
     grid-template-rows: 1fr;
     gap: 0 1rem;
     grid-template-areas:
-    "hits-chart win-loss-bank-chart win-loss-chart";
+    "win-loss-bank-chart this-round this-round";
     grid-area: charts;
 }
-.hits-chart { grid-area: hits-chart; }
+.hits-chart { grid-area: chips-panel; }
 .win-loss-bank-chart { grid-area: win-loss-bank-chart; }
 .win-loss-chart { grid-area: win-loss-chart; }
+
+.this-round { grid-area: this-round }
 
 .main-message-toast .Vue-Toastification__toast--error {
     background-color: #b91c1c;
@@ -99,7 +100,12 @@ html, .charts {
     fill: #14532D;
 }
 
-g.axis.y, g.axis.x, g.axis.yr { color: white; }
+/*.dc-chart svg rect {*/
+/*    stroke: red;*/
+/*    stroke-width: 0.5;*/
+/*}*/
+
+g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 
 .dc-chart text.y-axis-label.y-label,
 .dc-chart text.y-axis-label.yr-label,
@@ -107,6 +113,7 @@ g.axis.y, g.axis.x, g.axis.yr { color: white; }
     fill: white;
 }
 
+.dc-chart svg g g.axis path,
 .dc-chart svg g g.axis.x path,
 .dc-chart svg g g.tick line {
     display: none
@@ -124,17 +131,17 @@ g.axis.y, g.axis.x, g.axis.yr { color: white; }
     display: none;
 }
 
-#win-loss-chart {
-    min-height: 200px;
-}
+/*#win-loss-chart {*/
+/*    min-height: 200px;*/
+/*}*/
 
-#win-loss-row-chart {
-    min-height: 200px
-}
+/*#win-loss-row-chart {*/
+/*    min-height: 200px*/
+/*}*/
 
-#hits-chart {
-    min-height: 200px
-}
+/*#hits-chart {*/
+/*    min-height: 200px*/
+/*}*/
 
 .d3-tip {
     font-family: Arial, Helvetica, sans-serif;
@@ -216,7 +223,7 @@ g.axis.y, g.axis.x, g.axis.yr { color: white; }
     border: solid 1px red;
 }
 
-._zero {
+.sgl_37 {
     height: 46%;
     left: 3.25%;
     top: 7.5%;
@@ -249,7 +256,7 @@ g.axis.y, g.axis.x, g.axis.yr { color: white; }
     top: 9%;
 }
 
-.trip_0_3_2,
+.str_0_3_2,
 .dbl_3_2,
 .sqr_3_6_2_5,
 .dbl_6_5,
@@ -303,7 +310,7 @@ g.axis.y, g.axis.x, g.axis.yr { color: white; }
     top: 26.5%;
 }
 
-.trip_0_2_1,
+.str_0_2_1,
 .dbl_2_1,
 .sqr_2_5_1_4,
 .dbl_5_4,
@@ -386,8 +393,8 @@ g.axis.y, g.axis.x, g.axis.yr { color: white; }
 .dbl_0_3,
 .dbl_0_2,
 .dbl_0_1,
-.trip_0_3_2,
-.trip_0_2_1 {
+.str_0_3_2,
+.str_0_2_1 {
     left: 6%;
 }
 
@@ -673,12 +680,12 @@ g.axis.y, g.axis.x, g.axis.yr { color: white; }
 /* ------------- */
 .spot:hover,
 ._zero:hover ~ ._0,
-.trip_0_3_2:hover ~ ._0,
-.trip_0_3_2:hover ~ ._3,
-.trip_0_3_2:hover ~ ._2,
-.trip_0_2_1:hover ~ ._0,
-.trip_0_2_1:hover ~ ._2,
-.trip_0_2_1:hover ~ ._1,
+.str_0_3_2:hover ~ ._0,
+.str_0_3_2:hover ~ ._3,
+.str_0_3_2:hover ~ ._2,
+.str_0_2_1:hover ~ ._0,
+.str_0_2_1:hover ~ ._2,
+.str_0_2_1:hover ~ ._1,
 .dbl_0_3:hover ~ ._3,
 .dbl_0_2:hover ~ ._2,
 .dbl_0_1:hover ~ ._1,
