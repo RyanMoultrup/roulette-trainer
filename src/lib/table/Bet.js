@@ -262,9 +262,9 @@ export default class {
       this.spots = this.nineteenToThirtySix;
     }
 
-    if (this.type === 'dbl' || this.type === 'str' || this.type === 'line' || this.type === 'sqr' || this.type === 'trip') {
+    if (this.type === 'dbl' || this.type === 'str' || this.type === 'line' || this.type === 'sqr') {
       placedBetArr.forEach(item => {
-        this.spots.push(parseInt(item));
+        this.spots.push(parseInt(item === '0' ? '37' : item));
       });
     }
   }
