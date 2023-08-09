@@ -1,6 +1,6 @@
 <template>
   <div class="text-gray-300 opacity-90 font-lobster text-3xl" id="rounds">
-    Rounds <span>{{ rounds }}</span
+    Round <span>{{ rounds }}</span
   ></div>
 </template>
 <script>
