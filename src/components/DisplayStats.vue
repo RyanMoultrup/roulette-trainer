@@ -73,46 +73,46 @@ export default {
       tween('#bank')
           .initValue(oldVal)
           .onRender(val => this.balance = val)
-          .render(newVal);
+          .render(newVal)
     }
   },
   methods: {
     redraw () {
-      const displayFacts = displayReduce(this.getOutcomes);
-      const currentWinnings = +displayFacts.won - +displayFacts.loss;
+      const displayFacts = displayReduce(this.getOutcomes)
+      const currentWinnings = +displayFacts.won - +displayFacts.loss
 
       tween('#won')
           .initValue(this.won)
           .onRender(val => this.won = val)
-          .render(displayFacts.won);
+          .render(displayFacts.won)
 
       tween('#loss')
           .initValue(this.loss)
           .onRender(val => this.loss = val)
-          .render(displayFacts.loss);
+          .render(displayFacts.loss)
 
       tween('#winnings')
           .initValue(this.currentWinnings)
           .onRender(val => this.currentWinnings = val)
-          .render(currentWinnings);
+          .render(currentWinnings)
     }
   },
   mounted () {
     this.balance = this.availableBalance;
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
-        this.redraw();
+        this.redraw()
       }
     })
 
-    let spinTable = spinHistoryTable();
+    let spinTable = spinHistoryTable()
     spinTable
         .onRedraw(() => {
           this.redraw();
         });
-    spinTable.render();
+    spinTable.render()
 
-    this.redraw();
+    this.redraw()
   },
 }
 </script>
