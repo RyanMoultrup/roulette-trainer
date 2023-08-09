@@ -21,7 +21,7 @@ export default {
     ...mapActions('strategy', { double: 'doubleBet' }),
     async doubleBet () {
       if (!await this.double()) {
-        this.toast.error("You don't have enough in the bank to place your bet");
+        this.toast.error("You do not have enough in the bank to place your bet");
       }
     }
   }
