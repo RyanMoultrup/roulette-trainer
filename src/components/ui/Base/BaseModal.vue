@@ -20,7 +20,7 @@ export default {
   props: {
     show: {
       type: Boolean,
-      default: true
+      default: false
     }
   }
 }

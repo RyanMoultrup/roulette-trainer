@@ -14,24 +14,35 @@
       <div class="min-w-0 flex-1 ml-4">
         <new-game-button />
       </div>
-      <div class="ml-10 pr-4 flex-shrink-0 flex items-center space-x-10">
+      <div class="ml-10 pr-4 flex-shrink-0 flex items-center space-x-10 text-gray-200">
         <nav aria-label="Global" class="flex space-x-10">
-          <a href="#" @click="showSettings" class="text-2xl font-medium text-gray-200"><font-awesome-icon icon="fa-solid fa-gear"></font-awesome-icon></a>
+          <a href="#" @click="showSettings" class="text-2xl font-medium"><font-awesome-icon icon="fa-solid fa-gear"></font-awesome-icon></a>
         </nav>
+        <span>{{ username }}</span>
       </div>
     </div>
   </header>
 </template>
 <script>
-import NewGameButton from "@/components/NewGameButton.vue";
-import DisplayStats from "@/components/DisplayStats.vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
+import DisplayStats from "@/components/DisplayStats.vue"
+import NewGameButton from "@/components/NewGameButton.vue"
 
 export default {
   name: 'App',
   components: { NewGameButton, DisplayStats },
+  setup () {
+    const store = useStore()
+    const username = computed(() => {
+      return store.getters['user/getUsername']
+    })
+
+    return { username }
+  },
   methods: {
     showSettings () {
-      this.$emit('show');
+      this.$emit('show')
     }
   }
 }
