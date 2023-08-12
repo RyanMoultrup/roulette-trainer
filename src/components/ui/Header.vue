@@ -19,6 +19,7 @@
           <a href="#" @click="showSettings" class="text-2xl font-medium"><font-awesome-icon icon="fa-solid fa-gear"></font-awesome-icon></a>
         </nav>
         <span>{{ username }}</span>
+        <span><router-link to="logout">Logout</router-link></span>
       </div>
     </div>
   </header>
