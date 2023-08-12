@@ -33,6 +33,15 @@ export const user = {
     custom: fn => fn(axios)
 }
 
+export const game = {
+    list: (userId) => api.get(`/users/${userId}/games`),
+    get: (gameId) => api.get(`/games/${gameId}`),
+    create: (userId, payload) => api.post(`/games`, payload),
+    update: (id, payload) => api.put(`/games/${id}`, payload),
+    patch: (id, payload) => api.patch(`/$games/${id}`, payload),
+    remove: (id) => api.delete(`/games/${id}`),
+}
+
 export const auth = {
     register: payload => authApi.post('/register', payload),
     login: payload => authApi.post('/authenticate', payload)

@@ -42,7 +42,7 @@ export default {
     winLossBankChart
         // .parentHeight(winLossBankRef.clientHeight - 20)
         // .parentWidth(winLossBankRef.clientWidth - 20)
-        .parentHeight(125)
+        .parentHeight(null)
         .parentWidth(null)
         .render(outcomes);
 

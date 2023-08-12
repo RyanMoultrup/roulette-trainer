@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
 import Play from "@/views/Play.vue";
+import { createRouter, createWebHistory } from 'vue-router'
 import { removeToken } from "@/lib/storage/auth/TokenStorage";
 
 const router = createRouter({
@@ -30,6 +30,13 @@ const router = createRouter({
       name: 'register',
       component: () => import('../views/Register.vue'),
       meta: { layout: 'blank' }
+    },
+    {
+      path: '/game/:gameId',
+      name: 'game',
+      component: () => import('../views/Game.vue'),
+      props: true,
+      meta: { layout: 'default' }
     }
   ]
 })
