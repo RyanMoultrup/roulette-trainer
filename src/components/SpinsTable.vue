@@ -86,7 +86,7 @@ export default {
       return {
         'bg-red-700': color === 'red',
         'bg-black': color === 'black',
-        'bg-green-700': color === 'green'
+        'bg-green-400': color === 'green'
       }
     },
     redraw () {

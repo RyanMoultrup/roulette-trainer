@@ -19,4 +19,8 @@ const getNewChips = chips => {
     return findChips(getTotalChipValues(chips), availableChips, []);
 }
 
+export const getNewChipsFromValue = value => {
+    return findChips(value, availableChips, [])
+}
+
 export default getNewChips;

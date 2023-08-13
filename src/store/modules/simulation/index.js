@@ -20,6 +20,9 @@ const mutations = {
   updateRounds (state, number) {
     state.rounds = number
   },
+  updateSpin (state, number) {
+    state.spin = number
+  },
   pushSpin (state, number) {
     state.spin = number
     state.rounds++

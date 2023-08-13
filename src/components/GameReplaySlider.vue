@@ -3,7 +3,8 @@
     <div id="vis"></div>
     <div class="text-3xl text-gray-300 flex flex-row gap-12 bg-green-500 rounded-full py-2 px-10 drop-shadow-lg border border-green-700">
       <span class="slider-backing relative cursor-pointer"><font-awesome-icon @click="sliderBack" icon="fa-solid fa-backward-step" /></span>
-      <span class="relative cursor-pointer" ><font-awesome-icon @click="sliderPlay" icon="fa-solid fa-play" /></span>
+      <span v-show="!isPlaying" class="relative cursor-pointer"><font-awesome-icon @click="play" icon="fa-solid fa-play" /></span>
+      <span v-show="isPlaying" class="relative cursor-pointer"><font-awesome-icon @click="pause" icon="fa-solid fa-pause" /></span>
       <span class="slider-backing relative cursor-pointer"><font-awesome-icon @click="sliderForward" icon="fa-solid fa-forward-step" /></span>
     </div>
   </div>
@@ -13,13 +14,15 @@ import * as d3 from 'd3'
 import { onMounted, ref, watch } from "vue"
 import { useStore } from "vuex"
 import { redrawAll } from "dc"
-import chips from "@/lib/table/chips";
+import { getNewChipsFromValue } from "@/lib/table/ChipAggregator";
+import timer from "@/lib/timer";
 
 console.log('d3::', d3)
 
 export default {
   setup() {
     const store = useStore()
+    let isPlaying = ref(false)
     let currentValue = ref(0)
     let maxRound = 0
     let handle
@@ -28,29 +31,21 @@ export default {
     let group
     let facts
 
-    watch(currentValue, (newVal, oldVal) => {
+    watch(currentValue, async (newVal, oldVal) => {
       store.dispatch('simulation/setRound', newVal)
-      store.dispatch('strategy/clearAll')
+      await store.dispatch('strategy/clearAll')
 
-      const filteredRound = facts.all()
+      const { bet, hit } = facts.all()
           .filter(d => d.round === currentValue.value)
           .reduce((reducer, round) => {
-            // reducer.bets.push({
-            //   placement: round.placement,
-            //   chip: { value: round.bet, color: round.color === 'red' ? 'darkred' : 'black' }
-            // })
-            const [{ color }] = chips.filter(c => c.value === round.bet)
-            console.log('color::', color)
-            store.dispatch('strategy/placeBet', {
-              placement: round.placement,
-              chip: { value: round.bet, color }
-            })
+            const chips = getNewChipsFromValue(round.bet)
+            chips.forEach(c => store.dispatch('strategy/placeBet', { placement: round.placement, chip: c }))
             reducer.bet += round.bet
+            reducer.hit = round.hit
             return reducer
-          }, { bets: [], bet: 0 })
+          }, { bet: 0, hit: null })
 
-
-      console.log('FILTERED ROUND::', filteredRound)
+      store.commit('simulation/updateSpin', hit)
     })
     // const facts = store.getters['simulation/getOutcomes']
 
@@ -60,6 +55,18 @@ export default {
 
     const sliderBack = () => {
       moveSlider(-1)
+    }
+
+    const play = () => {
+      isPlaying.value = true
+      timer.start(1, () => {
+        moveSlider(1)
+      })
+    }
+
+    const pause = () => {
+      isPlaying.value = false
+      timer.stop()
     }
 
     function moveSlider(step) {
@@ -74,7 +81,6 @@ export default {
 
 
     function update(h) {
-      console.log('updating::', h)
       handle.attr("cx", x(h));
       applyCrossfilter(h)
       // const newData = dataset.filter(d => d.date < h);
@@ -82,9 +88,7 @@ export default {
     }
 
     function applyCrossfilter(round) {
-      console.log('applying crossfilter::', round)
       dimension.filterRange([1, round+1])
-      console.log('group::', group.all())
       redrawAll()
     }
 
@@ -94,15 +98,6 @@ export default {
         dimension = facts.dimension(d => d.round)
         group = dimension.group()
 
-        // const reducer = reductio()
-        // reducer
-        //     .exception(d => d.round)
-        //     .exceptionCount(true)
-        //
-        // reducer(group)
-
-        console.log('group', group.all())
-
         const margin = {top: 0, right: 50, bottom: 0, left: 50}
         const width = 960 - margin.left - margin.right
         const height = 75 - margin.top - margin.bottom
@@ -110,7 +105,6 @@ export default {
         const histHeight = height / 5;
 
         const parseDate = d3.timeParse("%d-%b-%y");
-        const formatDateIntoYear = d3.timeFormat("%Y");
 
         const startDate = new Date("2004-11-01"),
             endDate = new Date("2017-04-01");
@@ -122,9 +116,6 @@ export default {
             .range(['#ffc388', '#ffb269', '#ffa15e', '#fd8f5b', '#f97d5a', '#f26c58', '#e95b56', '#e04b51', '#d53a4b', '#c92c42', '#bb1d36', '#ac0f29', '#9c0418', '#8b0000']);
 
         maxRound = d3.max(facts.all(), d => d.round)
-        console.log('facts.all()::', facts.all())
-
-        console.log('maxRound::', maxRound)
 
         x = d3.scaleLinear()
             .domain([1, maxRound])
@@ -261,7 +252,10 @@ export default {
 
     return {
       sliderForward,
-      sliderBack
+      sliderBack,
+      play,
+      pause,
+      isPlaying
     }
   }
 }
