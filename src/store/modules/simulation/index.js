@@ -5,7 +5,7 @@ const cxf = crossfilter();
 
 const state = () => ({
   game: {},
-  // outcomes: cxf,
+  outcomes: cxf,
   spins: [],
   spin: null,
   rounds: 0,
@@ -22,7 +22,8 @@ const mutations = {
     state.rounds++
   },
   addOutcome (state, outcome) {
-    outcome.forEach(item => cxf.add([item]))
+    // outcome.forEach(item => cxf.add([item]))
+    outcome.forEach(item => state.outcomes.add([item]))
   },
   updateSpinEmit (state, value) {
     state.emittingSpins = value
@@ -55,8 +56,8 @@ const actions = {
 }
 
 const getters = {
-  // getOutcomes: state => state.outcomes,
-  getOutcomes: state => cxf,
+  getOutcomes: state => state.outcomes,
+  // getOutcomes: state => cxf,
   isEmitting: state => state.emittingSpins,
   selectedChip: state => state.selectedChip
 }
