@@ -17,6 +17,9 @@ const state = () => ({
 });
 
 const mutations = {
+  updateRounds (state, number) {
+    state.rounds = number
+  },
   pushSpin (state, number) {
     state.spin = number
     state.rounds++
@@ -46,6 +49,9 @@ const mutations = {
 }
 
 const actions = {
+  setRound ({ commit }, number) {
+    commit('updateRounds', number)
+  },
   async play ({ commit }, hit) {
     await game.play(hit);
     commit('pushSpin', hit)

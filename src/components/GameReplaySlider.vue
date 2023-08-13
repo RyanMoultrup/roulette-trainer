@@ -10,21 +10,48 @@
 </template>
 <script>
 import * as d3 from 'd3'
-import { onMounted } from "vue"
+import { onMounted, ref, watch } from "vue"
 import { useStore } from "vuex"
 import { redrawAll } from "dc"
+import chips from "@/lib/table/chips";
 
 console.log('d3::', d3)
 
 export default {
   setup() {
     const store = useStore()
-    let currentValue = 0
+    let currentValue = ref(0)
     let maxRound = 0
     let handle
     let x
     let dimension
     let group
+    let facts
+
+    watch(currentValue, (newVal, oldVal) => {
+      store.dispatch('simulation/setRound', newVal)
+      store.dispatch('strategy/clearAll')
+
+      const filteredRound = facts.all()
+          .filter(d => d.round === currentValue.value)
+          .reduce((reducer, round) => {
+            // reducer.bets.push({
+            //   placement: round.placement,
+            //   chip: { value: round.bet, color: round.color === 'red' ? 'darkred' : 'black' }
+            // })
+            const [{ color }] = chips.filter(c => c.value === round.bet)
+            console.log('color::', color)
+            store.dispatch('strategy/placeBet', {
+              placement: round.placement,
+              chip: { value: round.bet, color }
+            })
+            reducer.bet += round.bet
+            return reducer
+          }, { bets: [], bet: 0 })
+
+
+      console.log('FILTERED ROUND::', filteredRound)
+    })
     // const facts = store.getters['simulation/getOutcomes']
 
     const sliderForward = () => {
@@ -36,12 +63,12 @@ export default {
     }
 
     function moveSlider(step) {
-      let newRound = currentValue + step;
+      let newRound = currentValue.value + step;
 
       // Ensure the new round is within allowable range
       if (newRound >= 1 && newRound <= maxRound) {
-        currentValue = newRound;
-        update(currentValue);
+        currentValue.value = newRound;
+        update(currentValue.value);
       }
     }
 
@@ -63,10 +90,7 @@ export default {
 
     const handleMutation = (mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
-        console.log('Outcome was added:', mutation.payload);
-        // React to the mutation here.
-        console.log('in setup:::', state)
-        const facts = state.simulation.outcomes
+        facts = state.simulation.outcomes
         dimension = facts.dimension(d => d.round)
         group = dimension.group()
 
@@ -186,8 +210,8 @@ export default {
                   slider.interrupt();
                 })
                 .on("start drag", (event) => {
-                  currentValue = Math.round(x.invert(event.x));
-                  update(currentValue, handle, x, dimension, group)
+                  currentValue.value = Math.round(x.invert(event.x));
+                  update(currentValue.value)
                 })
             );
 
@@ -235,13 +259,6 @@ export default {
       store.subscribe(handleMutation)
     })
 
-    // console.log('the facts:::', facts)
-
-
-
-//     onMounted(() => {
-
-    // })
     return {
       sliderForward,
       sliderBack
