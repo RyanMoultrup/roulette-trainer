@@ -19,9 +19,13 @@ import {
     faChartPie,
     faChartArea,
     faChartColumn,
-    faTriangleExclamation
+    faTriangleExclamation,
+    faForwardStep,
+    faBackwardStep,
+    faPlay,
+    faPause
 } from '@fortawesome/free-solid-svg-icons'
-import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons"
+import { faXmarkCircle, faFloppyDisk } from "@fortawesome/free-regular-svg-icons"
 import "vue-toastification/dist/index.css"
 import './styles/dc.css'
 import './styles/app.css'
@@ -35,7 +39,9 @@ library.add(
     faRotateLeft, faPlus,
     faChartPie, faChartArea,
     faChartColumn, faXmarkCircle,
-    faTriangleExclamation
+    faTriangleExclamation, faFloppyDisk,
+    faForwardStep, faBackwardStep, faPlay,
+    faPause
 )
 
 const app = createApp(App)

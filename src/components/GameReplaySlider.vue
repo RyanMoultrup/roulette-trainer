@@ -1,12 +1,17 @@
 <template>
-  <h2>Hello Slider!</h2>
-  <div id="vis"></div>
+  <div class="chips-panel flex flex-col items-center">
+    <div id="vis"></div>
+    <div class="text-3xl text-gray-300 flex flex-row gap-12 bg-green-500 rounded-full py-2 px-10 drop-shadow-lg border border-green-700">
+      <span class="slider-backing relative cursor-pointer"><font-awesome-icon @click="sliderBack" icon="fa-solid fa-backward-step" /></span>
+      <span class="relative cursor-pointer" ><font-awesome-icon @click="sliderPlay" icon="fa-solid fa-play" /></span>
+      <span class="slider-backing relative cursor-pointer"><font-awesome-icon @click="sliderForward" icon="fa-solid fa-forward-step" /></span>
+    </div>
+  </div>
 </template>
 <script>
 import * as d3 from 'd3'
-import { onMounted, computed, watch, ref } from "vue"
+import { onMounted } from "vue"
 import { useStore } from "vuex"
-import reductio from "reductio"
 import { redrawAll } from "dc"
 
 console.log('d3::', d3)
@@ -14,7 +19,47 @@ console.log('d3::', d3)
 export default {
   setup() {
     const store = useStore()
+    let currentValue = 0
+    let maxRound = 0
+    let handle
+    let x
+    let dimension
+    let group
     // const facts = store.getters['simulation/getOutcomes']
+
+    const sliderForward = () => {
+      moveSlider(1)
+    }
+
+    const sliderBack = () => {
+      moveSlider(-1)
+    }
+
+    function moveSlider(step) {
+      let newRound = currentValue + step;
+
+      // Ensure the new round is within allowable range
+      if (newRound >= 1 && newRound <= maxRound) {
+        currentValue = newRound;
+        update(currentValue);
+      }
+    }
+
+
+    function update(h) {
+      console.log('updating::', h)
+      handle.attr("cx", x(h));
+      applyCrossfilter(h)
+      // const newData = dataset.filter(d => d.date < h);
+      // drawPlot(newData);
+    }
+
+    function applyCrossfilter(round) {
+      console.log('applying crossfilter::', round)
+      dimension.filterRange([1, round+1])
+      console.log('group::', group.all())
+      redrawAll()
+    }
 
     const handleMutation = (mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
@@ -22,8 +67,8 @@ export default {
         // React to the mutation here.
         console.log('in setup:::', state)
         const facts = state.simulation.outcomes
-        const dimension = facts.dimension(d => d.round)
-        const group = dimension.group()
+        dimension = facts.dimension(d => d.round)
+        group = dimension.group()
 
         // const reducer = reductio()
         // reducer
@@ -34,9 +79,9 @@ export default {
 
         console.log('group', group.all())
 
-        const margin = {top: 50, right: 50, bottom: 0, left: 50},
-            width = 960 - margin.left - margin.right,
-            height = 200 - margin.top - margin.bottom;
+        const margin = {top: 0, right: 50, bottom: 0, left: 50}
+        const width = 960 - margin.left - margin.right
+        const height = 75 - margin.top - margin.bottom
 
         const histHeight = height / 5;
 
@@ -52,12 +97,12 @@ export default {
             .domain(dateArray)
             .range(['#ffc388', '#ffb269', '#ffa15e', '#fd8f5b', '#f97d5a', '#f26c58', '#e95b56', '#e04b51', '#d53a4b', '#c92c42', '#bb1d36', '#ac0f29', '#9c0418', '#8b0000']);
 
-        const maxRound = d3.max(facts.all(), d => d.round)
+        maxRound = d3.max(facts.all(), d => d.round)
         console.log('facts.all()::', facts.all())
 
         console.log('maxRound::', maxRound)
 
-        const x = d3.scaleLinear()
+        x = d3.scaleLinear()
             .domain([1, maxRound])
             .range([1, width])
             .clamp(true);
@@ -120,7 +165,6 @@ export default {
 //       console.error("Error loading the CSV data:", error);
 //     });
 
-        let currentValue = 0;
         const slider = svg.append("g")
             .attr("class", "slider")
             .attr("transform", "translate(" + margin.left + "," + (margin.top + histHeight + 5) + ")");
@@ -143,7 +187,7 @@ export default {
                 })
                 .on("start drag", (event) => {
                   currentValue = Math.round(x.invert(event.x));
-                  update(currentValue)
+                  update(currentValue, handle, x, dimension, group)
                 })
             );
 
@@ -155,10 +199,11 @@ export default {
             .join("text")
             .attr("x", x)
             .attr("y", 10)
+            .attr("color", "white")
             .attr("text-anchor", "middle")
             .text(d => d);
 
-        const handle = slider.insert("circle", ".track-overlay")
+        handle = slider.insert("circle", ".track-overlay")
             .attr("class", "handle")
             .attr("r", 9);
 
@@ -177,20 +222,7 @@ export default {
               );
         }
 
-        function update(h) {
-          console.log('updating::', h)
-          handle.attr("cx", x(h));
-          applyCrossfilter(h)
-          // const newData = dataset.filter(d => d.date < h);
-          // drawPlot(newData);
-        }
 
-        function applyCrossfilter(round) {
-          console.log('applying crossfilter::', round)
-          dimension.filterRange([1, round+1])
-          console.log('group::', group.all())
-          redrawAll()
-        }
 
         function prepare(d) {
           d.date = parseDate(d.date);
@@ -210,18 +242,31 @@ export default {
 //     onMounted(() => {
 
     // })
+    return {
+      sliderForward,
+      sliderBack
+    }
   }
 }
 </script>
 <style>
-body {
-  font-family: "avenir next", Arial, sans-serif;
-  font-size: 12px;
-  color: #696969;
+
+.slider-backing::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #114726;
+  z-index: -1;
+  width: 2.9rem;
+  height: 2.9rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
 }
 
 .ticks {
   font-size: 10px;
+  fill: white;
 }
 
 .track,
@@ -231,12 +276,12 @@ body {
 }
 
 .track {
-  stroke: #dcdcdc;
+  stroke: #0A2916;
   stroke-width: 10px;
 }
 
 .track-inset {
-  stroke: #dcdcdc;
+  stroke: #071c0f;
   stroke-width: 8px;
 }
 
@@ -248,7 +293,7 @@ body {
 }
 
 .handle {
-  fill: #fff;
+  fill: darkgreen;
   stroke: #000;
   stroke-opacity: 0.5;
   stroke-width: 1.25px;
