@@ -93,21 +93,17 @@ export default {
 
     watch(getHighestPayout, (newVal) => {
       const highestPay = getHighestPayout.value;
-      console.log('highestPay:::', highestPay)
       const positiveWinningSpots = highestPay.filter(bet => bet.profit > 0);
       const winProbability =  (positiveWinningSpots.length / 37) * 100;
 
-      probability.value = winProbability.toFixed(1);
+      probability.value = +winProbability.toFixed(1);
       max.value = positiveWinningSpots[0]?.profit ?? 0;
       min.value =  positiveWinningSpots[positiveWinningSpots.length - 1]?.profit ?? 0;
       positiveProfit.value = positiveWinningSpots.length;
       negativeProfit.value = highestPay.length - positiveWinningSpots.length;
-
-      console.log('probability;:', probability.value)
     })
 
     const getBetPlacement = (bet) => {
-      console.log('THE BET:::', bet)
       const [placementId] = bet.placement.split('_')
       const placement = odds[placementId]
       return placement.name
@@ -116,7 +112,6 @@ export default {
     const getOdds = (bet) => {
       const [placementId] = bet.placement.split('_')
       const placement = odds[placementId]
-      console.log('getOdds placement::', placement)
       return placement.odds.european
     }
 
