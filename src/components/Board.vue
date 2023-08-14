@@ -16,7 +16,7 @@
               :chipValue="chip.value"
               :color="chip.color" />
           <span class="flex-shrink-0 font-sans text-sm flex-grow text-center py-0.5">{{ formatter.money(chip.value) }}</span>
-          <span class="text-black self-start text-sm font-red-800" @click.stop="removeChipFromBet({ placement: bet.placement, chipIndex: index, chip })">
+          <span v-if="getMode !== 'review'" class="text-black self-start text-sm font-red-800" @click.stop="removeChipFromBet({ placement: bet.placement, chipIndex: index, chip })">
             <font-awesome-icon :stlye="{ color: 'red' }" icon="fa-regular fa-circle-xmark" />
           </span>
         </div>
@@ -212,6 +212,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('simulation', ['getMode']),
     ...mapGetters('strategy', ['getStrategy']),
     ...mapGetters('bank', ['canBet', 'availableBalance']),
   },
@@ -227,6 +228,7 @@ export default {
       }
     },
     async place (event) {
+      if (this.getMode === 'review') return
       if (this.canBet(+this.selectedChip.value)) {
         const { success, msg } = await this.placeBetAction({ placement: event.target.id, chip: this.selectedChip });
         if (!success) {
@@ -237,6 +239,7 @@ export default {
       this.toast.error("You don't have enough in the bank to place your bet");
     },
     async placeNext (placement) {
+      if (this.getMode === 'review') return
       if (this.canBet(+this.selectedChip.value)) {
         const { success, msg } = await this.placeBetAction({ placement, chip: this.selectedChip });
         if (!success) {

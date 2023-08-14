@@ -107,7 +107,7 @@ export default {
 
       this.probability = winProbability.toFixed(1);
       this.max = positiveWinningSpots[0]?.profit ?? 0;
-      this.min =  positiveWinningSpots[positiveWinningSpots.length - 1]?.profit ?? 0;
+      this.min = positiveWinningSpots[positiveWinningSpots.length - 1]?.profit ?? 0;
       this.positiveProfit = positiveWinningSpots.length;
       this.negativeProfit = highestPay.length - positiveWinningSpots.length;
     }

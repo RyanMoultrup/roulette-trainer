@@ -63,22 +63,11 @@ export default {
   setup () {
     const store = useStore()
     const route = useRoute()
-    console.log('route::', route)
     const gameId = ref(route.params.gameId).value
 
-    // const fetchGame = async () => {
-    //   return await game.get(gameId)
-    // }
-
-    console.log('gameId::', gameId)
     game.get(gameId).then(async ({ status, data: { data: { outcomes } } }) => {
-      console.log('games API status::', status)
-      console.log('games API outcomes::', outcomes)
       await store.commit('simulation/addOutcome', outcomes)
-
-      console.log(store.getters['simulation/getOutcomes'].all())
     })
-
 
     return {}
   }
