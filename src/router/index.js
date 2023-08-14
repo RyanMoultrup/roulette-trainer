@@ -1,6 +1,7 @@
 import Play from "@/views/Play.vue";
 import { createRouter, createWebHistory } from 'vue-router'
-import { removeToken } from "@/lib/storage/auth/TokenStorage";
+import { removeToken } from "@/lib/storage/auth/TokenStorage"
+import store from '@/store/index'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,6 +10,10 @@ const router = createRouter({
       path: '/',
       name: 'play',
       component: Play,
+      beforeEnter: (to, from, next) => {
+        store.commit('simulation/updateMode', 'practice')
+        next()
+      },
       meta: { layout: 'default' }
     },
     {
@@ -35,6 +40,10 @@ const router = createRouter({
       path: '/game/:gameId',
       name: 'game',
       component: () => import('../views/Game.vue'),
+      beforeEnter: (to, from, next) => {
+        store.commit('simulation/updateMode', 'review')
+        next()
+      },
       props: true,
       meta: { layout: 'default' }
     }

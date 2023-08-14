@@ -1,7 +1,8 @@
 <template>
   <section class="charts bg-opacity-0 mx-4 mt-4 mb-2">
     <base-card class="hits-cart this-round">
-      <this-round-display class="relative overflow-hidden z-0 h-full" />
+      <this-round-display v-show="mode === 'practice'" class="relative overflow-hidden z-0 h-full" />
+      <this-round-display-review v-show="mode === 'review'" class="relative overflow-hidden z-0 h-full" />
     </base-card>
 
     <base-card>
@@ -14,15 +15,27 @@
 </template>
 
 <script>
-import { redrawAll } from "dc";
-import { mapGetters } from "vuex";
-import DisplayStats from "@/components/DisplayStats.vue";
-import BaseCard from "@/components/ui/Base/BaseCard.vue";
-import WinLossBankChart from "@/components/charts/WinLossBankChart.vue";
-import ThisRoundDisplay from "@/components/display/ThisRoundDisplay.vue";
+import { redrawAll } from "dc"
+import { mapGetters, useStore } from "vuex"
+import DisplayStats from "@/components/DisplayStats.vue"
+import BaseCard from "@/components/ui/Base/BaseCard.vue"
+import WinLossBankChart from "@/components/charts/WinLossBankChart.vue"
+import ThisRoundDisplay from "@/components/display/ThisRoundDisplay.vue"
+import ThisRoundDisplayReview from "@/components/display/ThisRoundDisplayReview.vue"
+import { computed } from "vue";
 
 export default {
-  components: { BaseCard, ThisRoundDisplay, DisplayStats, WinLossBankChart },
+  components: { BaseCard, ThisRoundDisplay, ThisRoundDisplayReview, DisplayStats, WinLossBankChart },
+  setup () {
+    const store = useStore()
+    const mode = computed(() => store.getters['simulation/getMode'])
+
+    console.log('mode::', mode)
+
+    return {
+      mode
+    }
+  },
   data () {
     return {
       showPlaceholder: true,

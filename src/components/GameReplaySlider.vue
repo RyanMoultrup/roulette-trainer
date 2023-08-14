@@ -35,8 +35,12 @@ export default {
       store.dispatch('simulation/setRound', newVal)
       await store.dispatch('strategy/clearAll')
 
-      const { bet, hit } = facts.all()
+      const filteredOutcomes = facts.all()
           .filter(d => d.round === currentValue.value)
+
+      store.commit('simulation/addFilteredOutcomes', filteredOutcomes)
+
+      const { bet, hit } = filteredOutcomes
           .reduce((reducer, round) => {
             const chips = getNewChipsFromValue(round.bet)
             chips.forEach(c => store.dispatch('strategy/placeBet', { placement: round.placement, chip: c }))
