@@ -202,7 +202,6 @@ export default class WinLossBankChart {
                 let totalWon = 0;
 
                 betOutcomes.forEach(outcome => {
-                    console.log('outcome:::', outcome);
                     betOutcomesHTML += `
                         <div class="flex flex-col border-b border-b-green-600">
                             <div class="flex flex-row justify-between">

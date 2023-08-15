@@ -61,11 +61,13 @@
           </div>
         </div>
       </div>
-
-      <div class="flex gap-4 items-center">
-        <span class="font-lobster text-2xl">{{ probability }}% Chance of profit</span>
-        <span class="font-lobster text-xl">Max Profit: {{ formatter.money(max) }}</span>
-        <span class="font-lobster text-xl">Min Profit: {{ formatter.money(min) }}</span>
+      <div class="flex flex-col">
+        <div class="flex gap-4 items-center">
+          <span class="font-lobster text-2xl">{{ probability }}% Chance of profit</span>
+          <span class="font-lobster text-xl">Max Profit: {{ formatter.money(max) }}</span>
+          <span class="font-lobster text-xl">Min Profit: {{ formatter.money(min) }}</span>
+        </div>
+        <div class="font-lobster text-xl">Actual Profit: {{ formatter.money(profit) }}</div>
       </div>
     </div>
   </div>
@@ -89,6 +91,13 @@ export default {
     const format = formatter
 
     const bets = computed(() => store.getters['simulation/getFilteredOutcomes'])
+
+    let profit = computed(() => {
+      return bets.value.reduce((r, b) => {
+        return b.wonRound ? r + b.won : r - b.loss
+      }, 0)
+    })
+
     const getHighestPayout = computed(() => highestPayout(store.getters['strategy/getStrategy']))
 
     watch(getHighestPayout, (newVal) => {
@@ -125,7 +134,8 @@ export default {
       negativeProfit,
       getHighestPayout,
       getBetPlacement,
-      getOdds
+      getOdds,
+      profit
     }
   }
 }
