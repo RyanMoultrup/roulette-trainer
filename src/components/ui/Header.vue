@@ -12,8 +12,8 @@
     <!-- Desktop nav area -->
     <div class="hidden md:min-w-0 md:flex-1 md:flex md:items-center md:justify-between">
       <div class="min-w-0 flex gap-2 ml-4">
-        <new-game-button />
-        <save-game-button />
+        <new-game-button v-if="mode !== 'review'" />
+        <save-game-button v-if="mode !== 'review'" />
       </div>
       <div class="ml-10 pr-4 flex-shrink-0 flex items-center space-x-10 text-gray-200">
         <nav aria-label="Global" class="flex space-x-10">
@@ -41,7 +41,9 @@ export default {
       return store.getters['user/getUsername']
     })
 
-    return { username }
+    const mode = computed(() => store.getters['simulation/getMode'])
+
+    return { username, mode }
   },
   methods: {
     showSettings () {

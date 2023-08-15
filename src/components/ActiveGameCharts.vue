@@ -30,8 +30,6 @@ export default {
     const store = useStore()
     const mode = computed(() => store.getters['simulation/getMode'])
 
-    console.log('mode::', mode)
-
     return {
       mode
     }
