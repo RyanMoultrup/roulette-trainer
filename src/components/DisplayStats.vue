@@ -70,10 +70,11 @@ export default {
   },
   watch: {
     availableBalance (newVal, oldVal) {
-      tween('#bank')
-          .initValue(oldVal)
-          .onRender(val => this.balance = val)
-          .render(newVal)
+      this.balance = newVal
+      // tween('#bank')
+      //     .initValue(oldVal)
+      //     .onRender(val => this.balance = val)
+      //     .render(newVal)
     }
   },
   methods: {
@@ -81,20 +82,24 @@ export default {
       const displayFacts = displayReduce(this.getOutcomes)
       const currentWinnings = +displayFacts.won - +displayFacts.loss
 
-      tween('#won')
-          .initValue(this.won)
-          .onRender(val => this.won = val)
-          .render(displayFacts.won)
+      this.won = displayFacts.won
+      this.loss = displayFacts.loss
+      this.currentWinnings = currentWinnings
 
-      tween('#loss')
-          .initValue(this.loss)
-          .onRender(val => this.loss = val)
-          .render(displayFacts.loss)
-
-      tween('#winnings')
-          .initValue(this.currentWinnings)
-          .onRender(val => this.currentWinnings = val)
-          .render(currentWinnings)
+      // tween('#won')
+      //     .initValue(this.won)
+      //     .onRender(val => this.won = val)
+      //     .render(displayFacts.won)
+      //
+      // tween('#loss')
+      //     .initValue(this.loss)
+      //     .onRender(val => this.loss = val)
+      //     .render(displayFacts.loss)
+      //
+      // tween('#winnings')
+      //     .initValue(this.currentWinnings)
+      //     .onRender(val => this.currentWinnings = val)
+      //     .render(currentWinnings)
     }
   },
   mounted () {

@@ -1,7 +1,6 @@
 import reductio from 'reductio';
-import spots from "../table/spots";
 import { format } from 'd3-format';
-import { RowChart, BarChart, units } from 'dc';
+import {RowChart, BarChart, units, deregisterChart } from 'dc';
 import { scaleOrdinal } from 'd3-scale';
 import { range, max } from 'd3-array'
 import { select } from 'd3-selection'
@@ -45,6 +44,12 @@ export default class Twelves {
 
             if (this.group.all().length) total = this.group.all().reduce((r, i) => r + i.value.exceptionCount, 0)
         }
+    }
+
+    reset () {
+        this.dimension.dispose()
+        select(this.chart.root().node()).remove()
+        deregisterChart(this.chart)
     }
 
     rescale (width, height) {

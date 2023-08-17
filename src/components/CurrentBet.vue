@@ -27,10 +27,11 @@ export default {
   },
   watch: {
     currentBetTotal (newVal, oldVal) {
-      tween('#current-bet')
-          .initValue(oldVal)
-          .onRender(val => this.currentBet = val)
-          .render(newVal);
+      this.currentBet = newVal
+      // tween('#current-bet')
+      //     .initValue(oldVal)
+      //     .onRender(val => this.currentBet = val)
+      //     .render(newVal);
     }
   },
 }

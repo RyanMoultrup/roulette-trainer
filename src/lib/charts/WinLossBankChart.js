@@ -1,10 +1,11 @@
-import { CompositeChart, LineChart, legend } from "dc";
+import { CompositeChart, LineChart, legend, deregisterChart } from "dc";
 import { scaleLinear } from 'd3-scale';
 import { curveCardinal } from 'd3-shape';
 import { tip as d3tip } from "d3-v6-tip";
 import spots from "@/lib/table/spots";
 import { names } from '@/lib/table/BetPlacements'
 import { simplePie } from "@/lib/charts/SimplePie";
+import { select } from 'd3-selection'
 
 export default class WinLossBankChart {
     chart;
@@ -149,6 +150,12 @@ export default class WinLossBankChart {
             this.reducer.remove,
             this.reducer.init
         );
+    }
+
+    reset () {
+        this.dimension.dispose()
+        select(this.chart.root().node()).remove()
+        deregisterChart(this.chart)
     }
 
     rescale (width, height) {

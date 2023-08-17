@@ -14,6 +14,9 @@ import HalfBoardSpots from "@/lib/charts/HalfBoardSpots.js";
 import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 import {redrawAll} from "dc";
 
+let unsubscribe
+let halfBoardSpots
+
 export default {
   components: { ChartPlaceholder },
   data () {
@@ -25,7 +28,7 @@ export default {
     ...mapGetters('simulation', ['getOutcomes'])
   },
   mounted () {
-    this.$store.subscribe((mutation, state) => {
+    unsubscribe = this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
         this.showPlaceholder = false;
         redrawAll()
@@ -34,8 +37,8 @@ export default {
 
     const outcomes = this.getOutcomes();
 
-    const evenOddChart = new HalfBoardSpots();
-    evenOddChart
+    halfBoardSpots = new HalfBoardSpots();
+    halfBoardSpots
         .parentHeight(100)
         .parentWidth(175)
         // .parentHeight(this.$refs.hitsChart.clientHeight - 30)
@@ -44,6 +47,10 @@ export default {
 
     // const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
     // useResizeObserver(this.$refs.hitsChart, debounceChartResize(hitsChart));
+  },
+  unmounted() {
+    unsubscribe()
+    halfBoardSpots.reset()
   }
 }
 </script>

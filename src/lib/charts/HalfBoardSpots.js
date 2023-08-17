@@ -1,9 +1,9 @@
 import reductio from 'reductio'
-import spots from "../table/spots"
 import { format } from 'd3-format'
-import { RowChart, units } from 'dc'
-import { scaleOrdinal } from 'd3-scale'
 import { range, max } from 'd3-array'
+import { select } from 'd3-selection'
+import { scaleOrdinal } from 'd3-scale'
+import { deregisterChart, RowChart, units } from 'dc'
 
 let total = 0;
 
@@ -44,6 +44,12 @@ export default class HalfBoardSpots {
 
             if (this.group.all().length) total = this.group.all().reduce((r, i) => r + i.value.exceptionCount, 0)
         }
+    }
+
+    reset () {
+        this.dimension.dispose()
+        select(this.chart.root().node()).remove()
+        deregisterChart(this.chart)
     }
 
     rescale (width, height) {

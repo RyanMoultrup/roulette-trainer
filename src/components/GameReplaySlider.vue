@@ -11,13 +11,11 @@
 </template>
 <script>
 import * as d3 from 'd3'
-import {onMounted, onUnmounted, ref, watch} from "vue"
-import { useStore } from "vuex"
 import { redrawAll } from "dc"
-import { getNewChipsFromValue } from "@/lib/table/ChipAggregator";
+import { useStore } from "vuex"
 import timer from "@/lib/timer";
-
-console.log('d3::', d3)
+import { onMounted, onUnmounted, ref, watch } from "vue"
+import { getNewChipsFromValue } from "@/lib/table/ChipAggregator";
 
 export default {
   setup() {
@@ -59,6 +57,7 @@ export default {
         d3.select("#vis").selectAll("*").remove()
         timer.stop()
         unwatch()
+        dimension.dispose()
         facts.remove()
       }
     })
