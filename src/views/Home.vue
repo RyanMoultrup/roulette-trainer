@@ -14,15 +14,15 @@
 
     <div class="top-left">
       <div class="flex flex-row justify-between h-full gap-4">
-        <base-card>
+        <base-card :top-gradient="true">
           <div class="">
             Add some content
           </div>
         </base-card>
-        <base-card>
+        <base-card :top-corner-gradient="true">
           <div class="">
             <h3 class="font-lobster text-gray-400 text-3xl">Play Roulette</h3>
-            <div class="image"></div>
+            <button @click="router.push({ name: 'play' })" type="button">Play Roulette!</button>
           </div>
         </base-card>
       </div>
@@ -34,20 +34,22 @@
           <font-awesome-icon icon="fa-solid fa-trophy" /> My Games
         </div>
         <div>
-          <div class="grid grid-cols-[1fr,1fr,1fr,1fr,1fr] justify-between border-b border-b-accent-200 pb-1 text-lg">
+          <div class="grid grid-cols-[1fr,1fr,1fr,1fr,1fr,1fr] content-center justify-between border-b border-b-accent-200 pb-1 text-lg">
             <span>Played On</span>
             <span>Rounds</span>
+            <span>Bets Placed</span>
             <span>Starting Balance</span>
             <span>Profit</span>
             <span>View Game</span>
           </div>
           <div>
             <div v-for="game in games">
-              <div class="grid grid-cols-[1fr,1fr,1fr,1fr,1fr] justify-between">
+              <div class="grid grid-cols-[1fr,1fr,1fr,1fr,1fr,1fr] items-center justify-between">
                 <span class="py-2 border-b border-b-accent-100">{{ formatter.dateTime(game.createdAt) }}</span>
-                <span class="py-2 border-b border-b-accent-100">{{ game.outcomes.length }}</span>
-                <span class="py-2 border-b border-b-accent-100">$1,000</span>
-                <span class="py-2 border-b border-b-accent-100">$1,200</span>
+                <span class="py-2 border-b border-b-accent-100">{{ game.rounds }}</span>
+                <span class="py-2 border-b border-b-accent-100">{{ game.bets }}</span>
+                <span class="py-2 border-b border-b-accent-100">{{ formatter.money(game.startBalance) }}</span>
+                <span class="py-2 border-b border-b-accent-100">{{ formatter.money(game.profit) }}</span>
                 <span @click="viewGame(game._id)" class="py-2 border-b border-b-accent-100 cursor-pointer text-accent-100"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></span>
               </div>
             </div>
@@ -77,12 +79,10 @@ export default {
     const games = ref([])
     const store = useStore()
     const router = useRouter()
-    // const user = reactive({})
 
     const user = computed(() => store.getters['user/getUser'])
 
     game.list(userId).then(async response => {
-      console.log('games response::', response.data.data)
       games.value = response.data.data
     })
 
@@ -90,7 +90,7 @@ export default {
       router.push({ path: `/game/${gameId}` })
     }
 
-    return { games, formatter, user, viewGame }
+    return { games, formatter, user, viewGame, router }
   }
 }
 </script>

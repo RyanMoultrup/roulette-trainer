@@ -25,7 +25,8 @@ import {
     faPlay,
     faPause,
     faTrophy,
-    faMagnifyingGlass
+    faMagnifyingGlass,
+    faHouse
 } from '@fortawesome/free-solid-svg-icons'
 import { faXmarkCircle, faFloppyDisk } from "@fortawesome/free-regular-svg-icons"
 import "vue-toastification/dist/index.css"
@@ -43,7 +44,8 @@ library.add(
     faChartColumn, faXmarkCircle,
     faTriangleExclamation, faFloppyDisk,
     faForwardStep, faBackwardStep, faPlay,
-    faPause, faTrophy, faMagnifyingGlass
+    faPause, faTrophy, faMagnifyingGlass,
+    faHouse
 )
 
 const app = createApp(App)

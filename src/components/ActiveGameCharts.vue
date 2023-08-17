@@ -1,11 +1,11 @@
 <template>
   <section :class="gridClass" class="bg-opacity-0 mx-4 mt-4 mb-2">
-    <base-card class="hits-cart this-round">
+    <base-card class="hits-cart this-round" :top-corner-gradient="true">
       <this-round-display v-show="mode === 'practice'" class="relative overflow-hidden z-0 h-full" />
       <this-round-display-review v-show="mode === 'review'" class="relative overflow-hidden z-0 h-full" />
     </base-card>
 
-    <base-card>
+    <base-card :top-gradient="true">
       <div class="relative win-loss-bank-card overflow-hidden flex flex-col gap-3">
         <display-stats />
         <win-loss-bank-chart class="justify-self-center" />

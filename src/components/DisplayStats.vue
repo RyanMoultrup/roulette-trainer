@@ -20,8 +20,6 @@
       </span>
     </div>
 
-
-
     <div class="text-base font-normal text-gray-400 font-inter">
       <span>
         Total Won

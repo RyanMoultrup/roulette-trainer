@@ -276,6 +276,7 @@ export default class WinLossBankChart {
             .margins({top: 15, right: 60, bottom: 10, left: 50})
             .x(scaleLinear().domain([1, this.dimension.group().size()]))
             .yAxisLabel("$ Won / Lost")
+            .yAxisPadding(10)
             .rightYAxisLabel('Bank')
             .legend(legend().x(80).y(20).itemHeight(13).gap(5))
             .renderTitle(false)

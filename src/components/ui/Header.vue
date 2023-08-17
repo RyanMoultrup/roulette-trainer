@@ -1,5 +1,5 @@
 <template>
-  <header class="flex-shrink-0 relative h-16 flex items-center bg-gradient-to-r from-accent-100 from-0% via-green-800 via-30% to-green-800 border-b border-green-700">
+  <header class="flex-shrink-0 relative h-16 flex items-center bg-gradient-to-r from-accent-100 from-0% via-green-800 via-65% to-green-800 border-b border-green-700">
     <!-- Logo area -->
     <div class="absolute inset-y-0 left-0 md:static md:flex-shrink-0">
       <a href="#"

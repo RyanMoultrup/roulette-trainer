@@ -1,7 +1,7 @@
 <template>
   <div class="layout-container flex-1">
 
-<!--    <spins-table grid-class="spin-table" />-->
+    <spins-table grid-class="spin-table" />
     <betting-table-review grid-class="betting-area" />
 
     <spin-history />

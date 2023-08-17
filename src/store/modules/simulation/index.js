@@ -79,7 +79,8 @@ const getters = {
   // getOutcomes: state => cxf,
   isEmitting: state => state.emittingSpins,
   selectedChip: state => state.selectedChip,
-  getMode: state => state.mode
+  getMode: state => state.mode,
+  getRounds: state => state.rounds
 }
 
 export default {

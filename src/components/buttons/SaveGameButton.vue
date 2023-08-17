@@ -9,27 +9,32 @@
   </button>
 </template>
 <script>
-import { useStore } from "vuex";
-import { game } from "@/api";
+import { useStore } from "vuex"
+import { game } from "@/api"
+import { useRouter } from "vue-router";
 
 export default {
   setup () {
     const store = useStore()
+    const router = useRouter()
     const saveGame = async () => {
-      console.log('SAVING GAME::')
       const outcomes = store.getters['simulation/getOutcomes'].all()
       const settings = store.getters['settings/getBetLimits']
       const userId = store.getters['user/getUser']._id
-
-      console.log('outcomes::', outcomes)
-      console.log('userId::', userId)
+      const rounds = store.getters['simulation/getRounds']
+      const startBalance = store.getters['bank/startBalance']
 
       const response = await game.create(userId, {
         outcomes,
-        user: userId
+        user: userId,
+        rounds,
+        startBalance,
+        ...settings
       })
 
-      console.log('save game response::', response)
+      if (response.status === 200) {
+        await router.push({ name: 'home' })
+      }
     }
 
     return { saveGame }
