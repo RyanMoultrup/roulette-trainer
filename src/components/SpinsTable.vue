@@ -1,6 +1,6 @@
 <!-- Secondary column (hidden on smaller screens) -->
 <template>
-  <aside class="spin-table bg-green-800 border-t border-green-800 hidden text-gray-400 lg:block lg:flex-shrink-0 lg:order-last flex flex-col h-full overflow-hidden">
+  <aside :class="gridClass" class="bg-green-800 border-t border-green-800 hidden text-gray-400 lg:block lg:flex-shrink-0 lg:order-last flex flex-col h-full overflow-hidden">
 
       <div class="grid grid-cols-[1fr,1fr,1fr] top-0 left-0 w-full px-2 pt-2 border-b border-b-green-400">
         <span>Round</span>
@@ -47,6 +47,7 @@ import formatter from "@/lib/formatter";
 import { spinHistoryTable } from '@/lib/charts/SpinHistoryTable';
 import { removeEmptyBins, spinTable } from '@/lib/Reducers';
 import BasePill from "@/components/ui/Base/BasePill.vue";
+import { useGridProps } from "@/composables/useGridProp";
 
 /**
  * Callback function that will find empty bins in crossfilter
@@ -65,6 +66,9 @@ export default {
   components: {BasePill},
   setup () {
     return { formatter }
+  },
+  props: {
+    ...useGridProps()
   },
   data () {
     return {

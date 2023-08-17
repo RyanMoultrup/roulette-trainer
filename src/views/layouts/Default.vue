@@ -37,9 +37,9 @@ export default {
     const showPanel = ref(false)
     const store = useStore()
 
-    onMounted(() => {
+    onMounted(async () => {
       if (!store.getters['user/isAuthenticated']) {
-        store.dispatch('user/setUserFromToken')
+        await store.dispatch('user/setUserFromToken')
       }
     })
 

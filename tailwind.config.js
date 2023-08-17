@@ -27,7 +27,10 @@ module.exports = {
           900: '#071C0F',
         },
         accent: {
-          500: '#381331'
+          100: '#0C4F4C', // light blue
+          200: '#073331', // darker blue
+          300: '#331A22', // dark red
+          500: '#381331' // green
         }
       }
     },

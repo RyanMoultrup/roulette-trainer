@@ -11,7 +11,7 @@
 </template>
 <script>
 import * as d3 from 'd3'
-import { onMounted, ref, watch } from "vue"
+import {onMounted, onUnmounted, ref, watch} from "vue"
 import { useStore } from "vuex"
 import { redrawAll } from "dc"
 import { getNewChipsFromValue } from "@/lib/table/ChipAggregator";
@@ -30,8 +30,9 @@ export default {
     let dimension
     let group
     let facts
+    let unsubscribeFromStore
 
-    watch(currentValue, async (newVal, oldVal) => {
+    const unwatch = watch(currentValue, async (newVal, oldVal) => {
       store.dispatch('simulation/setRound', newVal)
       await store.dispatch('strategy/clearAll')
 
@@ -50,6 +51,16 @@ export default {
           }, { bet: 0, hit: null })
 
       store.commit('simulation/updateSpin', hit)
+    })
+
+    onUnmounted(() => {
+      if (unsubscribeFromStore) {
+        unsubscribeFromStore()
+        d3.select("#vis").selectAll("*").remove()
+        timer.stop()
+        unwatch()
+        facts.remove()
+      }
     })
     // const facts = store.getters['simulation/getOutcomes']
 
@@ -123,7 +134,7 @@ export default {
 
         x = d3.scaleLinear()
             .domain([1, maxRound])
-            .range([1, width])
+            .range([0, width])
             .clamp(true);
 
         const y = d3.scaleLinear()
@@ -241,8 +252,6 @@ export default {
               );
         }
 
-
-
         function prepare(d) {
           d.date = parseDate(d.date);
           return d;
@@ -251,7 +260,7 @@ export default {
     };
 
     onMounted(() => {
-      store.subscribe(handleMutation)
+      unsubscribeFromStore = store.subscribe(handleMutation)
     })
 
     return {

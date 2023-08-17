@@ -4,24 +4,9 @@
     <spins-table />
     <betting-table />
 
-    <div class="flex flex-col justify-between bg-green-800 gap-3 p-3">
-      <div class="font-lobster text-2xl text-gray-400">Spin History</div>
-      <div class="flex flex-row gap-3">
-        <!--              <span class="font-lobster">Outside</span>-->
-        <div class="flex flex-col gap-3">
-          <red-black-chart />
-          <even-odd-chart />
-        </div>
-        <div class="flex flex-col gap-3">
-          <twelves-chart />
-          <half-board-chart />
-        </div>
-      </div>
+    <spin-history />
 
-      <hits-chart class="bet-display" />
-    </div>
-
-    <active-game-charts />
+    <active-game-charts grid-class="charts" />
   </div>
 </template>
 <script>
@@ -38,10 +23,12 @@ import SlidePanel from "@/components/ui/SlidePanel.vue"
 import BetsDisplayPanel from "@/components/BetsDisplayPanel.vue"
 import DisplayStats from "@/components/DisplayStats.vue"
 import BaseModal from "@/components/ui/Base/BaseModal.vue"
+import SpinHistory from "@/components/SpinHistory.vue";
 
 export default {
   name: 'App',
   components: {
+    SpinHistory,
     HalfBoardChart,
     TwelvesChart,
     EvenOddChart,

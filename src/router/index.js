@@ -1,4 +1,5 @@
-import Play from "@/views/Play.vue";
+import Play from "@/views/Play.vue"
+import Home from "@/views/Home.vue"
 import { createRouter, createWebHistory } from 'vue-router'
 import { removeToken } from "@/lib/storage/auth/TokenStorage"
 import store from '@/store/index'
@@ -8,6 +9,16 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'home',
+      component: Home,
+      beforeEnter: (to, from, next) => {
+        store.commit('simulation/updateMode', 'practice')
+        next()
+      },
+      meta: { layout: 'default' }
+    },
+    {
+      path: '/game/play',
       name: 'play',
       component: Play,
       beforeEnter: (to, from, next) => {

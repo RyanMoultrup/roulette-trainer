@@ -42,6 +42,24 @@ html, .charts {
     "charts charts charts bet-display"
     "betting-area betting-area betting-area spin-table";
 }
+
+.layout-container-home {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    grid-template-rows: 0.5fr 1.2fr;
+    gap: 1rem 1rem;
+    grid-template-areas:
+    "top-left side-pane"
+    "bottom-left side-pane";
+}
+
+.top-left { grid-area: top-left}
+.bottom-left { grid-area: bottom-left }
+
+.side-pane {
+    grid-area: side-pane;
+    grid-row: 1 / span 2
+}
 /*.stats {*/
 /*    display: grid;*/
 /*    grid-template-columns: 1fr 1fr 1fr 1fr;*/
