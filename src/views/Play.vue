@@ -24,6 +24,7 @@ import BetsDisplayPanel from "@/components/BetsDisplayPanel.vue"
 import DisplayStats from "@/components/DisplayStats.vue"
 import BaseModal from "@/components/ui/Base/BaseModal.vue"
 import SpinHistory from "@/components/SpinHistory.vue";
+import {mapActions} from "vuex";
 
 export default {
   name: 'App',
@@ -47,6 +48,16 @@ export default {
     return {
       showPanel: false
     }
+  },
+  methods: {
+    ...mapActions('strategy', { resetStrategy: 'reset' }),
+    ...mapActions('bank', { bankReset: 'reset' }),
+    ...mapActions('simulation', { resetSimulation: 'reset' }),
+  },
+  unmounted() {
+    this.resetStrategy();
+    this.bankReset();
+    this.resetSimulation();
   }
 }
 </script>

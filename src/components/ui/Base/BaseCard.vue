@@ -10,13 +10,15 @@
 export default {
   props: {
     topGradient: false,
-    topCornerGradient: false
+    topCornerGradient: false,
+    topFull: false
   },
   methods: {
     cssRules () {
       return {
         'top-gradient': this.topGradient,
-        'top-corner-gradient': this.topCornerGradient
+        'top-corner-gradient': this.topCornerGradient,
+        'top-full': this.topFull
       }
     }
   }
@@ -33,11 +35,15 @@ export default {
 }
 
 .top-corner-gradient {
-  @apply bg-gradient-to-br from-0% from-accent-100 via-20% via-green-800
+  @apply bg-gradient-to-br from-0% from-accent-150 via-20% via-green-800
+}
+
+.top-full {
+  @apply bg-gradient-to-br from-0% from-accent-150 via-90% via-green-800
 }
 
 .top-gradient {
-  @apply bg-gradient-to-b from-0% from-accent-100 via-35% via-green-800
+  @apply bg-gradient-to-b from-0% from-accent-150 via-35% via-green-800
 }
 
 .borders {

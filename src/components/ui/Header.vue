@@ -1,9 +1,9 @@
 <template>
-  <header class="flex-shrink-0 relative h-16 flex items-center bg-gradient-to-r from-accent-100 from-0% via-green-800 via-65% to-green-800 border-b border-green-700">
+  <header class="flex-shrink-0 relative h-16 flex items-center bg-gradient-to-r from-accent-150 from-0% via-green-800 via-65% to-green-800 border-b border-green-700">
     <!-- Logo area -->
     <div class="absolute inset-y-0 left-0 md:static md:flex-shrink-0">
       <a href="#"
-         class="flex items-center justify-center h-16 w-16 bg-accent-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-600 md:w-20">
+         class="flex items-center justify-center h-16 w-16 bg-accent-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-600 md:w-20">
         <img class="h-14 w-auto" src="@/assets/logo.svg"
              alt="Workflow">
       </a>
