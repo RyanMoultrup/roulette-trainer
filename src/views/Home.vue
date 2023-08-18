@@ -59,6 +59,7 @@
           <div class="font-lobster text-3xl mb-4">
             <font-awesome-icon icon="fa-solid fa-trophy" /> My Games
           </div>
+
           <div>
             <div class="grid grid-cols-[1fr,1fr,1fr,1fr,1fr,1fr] content-center justify-between border-b border-b-accent-200 pb-1 text-lg text-gray-300">
               <span v-for="column in columns">
@@ -68,7 +69,7 @@
               <span>View Game</span>
             </div>
             <div>
-              <div v-for="game in games" class="row">
+              <div v-for="game in paginatedGames" class="row">
                 <div class="grid grid-cols-[1fr,1fr,1fr,1fr,1fr,1fr] items-center justify-between">
                   <span class="col">{{ formatter.dateTime(game.createdAt) }}</span>
                   <span class="col">{{ game.rounds }}</span>
@@ -79,7 +80,17 @@
                 </div>
               </div>
             </div>
+            <div class="flex gap-3 justify-end py-3">
+              <span @click="goToPage(currentPage - 1)">
+                <font-awesome-icon class="text-accent-100 text-2xl cursor-pointer" icon="fa-solid fa-circle-chevron-left" />
+              </span>
+              <span>Page {{ currentPage }} of {{ totalPages }}</span>
+              <span @click="goToPage(currentPage + 1)">
+                <font-awesome-icon class="text-accent-100 text-2xl cursor-pointer" icon="fa-solid fa-circle-chevron-right" />
+              </span>
+            </div>
           </div>
+
         </div>
       </base-card>
     </div>
@@ -113,6 +124,8 @@ export default {
     const games = ref([])
     const store = useStore()
     const router = useRouter()
+    const currentPage = ref(1);
+    const itemsPerPage = ref(10);
 
     const user = computed(() => store.getters['user/getUser'])
 
@@ -121,7 +134,20 @@ export default {
         g.createdAt = new Date(g.createdAt)
         return g
       })
+      sortColumnAsc('createdAt')
     })
+
+    const paginatedGames = computed(() => {
+      const start = (currentPage.value - 1) * itemsPerPage.value;
+      const end = start + itemsPerPage.value;
+      return games.value.slice(start, end);
+    })
+
+    const totalPages = computed(() => Math.ceil(games.value.length / itemsPerPage.value))
+
+    const goToPage = pageNumber => {
+      if (pageNumber > 0 && pageNumber <= totalPages.value) currentPage.value = pageNumber
+    }
 
     const viewGame = gameId => {
       router.push({ path: `/game/${gameId}` })
@@ -183,9 +209,23 @@ export default {
     const sortColumnAsc = colName => games.value.sort((a, b) => b[colName] - a[colName])
     const sortColumnDesc = colName => games.value.sort((a, b) => a[colName] - b[colName])
 
-    return { games, formatter, user, viewGame, router, columns, sortColumn, sortStateIcons }
+    return {
+      games,
+      formatter,
+      user,
+      viewGame,
+      router,
+      columns,
+      sortColumn,
+      sortStateIcons,
+      totalPages,
+      goToPage,
+      paginatedGames,
+      currentPage
+    }
   }
 }
+
 </script>
 
 <style scoped>

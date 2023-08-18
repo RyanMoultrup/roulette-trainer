@@ -30,7 +30,9 @@ import {
     faMedal,
     faArrowUpWideShort,
     faArrowDownShortWide,
-    faArrowsUpDown
+    faArrowsUpDown,
+    faCircleChevronLeft,
+    faCircleChevronRight
 
 } from '@fortawesome/free-solid-svg-icons'
 import { faXmarkCircle, faFloppyDisk } from "@fortawesome/free-regular-svg-icons"
@@ -51,7 +53,8 @@ library.add(
     faForwardStep, faBackwardStep, faPlay,
     faPause, faTrophy, faMagnifyingGlass,
     faHouse, faMedal, faArrowUpWideShort,
-    faArrowDownShortWide, faArrowsUpDown
+    faArrowDownShortWide, faArrowsUpDown,
+    faCircleChevronLeft, faCircleChevronRight
 )
 
 const app = createApp(App)
