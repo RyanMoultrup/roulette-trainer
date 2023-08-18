@@ -1,12 +1,12 @@
 <template>
   <div class="layout-container-home flex-1 text-gray-400 py-4 pl-4">
-    <div class="side-pane flex flex-col gap-4 p-4">
+    <div class="side-pane flex flex-col gap-4 pr-4">
       <div class="flex gap-3">
-        <div class="w-full p-4 flex flex-col gap-4" style="background-color: #558280;">
+        <div class="w-full p-4 flex flex-col gap-4 rounded" style="background-color: #558280;">
           <span class="text-accent-50">Games</span>
           <span class="self-center font-lobster text-6xl text-accent-50">5</span>
         </div>
-        <div class="w-full p-4 flex flex-col gap-4" style="background-color: #331A22;">
+        <div class="w-full p-4 flex flex-col gap-4 rounded" style="background-color: #331A22;">
           <span class="text-accent-400">Total Won</span>
           <span class="self-center font-lobster text-6xl text-accent-400">{{ formatter.money(33875)}}</span>
         </div>
@@ -42,8 +42,8 @@
             <button
                 @click="router.push({ name: 'play' })"
                 type="button"
-                class="inline-flex mt-auto w-full items-center px-3 py-4 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-gray-200 bg-accent-100 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700">
-              Play Roulette!
+                class="inline-flex justify-center mt-auto w-full items-center px-3 py-4 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-gray-200 bg-accent-100 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700">
+              Click Here to Play Roulette!
             </button>
           </div>
         </base-card>

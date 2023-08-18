@@ -1,19 +1,19 @@
 <template>
-  <div class="betting-area mx-4 mb-4 mt-2 p-4 card-bg-border" style="z-index: 0;">
-    <div class="spin-buttons px-2 py-3 sm:px-6 justify-between">
-      <div class="flex gap-1">
-        <spin-button />
-        <spin-emit-button />
+    <div class="betting-area mx-4 mb-4 mt-2 p-4 card-bg-border" style="z-index: 0;">
+      <div class="spin-buttons px-2 py-3 sm:px-6 justify-between">
+        <div class="flex gap-1">
+          <spin-button />
+          <spin-emit-button />
+        </div>
       </div>
-    </div>
 
-    <wheel></wheel>
-    <board
-      :selected-chip="selectedChip"
-      style="z-index: 0;"
-    />
-    <chip-selection-panel @chipSelected="chipSelected" />
-  </div>
+      <wheel></wheel>
+      <board
+          :selected-chip="selectedChip"
+          style="z-index: 0;"
+      />
+      <chip-selection-panel @chipSelected="chipSelected" />
+    </div>
 </template>
 
 <script>
@@ -25,10 +25,11 @@ import BetsDisplayPanel from '@/components/BetsDisplayPanel.vue';
 import ChipSelectionPanel from '@/components/ChipSelectionPanel.vue';
 import SpinButton from "@/components/SpinButton.vue";
 import SpinEmitButton from "@/components/SpinEmitButton.vue";
+import BaseCard from "@/components/ui/Base/BaseCard.vue";
 
 export default {
   name: 'BettingTable',
-  components: { Wheel, BetsDisplayPanel, ChipSelectionPanel, Board, Chip, SpinButton, SpinEmitButton },
+  components: {BaseCard, Wheel, BetsDisplayPanel, ChipSelectionPanel, Board, Chip, SpinButton, SpinEmitButton },
   data () {
     return {
       bets: [],

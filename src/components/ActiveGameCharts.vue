@@ -5,7 +5,7 @@
       <this-round-display-review v-show="mode === 'review'" class="relative overflow-hidden z-0 h-full" />
     </base-card>
 
-    <base-card :top-gradient="true">
+    <base-card :top-full="true">
       <div class="relative win-loss-bank-card overflow-hidden flex flex-col gap-3">
         <display-stats />
         <win-loss-bank-chart class="justify-self-center" />

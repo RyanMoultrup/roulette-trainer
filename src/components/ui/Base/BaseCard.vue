@@ -1,5 +1,5 @@
 <template>
-  <div class="card-bg-border basis-full h-full gradients-green">
+  <div class="relative card-bg-border basis-full h-full gradients-green"  style="z-index: 0;">
     <div class="rounded text-gray-400 borders layout opacity-80" :class="cssRules()">
       <slot></slot>
     </div>

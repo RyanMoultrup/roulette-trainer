@@ -32,6 +32,7 @@ module.exports = {
           150: '#0d3b32',
           200: '#073331', // darker blue
           300: '#331A22', // dark red
+          350: '#940E07', // board red
           400: '#A6516C', // lighter red
           500: '#381331' // green
         }
