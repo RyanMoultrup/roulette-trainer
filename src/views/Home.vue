@@ -27,7 +27,10 @@
             </div>
             <span>Rank: <base-pill>Expert</base-pill></span>
             <div class="flex flex-col gap-3 mt-auto">
-              <span class="font-lobster text-xl text-gray-400">Achievements</span>
+              <div class="flex gap-1 items-center">
+                <font-awesome-icon icon="fa-solid fa-medal" />
+                <span class="font-lobster text-xl text-gray-400">Achievements</span>
+              </div>
               <div class="flex gap-3">
                 <mountain-badge />
                 <trophy />
@@ -58,21 +61,20 @@
           </div>
           <div>
             <div class="grid grid-cols-[1fr,1fr,1fr,1fr,1fr,1fr] content-center justify-between border-b border-b-accent-200 pb-1 text-lg">
-              <span>Played On</span>
-              <span>Rounds</span>
-              <span>Bets Placed</span>
-              <span>Starting Balance</span>
-              <span>Profit</span>
+              <span v-for="column in columns">
+                {{ column.title }}
+                <font-awesome-icon @click="sortColumn(column.key, column.state)" class="text-accent-100 cursor-pointer" :icon="`fa-solid ${sortStateIcons[column.state]}`" />
+              </span>
               <span>View Game</span>
             </div>
             <div>
               <div v-for="game in games">
                 <div class="grid grid-cols-[1fr,1fr,1fr,1fr,1fr,1fr] items-center justify-between">
-                  <span class="py-2 border-b border-b-accent-100">{{ formatter.dateTime(game.createdAt) }}</span>
-                  <span class="py-2 border-b border-b-accent-100">{{ game.rounds }}</span>
-                  <span class="py-2 border-b border-b-accent-100">{{ game.bets }}</span>
-                  <span class="py-2 border-b border-b-accent-100">{{ formatter.money(game.startBalance) }}</span>
-                  <span class="py-2 border-b border-b-accent-100">{{ formatter.money(game.profit) }}</span>
+                  <span class="row">{{ formatter.dateTime(game.createdAt) }}</span>
+                  <span class="row">{{ game.rounds }}</span>
+                  <span class="row">{{ game.bets }}</span>
+                  <span class="row">{{ formatter.money(game.startBalance) }}</span>
+                  <span class="row">{{ formatter.money(game.profit) }}</span>
                   <span @click="viewGame(game._id)" class="py-2 border-b border-b-accent-100 cursor-pointer text-accent-100"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></span>
                 </div>
               </div>
@@ -115,24 +117,79 @@ export default {
     const user = computed(() => store.getters['user/getUser'])
 
     game.list(userId).then(async response => {
-      games.value = response.data.data
+      games.value = response.data.data.map(g => {
+        g.createdAt = new Date(g.createdAt)
+        return g
+      })
     })
 
     const viewGame = gameId => {
       router.push({ path: `/game/${gameId}` })
     }
 
-    return { games, formatter, user, viewGame, router }
+    const sortStateIcons = {
+      ascending: 'fa-arrow-up-wide-short',
+      descending: 'fa-arrow-down-short-wide',
+      normal: 'fa-arrows-up-down'
+    }
+
+    const columns = ref([
+      {
+        title: 'Played On',
+        key: 'createdAt',
+        state: 'ascending'
+      },
+      {
+        title: 'Rounds',
+        key: 'rounds',
+        state: 'normal'
+      },
+      {
+        title: 'Bets Placed',
+        key: 'bets',
+        state: 'normal'
+      },
+      {
+        title: 'Start Balance',
+        key: 'startBalance',
+        state: 'normal'
+      },
+      {
+        title: 'Profit',
+        key: 'profit',
+        state: 'normal'
+      },
+    ])
+
+    const setColIcons = (key, state) => columns.value.forEach(c => (c.key === key) ? c.state = state : c.state = 'normal')
+
+    const sortColumn = (key, state) => {
+      if (state === 'normal') {
+        setColIcons(key, 'ascending')
+        sortColumnAsc(key)
+      }
+
+      if (state === 'ascending') {
+        setColIcons(key, 'descending')
+        sortColumnDesc(key)
+      }
+
+      if (state === 'descending') {
+        setColIcons('createdAt', 'ascending')
+        sortColumnAsc('createdAt')
+      }
+    }
+
+    const sortColumnAsc = colName => games.value.sort((a, b) => b[colName] - a[colName])
+    const sortColumnDesc = colName => games.value.sort((a, b) => a[colName] - b[colName])
+
+    return { games, formatter, user, viewGame, router, columns, sortColumn, sortStateIcons }
   }
 }
 </script>
 
-<style>
-.image {
-  background: url("@/assets/play-rated.jpg");
-  background-size: cover;
-  background-blend-mode: soft-light;
-  width: 300px;
-  height: 250px;
+<style scoped>
+.row {
+  @apply py-2 border-b border-b-accent-100
 }
 </style>
