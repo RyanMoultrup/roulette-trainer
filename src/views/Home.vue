@@ -42,6 +42,9 @@
         <base-card :top-corner-gradient="true">
           <div class="flex flex-col h-full">
             <h3 class="font-lobster text-gray-400 text-3xl">Play Roulette</h3>
+            <div class="max-h-36 overflow-hidden">
+              <wheel />
+            </div>
             <button
                 @click="router.push({ name: 'play' })"
                 type="button"
@@ -109,10 +112,12 @@ import Trophy from "@/components/badges/Trophy.vue"
 import MountainBadge from "@/components/badges/MountainBadge.vue"
 import { getUserIdFromToken } from "@/lib/storage/auth/TokenStorage"
 import MoneyUp from "@/components/badges/MoneyUp.vue";
+import Wheel from "@/components/Wheel.vue";
 
 export default {
   name: 'App',
   components: {
+    Wheel,
     MoneyUp,
     MountainBadge,
     Trophy,
