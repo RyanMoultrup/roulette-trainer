@@ -60,7 +60,7 @@
             <font-awesome-icon icon="fa-solid fa-trophy" /> My Games
           </div>
           <div>
-            <div class="grid grid-cols-[1fr,1fr,1fr,1fr,1fr,1fr] content-center justify-between border-b border-b-accent-200 pb-1 text-lg">
+            <div class="grid grid-cols-[1fr,1fr,1fr,1fr,1fr,1fr] content-center justify-between border-b border-b-accent-200 pb-1 text-lg text-gray-300">
               <span v-for="column in columns">
                 {{ column.title }}
                 <font-awesome-icon @click="sortColumn(column.key, column.state)" class="text-accent-100 cursor-pointer" :icon="`fa-solid ${sortStateIcons[column.state]}`" />
@@ -68,14 +68,14 @@
               <span>View Game</span>
             </div>
             <div>
-              <div v-for="game in games">
+              <div v-for="game in games" class="row">
                 <div class="grid grid-cols-[1fr,1fr,1fr,1fr,1fr,1fr] items-center justify-between">
-                  <span class="row">{{ formatter.dateTime(game.createdAt) }}</span>
-                  <span class="row">{{ game.rounds }}</span>
-                  <span class="row">{{ game.bets }}</span>
-                  <span class="row">{{ formatter.money(game.startBalance) }}</span>
-                  <span class="row">{{ formatter.money(game.profit) }}</span>
-                  <span @click="viewGame(game._id)" class="py-2 border-b border-b-accent-100 cursor-pointer text-accent-100"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></span>
+                  <span class="col">{{ formatter.dateTime(game.createdAt) }}</span>
+                  <span class="col">{{ game.rounds }}</span>
+                  <span class="col">{{ game.bets }}</span>
+                  <span class="col">{{ formatter.money(game.startBalance) }}</span>
+                  <span class="col">{{ formatter.money(game.profit) }}</span>
+                  <span @click="viewGame(game._id)" class="col cursor-pointer text-accent-100"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></span>
                 </div>
               </div>
             </div>
@@ -189,7 +189,15 @@ export default {
 </script>
 
 <style scoped>
-.row {
-  @apply py-2 border-b border-b-accent-100
+.col {
+  @apply py-2 border-b border-b-accent-150
+}
+
+.row:nth-child(2n) {
+  background-color: #08291e;
+}
+
+.row:hover {
+  @apply bg-accent-150
 }
 </style>
