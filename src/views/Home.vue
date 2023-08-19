@@ -2,20 +2,50 @@
   <div class="layout-container-home flex-1 text-gray-400 py-4 pl-4">
     <div class="side-pane flex flex-col gap-4 pr-4">
       <div class="flex gap-3">
-        <div class="w-full p-4 flex flex-col gap-4 rounded" style="background-color: #558280;">
-          <span class="text-accent-50">Games</span>
-          <span class="self-center font-lobster text-6xl text-accent-50">{{ totalGames }}</span>
+        <div class="w-full p-4 flex flex-col gap-4 rounded" style="background-color: #2E4746;">
+          <span class="text-accent-50"  style="color: #588785">Games</span>
+          <span class="self-center font-lobster text-6xl text-accent-50 text-shadow" style="color: #588785">{{ totalGames }}</span>
         </div>
-        <div class="w-full p-4 flex flex-col gap-4 rounded" style="background-color: #331A22;">
-          <span class="text-accent-400">Total Won</span>
-          <span class="self-center font-lobster text-6xl text-accent-400">{{ formatter.money(totalWon)}}</span>
+        <div class="w-full p-4 flex flex-col gap-4 rounded" style="background-color: #1b1003;">
+          <span class="text-accent-400" style="color: #572B39">Total Won</span>
+          <span class="self-center font-lobster text-6xl text-accent-400 text-shadow" style="color: #572B39">{{ formatter.money(totalWon)}}</span>
         </div>
       </div>
       <h5 class="font-lobster text-xl">Strategies</h5>
-      <div class="p-4 rounded-md" style="background-color: #0C4F4C; height: 100px;">Martingale</div>
-      <div class="p-4 rounded-md" style="background-color: #0C4F4C; height: 100px;">Peroli</div>
+      <div class="p-4 rounded flex flex-col justify-between gap-3" style="background-color: #0C4F4C;">
+        <span class="font-bold">Martingale</span>
+        <div class="flex gap-3 text-xs">
+          <span>Effectiveness: <base-pill>medium</base-pill></span>
+          <span>Risk: <base-pill>high</base-pill></span>
+          <span>Reward: <base-pill>medium</base-pill></span>
+        </div>
+        <p class="text-sm">A simple strategy great for beginners and used in more complex strategies</p>
+        <button
+            type="button"
+            class="play inline-flex justify-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded text-gray-400 bg-accent-150 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
+        >
+          <font-awesome-icon icon="fa-solid fa-graduation-cap" class="mr-1" />
+          Learn More
+        </button>
+      </div>
+      <div class="p-4 rounded flex flex-col justify-between gap-3" style="background-color: #0C4F4C;">
+        <span class="font-bold">Paroli</span>
+        <div class="flex gap-3 text-xs">
+          <span>Effectiveness: <base-pill>medium</base-pill></span>
+          <span>Risk: <base-pill>high</base-pill></span>
+          <span>Reward: <base-pill>medium</base-pill></span>
+        </div>
+        <p class="text-sm">A positive progression strategy that is the opposite of the Martingale strategy</p>
+        <button
+            type="button"
+            class="play inline-flex justify-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded text-gray-400 bg-accent-150 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
+        >
+          <font-awesome-icon icon="fa-solid fa-graduation-cap" class="mr-1"/>
+          Learn More
+        </button>
+      </div>
       <h5 class="font-lobster text-xl">More Things</h5>
-      <div class="p-4 rounded-md" style="background-color: #0D5C58; height: 100px;">More text describing things</div>
+      <div class="p-4 rounded" style="background-color: #0D5C58; height: 100px;">More text describing things</div>
     </div>
 
     <div class="top-left">
