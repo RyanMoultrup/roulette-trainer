@@ -4,11 +4,11 @@
       <div class="flex gap-3">
         <div class="w-full p-4 flex flex-col gap-4 rounded" style="background-color: #558280;">
           <span class="text-accent-50">Games</span>
-          <span class="self-center font-lobster text-6xl text-accent-50">5</span>
+          <span class="self-center font-lobster text-6xl text-accent-50">{{ totalGames }}</span>
         </div>
         <div class="w-full p-4 flex flex-col gap-4 rounded" style="background-color: #331A22;">
           <span class="text-accent-400">Total Won</span>
-          <span class="self-center font-lobster text-6xl text-accent-400">{{ formatter.money(33875)}}</span>
+          <span class="self-center font-lobster text-6xl text-accent-400">{{ formatter.money(totalWon)}}</span>
         </div>
       </div>
       <h5 class="font-lobster text-xl">Strategies</h5>
@@ -131,6 +131,8 @@ export default {
     const router = useRouter()
     const currentPage = ref(1);
     const itemsPerPage = ref(10);
+    let totalGames = ref(0)
+    let totalWon = ref(0)
 
     const user = computed(() => store.getters['user/getUser'])
 
@@ -140,6 +142,13 @@ export default {
         return g
       })
       sortColumnAsc('createdAt')
+      totalGames.value = games.value.length
+
+      console.log('games::', games.value)
+
+      totalWon.value = games.value.reduce((r, g) => r + g.profit, 0)
+
+      console.log('totalWon::', totalWon.value)
     })
 
     const paginatedGames = computed(() => {
@@ -226,7 +235,9 @@ export default {
       totalPages,
       goToPage,
       paginatedGames,
-      currentPage
+      currentPage,
+      totalGames,
+      totalWon
     }
   }
 }
