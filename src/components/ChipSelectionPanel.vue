@@ -5,7 +5,7 @@
       <replay-last-bet-button />
     </div>
     <div style="min-width: 0;" class="max-w-[75%]">
-      <div class="bg-green-500 border border-green-800 border-1 p-3 rounded-md">
+      <div class="bg-accent-150 border border-green-800 border-1 p-3 rounded-md">
         <swiper
             :slidesPerView="5"
             :spaceBetween="2"

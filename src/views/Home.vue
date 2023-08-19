@@ -173,12 +173,7 @@ export default {
       })
       sortColumnAsc('createdAt')
       totalGames.value = games.value.length
-
-      console.log('games::', games.value)
-
       totalWon.value = games.value.reduce((r, g) => r + g.profit, 0)
-
-      console.log('totalWon::', totalWon.value)
     })
 
     const paginatedGames = computed(() => {

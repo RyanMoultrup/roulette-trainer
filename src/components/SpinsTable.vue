@@ -2,12 +2,12 @@
 <template>
   <aside :class="gridClass" class="bg-green-800 border-t border-green-800 hidden text-gray-400 lg:block lg:flex-shrink-0 lg:order-last flex flex-col h-full overflow-hidden">
 
-      <div class="grid grid-cols-[1fr,1fr,1fr] top-0 left-0 w-full px-2 pt-2 border-b border-b-green-400">
+      <div class="grid grid-cols-[1fr,1fr,1fr] top-0 left-0 w-full px-2 pt-2 border-b border-b-accent-200">
         <span>Round</span>
         <span>Bet</span>
         <span>Outcome</span>
       </div>
-      <div class="relative px-2 pb-2 pt-1 overflow-y-auto border-t border-t-green-600 h-full">
+      <div class="relative px-2 pb-2 pt-1 overflow-y-auto border-t border-t-accent-200 h-full">
         <div v-for="outcome in outcomes" :key="outcome.value.round" class="border-b border-b-green-600">
           <div class="grid grid-cols-[1fr,1fr,1fr] justify-between">
             <div class="flex items-center">

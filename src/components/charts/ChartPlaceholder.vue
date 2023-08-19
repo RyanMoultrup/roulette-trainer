@@ -1,6 +1,6 @@
 <template>
   <fade-out-transition>
-    <div v-show="showPlaceholder" :key="showPlaceholder" class="skeleton absolute top-0 left-0 rounded-md text-sm w-full py-2 flex flex-col justify-center items-center text-green-500 bg-green-600  h-full">
+    <div v-show="showPlaceholder" :key="showPlaceholder" class="skeleton absolute top-0 left-0 rounded-md text-sm w-full py-2 flex flex-col justify-center items-center text-accent-100 bg-accent-200  h-full">
       <font-awesome-icon class="text-5xl icon-shadow" :icon="icon" />
     </div>
   </fade-out-transition>
@@ -50,7 +50,7 @@ export default {
   @apply bg-gradient-to-tr from-green-700 via-green-600 to-green-700
 }
 
-$color-base: #104224;
+$color-base: #0d3b32;
 $color-highlight: lighten($color-base, 2%);
 
 .skeleton {
