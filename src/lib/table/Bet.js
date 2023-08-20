@@ -46,10 +46,10 @@ export default class {
       return (amt * 5) + amt;
     },
     twelve (amt) {
-      return amt * 3;
+      return (amt * 2) + amt;
     },
     row (amt) {
-      return amt * 2;
+      return (amt * 2) + amt;
     },
     nineteen (amt) {
       return amt * 2;
@@ -70,7 +70,7 @@ export default class {
       return amt * 2;
     },
     sgl (amt) {
-      return amt * 35;
+      return amt * 35 + amt;
     }
   }
 
@@ -176,7 +176,7 @@ export default class {
 
   row (hit) {
     if (this.spots.includes(hit)) {
-      return this.get() * 2;
+      return (this.get() * 2) + this.get();
     }
   }
 
@@ -194,7 +194,7 @@ export default class {
 
   sgl (hit) {
     if (this.spots.includes(hit)) {
-      return this.get() * 35;
+      return (this.get() * 35) + this.get();
     }
   }
 

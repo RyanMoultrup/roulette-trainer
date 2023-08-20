@@ -36,7 +36,7 @@
             <span>Total: {{ getHighestPayout.length }}</span>
             <div v-if="negativeProfit > 0" class="flex gap-1 items-center danger">
               <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />
-              <span  class="text-sm danger">{{ negativeProfit }}/{{ getHighestPayout.length }} have a negative payout</span>
+              <span  class="text-sm danger">{{ negativeProfit }} bets have zero or negative payout</span>
             </div>
           </div>
 
