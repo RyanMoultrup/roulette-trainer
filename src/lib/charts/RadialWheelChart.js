@@ -4,6 +4,11 @@ export default class RadialWheelChart {
     constructor(elementId) {
         this.elementId = elementId;
         this.init();
+
+        // Assuming a fixed set of numbers for a roulette wheel
+        this.nums = [37, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+        this.hits = new Array(this.nums.length).fill(0);  // Initialize hits to zero for each number
+        this.setData();  // Set initial data state
     }
 
     clear() {
@@ -11,7 +16,7 @@ export default class RadialWheelChart {
     }
 
     init() {
-        this.svg = d3.select(`#${this.elementId}`).append('svg')
+        this.svg = d3.select(this.elementId).append('svg')
             .attr('width', 275)
             .attr('height', 275);
 
@@ -35,12 +40,17 @@ export default class RadialWheelChart {
         this.hitScale = d3.scaleLinear().range([this.radius - 120, this.radius - 20]);
     }
 
-    setData(nums, hits) {
-        const rouletteData = nums.map((num, index) => ({ number: num, hit: hits[index] }));
-        this.color.domain(rouletteData.map(d => d.number))
-            .range(['green', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black']);
+    setData() {
+        this.hitColorScale = d3.scaleSequential(d3.interpolatePuBuGn)
+            .domain([0, d3.max(this.hits)])
 
-        this.hitScale.domain([0, d3.max(hits)]);
+        const rouletteData = this.nums.map((num, index) => ({ number: num, hit: this.hits[index] }));
+
+        // Let's ensure that the domain and range have the same length
+        const colorRange = ['green', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black'];
+        this.color.domain(rouletteData.map(d => d.number)).range(colorRange);
+
+        this.hitScale.domain([0, d3.max(this.hits)]);
         this.data = rouletteData;
     }
 
@@ -68,7 +78,7 @@ export default class RadialWheelChart {
         // Dynamic arcs for hits
         this.pieChart.append('path')
             .attr('d', this.dynamicArc)
-            .attr('fill', d => d3.interpolatePuBuGn(d.data.hit / 100));
+            .attr('fill', d => this.hitColorScale(d.data.hit));
 
         // Define a new arc generator for the outlined ring
         const outlineArc = d3.arc()
@@ -95,6 +105,24 @@ export default class RadialWheelChart {
             .attr('font-size', '9px')
             .attr('fill', 'white')
             .text(d => d.data.number);
+    }
+
+    update(hit) {
+        // Let's simplify this logic for clarity
+        // if (hit === 37) {
+        //     hit = 0;
+        // }
+
+        const hitIndex = this.nums.indexOf(hit);
+        if (hitIndex !== -1) {
+            this.hits[hitIndex]++;
+
+            this.setData();
+            this.render();
+        } else {
+            console.error(`Invalid hit value: ${hit}`);
+        }
+
     }
 
 }
