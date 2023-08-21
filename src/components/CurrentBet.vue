@@ -5,7 +5,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { tween } from "@/lib/Tween";
+// import { tween } from "@/lib/Tween";
 import formatter from "@/lib/formatter";
 
 export default {

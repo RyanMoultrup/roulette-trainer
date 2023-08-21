@@ -1,4 +1,4 @@
-export const tableSpots = [
+const firstRow = [
     {
         class: 'spot _0 pt-16 cell border-t-3 outside-cell align-text-middle row-span-3 rounded-tl rounded-bl left-border-cell bottom-border-cell top-border-cell',
         text: '0'
@@ -8,7 +8,7 @@ export const tableSpots = [
         text: '3'
     },
     {
-        class: 'spot cell black-cell  top-border-cell',
+        class: 'spot cell black-cell top-border-cell',
         text: '6'
     },
     {
@@ -51,11 +51,9 @@ export const tableSpots = [
         class: 'spot cell cell right-border-cell border-t-3 red-cell top-border-cell',
         text: '36'
     },
-    {
-        class: 'spot cell outside-cell text-base rounded-tr rounded-br top-border-cell right-border-cell',
-        text: '2/1'
-    },
+]
 
+const secondRow = [
     {
         class: 'spot cell cell left-border-cell black-cell',
         text: '2'
@@ -103,12 +101,10 @@ export const tableSpots = [
     {
         class: 'spot cell right-border-cell black-cell',
         text: '35'
-    },
-    {
-        class: 'spot cell outside-cell text-base right-border-cell rounded-br rounded-tr',
-        text: '2/1'
-    },
+    }
+]
 
+const thirdRow = [
     {
         class: 'spot cell left-border-cell red-cell bottom-border-cell',
         text: '1'
@@ -156,12 +152,25 @@ export const tableSpots = [
     {
         class: 'spot cell right-border-cell red-cell bottom-border-cell',
         text: '34'
-    },
-    {
-        class: 'spot cell outside-cell text-base rounded-br rounded-tr bottom-border-cell right-border-cell',
-        text: '2/1'
-    },
+    }
+]
 
+const firstColumn = {
+    class: 'spot cell outside-cell text-base rounded-tr rounded-br top-border-cell right-border-cell',
+    text: '2/1'
+}
+
+const secondColumn = {
+    class: 'spot cell outside-cell text-base right-border-cell rounded-br rounded-tr',
+    text: '2/1'
+}
+
+const thirdColumn = {
+    class: 'spot cell outside-cell text-base rounded-br rounded-tr bottom-border-cell right-border-cell',
+    text: '2/1'
+}
+
+export const outsideSpots = [
     {
         class: 'spot cell outside-cell text-large col-span-4 col-start-2 left-border-cell rounded-tl',
         text: '1ST 12'
@@ -192,7 +201,6 @@ export const tableSpots = [
         class: 'spot cell p-2 pt-4 black-cell col-span-2 bottom-border-cell',
         text: 'BLACK'
     },
-
     {
         class: 'spot cell outside-cell text-opacity-70 col-span-2 bottom-border-cell',
         text: 'ODD'
@@ -200,5 +208,17 @@ export const tableSpots = [
     {
         class: 'spot cell p-2 pt-4 outside-cell text-xl col-span-2 rounded-br right-border-cell bottom-border-cell',
         text: '19 TO 36'
-    },
+    }
 ]
+
+export const tableSpots = [
+    ...firstRow,
+    firstColumn,
+    ...secondRow,
+    secondColumn,
+    ...thirdRow,
+    thirdColumn,
+    ...outsideSpots
+]
+
+export const insideTable = [...firstRow, ...secondRow, ...thirdRow]

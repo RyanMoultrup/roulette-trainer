@@ -75,7 +75,7 @@
 
 <script>
 import { useStore } from "vuex"
-import { computed, watch, ref } from "vue"
+import {computed, watch, ref, onUnmounted} from "vue"
 import formatter from "@/lib/formatter"
 import highestPayout from "@/lib/stats/HighestPayoutSpots"
 import { odds } from "@/lib/table/BetPlacements";
@@ -100,8 +100,11 @@ export default {
 
     const getHighestPayout = computed(() => highestPayout(store.getters['strategy/getStrategy']))
 
-    watch(getHighestPayout, (newVal) => {
+    const unwatch = watch(getHighestPayout, (newVal) => {
       const highestPay = getHighestPayout.value;
+
+      console.log('highestPay::', highestPay)
+
       const positiveWinningSpots = highestPay.filter(bet => bet.profit > 0);
       const winProbability =  (positiveWinningSpots.length / 37) * 100;
 
@@ -123,6 +126,8 @@ export default {
       const placement = odds[placementId]
       return placement.odds.european
     }
+
+    onUnmounted(() => unwatch())
 
     return {
       bets,

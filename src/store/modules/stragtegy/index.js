@@ -14,9 +14,7 @@ const allInsideBets = bets => {
 }
 
 const placementCategory = placement => {
-    console.log('placement::', placement)
     const [placementId] = placement.split('_')
-    console.log('placementId::', placementId)
     return odds[placementId].category
 }
 
@@ -35,7 +33,6 @@ const removeFromCurrentBets = function (value) {
 
 const mutations = {
     async placeBet (state, bet) {
-        console.log('bet::', bet)
         if (currentBetSpots.includes(bet.placement)) {
             await state.strategy[bet.placement].addChip(bet.chip)
             return
