@@ -6,6 +6,10 @@ export default class RadialWheelChart {
         this.init();
     }
 
+    clear() {
+        this.chartGroup.selectAll('*').remove();
+    }
+
     init() {
         this.svg = d3.select(`#${this.elementId}`).append('svg')
             .attr('width', 275)
@@ -25,6 +29,8 @@ export default class RadialWheelChart {
             .attr('r', this.radius)
             .attr('fill', '#4A2531'); // Color of the background
 
+        this.chartGroup = this.g.append('g')
+
         this.color = d3.scaleOrdinal();
         this.hitScale = d3.scaleLinear().range([this.radius - 120, this.radius - 20]);
     }
@@ -39,6 +45,8 @@ export default class RadialWheelChart {
     }
 
     render() {
+        this.clear();
+
         const pie = d3.pie().value(d => 1).sort(null);
         const arcs = pie(this.data);
 
@@ -46,7 +54,8 @@ export default class RadialWheelChart {
         this.arc = d3.arc().innerRadius(this.radius - 20).outerRadius(this.radius);
         this.dynamicArc = d3.arc().innerRadius(this.radius - 120).outerRadius(d => this.hitScale(d.data.hit));
 
-        this.pieChart = this.g.selectAll('.arc')
+        // Append dynamic content to this.chartGroup instead of this.g
+        this.pieChart = this.chartGroup.selectAll('.arc')
             .data(arcs)
             .enter().append('g')
             .attr('class', 'arc');
@@ -87,4 +96,5 @@ export default class RadialWheelChart {
             .attr('fill', 'white')
             .text(d => d.data.number);
     }
+
 }
