@@ -3,11 +3,11 @@ import * as d3 from 'd3';
 export default class RadialWheelChart {
     constructor(elementId) {
         this.elementId = elementId;
-        this.init();
-
         // Assuming a fixed set of numbers for a roulette wheel
-        this.nums = [37, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+        this.nums = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
         this.hits = new Array(this.nums.length).fill(0);  // Initialize hits to zero for each number
+
+        this.init();
         this.setData();  // Set initial data state
     }
 
@@ -38,6 +38,10 @@ export default class RadialWheelChart {
 
         this.color = d3.scaleOrdinal();
         this.hitScale = d3.scaleLinear().range([this.radius - 120, this.radius - 20]);
+
+        // Let's ensure that the domain and range have the same length
+        const colorRange = ['green', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black'];
+        this.color.domain(this.nums).range(colorRange);
     }
 
     setData() {
@@ -46,10 +50,6 @@ export default class RadialWheelChart {
 
         const rouletteData = this.nums.map((num, index) => ({ number: num, hit: this.hits[index] }));
 
-        // Let's ensure that the domain and range have the same length
-        const colorRange = ['green', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black'];
-        this.color.domain(rouletteData.map(d => d.number)).range(colorRange);
-
         this.hitScale.domain([0, d3.max(this.hits)]);
         this.data = rouletteData;
     }
@@ -57,12 +57,29 @@ export default class RadialWheelChart {
     render() {
         this.clear();
 
-        const pie = d3.pie().value(d => 1).sort(null);
+        // 1. Calculate the angular size of each segment.
+        const segmentAngle = 2 * Math.PI / this.nums.length;
+
+        // 2. Find the index of the 0 section in your nums array.
+        const zeroIndex = this.nums.indexOf(0); // Assuming 37 represents 0.
+
+        // 3. Calculate the necessary rotation to place the midpoint of the 0 section on top.
+        const rotation = - (zeroIndex + 0.5) * segmentAngle;
+
+        const pie = d3.pie()
+            .value(d => 1)
+            .sort(null)
+            .startAngle(rotation)
+            .endAngle(rotation + 2 * Math.PI);
         const arcs = pie(this.data);
 
         // Define arcs
         this.arc = d3.arc().innerRadius(this.radius - 20).outerRadius(this.radius);
-        this.dynamicArc = d3.arc().innerRadius(this.radius - 120).outerRadius(d => this.hitScale(d.data.hit));
+
+        // Check for hits before defining dynamicArc
+        if (d3.max(this.hits) > 0) {
+            this.dynamicArc = d3.arc().innerRadius(this.radius - 120).outerRadius(d => this.hitScale(d.data.hit));
+        }
 
         // Append dynamic content to this.chartGroup instead of this.g
         this.pieChart = this.chartGroup.selectAll('.arc')
@@ -75,10 +92,12 @@ export default class RadialWheelChart {
             .attr('d', this.arc)
             .attr('fill', d => this.color(d.data.number));
 
-        // Dynamic arcs for hits
-        this.pieChart.append('path')
-            .attr('d', this.dynamicArc)
-            .attr('fill', d => this.hitColorScale(d.data.hit));
+        // If there are hits, append dynamic arcs for hits
+        if (d3.max(this.hits) > 0) {
+            this.pieChart.append('path')
+                .attr('d', this.dynamicArc)
+                .attr('fill', d => this.hitColorScale(d.data.hit));
+        }
 
         // Define a new arc generator for the outlined ring
         const outlineArc = d3.arc()
@@ -107,13 +126,15 @@ export default class RadialWheelChart {
             .text(d => d.data.number);
     }
 
+
     update(hit) {
         // Let's simplify this logic for clarity
-        // if (hit === 37) {
-        //     hit = 0;
-        // }
+        if (hit === 37) {
+            hit = 0;
+        }
 
         const hitIndex = this.nums.indexOf(hit);
+
         if (hitIndex !== -1) {
             this.hits[hitIndex]++;
 
@@ -122,7 +143,5 @@ export default class RadialWheelChart {
         } else {
             console.error(`Invalid hit value: ${hit}`);
         }
-
     }
-
 }
