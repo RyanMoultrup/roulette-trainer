@@ -1,26 +1,47 @@
 <template>
-  <div class="flex flex-col justify-between bg-green-800 gap-3 p-3">
-  <div class="font-lobster text-2xl text-gray-400">Spin History</div>
-  <div class="flex flex-row gap-3">
-    <!--              <span class="font-lobster">Outside</span>-->
-    <div class="flex flex-col gap-3">
-      <red-black-chart />
-      <even-odd-chart />
+  <div :class="gridClass" class="flex flex-col justify-start bg-green-800 gap-4 p-3">
+    <div class="font-lobster text-2xl text-gray-400">Spin History</div>
+    <div class="flex justify-center w-full">
+      <radial-wheel-chart />
     </div>
-    <div class="flex flex-col gap-3">
-      <twelves-chart />
-      <half-board-chart />
+    <span class="font-lobster text-gray-400 text-xl">Outside</span>
+    <div class="flex flex-row gap-3 bg-accent-150 rounded">
+      <div class="flex flex-col gap-3">
+        <red-black-chart />
+        <even-odd-chart />
+      </div>
+      <div class="flex flex-col gap-3">
+        <twelves-chart />
+        <half-board-chart />
+      </div>
     </div>
-  </div>
-
-  <hits-chart class="bet-display" />
+    <span class="font-lobster text-gray-400 text-xl">Inside</span>
+    <div class="bg-accent-150 rounded p-2">
+      <hits-chart class="bet-display" />
+    </div>
   </div>
 </template>
 
-<script setup>
-import HitsChart from "@/components/charts/HitsChart.vue";
-import EvenOddChart from "@/components/charts/EvenOddChart.vue";
-import TwelvesChart from "@/components/charts/TwelvesChart.vue";
-import RedBlackChart from "@/components/charts/RedBlackChart.vue";
-import HalfBoardChart from "@/components/charts/HalfBoardChart.vue";
+<script>
+import {useGridProps} from "@/composables/useGridProp"
+import HitsChart from "@/components/charts/HitsChart.vue"
+import EvenOddChart from "@/components/charts/EvenOddChart.vue"
+import TwelvesChart from "@/components/charts/TwelvesChart.vue"
+import RedBlackChart from "@/components/charts/RedBlackChart.vue"
+import HalfBoardChart from "@/components/charts/HalfBoardChart.vue"
+import RadialWheelChart from "@/components/charts/RadialWheelChart.vue"
+
+export default {
+  components: {
+    HitsChart,
+    EvenOddChart,
+    TwelvesChart,
+    RedBlackChart,
+    HalfBoardChart,
+    RadialWheelChart
+  },
+  props: {
+    ...useGridProps()
+  }
+}
 </script>

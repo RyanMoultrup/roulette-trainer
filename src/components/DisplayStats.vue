@@ -1,5 +1,5 @@
 <template>
-  <section class="stats flex flex-col">
+  <section class="flex flex-col">
 <!--    <dl class="grid grid-cols-1 bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">-->
     <div class="flex text-3xl font-normal text-gray-300 font-lobster gap-4">
       <div>

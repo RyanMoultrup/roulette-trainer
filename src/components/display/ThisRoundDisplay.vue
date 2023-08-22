@@ -120,7 +120,6 @@ export default {
       this.negativeProfit = highestPay.length - positiveWinningSpots.length;
     },
     currentBetTotal (newVal, oldVal) {
-      console.log('currentbet:::', newVal)
       this.currentBet = newVal
     }
   },

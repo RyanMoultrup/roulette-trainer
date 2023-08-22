@@ -125,7 +125,7 @@ export default {
 }
 
 .red-cell {
-  @apply bg-accent-350
+  @apply bg-accent-375
 }
 
 .black-cell {

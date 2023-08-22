@@ -72,7 +72,7 @@ export default class EvenOdd {
             .colors(
                 scaleOrdinal()
                     .domain(['odd', 'even'])
-                    .range(['green', 'darkgreen'])
+                    .range(['#0C4F4C', '#0C4F4C'])
             )
             .colorAccessor(d => d.key ? 'Even' : 'Odd')
             .elasticX(true)

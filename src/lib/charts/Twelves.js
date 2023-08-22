@@ -78,7 +78,7 @@ export default class Twelves {
             .colors(
                 scaleOrdinal()
                     .domain(['odd', 'even'])
-                    .range(['darkgreen', 'darkgreen'])
+                    .range(['#0C4F4C', '#0C4F4C'])
             )
             .colorAccessor(d => d.key ? 'Even' : 'Odd')
             .elasticX(true)

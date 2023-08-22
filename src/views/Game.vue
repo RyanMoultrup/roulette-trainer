@@ -1,12 +1,9 @@
 <template>
   <div class="layout-container flex-1">
-
-    <spins-table grid-class="spin-table" />
-    <betting-table-review grid-class="betting-area" />
-
-    <spin-history />
-
-    <active-game-charts grid-class="charts" />
+    <active-game-charts grid-class="top-left" />
+    <betting-table-review grid-class="bottom-left" />
+    <spin-history grid-class="side-pane" />
+<!--    <spins-table grid-class="side-pane" />-->
   </div>
 </template>
 <script>

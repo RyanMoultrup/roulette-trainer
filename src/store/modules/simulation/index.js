@@ -80,7 +80,8 @@ const getters = {
   isEmitting: state => state.emittingSpins,
   selectedChip: state => state.selectedChip,
   getMode: state => state.mode,
-  getRounds: state => state.rounds
+  getRounds: state => state.rounds,
+  getSpin: state => state.spin
 }
 
 export default {

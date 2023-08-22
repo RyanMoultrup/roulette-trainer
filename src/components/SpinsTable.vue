@@ -1,7 +1,6 @@
 <!-- Secondary column (hidden on smaller screens) -->
 <template>
   <aside :class="gridClass" class="bg-green-800 border-t border-green-800 hidden text-gray-400 lg:block lg:flex-shrink-0 lg:order-last flex flex-col h-full overflow-hidden">
-
       <div class="grid grid-cols-[1fr,1fr,1fr] top-0 left-0 w-full px-2 pt-2 border-b border-b-accent-200">
         <span>Round</span>
         <span>Bet</span>
@@ -41,13 +40,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import spots from '../lib/table/spots';
-import formatter from "@/lib/formatter";
-import { spinHistoryTable } from '@/lib/charts/SpinHistoryTable';
-import { removeEmptyBins, spinTable } from '@/lib/Reducers';
-import BasePill from "@/components/ui/Base/BasePill.vue";
-import { useGridProps } from "@/composables/useGridProp";
+import { mapGetters } from 'vuex'
+import spots from '../lib/table/spots'
+import formatter from "@/lib/formatter"
+import BasePill from "@/components/ui/Base/BasePill.vue"
+import { useGridProps } from "@/composables/useGridProp"
+import { removeEmptyBins, spinTable } from '@/lib/Reducers'
+import { spinHistoryTable } from '@/lib/charts/SpinHistoryTable'
 
 /**
  * Callback function that will find empty bins in crossfilter
@@ -59,7 +58,7 @@ import { useGridProps } from "@/composables/useGridProp";
 const spinTableEmptyBinCallback = d => {
   return !(
       +d.value.won === 0 &&
-      +d.value.loss === 0);
+      +d.value.loss === 0)
 }
 
 export default {
@@ -83,7 +82,7 @@ export default {
   },
   methods: {
     getHit (outcome) {
-      return outcome.value.hit !== 37 ? outcome.value.hit : 0;
+      return outcome.value.hit !== 37 ? outcome.value.hit : 0
     },
     getHitCss (outcome) {
       const color = spots[outcome.value.hit].color;
@@ -94,27 +93,27 @@ export default {
       }
     },
     redraw () {
-      this.outcomes = removeEmptyBins(spinTableEmptyBinCallback, spinTable(this.getOutcomes)).all();
+      this.outcomes = removeEmptyBins(spinTableEmptyBinCallback, spinTable(this.getOutcomes)).all()
     },
     initOutcomes () {
-      this.outcomes = spinTable(this.getOutcomes).top(Infinity);
+      this.outcomes = spinTable(this.getOutcomes).top(Infinity)
     },
   },
   mounted () {
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
-        this.redraw();
+        this.redraw()
       }
     })
 
     let spinTable = spinHistoryTable();
     spinTable
         .onRedraw(() => {
-          this.redraw();
-        });
-    spinTable.render();
+          this.redraw()
+        })
+    spinTable.render()
 
-    this.initOutcomes();
+    this.initOutcomes()
   },
 }
 </script>
