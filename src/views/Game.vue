@@ -1,9 +1,8 @@
 <template>
   <div class="layout-container flex-1">
-    <active-game-charts grid-class="top-left" />
+    <active-game-charts grid-class="charts" />
     <betting-table-review grid-class="bottom-left" />
     <spin-history grid-class="side-pane" />
-<!--    <spins-table grid-class="side-pane" />-->
   </div>
 </template>
 <script>

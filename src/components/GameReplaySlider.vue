@@ -1,7 +1,7 @@
 <template>
   <div class="chips-panel flex flex-col items-center">
     <div id="vis"></div>
-    <div class="text-3xl text-gray-300 flex flex-row gap-12 bg-green-500 rounded-full py-2 px-10 drop-shadow-lg border border-green-700">
+    <div class="text-3xl text-gray-300 flex flex-row gap-12 bg-accent-100 rounded-full py-2 px-10 drop-shadow-lg border border-green-700">
       <span class="slider-backing relative cursor-pointer"><font-awesome-icon @click="sliderBack" icon="fa-solid fa-backward-step" /></span>
       <span v-show="!isPlaying" class="relative cursor-pointer"><font-awesome-icon @click="play" icon="fa-solid fa-play" /></span>
       <span v-show="isPlaying" class="relative cursor-pointer"><font-awesome-icon @click="pause" icon="fa-solid fa-pause" /></span>
@@ -279,7 +279,7 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
-  background-color: #114726;
+  background-color: #073331;
   z-index: -1;
   width: 2.9rem;
   height: 2.9rem;
@@ -299,12 +299,12 @@ export default {
 }
 
 .track {
-  stroke: #0A2916;
+  stroke: #073331;
   stroke-width: 10px;
 }
 
 .track-inset {
-  stroke: #071c0f;
+  stroke: #073331;
   stroke-width: 8px;
 }
 

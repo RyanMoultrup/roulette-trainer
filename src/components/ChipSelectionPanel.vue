@@ -31,7 +31,7 @@ import DoubleBetButton from "@/components/DoubleBetButton.vue";
 import ReplayLastBetButton from "@/components/ReplayLastBetButton.vue";
 
 // Import Swiper styles
-import 'swiper/css';
+import 'swiper/css'
 
 export default {
   components: { SelectedChip, Chip, DoubleBetButton, ReplayLastBetButton, Swiper, SwiperSlide },

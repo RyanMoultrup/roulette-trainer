@@ -3,7 +3,6 @@
     <active-game-charts grid-class="charts" />
     <betting-table grid-class="bottom-left" />
     <spin-history grid-class="side-pane" />
-<!--    <spins-table grid-class="side-pane" />-->
   </div>
 </template>
 <script>
