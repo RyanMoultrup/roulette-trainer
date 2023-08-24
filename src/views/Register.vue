@@ -56,9 +56,9 @@ export default defineComponent({
     const submitForm = async () => {
       const { status, data: { error, data, token } } = await auth.register(formData.value)
       if (status === 200 && !error) storeToken(token)
-      await store.dispatch('user/setUser', data)
+      await store.dispatch('user/setUser', data._id)
       await store.dispatch('user/authenticate')
-      router.push({ name: 'play' })
+      router.push({ name: 'home' })
     }
 
     return {

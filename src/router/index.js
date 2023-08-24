@@ -38,6 +38,7 @@ const router = createRouter({
       name: 'logout',
       beforeEnter: (to, from, next) => {
         removeToken()
+        store.commit('user/clear')
         next({ name: 'login' })
       }
     },

@@ -52,7 +52,7 @@ export default defineComponent({
       if (status === 200 && !error) storeToken(token)
       await store.dispatch('user/setUser', userId)
       await store.dispatch('user/authenticate')
-      router.push({ name: 'play' })
+      router.push({ name: 'home' })
     }
 
     return {

@@ -16,6 +16,13 @@ const mutations = {
     },
     setUser (state, user) {
         state.user = reactive({ ...user })
+    },
+    clear (state) {
+        state.isAuthenticated = false
+        state.user = {
+            username: '',
+            _id: ''
+        }
     }
 }
 

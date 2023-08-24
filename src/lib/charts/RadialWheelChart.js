@@ -115,13 +115,13 @@ export default class RadialWheelChart {
         this.pieChart.append('text')
             .attr('transform', d => {
                 const angle = (d.startAngle + d.endAngle) / 2 * 180 / Math.PI;
-                const rotateAngle = angle - 180;
+                const rotateAngle = angle - 360;
                 const centroid = d3.arc().innerRadius(this.radius - 20).outerRadius(this.radius).centroid(d);
                 return `translate(${centroid}) rotate(${rotateAngle})`;
             })
             .attr('dy', '0.6em')
             .attr('dx', '-0.4em')
-            .attr('font-size', '9px')
+            .attr('font-size', '10px')
             .attr('fill', 'white')
             .text(d => d.data.number);
     }
