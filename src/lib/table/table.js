@@ -4,153 +4,153 @@ const firstRow = [
         text: '0'
     },
     {
-        class: 'spot cell left-border-cell red-cell top-border-cell',
+        class: 'spot _3 cell left-border-cell red-cell top-border-cell',
         text: '3'
     },
     {
-        class: 'spot cell black-cell top-border-cell',
+        class: 'spot _6 cell black-cell top-border-cell',
         text: '6'
     },
     {
-        class: 'spot cell red-cell top-border-cell',
+        class: 'spot _9 cell red-cell top-border-cell',
         text: '9'
     },
     {
-        class: 'spot cell red-cell top-border-cell',
+        class: 'spot _12 cell red-cell top-border-cell',
         text: '12'
     },
     {
-        class: 'spot cell black-cell top-border-cell',
+        class: 'spot _15 cell black-cell top-border-cell',
         text: '15'
     },
     {
-        class: 'spot cell red-cell top-border-cell',
+        class: 'spot _18 cell red-cell top-border-cell',
         text: '18'
     },
     {
-        class: 'spot cell red-cell top-border-cell',
+        class: 'spot _21 cell red-cell top-border-cell',
         text: '21'
     },
     {
-        class: 'spot cell black-cell top-border-cell',
+        class: 'spot _24 cell black-cell top-border-cell',
         text: '24'
     },
     {
-        class: 'spot cell red-cell top-border-cell',
+        class: 'spot _27 cell red-cell top-border-cell',
         text: '27'
     },
     {
-        class: 'spot cell red-cell top-border-cell',
+        class: 'spot _30 cell red-cell top-border-cell',
         text: '30'
     },
     {
-        class: 'spot cell black-cell top-border-cell',
+        class: 'spot _33 cell black-cell top-border-cell',
         text: '33'
     },
     {
-        class: 'spot cell cell right-border-cell border-t-3 red-cell top-border-cell',
+        class: 'spot _36 cell cell right-border-cell border-t-3 red-cell top-border-cell',
         text: '36'
     },
 ]
 
 const secondRow = [
     {
-        class: 'spot cell cell left-border-cell black-cell',
+        class: 'spot _2 cell cell left-border-cell black-cell',
         text: '2'
     },
     {
-        class: 'spot cell red-cell',
+        class: 'spot _5 cell red-cell',
         text: '5'
     },
     {
-        class: 'spot cell black-cell',
+        class: 'spot _8 cell black-cell',
         text: '8'
     },
     {
-        class: 'spot cell black-cell',
+        class: 'spot _11 cell black-cell',
         text: '11'
     },
     {
-        class: 'spot cell red-cell',
+        class: 'spot _14 cell red-cell',
         text: '14'
     },
     {
-        class: 'spot cell black-cell',
+        class: 'spot _17 cell black-cell',
         text: '17'
     },
     {
-        class: 'spot cell black-cell',
+        class: 'spot _20 cell black-cell',
         text: '20'
     },
     {
-        class: 'spot cell red-cell',
+        class: 'spot _23 cell red-cell',
         text: '23'
     },
     {
-        class: 'spot cell black-cell',
+        class: 'spot _26 cell black-cell',
         text: '26'
     },
     {
-        class: 'spot cell black-cell',
+        class: 'spot _29 cell black-cell',
         text: '29'
     },
     {
-        class: 'spot cell red-cell',
+        class: 'spot _32 cell red-cell',
         text: '32'
     },
     {
-        class: 'spot cell right-border-cell black-cell',
+        class: 'spot _35 cell right-border-cell black-cell',
         text: '35'
     }
 ]
 
 const thirdRow = [
     {
-        class: 'spot cell left-border-cell red-cell bottom-border-cell',
+        class: 'spot _1 cell left-border-cell red-cell bottom-border-cell',
         text: '1'
     },
     {
-        class: 'spot cell black-cell bottom-border-cell',
+        class: 'spot _4 cell black-cell bottom-border-cell',
         text: '4'
     },
     {
-        class: 'spot cell red-cell bottom-border-cell',
+        class: 'spot _7 cell red-cell bottom-border-cell',
         text: '7'
     },
     {
-        class: 'spot cell black-cell bottom-border-cell',
+        class: 'spot _10 cell black-cell bottom-border-cell',
         text: '10'
     },
     {
-        class: 'spot cell black-cell bottom-border-cell',
+        class: 'spot _13 cell black-cell bottom-border-cell',
         text: '13'
     },
     {
-        class: 'spot cell red-cell bottom-border-cell',
+        class: 'spot _16 cell red-cell bottom-border-cell',
         text: '16'
     },
     {
-        class: 'spot cell red-cell bottom-border-cell',
+        class: 'spot _19 cell red-cell bottom-border-cell',
         text: '19'
     },
     {
-        class: 'spot cell black-cell bottom-border-cell',
+        class: 'spot _22 cell black-cell bottom-border-cell',
         text: '22'
     },
     {
-        class: 'spot cell red-cell bottom-border-cell',
+        class: 'spot _25 cell red-cell bottom-border-cell',
         text: '25'
     },
     {
-        class: 'spot cell black-cell bottom-border-cell',
+        class: 'spot _28 cell black-cell bottom-border-cell',
         text: '28'
     },
     {
-        class: 'spot cell black-cell bottom-border-cell',
+        class: 'spot _31 cell black-cell bottom-border-cell',
         text: '31'
     },
     {
-        class: 'spot cell right-border-cell red-cell bottom-border-cell',
+        class: 'spot _34 cell right-border-cell red-cell bottom-border-cell',
         text: '34'
     }
 ]
