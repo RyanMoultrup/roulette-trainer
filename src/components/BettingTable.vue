@@ -20,10 +20,10 @@
 import Wheel from '@/components/Wheel.vue'
 import Board from '@/components/Board.vue'
 import { mapGetters, mapMutations } from 'vuex'
-import SpinButton from "@/components/SpinButton.vue"
+import SpinButton from "@/components/buttons/SpinButton.vue"
 import {useGridProps} from "@/composables/useGridProp"
 import BaseCard from "@/components/ui/Base/BaseCard.vue"
-import SpinEmitButton from "@/components/SpinEmitButton.vue"
+import SpinEmitButton from "@/components/buttons/SpinEmitButton.vue"
 import ChipSelectionPanel from '@/components/ChipSelectionPanel.vue'
 
 export default {

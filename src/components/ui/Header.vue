@@ -30,7 +30,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import DisplayStats from "@/components/DisplayStats.vue"
-import NewGameButton from "@/components/NewGameButton.vue"
+import NewGameButton from "@/components/buttons/NewGameButton.vue"
 import SaveGameButton from "@/components/buttons/SaveGameButton.vue";
 
 export default {

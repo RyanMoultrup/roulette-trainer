@@ -28,8 +28,8 @@ import chips from '@/lib/table/chips';
 import Chip from '@/components/Chip.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import SelectedChip from "@/components/SelectedChip.vue";
-import DoubleBetButton from "@/components/DoubleBetButton.vue";
-import ReplayLastBetButton from "@/components/ReplayLastBetButton.vue";
+import DoubleBetButton from "@/components/buttons/DoubleBetButton.vue";
+import ReplayLastBetButton from "@/components/buttons/ReplayLastBetButton.vue";
 
 // Import Swiper styles
 import 'swiper/css'
