@@ -90,7 +90,9 @@ export default class {
   addChip (chip) {
     this.chips.unshift(chip);
     this.chips = chipAggregator(this.chips)
+    console.log('this.chips::', this.chips)
     this._amount = this._amount + +chip.value;
+    console.log('this._amount::', this._amount)
     store.commit('bank/reduceAvailableBalance', +chip.value);
   }
 

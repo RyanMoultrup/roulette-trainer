@@ -1,7 +1,7 @@
-import Bet from '@/lib/table/Bet';
-import { odds } from '@/lib/table/BetPlacements';
-import formatter from "@/lib/formatter";
-import { useToast } from "vue-toastification";
+import Bet from '@/lib/table/Bet'
+import formatter from "@/lib/formatter"
+import { useToast } from "vue-toastification"
+import { odds } from '@/lib/table/BetPlacements'
 
 const toast = useToast();
 
@@ -10,7 +10,10 @@ let currentBetSpots = [];
 const allInsideBets = bets => {
     return Object.values(bets)
         .filter(bet => bet.category === 'inside')
-        .reduce((accumulator, bet) => accumulator + bet.amount, 0);
+        .reduce((accumulator, bet) => {
+            accumulator += bet.amount
+            return accumulator
+        }, 0)
 }
 
 const placementCategory = placement => {
@@ -73,11 +76,11 @@ const mutations = {
 
 const actions = {
     placeBet ({ commit, rootGetters, state }, bet) {
-        const tableLimit = rootGetters['settings/hasTableLimit'];
+        const tableLimit = rootGetters['settings/hasTableLimit']
 
         if (tableLimit) {
             const betCategory = placementCategory(bet.placement);
-            const { maxInside, maxOutside, minInside, minOutside } = rootGetters['settings/getBetLimits'];
+            const { maxInside, maxOutside, minInside, minOutside } = rootGetters['settings/getBetLimits']
 
             if (betCategory === 'outside') {
                 const outsideBetAmount = currentBetSpots.includes(bet.placement)
@@ -109,7 +112,7 @@ const actions = {
 
                 (+bet.chip.value + insideBetAmount < minInside)
                     ? commit('minInsideBetMet', false)
-                    : commit('minInsideBetMet', true);
+                    : commit('minInsideBetMet', true)
 
                 if (+bet.chip.value + insideBetAmount > maxInside) {
                     return {
@@ -124,10 +127,10 @@ const actions = {
         return { success: true, msg: 'Bet placed' }
     },
     async removeBet ({ commit, state, rootGetters }, placement) {
-        await commit('removeBet', placement);
+        await commit('removeBet', placement)
 
-        const betCategory = placementCategory(placement);
-        const { minInside } = rootGetters['settings/getBetLimits'];
+        const betCategory = placementCategory(placement)
+        const { minInside } = rootGetters['settings/getBetLimits']
 
         if (betCategory === 'inside') {
             // Check if the remaining bets are below the limit
@@ -140,9 +143,9 @@ const actions = {
         }
     },
     async removeChip({ commit, state, rootGetters }, { placement, chipIndex, chip }) {
-        const betCategory = placementCategory(placement);
-        const placementBetAmount = state.strategy[placement].amount - +chip.value;
-        const { minOutside, minInside } = rootGetters['settings/getBetLimits'];
+        const betCategory = placementCategory(placement)
+        const placementBetAmount = state.strategy[placement].amount - +chip.value
+        const { minOutside, minInside } = rootGetters['settings/getBetLimits']
 
         if (betCategory === 'outside') {
             if (placementBetAmount > 0 && placementBetAmount < minOutside) {
@@ -152,7 +155,7 @@ const actions = {
                 }
             }
 
-            placementBetAmount > 0 ? commit('removeChip', { placement, chipIndex }) : commit('removeBet', placement);
+            placementBetAmount > 0 ? commit('removeChip', { placement, chipIndex }) : commit('removeBet', placement)
 
             return {
                 success: true,
@@ -162,7 +165,7 @@ const actions = {
 
         placementBetAmount > 0
             ? await commit('removeChip', { placement, chipIndex })
-            : await commit('removeBet', placement);
+            : await commit('removeBet', placement)
 
         // Need to get the total inside bets after removing the bet
         // and compare that against the min inside bet
@@ -203,7 +206,7 @@ const actions = {
 
         return false;
     },
-    doubleBet ({ dispatch, state, rootGetters }) {
+    async doubleBet ({ dispatch, state, rootGetters }) {
         let totalBetAmount = 0
         const bets = Object.values(state.strategy)
 
@@ -241,6 +244,7 @@ const actions = {
                     return accumulator
                 }, [[], []])
 
+
             // Combine all the rejected bets, and bets allowed to be doubled, from the
             // inside and outside bets for further processing.
             // Check that all of the inside bets added together do not exceed the inside max bet
@@ -251,21 +255,23 @@ const actions = {
                 const rejectedBetsString = allRejectedBets.reduce((string, bet) => {
                     string += ` ${bet.placement} `
                     return string
-                }, '');
+                }, '')
 
                 toast.error(`The following bets could not be doubled because they would exceed the maximum bet ${rejectedBetsString}`)
             }
 
             allGoodBets.forEach(bet => {
-                bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
+                [...bet.chips].forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
             })
 
             return true
         }
 
-        bets.forEach(bet => {
-            bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
-        });
+        // Make a deep copy of bets because if this doesn't happen as soon as the first bet is placed
+        // the reactive nature of "bets" alters the original array causing inaccurate results
+        [...bets].forEach(bet => {
+            [...bet.chips].forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
+        })
 
         return true
     },
