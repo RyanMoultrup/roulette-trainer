@@ -26,7 +26,7 @@
 @tailwind utilities;
 
 .card-bg-border {
-    @apply rounded bg-gradient-to-tr from-green-600 via-green-700 to-green-700 border-green-600 border;
+    @apply rounded bg-gradient-to-br from-0% from-accent-150 via-20% via-green-800 border-green-600 border;
 }
 
 html, .charts {
@@ -35,12 +35,30 @@ html, .charts {
 
 .layout-container {
     display: grid;
-    grid-template-columns: 1.2fr 1.2fr 0.8fr 0.8fr;
-    grid-template-rows: 0.2fr 1.7fr;
+    grid-template-columns: 1.6fr 0.4fr;
+    grid-template-rows: 0.4fr 1.6fr;
     gap: 0 0;
     grid-template-areas:
-    "charts charts charts bet-display"
-    "betting-area betting-area betting-area spin-table";
+    "top-left side-pane"
+    "bottom-left side-pane";
+}
+
+.layout-container-home {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    grid-template-rows: 0.3fr 1.7fr;
+    gap: 1rem 1rem;
+    grid-template-areas:
+    "top-left side-pane"
+    "bottom-left side-pane";
+}
+
+.top-left { grid-area: top-left}
+.bottom-left { grid-area: bottom-left }
+
+.side-pane {
+    grid-area: side-pane;
+    grid-row: 1 / span 2
 }
 /*.stats {*/
 /*    display: grid;*/
@@ -56,6 +74,7 @@ html, .charts {
 .total-lost { grid-area: total-lost; }
 .current-winnings { grid-area: current-winnings; }
 .spin-table { grid-area: spin-table; }
+
 .betting-area {
     display: grid;
     place-items: center;
@@ -65,7 +84,7 @@ html, .charts {
     grid-template-areas:
     "wheel betting-table"
     "spin-buttons chips-panel";
-    grid-area: betting-area;
+    grid-area: bottom-left;
 }
 .wheel { grid-area: wheel; }
 .betting-table { grid-area: betting-table; }
@@ -84,7 +103,7 @@ html, .charts {
     gap: 0 1rem;
     grid-template-areas:
     "win-loss-bank-chart this-round this-round";
-    grid-area: charts;
+    grid-area: top-left;
 }
 .hits-chart { grid-area: chips-panel; }
 .win-loss-bank-chart { grid-area: win-loss-bank-chart; }
@@ -678,7 +697,6 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 }
 
 /* ------------- */
-.spot:hover,
 ._zero:hover ~ ._0,
 .str_0_3_2:hover ~ ._0,
 .str_0_3_2:hover ~ ._3,
@@ -728,39 +746,94 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .sgl_34:hover ~ ._34,
 .sgl_35:hover ~ ._35,
 .sgl_36:hover ~ ._36,
-.dbl_3_6:hover ~ ._3_6,
-.dbl_6_9:hover ~ ._6_9,
-.dbl_9_12:hover ~ ._9_12,
-.dbl_12_15:hover ~ ._12_15,
-.dbl_15_18:hover ~ ._15_18,
-.dbl_18_21:hover ~ ._18_21,
-.dbl_21_24:hover ~ ._21_24,
-.dbl_24_27:hover ~ ._24_27,
-.dbl_27_30:hover ~ ._27_30,
-.dbl_30_33:hover ~ ._30_33,
-.dbl_33_36:hover ~ ._33_36,
-.dbl_3_2:hover ~ ._3_2,
-.sqr_3_6_2_5:hover ~ ._3_6_2_5,
-.dbl_6_5:hover ~ ._6_5,
-.sqr_6_9_5_8:hover ~ ._6_9_5_8,
-.dbl_9_8:hover ~ ._9_8,
-.sqr_9_12_8_11:hover ~ ._9_12_8_11,
-.dbl_12_11:hover ~ ._12_11,
-.sqr_12_15_11_14:hover ~ ._12_15_11_14,
-.dbl_15_14:hover ~ ._15_14,
-.sqr_15_18_14_17:hover ~ ._15_18_14_17,
-.dbl_18_17:hover ~ ._18_17,
-.sqr_18_21_17_20:hover ~ ._18_21_17_20,
-.dbl_21_20:hover ~ ._21_20,
-.sqr_21_24_20_23:hover ~ ._21_24_20_23,
-.dbl_24_23:hover ~ ._24_23,
-.sqr_24_27_23_26:hover ~ ._24_27_23_26,
-.dbl_27_26:hover ~ ._27_26,
-.sqr_27_30_26_29:hover ~ ._27_30_26_29,
-.dbl_30_29:hover ~ ._30_29,
-.sqr_30_33_29_32:hover ~ ._30_33_29_32,
-.dbl_33_32:hover ~ ._33_32,
-.sqr_33_36_32_35:hover ~ ._33_36_32_35,
+.dbl_3_6:hover ~ ._3,
+.dbl_3_6:hover ~ ._6,
+.dbl_6_9:hover ~ ._6,
+.dbl_6_9:hover ~ ._9,
+.dbl_9_12:hover ~ ._9,
+.dbl_9_12:hover ~ ._12,
+.dbl_12_15:hover ~ ._12,
+.dbl_12_15:hover ~ ._15,
+.dbl_15_18:hover ~ ._15,
+.dbl_15_18:hover ~ ._18,
+.dbl_18_21:hover ~ ._18,
+.dbl_18_21:hover ~ ._21,
+.dbl_21_24:hover ~ ._21,
+.dbl_21_24:hover ~ ._24,
+.dbl_24_27:hover ~ ._24,
+.dbl_24_27:hover ~ ._27,
+.dbl_27_30:hover ~ ._27,
+.dbl_27_30:hover ~ ._30,
+.dbl_30_33:hover ~ ._30,
+.dbl_30_33:hover ~ ._33,
+.dbl_33_36:hover ~ ._33,
+.dbl_33_36:hover ~ ._36,
+.dbl_3_2:hover ~ ._3,
+.dbl_3_2:hover ~ ._2,
+.sqr_3_6_2_5:hover ~ ._3,
+.sqr_3_6_2_5:hover ~ ._6,
+.sqr_3_6_2_5:hover ~ ._2,
+.sqr_3_6_2_5:hover ~ ._5,
+.dbl_6_5:hover ~ ._6,
+.dbl_6_5:hover ~ ._5,
+.sqr_6_9_5_8:hover ~ ._8,
+.sqr_6_9_5_8:hover ~ ._5,
+.sqr_6_9_5_8:hover ~ ._9,
+.sqr_6_9_5_8:hover ~ ._6,
+.dbl_9_8:hover ~ ._9,
+.dbl_9_8:hover ~ ._8,
+.sqr_9_12_8_11:hover ~ ._9,
+.sqr_9_12_8_11:hover ~ ._12,
+.sqr_9_12_8_11:hover ~ ._8,
+.sqr_9_12_8_11:hover ~ ._11,
+.dbl_12_11:hover ~ ._12,
+.dbl_12_11:hover ~ ._11,
+.sqr_12_15_11_14:hover ~ ._12,
+.sqr_12_15_11_14:hover ~ ._15,
+.sqr_12_15_11_14:hover ~ ._11,
+.sqr_12_15_11_14:hover ~ ._14,
+.dbl_15_14:hover ~ ._15,
+.dbl_15_14:hover ~ ._14,
+.sqr_15_18_14_17:hover ~ ._15,
+.sqr_15_18_14_17:hover ~ ._18,
+.sqr_15_18_14_17:hover ~ ._14,
+.sqr_15_18_14_17:hover ~ ._17,
+.dbl_18_17:hover ~ ._18,
+.dbl_18_17:hover ~ ._17,
+.sqr_18_21_17_20:hover ~ ._18,
+.sqr_18_21_17_20:hover ~ ._21,
+.sqr_18_21_17_20:hover ~ ._17,
+.sqr_18_21_17_20:hover ~ ._20,
+.dbl_21_20:hover ~ ._21,
+.dbl_21_20:hover ~ ._20,
+.sqr_21_24_20_23:hover ~ ._21,
+.sqr_21_24_20_23:hover ~ ._24,
+.sqr_21_24_20_23:hover ~ ._20,
+.sqr_21_24_20_23:hover ~ ._23,
+.dbl_24_23:hover ~ ._23,
+.dbl_24_23:hover ~ ._24,
+.sqr_24_27_23_26:hover ~ ._24,
+.sqr_24_27_23_26:hover ~ ._27,
+.sqr_24_27_23_26:hover ~ ._23,
+.sqr_24_27_23_26:hover ~ ._26,
+.dbl_27_26:hover ~ ._27,
+.dbl_27_26:hover ~ ._26,
+.sqr_27_30_26_29:hover ~ ._27,
+.sqr_27_30_26_29:hover ~ ._30,
+.sqr_27_30_26_29:hover ~ ._26,
+.sqr_27_30_26_29:hover ~ ._29,
+.dbl_30_29:hover ~ ._30,
+.dbl_30_29:hover ~ ._29,
+.sqr_30_33_29_32:hover ~ ._32,
+.sqr_30_33_29_32:hover ~ ._29,
+.sqr_30_33_29_32:hover ~ ._33,
+.sqr_30_33_29_32:hover ~ ._30,
+.dbl_33_32:hover ~ ._33,
+.dbl_33_32:hover ~ ._32,
+.sqr_33_36_32_35:hover ~ ._33,
+.sqr_33_36_32_35:hover ~ ._36,
+.sqr_33_36_32_35:hover ~ ._32,
+.sqr_33_36_32_35:hover ~ ._35,
 
 .row_first:hover ~ ._3,
 .row_first:hover ~ ._6,
@@ -1166,6 +1239,6 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .black:hover ~ ._33,
 .black:hover ~ ._35
 {
-    box-shadow: inset 0 0 9px yellow;
-    color: yellow;
+    box-shadow: inset 0 0 9px yellowgreen;
+    color: yellowgreen;
 }

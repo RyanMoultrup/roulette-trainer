@@ -15,6 +15,9 @@ import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 import { redrawAll } from "dc";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
+let unsubscribe
+let redBlackChart
+
 export default {
   components: { ChartPlaceholder },
   data () {
@@ -26,7 +29,7 @@ export default {
     ...mapGetters('simulation', ['getOutcomes'])
   },
   mounted () {
-    this.$store.subscribe((mutation, state) => {
+    unsubscribe = this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
         this.showPlaceholder = false;
         redrawAll()
@@ -35,7 +38,7 @@ export default {
 
     const outcomes = this.getOutcomes();
 
-    const redBlackChart = new RedBlack();
+    redBlackChart = new RedBlack();
     redBlackChart
         .parentHeight(100)
         .parentWidth(175)
@@ -45,6 +48,10 @@ export default {
 
     // const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
     // useResizeObserver(this.$refs.hitsChart, debounceChartResize(hitsChart));
+  },
+  unmounted() {
+    unsubscribe()
+    redBlackChart.reset()
   }
 }
 </script>

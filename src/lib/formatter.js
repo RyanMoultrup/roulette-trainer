@@ -13,4 +13,18 @@ const number = function (value) {
     return formatter.format(value);
 };
 
-export default { money, number };
+const dateTime = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+
+    // Use the built-in toLocaleString method with US options
+    return date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    });
+}
+
+export default { money, number, dateTime };

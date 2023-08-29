@@ -5,7 +5,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { tween } from "@/lib/Tween";
+// import { tween } from "@/lib/Tween";
 import formatter from "@/lib/formatter";
 
 export default {
@@ -27,10 +27,11 @@ export default {
   },
   watch: {
     currentBetTotal (newVal, oldVal) {
-      tween('#current-bet')
-          .initValue(oldVal)
-          .onRender(val => this.currentBet = val)
-          .render(newVal);
+      this.currentBet = newVal
+      // tween('#current-bet')
+      //     .initValue(oldVal)
+      //     .onRender(val => this.currentBet = val)
+      //     .render(newVal);
     }
   },
 }

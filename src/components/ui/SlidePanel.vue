@@ -1,9 +1,9 @@
 <template>
   <div class="fixed top-0 right-0 z-10 h-full max-w-2xl">
     <slide-in-from-right-transition>
-      <div v-if="show" class="slider-panel h-full bg-green-700 bg-gradient-to-tr from-green-600 via-green-700 to-green-700">
+      <div v-if="show" class="slider-panel h-full bg-gradient-to-tr from-0% from-accent-150 via-35% via-green-800 to-green-800">
         <div>
-          <header class="p-5 bg-green-500 bg-gradient-to-r from-green-500 via-green-500 to-green-600">
+          <header class="p-5 bg-green-500 bg-gradient-to-r from-accent-150 via-green-700 to-green-800">
             <div>
               <span class="font-lobster text-3xl text-gray-300"><font-awesome-icon icon="fa-solid fa-gear" /> Game Settings</span>
             </div>
@@ -115,7 +115,7 @@
 }
 
 .input {
-  @apply h-10 bg-green-500 border border-green-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 dark:bg-green-500 dark:border-green-400 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400
+  @apply h-10 bg-green-650 border border-green-500 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 dark:bg-green-500 dark:border-green-400 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400
 }
 </style>
 <script>
@@ -179,7 +179,6 @@ export default {
   watch: {
     bank: {
       handler (newVal) {
-        console.log('bank updated::::', newVal);
         this.debounceBank(newVal);
       },
       deep: true

@@ -14,6 +14,9 @@ import { debounce } from "@/lib/Utils";
 import HitsChart from "@/lib/charts/HitsChart.js";
 import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 
+let unsubscribe
+let hitsChart
+
 export default {
   components: { ChartPlaceholder },
   data () {
@@ -27,7 +30,7 @@ export default {
     ...mapGetters('simulation', ['getOutcomes'])
   },
   mounted () {
-    this.$store.subscribe((mutation, state) => {
+    unsubscribe = this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
         this.showPlaceholder = false;
         redrawAll();
@@ -36,7 +39,7 @@ export default {
 
     const outcomes = this.getOutcomes();
 
-    const hitsChart = new HitsChart();
+    hitsChart = new HitsChart();
     hitsChart
         .parentHeight(100)
         .parentWidth(null)
@@ -44,8 +47,12 @@ export default {
         // .parentWidth(this.$refs.hitsChart.clientWidth - 40)
         .render(outcomes);
 
-    const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
+    // const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
     // useResizeObserver(this.$refs.hitsChart, debounceChartResize(hitsChart));
+  },
+  unmounted() {
+    unsubscribe()
+    hitsChart.reset()
   }
 }
 </script>

@@ -1,10 +1,11 @@
-import { CompositeChart, LineChart, legend } from "dc";
+import { CompositeChart, LineChart, legend, deregisterChart } from "dc";
 import { scaleLinear } from 'd3-scale';
 import { curveCardinal } from 'd3-shape';
 import { tip as d3tip } from "d3-v6-tip";
 import spots from "@/lib/table/spots";
 import { names } from '@/lib/table/BetPlacements'
 import { simplePie } from "@/lib/charts/SimplePie";
+import { select } from 'd3-selection'
 
 export default class WinLossBankChart {
     chart;
@@ -151,6 +152,12 @@ export default class WinLossBankChart {
         );
     }
 
+    reset () {
+        this.dimension.dispose()
+        select(this.chart.root().node()).remove()
+        deregisterChart(this.chart)
+    }
+
     rescale (width, height) {
         this.chart.width(width-30).height(height-20);
         this.chart.rescale();
@@ -202,7 +209,6 @@ export default class WinLossBankChart {
                 let totalWon = 0;
 
                 betOutcomes.forEach(outcome => {
-                    console.log('outcome:::', outcome);
                     betOutcomesHTML += `
                         <div class="flex flex-col border-b border-b-green-600">
                             <div class="flex flex-row justify-between">
@@ -270,6 +276,7 @@ export default class WinLossBankChart {
             .margins({top: 15, right: 60, bottom: 10, left: 50})
             .x(scaleLinear().domain([1, this.dimension.group().size()]))
             .yAxisLabel("$ Won / Lost")
+            .yAxisPadding(10)
             .rightYAxisLabel('Bank')
             .legend(legend().x(80).y(20).itemHeight(13).gap(5))
             .renderTitle(false)

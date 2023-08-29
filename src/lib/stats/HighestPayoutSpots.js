@@ -19,7 +19,7 @@ export const highestPayout = bets => {
     }, [{}, 0])
 
     return Object.entries(spots).map(([spot, meta]) => {
-        const profit = { profit: meta.payout - (betAmt - meta.totalBet) }
+        const profit = { profit: meta.payout - betAmt }
         return { spot: spot, ...meta, ...profit}
     }).sort((a, b) => b.profit - a.profit)
 }

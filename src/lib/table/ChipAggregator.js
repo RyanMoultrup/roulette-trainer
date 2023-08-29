@@ -1,22 +1,22 @@
-import availableChips from "@/lib/table/chips";
+import availableChips from "@/lib/table/chips"
 
-const getTotalChipValues = chips => chips.reduce((r, c) => r + +c.value, 0);
+const getTotalChipValues = chips => chips.reduce((r, c) => r + +c.value, 0)
 
-const findChips = (value, avaiableChips, newChips) => {
-    const rChips = availableChips.filter(c => c.value <= value);
+const findChips = (value, newChips = []) => {
+    const rChips = availableChips.filter(c => c.value <= value)
 
-    const newChip = rChips.pop();
-    newChips.push(newChip);
+    const newChip = rChips.pop()
+    newChips.push(newChip)
 
     if (newChip.value === value) {
-        return newChips;
+        return newChips
     }
 
-    return findChips(+value - +newChip.value, rChips, newChips);
+    return findChips(+value - +newChip.value, newChips)
 }
 
-const getNewChips = chips => {
-    return findChips(getTotalChipValues(chips), availableChips, []);
-}
+const getNewChips = chips => findChips(getTotalChipValues(chips))
+
+export const getNewChipsFromValue = value => findChips(value)
 
 export default getNewChips;

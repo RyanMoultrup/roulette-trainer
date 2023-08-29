@@ -14,9 +14,7 @@ const allInsideBets = bets => {
 }
 
 const placementCategory = placement => {
-    console.log('placement::', placement)
     const [placementId] = placement.split('_')
-    console.log('placementId::', placementId)
     return odds[placementId].category
 }
 

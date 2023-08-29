@@ -6,6 +6,7 @@ const cxf = crossfilter();
 const state = () => ({
   game: {},
   outcomes: cxf,
+  filteredOutcomes: [],
   spins: [],
   spin: null,
   rounds: 0,
@@ -13,24 +14,39 @@ const state = () => ({
     color: 'darkred',
     value: '5'
   },
-  emittingSpins: false
+  emittingSpins: false,
+  mode: 'practice'
 });
 
 const mutations = {
+  updateRounds (state, number) {
+    state.rounds = number
+  },
+  updateSpin (state, number) {
+    state.spin = number
+  },
   pushSpin (state, number) {
     state.spin = number
     state.rounds++
   },
+  addFilteredOutcomes (state, outcomes) {
+    state.filteredOutcomes = outcomes
+  },
   addOutcome (state, outcome) {
-    state.outcomes.add(outcome)
+    // outcome.forEach(item => cxf.add([item]))
+    outcome.forEach(item => state.outcomes.add([item]))
   },
   updateSpinEmit (state, value) {
     state.emittingSpins = value
+  },
+  updateMode (state, mode) {
+    state.mode = mode
   },
   reset (state) {
     cxf.remove();
     state.game = {}
     state.outcomes = cxf
+    state.filteredOutcomes = []
     state.spins = []
     state.rounds = 0
     state.emittingSpins = false
@@ -45,6 +61,9 @@ const mutations = {
 }
 
 const actions = {
+  setRound ({ commit }, number) {
+    commit('updateRounds', number)
+  },
   async play ({ commit }, hit) {
     await game.play(hit);
     commit('pushSpin', hit)
@@ -56,8 +75,13 @@ const actions = {
 
 const getters = {
   getOutcomes: state => state.outcomes,
+  getFilteredOutcomes: state => state.filteredOutcomes,
+  // getOutcomes: state => cxf,
   isEmitting: state => state.emittingSpins,
-  selectedChip: state => state.selectedChip
+  selectedChip: state => state.selectedChip,
+  getMode: state => state.mode,
+  getRounds: state => state.rounds,
+  getSpin: state => state.spin
 }
 
 export default {

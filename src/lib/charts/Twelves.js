@@ -1,7 +1,6 @@
 import reductio from 'reductio';
-import spots from "../table/spots";
 import { format } from 'd3-format';
-import { RowChart, BarChart, units } from 'dc';
+import {RowChart, BarChart, units, deregisterChart } from 'dc';
 import { scaleOrdinal } from 'd3-scale';
 import { range, max } from 'd3-array'
 import { select } from 'd3-selection'
@@ -47,6 +46,12 @@ export default class Twelves {
         }
     }
 
+    reset () {
+        this.dimension.dispose()
+        select(this.chart.root().node()).remove()
+        deregisterChart(this.chart)
+    }
+
     rescale (width, height) {
         this.chart.width(width-20).height(height-20)
         this.chart.rescale()
@@ -73,7 +78,7 @@ export default class Twelves {
             .colors(
                 scaleOrdinal()
                     .domain(['odd', 'even'])
-                    .range(['darkgreen', 'darkgreen'])
+                    .range(['#0C4F4C', '#0C4F4C'])
             )
             .colorAccessor(d => d.key ? 'Even' : 'Odd')
             .elasticX(true)

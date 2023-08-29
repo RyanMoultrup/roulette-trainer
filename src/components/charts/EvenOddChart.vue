@@ -14,6 +14,9 @@ import EvenOdd from "@/lib/charts/EvenOdd.js";
 import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 import {redrawAll} from "dc";
 
+let unsubscribe
+let evenOddChart
+
 export default {
   components: { ChartPlaceholder },
   data () {
@@ -25,7 +28,7 @@ export default {
     ...mapGetters('simulation', ['getOutcomes'])
   },
   mounted () {
-    this.$store.subscribe((mutation, state) => {
+    unsubscribe = this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
         this.showPlaceholder = false
         redrawAll()
@@ -34,7 +37,7 @@ export default {
 
     const outcomes = this.getOutcomes()
 
-    const evenOddChart = new EvenOdd()
+    evenOddChart = new EvenOdd()
     evenOddChart
         .parentHeight(100)
         .parentWidth(150)
@@ -44,6 +47,10 @@ export default {
 
     // const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
     // useResizeObserver(this.$refs.hitsChart, debounceChartResize(hitsChart));
+  },
+  unmounted() {
+    unsubscribe()
+    evenOddChart.reset()
   }
 }
 </script>

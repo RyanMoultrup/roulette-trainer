@@ -1,5 +1,8 @@
+import Play from "@/views/Play.vue"
+import Home from "@/views/Home.vue"
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { removeToken } from "@/lib/storage/auth/TokenStorage"
+import store from '@/store/index'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,17 +10,74 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: Home,
+      beforeEnter: (to, from, next) => {
+        store.commit('simulation/updateMode', 'practice')
+        next()
+      },
+      meta: { layout: 'default' }
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      path: '/game/play',
+      name: 'play',
+      component: Play,
+      beforeEnter: (to, from, next) => {
+        store.commit('simulation/updateMode', 'practice')
+        next()
+      },
+      meta: { layout: 'default' }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/Login.vue'),
+      meta: { layout: 'blank' }
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      beforeEnter: (to, from, next) => {
+        removeToken()
+        store.commit('user/clear')
+        next({ name: 'login' })
+      }
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/Register.vue'),
+      meta: { layout: 'blank' }
+    },
+    {
+      path: '/game/:gameId',
+      name: 'game',
+      component: () => import('../views/Game.vue'),
+      beforeEnter: (to, from, next) => {
+        store.commit('simulation/updateMode', 'review')
+        next()
+      },
+      props: true,
+      meta: { layout: 'default' }
+    },
+    {
+      path: '/table',
+      name: 'table',
+      component: () => import('../components/charts/RadialWheelChart.vue'),
+      meta: { layout: 'default' }
     }
   ]
+})
+
+function isLoggedIn() {
+  return localStorage.getItem('auth._token');
+}
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'login' && to.name !== 'register' && !isLoggedIn()) {
+    next({ name: 'login' })
+  } else {
+    next()
+  }
 })
 
 export default router

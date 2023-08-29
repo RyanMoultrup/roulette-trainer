@@ -3,9 +3,10 @@
     <div class="flex flex-col shrink-0 justify-end gap-3 p-2 mr-2">
       <double-bet-button />
       <replay-last-bet-button />
+      <clear-bets-button />
     </div>
     <div style="min-width: 0;" class="max-w-[75%]">
-      <div class="bg-green-500 border border-green-800 border-1 p-3 rounded-md">
+      <div class="bg-accent-150 border border-green-800 border-1 p-3 rounded-md">
         <swiper
             :slidesPerView="5"
             :spaceBetween="2"
@@ -27,14 +28,15 @@ import chips from '@/lib/table/chips';
 import Chip from '@/components/Chip.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import SelectedChip from "@/components/SelectedChip.vue";
-import DoubleBetButton from "@/components/DoubleBetButton.vue";
-import ReplayLastBetButton from "@/components/ReplayLastBetButton.vue";
+import DoubleBetButton from "@/components/buttons/DoubleBetButton.vue";
+import ReplayLastBetButton from "@/components/buttons/ReplayLastBetButton.vue";
 
 // Import Swiper styles
-import 'swiper/css';
+import 'swiper/css'
+import ClearBetsButton from "@/components/buttons/ClearBetsButton.vue";
 
 export default {
-  components: { SelectedChip, Chip, DoubleBetButton, ReplayLastBetButton, Swiper, SwiperSlide },
+  components: {ClearBetsButton, SelectedChip, Chip, DoubleBetButton, ReplayLastBetButton, Swiper, SwiperSlide },
   data () {
     return {
       allChips: chips

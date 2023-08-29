@@ -1,9 +1,9 @@
 import reductio from 'reductio';
-import spots from "../table/spots";
 import { format } from 'd3-format';
-import { RowChart, BarChart, units } from 'dc';
-import { scaleOrdinal } from 'd3-scale';
 import { range, max } from 'd3-array'
+import { select } from 'd3-selection'
+import { scaleOrdinal } from 'd3-scale';
+import {RowChart, BarChart, units, deregisterChart } from 'dc';
 
 let total = 0
 
@@ -47,6 +47,12 @@ export default class EvenOdd {
         }
     }
 
+    reset () {
+        this.dimension.dispose()
+        select(this.chart.root().node()).remove()
+        deregisterChart(this.chart)
+    }
+
     rescale (width, height) {
         this.chart.width(width-20).height(height-20)
         this.chart.rescale()
@@ -66,7 +72,7 @@ export default class EvenOdd {
             .colors(
                 scaleOrdinal()
                     .domain(['odd', 'even'])
-                    .range(['green', 'darkgreen'])
+                    .range(['#0C4F4C', '#0C4F4C'])
             )
             .colorAccessor(d => d.key ? 'Even' : 'Odd')
             .elasticX(true)

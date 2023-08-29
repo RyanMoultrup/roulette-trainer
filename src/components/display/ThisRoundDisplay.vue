@@ -10,14 +10,14 @@
           </div>
 
           <div class="relative">
-            <div class="grid grid-cols-[1.3fr,0.9fr,0.9fr,0.9fr] top-0 left-0 w-full px-2 pt-2 border-b border-b-green-400">
+            <div class="grid grid-cols-[1.3fr,0.9fr,0.9fr,0.9fr] top-0 left-0 w-full px-2 pt-2 border-b border-b-accent-200">
               <span>Placement</span>
               <span>Odds</span>
               <span>Bet</span>
               <span>Payout</span>
             </div>
-            <div class="relative px-2 pb-2 pt-1 max-h-40 overflow-y-auto border-t border-t-green-600">
-              <div v-for="bet in allBets" :key="bet.type" class="border-b border-b-green-600">
+            <div class="relative px-2 pb-2 pt-1 h-32 overflow-y-auto">
+              <div v-for="bet in allBets" :key="bet.type" class="border-b border-b-accent-100">
                 <div class="grid grid-cols-[1.3fr,0.9fr,0.9fr,0.9fr] justify-between">
                   <span style="color: #D49228;" class="mr-2 ">{{ bet.name() }}</span>
                   <span>{{ bet.odds }}%</span>
@@ -35,17 +35,17 @@
             <span>Total: {{ getHighestPayouts.length }}</span>
             <div v-if="negativeProfit > 0" class="flex gap-1 items-center danger">
               <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />
-              <span  class="text-sm danger">{{ negativeProfit }}/{{ getHighestPayouts.length }} have a negative payout</span>
+              <span  class="text-sm danger">{{ negativeProfit }} bets have zero or negative payout</span>
             </div>
           </div>
 
-          <div class="grid grid-cols-3 top-0 left-0 w-full px-2 pt-2 border-b border-b-green-400">
+          <div class="grid grid-cols-3 top-0 left-0 w-full px-2 pt-2 border-b border-b-accent-200">
             <span>Spin</span>
             <span>Payout</span>
             <span>Profit</span>
           </div>
-          <div class="w-80 p-2 max-h-40 overflow-y-auto">
-            <div v-for="spot in getHighestPayouts" :key="spot" class="flex flex-col border-b border-b-green-600 py-0.5">
+          <div class="w-80 p-2 h-32 overflow-y-auto">
+            <div v-for="spot in getHighestPayouts" :key="spot" class="flex flex-col border-b border-b-accent-100 py-0.5">
               <div class="grid grid-cols-3 justify-between">
                 <span
                     class="pt-0.5 w-5 h-5 mb-1 text-xs text-center text-white rounded-full"
@@ -66,6 +66,7 @@
         <span class="font-lobster text-xl">Max Profit: {{ formatter.money(max) }}</span>
         <span class="font-lobster text-xl">Min Profit: {{ formatter.money(min) }}</span>
       </div>
+      <coverage-table :payouts="getHighestPayouts" :total-bet="currentBet" />
     </div>
   </div>
 </template>
@@ -75,9 +76,10 @@ import {mapActions, mapGetters} from "vuex";
 import formatter from "@/lib/formatter";
 import highestPayout from "@/lib/stats/HighestPayoutSpots";
 import BasePill from "@/components/ui/Base/BasePill.vue";
+import CoverageTable from "@/components/CoverageTable.vue";
 
 export default {
-  components: {BasePill},
+  components: { CoverageTable, BasePill },
   setup () {
     return { formatter }
   },
@@ -87,7 +89,8 @@ export default {
       min: 0,
       probability: 0,
       positiveProfit: 0,
-      negativeProfit: 0
+      negativeProfit: 0,
+      currentBet: 0
     }
   },
   computed: {
@@ -97,7 +100,12 @@ export default {
     },
     getHighestPayouts () {
       return highestPayout(this.getStrategy)
-    }
+    },
+    currentBetTotal () {
+      let bets = this.getStrategy;
+      if (bets.length) return bets.reduce((accumulator, item) => accumulator + +item.get(), 0);
+      return 0;
+    },
   },
   watch: {
     getHighestPayouts (newVal) {
@@ -107,9 +115,12 @@ export default {
 
       this.probability = winProbability.toFixed(1);
       this.max = positiveWinningSpots[0]?.profit ?? 0;
-      this.min =  positiveWinningSpots[positiveWinningSpots.length - 1]?.profit ?? 0;
+      this.min = positiveWinningSpots[positiveWinningSpots.length - 1]?.profit ?? 0;
       this.positiveProfit = positiveWinningSpots.length;
       this.negativeProfit = highestPay.length - positiveWinningSpots.length;
+    },
+    currentBetTotal (newVal, oldVal) {
+      this.currentBet = newVal
     }
   },
   methods: {

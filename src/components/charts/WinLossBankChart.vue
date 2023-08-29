@@ -16,6 +16,9 @@ import WinLossBankChart from "@/lib/charts/WinLossBankChart";
 import {debounce} from "@/lib/Utils";
 import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 
+let unsubscribe
+let winLossBankChart
+
 export default {
   components: { ChartPlaceholder },
   data () {
@@ -28,7 +31,7 @@ export default {
     ...mapGetters('strategy', ['getStrategy'])
   },
   mounted () {
-    this.$store.subscribe((mutation, state) => {
+    unsubscribe = this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
         this.showPlaceholder = false;
         redrawAll();
@@ -37,18 +40,22 @@ export default {
 
     const outcomes = this.getOutcomes();
 
-    const winLossBankChart = new WinLossBankChart();
+    winLossBankChart = new WinLossBankChart();
     // const winLossBankRef = this.$refs.winLossBankChart;
     winLossBankChart
         // .parentHeight(winLossBankRef.clientHeight - 20)
         // .parentWidth(winLossBankRef.clientWidth - 20)
-        .parentHeight(125)
+        .parentHeight(null)
         .parentWidth(null)
         .render(outcomes);
 
     // const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
 
     // useResizeObserver(this.$refs.winLossBankChart, debounceChartResize(winLossBankChart));
+  },
+  unmounted() {
+    unsubscribe()
+    winLossBankChart.reset()
   }
 }
 </script>
