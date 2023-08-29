@@ -1,22 +1,19 @@
-import Bet from '@/lib/table/Bet';
-import { odds } from '@/lib/table/BetPlacements';
-import formatter from "@/lib/formatter";
-import { useToast } from "vue-toastification";
+import Bet from '@/lib/table/Bet'
+import formatter from "@/lib/formatter"
+import { useToast } from "vue-toastification"
+import { odds } from '@/lib/table/BetPlacements'
 
 const toast = useToast();
 
 let currentBetSpots = [];
 
 const allInsideBets = bets => {
-    console.log('allInsideBets:::bets', { ...bets })
-    console.log('allInsideBets:::object.values.bets', Object.values({ ...bets }))
-    // debugger
     return Object.values(bets)
         .filter(bet => bet.category === 'inside')
         .reduce((accumulator, bet) => {
             accumulator += bet.amount
             return accumulator
-        }, 0);
+        }, 0)
 }
 
 const placementCategory = placement => {
@@ -79,13 +76,11 @@ const mutations = {
 
 const actions = {
     placeBet ({ commit, rootGetters, state }, bet) {
-        console.log('placeBet:::bet::', bet)
-        debugger
-        const tableLimit = rootGetters['settings/hasTableLimit'];
+        const tableLimit = rootGetters['settings/hasTableLimit']
 
         if (tableLimit) {
             const betCategory = placementCategory(bet.placement);
-            const { maxInside, maxOutside, minInside, minOutside } = rootGetters['settings/getBetLimits'];
+            const { maxInside, maxOutside, minInside, minOutside } = rootGetters['settings/getBetLimits']
 
             if (betCategory === 'outside') {
                 const outsideBetAmount = currentBetSpots.includes(bet.placement)
@@ -113,9 +108,7 @@ const actions = {
             }
 
             if (betCategory === 'inside') {
-                const insideBetAmount = allInsideBets(state.strategy)
-
-                console.log('insideBetAmount::', insideBetAmount);
+                const insideBetAmount = allInsideBets(state.strategy);
 
                 (+bet.chip.value + insideBetAmount < minInside)
                     ? commit('minInsideBetMet', false)
@@ -134,10 +127,10 @@ const actions = {
         return { success: true, msg: 'Bet placed' }
     },
     async removeBet ({ commit, state, rootGetters }, placement) {
-        await commit('removeBet', placement);
+        await commit('removeBet', placement)
 
-        const betCategory = placementCategory(placement);
-        const { minInside } = rootGetters['settings/getBetLimits'];
+        const betCategory = placementCategory(placement)
+        const { minInside } = rootGetters['settings/getBetLimits']
 
         if (betCategory === 'inside') {
             // Check if the remaining bets are below the limit
@@ -150,9 +143,9 @@ const actions = {
         }
     },
     async removeChip({ commit, state, rootGetters }, { placement, chipIndex, chip }) {
-        const betCategory = placementCategory(placement);
-        const placementBetAmount = state.strategy[placement].amount - +chip.value;
-        const { minOutside, minInside } = rootGetters['settings/getBetLimits'];
+        const betCategory = placementCategory(placement)
+        const placementBetAmount = state.strategy[placement].amount - +chip.value
+        const { minOutside, minInside } = rootGetters['settings/getBetLimits']
 
         if (betCategory === 'outside') {
             if (placementBetAmount > 0 && placementBetAmount < minOutside) {
@@ -162,7 +155,7 @@ const actions = {
                 }
             }
 
-            placementBetAmount > 0 ? commit('removeChip', { placement, chipIndex }) : commit('removeBet', placement);
+            placementBetAmount > 0 ? commit('removeChip', { placement, chipIndex }) : commit('removeBet', placement)
 
             return {
                 success: true,
@@ -172,7 +165,7 @@ const actions = {
 
         placementBetAmount > 0
             ? await commit('removeChip', { placement, chipIndex })
-            : await commit('removeBet', placement);
+            : await commit('removeBet', placement)
 
         // Need to get the total inside bets after removing the bet
         // and compare that against the min inside bet
@@ -217,11 +210,7 @@ const actions = {
         let totalBetAmount = 0
         const bets = Object.values(state.strategy)
 
-        // console.log('BETS::', bets)
-
         bets.forEach(bet => totalBetAmount += bet.amount)
-
-        // console.log('TOTAL BET AMOUNT:::', totalBetAmount)
 
         if (totalBetAmount > rootGetters['bank/availableBalance']) return false
 
@@ -240,10 +229,6 @@ const actions = {
                 }, { insideBetsTotal: 0, insideBets: [], outsideBets: [] })
 
             const { maxOutside, maxInside } = rootGetters['settings/getBetLimits']
-
-            // console.log('insidebets:::', insideBets)
-            // console.log('insideBetsTotal:::', insideBetsTotal)
-            // console.log('outsidebets:::', outsideBets)
 
             // Once the bets have been split into two arrays on with inside bet and the other
             // with outside bets, the outside bets must be looped over again and compared against the
@@ -270,30 +255,23 @@ const actions = {
                 const rejectedBetsString = allRejectedBets.reduce((string, bet) => {
                     string += ` ${bet.placement} `
                     return string
-                }, '');
+                }, '')
 
                 toast.error(`The following bets could not be doubled because they would exceed the maximum bet ${rejectedBetsString}`)
             }
 
-            // console.log('all good bets:::', allGoodBets)
-
-            // await dispatch('clearAll')
-
             allGoodBets.forEach(bet => {
-                bet.chips.forEach(async chip => {
-                    console.log('foreach bets::', { placement: bet.placement, chip })
-                    await dispatch('placeBet', { placement: bet.placement, chip })
-                })
+                [...bet.chips].forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
             })
 
             return true
         }
 
-        bets.forEach(bet => {
-            console.log('bet before loop::', bet)
-            debugger
-            bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
-        });
+        // Make a deep copy of bets because if this doesn't happen as soon as the first bet is placed
+        // the reactive nature of "bets" alters the original array causing inaccurate results
+        [...bets].forEach(bet => {
+            [...bet.chips].forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
+        })
 
         return true
     },
