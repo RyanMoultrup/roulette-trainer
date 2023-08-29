@@ -8,9 +8,15 @@ const toast = useToast();
 let currentBetSpots = [];
 
 const allInsideBets = bets => {
+    console.log('allInsideBets:::bets', { ...bets })
+    console.log('allInsideBets:::object.values.bets', Object.values({ ...bets }))
+    // debugger
     return Object.values(bets)
         .filter(bet => bet.category === 'inside')
-        .reduce((accumulator, bet) => accumulator + bet.amount, 0);
+        .reduce((accumulator, bet) => {
+            accumulator += bet.amount
+            return accumulator
+        }, 0);
 }
 
 const placementCategory = placement => {
@@ -73,6 +79,8 @@ const mutations = {
 
 const actions = {
     placeBet ({ commit, rootGetters, state }, bet) {
+        console.log('placeBet:::bet::', bet)
+        debugger
         const tableLimit = rootGetters['settings/hasTableLimit'];
 
         if (tableLimit) {
@@ -105,11 +113,13 @@ const actions = {
             }
 
             if (betCategory === 'inside') {
-                const insideBetAmount = allInsideBets(state.strategy);
+                const insideBetAmount = allInsideBets(state.strategy)
+
+                console.log('insideBetAmount::', insideBetAmount);
 
                 (+bet.chip.value + insideBetAmount < minInside)
                     ? commit('minInsideBetMet', false)
-                    : commit('minInsideBetMet', true);
+                    : commit('minInsideBetMet', true)
 
                 if (+bet.chip.value + insideBetAmount > maxInside) {
                     return {
@@ -203,11 +213,15 @@ const actions = {
 
         return false;
     },
-    doubleBet ({ dispatch, state, rootGetters }) {
+    async doubleBet ({ dispatch, state, rootGetters }) {
         let totalBetAmount = 0
         const bets = Object.values(state.strategy)
 
+        // console.log('BETS::', bets)
+
         bets.forEach(bet => totalBetAmount += bet.amount)
+
+        // console.log('TOTAL BET AMOUNT:::', totalBetAmount)
 
         if (totalBetAmount > rootGetters['bank/availableBalance']) return false
 
@@ -227,6 +241,10 @@ const actions = {
 
             const { maxOutside, maxInside } = rootGetters['settings/getBetLimits']
 
+            // console.log('insidebets:::', insideBets)
+            // console.log('insideBetsTotal:::', insideBetsTotal)
+            // console.log('outsidebets:::', outsideBets)
+
             // Once the bets have been split into two arrays on with inside bet and the other
             // with outside bets, the outside bets must be looped over again and compared against the
             // max bet for outside bets.
@@ -240,6 +258,7 @@ const actions = {
                         : accumulator[1].push(bet)
                     return accumulator
                 }, [[], []])
+
 
             // Combine all the rejected bets, and bets allowed to be doubled, from the
             // inside and outside bets for further processing.
@@ -256,14 +275,23 @@ const actions = {
                 toast.error(`The following bets could not be doubled because they would exceed the maximum bet ${rejectedBetsString}`)
             }
 
+            // console.log('all good bets:::', allGoodBets)
+
+            // await dispatch('clearAll')
+
             allGoodBets.forEach(bet => {
-                bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
+                bet.chips.forEach(async chip => {
+                    console.log('foreach bets::', { placement: bet.placement, chip })
+                    await dispatch('placeBet', { placement: bet.placement, chip })
+                })
             })
 
             return true
         }
 
         bets.forEach(bet => {
+            console.log('bet before loop::', bet)
+            debugger
             bet.chips.forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
         });
 

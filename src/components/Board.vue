@@ -3,14 +3,15 @@
     <table-limits />
     <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-80">
       <div
-          v-for="bet in getStrategy" :key="bet.type"
+          v-for="bet in bets"
           class="absolute w-28 mt-1 ml-1 backdrop-blur-sm"
           v-bind:class="hoverBetCSS(bet)"
           @mouseleave="leaveHoverBet"
           @click="placeNext(bet.placement)"
       >
-        <div v-for="(chip, index) in bet.chips" :key="chip.value" class="board-chip flex gap-1 items-start">
+        <div v-for="(chip, index) in bet.chips" class="board-chip flex gap-1 items-start">
           <chip
+              :id="index"
               class="mb-2 flex-shrink-0"
               size="sm"
               :chipValue="chip.value"
@@ -40,7 +41,7 @@ import { tableSpots } from "@/lib/table/table"
 
 export default {
   name: 'Board',
-  components: {TableLimits, Chip },
+  components: { TableLimits, Chip },
   props: {
     selectedChip: {
       type: Object,
@@ -63,6 +64,10 @@ export default {
     ...mapGetters('simulation', ['getMode']),
     ...mapGetters('strategy', ['getStrategy']),
     ...mapGetters('bank', ['canBet', 'availableBalance']),
+    bets () {
+      console.log('this.getStartegy', this.getStrategy)
+      return this.getStrategy
+    }
   },
   methods: {
     ...mapMutations('strategy', ['placeBet']),
@@ -133,7 +138,7 @@ export default {
 }
 
 .top-border-cell {
- @apply border-t-4
+  @apply border-t-4
 }
 
 .bottom-border-cell {
