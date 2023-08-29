@@ -216,7 +216,7 @@ const actions = {
 
         if (rootGetters['settings/hasTableLimit']) {
             // First all the current bets on the table must be split into the inside
-            // bets and the outside bets as each have their own rules for max bets
+            // bets and the outside bets as each have their own rules for max bets.
             const { insideBetsTotal, insideBets, outsideBets } = bets
                 .reduce((accumulator, bet) => {
                     if (bet.category === 'inside') {
