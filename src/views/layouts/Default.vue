@@ -26,7 +26,7 @@ import { ref } from 'vue'
 import { onMounted } from "vue";
 import { useStore } from "vuex";
 import SideNav from "@/components/ui/SideNav.vue";
-import SlidePanel from "@/components/ui/SlidePanel.vue";
+import SlidePanel from "@/components/slide-panes/Settings.vue";
 import BaseModal from "@/components/ui/Base/BaseModal.vue";
 import { default as AppHeader } from "@/components/ui/Header.vue";
 

@@ -13,15 +13,33 @@
       </div>
       <h5 class="font-lobster text-xl">Strategies</h5>
       <div class="p-4 rounded flex flex-col justify-between gap-3" style="background-color: #0C4F4C;">
+        <span class="font-bold">Flat Bet</span>
+        <div class="flex gap-3 text-xs">
+          <span>Effectiveness: <base-pill>medium</base-pill></span>
+          <span>Risk: <base-pill>low</base-pill></span>
+          <span>Reward: <base-pill>low</base-pill></span>
+        </div>
+        <p class="text-sm">A simple strategy great for beginners</p>
+        <button
+            type="button"
+            @click="showFlatBet"
+            class="play inline-flex justify-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded text-gray-400 bg-accent-150 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
+        >
+          <font-awesome-icon icon="fa-solid fa-graduation-cap" class="mr-1" />
+          Learn More
+        </button>
+      </div>
+      <div class="p-4 rounded flex flex-col justify-between gap-3" style="background-color: #0C4F4C;">
         <span class="font-bold">Martingale</span>
         <div class="flex gap-3 text-xs">
           <span>Effectiveness: <base-pill>medium</base-pill></span>
           <span>Risk: <base-pill>high</base-pill></span>
           <span>Reward: <base-pill>medium</base-pill></span>
         </div>
-        <p class="text-sm">A simple strategy great for beginners and used in more complex strategies</p>
+        <p class="text-sm">A simple strategy used to recoup losses quickly</p>
         <button
             type="button"
+            @click="showMartingale"
             class="play inline-flex justify-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded text-gray-400 bg-accent-150 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
         >
           <font-awesome-icon icon="fa-solid fa-graduation-cap" class="mr-1" />
@@ -38,14 +56,15 @@
         <p class="text-sm">A positive progression strategy that is the opposite of the Martingale strategy</p>
         <button
             type="button"
+            @click="showParoli"
             class="play inline-flex justify-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded text-gray-400 bg-accent-150 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-grey-700"
         >
           <font-awesome-icon icon="fa-solid fa-graduation-cap" class="mr-1"/>
           Learn More
         </button>
       </div>
-      <h5 class="font-lobster text-xl">More Things</h5>
-      <div class="p-4 rounded" style="background-color: #0D5C58; height: 100px;">More text describing things</div>
+<!--      <h5 class="font-lobster text-xl">More Things</h5>-->
+<!--      <div class="p-4 rounded" style="background-color: #0D5C58; height: 100px;">More text describing things</div>-->
     </div>
 
     <div class="top-left">
@@ -127,8 +146,10 @@
         </div>
       </base-card>
     </div>
-
   </div>
+  <martingale :show="showMartingalePanel" @close="showMartingalePanel = !showMartingalePanel" />
+  <paroli :show="showParoliPanel" @close="showParoliPanel = !showParoliPanel" />
+  <flat-bet :show="showFlatBetPanel" @close="showFlatBetPanel = !showFlatBetPanel" />
 </template>
 <script>
 import { game } from "@/api"
@@ -143,10 +164,16 @@ import MountainBadge from "@/components/badges/MountainBadge.vue"
 import { getUserIdFromToken } from "@/lib/storage/auth/TokenStorage"
 import MoneyUp from "@/components/badges/MoneyUp.vue";
 import Wheel from "@/components/Wheel.vue";
+import Martingale from "@/components/learning/strategies/Martingale.vue";
+import Paroli from "@/components/learning/strategies/Paroli.vue";
+import FlatBet from "@/components/learning/strategies/FlatBet.vue";
 
 export default {
   name: 'App',
   components: {
+    FlatBet,
+    Paroli,
+    Martingale,
     Wheel,
     MoneyUp,
     MountainBadge,
@@ -163,8 +190,23 @@ export default {
     const itemsPerPage = ref(10);
     let totalGames = ref(0)
     let totalWon = ref(0)
+    let showMartingalePanel = ref(false)
+    let showParoliPanel = ref(false)
+    let showFlatBetPanel = ref(false)
 
     const user = computed(() => store.getters['user/getUser'])
+
+    const showMartingale = () => {
+      showMartingalePanel.value = true
+    }
+
+    const showParoli = () => {
+      showParoliPanel.value = true
+    }
+
+    const showFlatBet = () => {
+      showFlatBetPanel.value = true
+    }
 
     game.list(userId).then(async response => {
       games.value = response.data.data.map(g => {
@@ -262,11 +304,16 @@ export default {
       paginatedGames,
       currentPage,
       totalGames,
-      totalWon
+      totalWon,
+      showMartingale,
+      showMartingalePanel,
+      showParoliPanel,
+      showParoli,
+      showFlatBetPanel,
+      showFlatBet
     }
   }
 }
-
 </script>
 
 <style scoped>
