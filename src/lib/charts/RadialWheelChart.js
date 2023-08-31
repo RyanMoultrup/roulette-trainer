@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import { scaleOrdinal, scaleLinear, scaleSequential } from 'd3-scale'
 
 export default class RadialWheelChart {
     constructor(elementId) {
@@ -6,12 +7,13 @@ export default class RadialWheelChart {
         // Assuming a fixed set of numbers for a roulette wheel
         this.nums = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
         this.hits = new Array(this.nums.length).fill(0);  // Initialize hits to zero for each number
+        this.allHits = []
 
         this.init();
         this.setData();  // Set initial data state
     }
 
-    clear() {
+    #clear() {
         this.chartGroup.selectAll('*').remove();
     }
 
@@ -36,8 +38,8 @@ export default class RadialWheelChart {
 
         this.chartGroup = this.g.append('g')
 
-        this.color = d3.scaleOrdinal();
-        this.hitScale = d3.scaleLinear().range([this.radius - 120, this.radius - 20]);
+        this.color = scaleOrdinal();
+        this.hitScale = scaleLinear().range([this.radius - 120, this.radius - 20]);
 
         // Let's ensure that the domain and range have the same length
         const colorRange = ['green', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black'];
@@ -45,7 +47,7 @@ export default class RadialWheelChart {
     }
 
     setData() {
-        this.hitColorScale = d3.scaleSequential(d3.interpolatePuBuGn)
+        this.hitColorScale = scaleSequential(d3.interpolatePuBuGn)
             .domain([0, d3.max(this.hits)])
 
         const rouletteData = this.nums.map((num, index) => ({ number: num, hit: this.hits[index] }));
@@ -54,8 +56,13 @@ export default class RadialWheelChart {
         this.data = rouletteData;
     }
 
+    domain (hits) {
+        this.allHits = hits
+        return this
+    }
+
     render() {
-        this.clear();
+        this.#clear();
 
         // 1. Calculate the angular size of each segment.
         const segmentAngle = 2 * Math.PI / this.nums.length;
@@ -84,7 +91,8 @@ export default class RadialWheelChart {
         // Append dynamic content to this.chartGroup instead of this.g
         this.pieChart = this.chartGroup.selectAll('.arc')
             .data(arcs)
-            .enter().append('g')
+            .enter()
+            .append('g')
             .attr('class', 'arc');
 
         // Color slices
@@ -127,21 +135,29 @@ export default class RadialWheelChart {
     }
 
 
-    update(hit) {
+    update() {
         // Let's simplify this logic for clarity
-        if (hit === 37) {
-            hit = 0;
-        }
+        const newHits = new Array(this.nums.length).fill(0);  // Initialize hits to zero for each number
+        this.allHits.allFiltered().map(i => i.hit).forEach(hit => {
+            if (hit === 37) {
+                hit = 0;
+            }
 
-        const hitIndex = this.nums.indexOf(hit);
+            const hitIndex = this.nums.indexOf(hit);
 
-        if (hitIndex !== -1) {
-            this.hits[hitIndex]++;
+            if (hitIndex !== -1) {
+                newHits[hitIndex]++;
+            } else {
+                console.error(`Invalid hit value: ${hit}`);
+            }
+        })
 
-            this.setData();
-            this.render();
-        } else {
-            console.error(`Invalid hit value: ${hit}`);
-        }
+        this.hits = newHits
+        this.setData();
+        this.render();
+    }
+
+    clear () {
+        this.data = []
     }
 }

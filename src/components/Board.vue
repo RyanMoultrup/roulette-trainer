@@ -65,7 +65,6 @@ export default {
     ...mapGetters('strategy', ['getStrategy']),
     ...mapGetters('bank', ['canBet', 'availableBalance']),
     bets () {
-      console.log('this.getStartegy', this.getStrategy)
       return this.getStrategy
     }
   },

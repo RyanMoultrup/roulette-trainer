@@ -1,5 +1,4 @@
 <template>
-<!--    <span class="text-gray-400" @click="updateChart">I can see it</span>-->
     <div id="radial-wheel"></div>
 </template>
 
@@ -7,7 +6,6 @@
 import { useStore } from "vuex"
 import { onMounted, computed, watch } from "vue"
 import RadialWheelChart from "@/lib/charts/RadialWheelChart"
-const moreRandomeHits = () => Math.floor(Math.random() * 37) + 1
 
 export default {
   components: {  },
@@ -15,12 +13,17 @@ export default {
     const store = useStore()
     let chart
 
+    const hits = store.getters['simulation/getOutcomes']
+
+    console.log('hits::', hits)
+
     const hit = computed(() => {
       return store.getters['simulation/getSpin']
     })
 
     watch(hit, (newVal) => {
-      chart.update(newVal)
+      console.log('watching hit:::')
+      chart.update()
     })
 
     // const updateChart = () => {
@@ -29,12 +32,8 @@ export default {
 
     onMounted(() => {
       chart = new RadialWheelChart('#radial-wheel')
-      chart.render()
+      chart.domain(hits).render()
     })
-
-    return {
-      // updateChart
-    }
   }
 }
 
