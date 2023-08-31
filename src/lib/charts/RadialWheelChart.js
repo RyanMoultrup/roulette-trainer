@@ -1,4 +1,7 @@
-import * as d3 from 'd3';
+import { max } from 'd3-array'
+import { select } from 'd3-selection'
+import { pie as Pie, arc } from 'd3-shape'
+import { interpolatePuBuGn } from 'd3-scale-chromatic'
 import { scaleOrdinal, scaleLinear, scaleSequential } from 'd3-scale'
 
 export default class RadialWheelChart {
@@ -18,7 +21,7 @@ export default class RadialWheelChart {
     }
 
     init() {
-        this.svg = d3.select(this.elementId).append('svg')
+        this.svg = select(this.elementId).append('svg')
             .attr('width', 275)
             .attr('height', 275);
 
@@ -47,12 +50,12 @@ export default class RadialWheelChart {
     }
 
     setData() {
-        this.hitColorScale = scaleSequential(d3.interpolatePuBuGn)
-            .domain([0, d3.max(this.hits)])
+        this.hitColorScale = scaleSequential(interpolatePuBuGn)
+            .domain([0, max(this.hits)])
 
         const rouletteData = this.nums.map((num, index) => ({ number: num, hit: this.hits[index] }));
 
-        this.hitScale.domain([0, d3.max(this.hits)]);
+        this.hitScale.domain([0, max(this.hits)]);
         this.data = rouletteData;
     }
 
@@ -73,7 +76,7 @@ export default class RadialWheelChart {
         // 3. Calculate the necessary rotation to place the midpoint of the 0 section on top.
         const rotation = - (zeroIndex + 0.5) * segmentAngle;
 
-        const pie = d3.pie()
+        const pie = Pie()
             .value(d => 1)
             .sort(null)
             .startAngle(rotation)
@@ -81,11 +84,11 @@ export default class RadialWheelChart {
         const arcs = pie(this.data);
 
         // Define arcs
-        this.arc = d3.arc().innerRadius(this.radius - 20).outerRadius(this.radius);
+        this.arc = arc().innerRadius(this.radius - 20).outerRadius(this.radius);
 
         // Check for hits before defining dynamicArc
-        if (d3.max(this.hits) > 0) {
-            this.dynamicArc = d3.arc().innerRadius(this.radius - 120).outerRadius(d => this.hitScale(d.data.hit));
+        if (max(this.hits) > 0) {
+            this.dynamicArc = arc().innerRadius(this.radius - 120).outerRadius(d => this.hitScale(d.data.hit));
         }
 
         // Append dynamic content to this.chartGroup instead of this.g
@@ -101,14 +104,14 @@ export default class RadialWheelChart {
             .attr('fill', d => this.color(d.data.number));
 
         // If there are hits, append dynamic arcs for hits
-        if (d3.max(this.hits) > 0) {
+        if (max(this.hits) > 0) {
             this.pieChart.append('path')
                 .attr('d', this.dynamicArc)
                 .attr('fill', d => this.hitColorScale(d.data.hit));
         }
 
         // Define a new arc generator for the outlined ring
-        const outlineArc = d3.arc()
+        const outlineArc = arc()
             .innerRadius(this.radius - 120)
             .outerRadius(this.radius);
 
@@ -124,7 +127,7 @@ export default class RadialWheelChart {
             .attr('transform', d => {
                 const angle = (d.startAngle + d.endAngle) / 2 * 180 / Math.PI;
                 const rotateAngle = angle - 360;
-                const centroid = d3.arc().innerRadius(this.radius - 20).outerRadius(this.radius).centroid(d);
+                const centroid = arc().innerRadius(this.radius - 20).outerRadius(this.radius).centroid(d);
                 return `translate(${centroid}) rotate(${rotateAngle})`;
             })
             .attr('dy', '0.6em')
@@ -139,9 +142,7 @@ export default class RadialWheelChart {
         // Let's simplify this logic for clarity
         const newHits = new Array(this.nums.length).fill(0);  // Initialize hits to zero for each number
         this.allHits.allFiltered().map(i => i.hit).forEach(hit => {
-            if (hit === 37) {
-                hit = 0;
-            }
+            if (hit === 37) hit = 0
 
             const hitIndex = this.nums.indexOf(hit);
 
