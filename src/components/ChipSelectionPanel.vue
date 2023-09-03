@@ -1,20 +1,23 @@
 <template>
-  <div id="chips-container" class="chips-panel flex flex-row justify-start w-full px-4 -z-10" style="min-width: 0;"> <!-- -bottom-8 -->
+  <div class="relative flex flex-row justify-start px-4 -z-10 w-full" style="min-width: 0;"> <!-- -bottom-8 -->
     <div class="flex flex-col shrink-0 justify-end gap-3 p-2 mr-2">
       <double-bet-button />
       <replay-last-bet-button />
       <clear-bets-button />
     </div>
-    <div style="min-width: 0;" class="">
-      <div class="bg-accent-150 border border-green-800 border-1 p-3 rounded-md">
+    <div class="relative w-full">
+      <div class="absolute chips-container bg-accent-150 border border-green-800 border-1 p-3 rounded-md">
         <swiper
+            v-if="chips.length"
             slidesPerView="auto"
-            :spaceBetween="2"
-
+            :spaceBetween="10"
+            :auto-width="true"
             class="mySwiper"
         >
           <swiper-slide v-for="chip in chips">
-            <chip class="text-2xl" :color="chip.color" size="lg" :chipValue="chip.value" @chipSelected="chipSelected"></chip>
+<!--            <div class="flex shrink gap-0">-->
+              <chip class="text-2xl" :color="chip.color" size="lg" :chipValue="chip.value" @chipSelected="chipSelected"></chip>
+<!--            </div>-->
           </swiper-slide>
         </swiper>
       </div>
@@ -30,14 +33,13 @@ import Chip from '@/components/Chip.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import SelectedChip from "@/components/SelectedChip.vue";
 import DoubleBetButton from "@/components/buttons/DoubleBetButton.vue";
+import ClearBetsButton from "@/components/buttons/ClearBetsButton.vue";
 import ReplayLastBetButton from "@/components/buttons/ReplayLastBetButton.vue";
-
 // Import Swiper styles
 import 'swiper/css'
-import ClearBetsButton from "@/components/buttons/ClearBetsButton.vue";
 
 export default {
-  components: {ClearBetsButton, SelectedChip, Chip, DoubleBetButton, ReplayLastBetButton, Swiper, SwiperSlide },
+  components: { ClearBetsButton, SelectedChip, Chip, DoubleBetButton, ReplayLastBetButton, Swiper, SwiperSlide },
   data () {
     return {
       allChips: chips
@@ -56,8 +58,15 @@ export default {
   }
 }
 </script>
-<!--<style>-->
-<!--.swiper-wrapper { width: 100%}-->
-<!--.swiper-slides { width: auto !important }-->
-<!--</style>-->
+<style>
+.chips-container {
+  min-width: 0;
+  width: 95%;
+}
+</style>
+<style scoped>
+
+/*.swiper-slides { width: auto !important }*/
+.swiper-slide { width: auto !important; }
+</style>
 

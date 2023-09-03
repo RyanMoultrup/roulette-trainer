@@ -49,6 +49,9 @@ body {
 }
 
 @media screen and (max-width: 1600px) {
+    html {
+        font-size: 14px;
+    }
     #table {
         max-height: 24rem;
     }
@@ -69,7 +72,7 @@ html, .charts {
 .layout-container {
     display: grid;
     grid-template-columns: 1.6fr 0.4fr;
-    grid-template-rows: 0.4fr 1.6fr;
+    grid-template-rows: 0.7fr 1.3fr;
     gap: 0 0;
     grid-template-areas:
     "top-left side-pane"

@@ -9,7 +9,7 @@
           />
         </div>
 
-        <div class="flex shrink-0">
+        <div class="flex z-0">
           <div class="px-2 py-3 sm:px-6 justify-between">
             <div class="flex gap-1">
               <spin-button />

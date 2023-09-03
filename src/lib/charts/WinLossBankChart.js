@@ -159,7 +159,7 @@ export default class WinLossBankChart {
     }
 
     rescale (width, height) {
-        this.chart.width(width-30).height(height-20);
+        this.chart.width(width).height(height);
         this.chart.rescale();
         this.chart.redraw();
     }
