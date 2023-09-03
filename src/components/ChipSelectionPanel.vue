@@ -5,11 +5,12 @@
       <replay-last-bet-button />
       <clear-bets-button />
     </div>
-    <div style="min-width: 0;" class="max-w-[75%]">
+    <div style="min-width: 0;" class="">
       <div class="bg-accent-150 border border-green-800 border-1 p-3 rounded-md">
         <swiper
-            :slidesPerView="5"
+            slidesPerView="auto"
             :spaceBetween="2"
+
             class="mySwiper"
         >
           <swiper-slide v-for="chip in chips">
@@ -55,4 +56,8 @@ export default {
   }
 }
 </script>
+<!--<style>-->
+<!--.swiper-wrapper { width: 100%}-->
+<!--.swiper-slides { width: auto !important }-->
+<!--</style>-->
 

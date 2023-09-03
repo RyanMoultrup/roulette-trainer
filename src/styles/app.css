@@ -25,6 +25,39 @@
 @tailwind components;
 @tailwind utilities;
 
+html { min-height: 100vh; }
+
+body {
+    min-height: 100vh;
+    /*color: var(--color-text);*/
+    /*background: var(--color-background);*/
+    /*transition: color 0.5s, background-color 0.5s;*/
+    /*line-height: 1.6;*/
+    /*font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,*/
+    /*Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;*/
+    /*font-size: 15px;*/
+    /*text-rendering: optimizeLegibility;*/
+    /*-webkit-font-smoothing: antialiased;*/
+    /*-moz-osx-font-smoothing: grayscale;*/
+}
+
+
+@media screen and (min-width: 2000px), screen and (min-height: 1900px) {
+    html {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    #table {
+        max-height: 24rem;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1200px) and (min-height: 400px) and (max-height: 800px) {
+    /* your styles here */
+}
+
 .card-bg-border {
     @apply rounded bg-gradient-to-br from-0% from-accent-150 via-20% via-green-800 border-green-600 border;
 }
@@ -75,17 +108,17 @@ html, .charts {
 .current-winnings { grid-area: current-winnings; }
 .spin-table { grid-area: spin-table; }
 
-.betting-area {
-    display: grid;
-    place-items: center;
-    grid-template-columns: 0.7fr 1.7fr;
-    grid-template-rows: 1.5fr 0.5fr;
-    gap: 0 0;
-    grid-template-areas:
-    "wheel betting-table"
-    "spin-buttons chips-panel";
-    grid-area: bottom-left;
-}
+/*.betting-area {*/
+/*    display: grid;*/
+/*    place-items: center;*/
+/*    grid-template-columns: 5rem 1fr;*/
+/*    grid-template-rows: 1.5fr 0.5fr;*/
+/*    gap: 0 0;*/
+/*    grid-template-areas:*/
+/*    "wheel betting-table"*/
+/*    "spin-buttons chips-panel";*/
+/*    grid-area: bottom-left;*/
+/*}*/
 .wheel { grid-area: wheel; }
 .betting-table { grid-area: betting-table; }
 
@@ -218,10 +251,6 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
     margin: -4px 0 0 -1px;
     top: 50%;
     left: 100%;
-}
-
-#table {
-    max-height: 350px;
 }
 
 .spot-h {

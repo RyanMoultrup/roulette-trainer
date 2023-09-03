@@ -1,5 +1,6 @@
 <template>
-  <div class="betting-table">
+  <div class="h-full w-full">
+<!--  <div class="h-full">-->
     <table-limits />
     <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-80">
       <div
@@ -119,7 +120,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+/*html { height: 100vh;}*/
+/*
+#table {
+  max-height: 350px;
+  width: 950px;
+}
+*/
+
+#table {
+  width: 100%;
+  height: 90%;
+}
+
 .chips-hover {
   @apply border bg-gray-100 bg-opacity-75 p-1 rounded z-50;
 }

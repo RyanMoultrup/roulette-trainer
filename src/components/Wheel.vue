@@ -1,5 +1,5 @@
 <template>
-  <div id="wheel" class="wheel">
+  <div id="wheel">
     <div class="main">
       <div class="plate" id="plate">
         <ul class="inner">
