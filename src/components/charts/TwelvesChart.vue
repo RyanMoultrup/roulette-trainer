@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="relative" ref="twelveChartRef">
     <chart-placeholder
         icon="fa-solid fa-chart-column"
         :show-placeholder="showPlaceholder" >
@@ -13,6 +13,7 @@ import { debounce } from "@/lib/Utils";
 import Twelves from "@/lib/charts/Twelves.js";
 import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
 import {redrawAll} from "dc";
+import chartResize from "@/lib/charts/ChartResize";
 
 let unsubscribe
 let twelvesChart
@@ -36,17 +37,17 @@ export default {
     })
 
     const outcomes = this.getOutcomes()
+    const twelveChartRef = this.$refs.twelveChartRef
+    const initWidth = window.innerWidth * 0.09
+    const initHeight = window.innerHeight * 0.12
 
     twelvesChart = new Twelves()
     twelvesChart
-        .parentHeight(100)
-        .parentWidth(175)
-        // .parentHeight(this.$refs.hitsChart.clientHeight - 30)
-        // .parentWidth(this.$refs.hitsChart.clientWidth - 40)
+        .parentHeight(initHeight)
+        .parentWidth(initWidth)
         .render(outcomes)
 
-    // const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
-    // useResizeObserver(this.$refs.hitsChart, debounceChartResize(hitsChart));
+    addEventListener('resize', chartResize(twelvesChart, twelveChartRef, initWidth, initHeight))
   },
   unmounted() {
     unsubscribe()

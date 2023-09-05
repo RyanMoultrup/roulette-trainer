@@ -2,7 +2,7 @@
   <div class="h-full w-full">
 <!--  <div class="h-full">-->
     <table-limits />
-    <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-80">
+    <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-80" ref="boardTable">
       <div
           v-for="bet in bets"
           class="absolute w-28 mt-1 ml-1 backdrop-blur-sm"
@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div v-for="placement in placements" :id="placement" :class="placement" class="absolute spot-h z-0" @click="place" @mouseover="hoverBet"></div>
+      <div v-if="getMode !== 'review'" v-for="placement in placements" :id="placement" :class="placement" class="absolute spot-h z-0" @click="place" @mouseover="hoverBet"></div>
 
       <div v-for="spot in tableSpots" :class="spot.class">{{ spot.text }}</div>
     </div>
@@ -58,7 +58,8 @@ export default {
   data () {
     return {
       isHovered: '',
-      placements
+      placements,
+      boardWidth: 0
     }
   },
   computed: {
@@ -68,6 +69,11 @@ export default {
     bets () {
       return this.getStrategy
     }
+  },
+  mounted () {
+    this.boardWidth = this.$refs.boardTable.clientWidth
+    console.log('boardWidth::', this.boardWidth)
+    console.log('boardWidth::part', this.boardWidth / 27)
   },
   methods: {
     ...mapMutations('strategy', ['placeBet']),
@@ -121,14 +127,6 @@ export default {
 </script>
 
 <style scoped>
-/*html { height: 100vh;}*/
-/*
-#table {
-  max-height: 350px;
-  width: 950px;
-}
-*/
-
 #table {
   width: 100%;
   height: 90%;
@@ -167,7 +165,7 @@ export default {
 }
 
 .outside-cell {
-  @apply bg-accent-150 /* green-500 */
+  @apply bg-accent-150
 }
 
 .text-large {

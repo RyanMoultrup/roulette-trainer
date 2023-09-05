@@ -53,8 +53,7 @@ export default class Twelves {
     }
 
     rescale (width, height) {
-        this.chart.width(width-20).height(height-20)
-        this.chart.rescale()
+        this.chart.width(width).height(height)
         this.chart.redraw()
     }
 

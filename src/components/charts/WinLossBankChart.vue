@@ -55,6 +55,7 @@ export default {
     let lastResizeHeight = window.innerHeight
 
     const getChartSize = (context, args) => {
+      console.log('WIN LOSS WINDOW RESIZE')
       const newWindowWidth = context.target.innerWidth
       const newWindowHeight = context.target.innerHeight
       let chartWidth
@@ -76,7 +77,9 @@ export default {
       winLossBankChart.rescale(chartWidth, chartHeight)
     }
 
-    window.onresize = debounce(getChartSize, 300)
+    // window.onresize = debounce(getChartSize, 300)
+
+    addEventListener('resize', debounce(getChartSize, 300))
 
     // const debounceChartResize = chart => {
     //   console.log('chart::', chart)
