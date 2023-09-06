@@ -20,10 +20,10 @@
           <half-board-chart />
         </div>
       </div>
-<!--      <span class="font-lobster text-gray-400 text-xl">Inside</span>-->
-<!--      <div class="bg-accent-150 rounded p-2">-->
-<!--        <hits-chart class="bet-display" />-->
-<!--      </div>-->
+      <span class="font-lobster text-gray-400 text-xl">Inside</span>
+      <div class="bg-accent-150 rounded p-2">
+        <hits-chart class="bet-display" />
+      </div>
     </div>
   </div>
 </template>
