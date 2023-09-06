@@ -25,6 +25,7 @@ export default class RedBlack extends BaseRowChart {
             .dimension(this.dimension)
             .group(this.group)
             .label(d => {
+                console.log('label this.total::', this.total)
                 const percent = Math.round((d.value.exceptionCount / this.total) * 100)
                 return `${d.key} - ${percent}%`
             })
@@ -33,11 +34,12 @@ export default class RedBlack extends BaseRowChart {
         this.chart
             .on('preRender', this.adjustYAxisTicks(this.group))
             .on('preRedraw', this.adjustYAxisTicks(this.group))
-            .on('renderlet', function(chart) {
-                selectAll(".dc-chart g.row svg.icon").remove();
-                selectAll(".dc-chart g.row").each(function(d) {
-                    // Check condition for displaying the icon.
-                    const percent = Math.round((d.value.exceptionCount / this.total) * 100);
+            .on('renderlet', (chart) => {
+                console.log('chart::', chart)
+                const total = this.total
+                selectAll("#red-black-chart.dc-chart g.row svg.icon").remove();
+                selectAll("#red-black-chart.dc-chart g.row").each(function(d) {
+                    const percent = Math.round((d.value.exceptionCount / total) * 100);
                     const opacity = percent > 30 ? 0.6 : 0.8
                     if (percent < 40) {
                         // Append the icon SVG to the row.
