@@ -12,6 +12,8 @@ export default class RadialWheelChart {
         this.allHits = [];
         this._width = 275;
         this._height = 275;
+        this._radiusMax = 120
+        this._radiusMin = 20
     }
 
     #clear() {
@@ -19,6 +21,8 @@ export default class RadialWheelChart {
     }
 
     init() {
+        select(this.elementId).select("svg").remove();
+
         this.svg = select(this.elementId).append('svg')
             .attr('width', this._width)
             .attr('height', this._height);
@@ -40,7 +44,8 @@ export default class RadialWheelChart {
         this.chartGroup = this.g.append('g')
 
         this.color = scaleOrdinal();
-        this.hitScale = scaleLinear().range([this.radius - 120, this.radius - 20]);
+        // this.hitScale = scaleLinear().range([this.radius - 120, this.radius - 20]);
+        this.hitScale = scaleLinear().range([this.radius - this._radiusMax, this.radius - this._radiusMin]);
 
         // Let's ensure that the domain and range have the same length
         const colorRange = ['green', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black'];
@@ -82,11 +87,11 @@ export default class RadialWheelChart {
         const arcs = pie(this.data);
 
         // Define arcs
-        this.arc = arc().innerRadius(this.radius - 20).outerRadius(this.radius);
+        this.arc = arc().innerRadius(this.radius - this._radiusMin).outerRadius(this.radius);
 
         // Check for hits before defining dynamicArc
         if (max(this.hits) > 0) {
-            this.dynamicArc = arc().innerRadius(this.radius - 120).outerRadius(d => this.hitScale(d.data.hit));
+            this.dynamicArc = arc().innerRadius(this.radius - this._radiusMax).outerRadius(d => this.hitScale(d.data.hit));
         }
 
         // Append dynamic content to this.chartGroup instead of this.g
@@ -110,7 +115,7 @@ export default class RadialWheelChart {
 
         // Define a new arc generator for the outlined ring
         const outlineArc = arc()
-            .innerRadius(this.radius - 120)
+            .innerRadius(this.radius - this._radiusMax)
             .outerRadius(this.radius);
 
         // Adding spokes between sections
@@ -125,7 +130,7 @@ export default class RadialWheelChart {
             .attr('transform', d => {
                 const angle = (d.startAngle + d.endAngle) / 2 * 180 / Math.PI;
                 const rotateAngle = angle - 360;
-                const centroid = arc().innerRadius(this.radius - 20).outerRadius(this.radius).centroid(d);
+                const centroid = arc().innerRadius(this.radius - this._radiusMin).outerRadius(this.radius).centroid(d);
                 return `translate(${centroid}) rotate(${rotateAngle})`;
             })
             .attr('dy', '0.6em')
@@ -157,18 +162,15 @@ export default class RadialWheelChart {
     }
 
     width (width) {
-        this._width = width;
+        this.#setDimensions(width)
         return this;
     }
 
-    height (height) {
-        this._height = height;
-        return this;
-    }
+    rescale (width) {
+        this.#setDimensions(width)
 
-    rescale (width, height) {
-        this._width(width)
-        this._height(height)
+        this.init()
+        this.setData();
         this.draw()
     }
 
@@ -180,5 +182,11 @@ export default class RadialWheelChart {
 
     clear () {
         this.data = []
+    }
+
+    #setDimensions (width) {
+        this._width = width;
+        this._height = width;
+        this._radiusMax = width * .43
     }
 }
