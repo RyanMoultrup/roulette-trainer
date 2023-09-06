@@ -15,10 +15,10 @@
           <red-black-chart />
           <twelves-chart />
         </div>
-<!--        <div class="flex flex-row gap-3">-->
-<!--          <even-odd-chart />-->
-<!--          <half-board-chart />-->
-<!--        </div>-->
+        <div class="flex flex-row gap-3">
+          <even-odd-chart />
+          <half-board-chart />
+        </div>
       </div>
 <!--      <span class="font-lobster text-gray-400 text-xl">Inside</span>-->
 <!--      <div class="bg-accent-150 rounded p-2">-->

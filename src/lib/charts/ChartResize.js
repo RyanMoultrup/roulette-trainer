@@ -1,6 +1,6 @@
 import { debounce } from "@/lib/Utils";
 
-export const resize = (chart, ref, initWidth, initHeight) => {
+export const resize = (chart, ref) => {
     const chartPercentOfWidth = ref.clientWidth / window.innerWidth
     const chartPercentOfHeight = ref.clientHeight / window.innerHeight
 
@@ -13,18 +13,16 @@ export const resize = (chart, ref, initWidth, initHeight) => {
         const newWindowWidth = context.target.innerWidth
         const newWindowHeight = context.target.innerHeight
 
-        chartWidth = (newWindowWidth < lastResizeWidth)
-            ? newWindowWidth * chartPercentOfWidth
-            : initWidth
+        chartWidth = newWindowWidth * chartPercentOfWidth
 
-        chartHeight = (newWindowHeight < lastResizeHeight)
-            ? newWindowHeight * chartPercentOfHeight
-            : initHeight
+        chartHeight = newWindowHeight * chartPercentOfHeight
+
+        console.log('chartWidth::', chartWidth)
 
         lastResizeWidth = newWindowWidth
         lastResizeHeight = newWindowHeight
 
-        chart.rescale(chartWidth, chartHeight)
+        chart.rescale(Math.round(chartWidth), Math.round(chartHeight))
     }, 300)
 }
 

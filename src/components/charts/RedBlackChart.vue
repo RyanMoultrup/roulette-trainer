@@ -47,7 +47,7 @@ export default {
         .parentWidth(initWidth)
         .render(outcomes)
 
-    addEventListener('resize', chartResize(redBlackChart, redBlackRef, initWidth, initHeight))
+    addEventListener('resize', chartResize(redBlackChart, redBlackRef))
   },
   unmounted() {
     unsubscribe()

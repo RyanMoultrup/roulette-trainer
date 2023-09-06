@@ -1,9 +1,9 @@
+import { max } from 'd3-array'
 import reductio from 'reductio';
 import { format } from 'd3-format';
-import { range, max } from 'd3-array'
 import { select } from 'd3-selection'
 import { scaleOrdinal } from 'd3-scale';
-import {RowChart, BarChart, units, deregisterChart } from 'dc';
+import {RowChart, deregisterChart } from 'dc';
 
 let total = 0
 
@@ -54,8 +54,7 @@ export default class EvenOdd {
     }
 
     rescale (width, height) {
-        this.chart.width(width-20).height(height-20)
-        this.chart.rescale()
+        this.chart.width(width).height(height)
         this.chart.redraw()
     }
 
@@ -68,6 +67,7 @@ export default class EvenOdd {
         this.chart
             .width(this._width)
             .height(this._height)
+            .margins({top: 10, right: 10, bottom: 20, left: 30})
             .gap(2)
             .colors(
                 scaleOrdinal()
@@ -83,7 +83,6 @@ export default class EvenOdd {
                 return `${d.key ? 'Even' : 'Odd'} - ${percent}%`
             })
             .valueAccessor(d => +d.value.exceptionCount)
-            .keyAccessor(d => d.key ? 'Even' : 'Odd')
 
         this.chart
             .on('preRender', this.#adjustYAxisTicks(this.group))

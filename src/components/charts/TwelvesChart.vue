@@ -8,12 +8,11 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import { debounce } from "@/lib/Utils";
-import Twelves from "@/lib/charts/Twelves.js";
-import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
-import {redrawAll} from "dc";
-import chartResize from "@/lib/charts/ChartResize";
+import {redrawAll} from "dc"
+import { mapGetters } from "vuex"
+import Twelves from "@/lib/charts/Twelves.js"
+import chartResize from "@/lib/charts/ChartResize"
+import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue"
 
 let unsubscribe
 let twelvesChart
@@ -47,7 +46,7 @@ export default {
         .parentWidth(initWidth)
         .render(outcomes)
 
-    addEventListener('resize', chartResize(twelvesChart, twelveChartRef, initWidth, initHeight))
+    addEventListener('resize', chartResize(twelvesChart, twelveChartRef))
   },
   unmounted() {
     unsubscribe()

@@ -52,7 +52,7 @@ export default class RedBlack {
     }
 
     rescale (width, height) {
-        this.chart.width(Math.round(width)).height(Math.round(height));
+        this.chart.width(width).height(height);
         this.chart.redraw();
     }
 

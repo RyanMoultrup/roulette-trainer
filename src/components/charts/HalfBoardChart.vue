@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="relative" ref="halfBoardRef">
     <chart-placeholder
         icon="fa-solid fa-chart-column"
         :show-placeholder="showPlaceholder" >
@@ -8,11 +8,11 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import { debounce } from "@/lib/Utils";
-import HalfBoardSpots from "@/lib/charts/HalfBoardSpots.js";
-import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
-import {redrawAll} from "dc";
+import {redrawAll} from "dc"
+import { mapGetters } from "vuex"
+import chartResize from "@/lib/charts/ChartResize"
+import HalfBoardSpots from "@/lib/charts/HalfBoardSpots.js"
+import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue"
 
 let unsubscribe
 let halfBoardSpots
@@ -35,18 +35,18 @@ export default {
       }
     })
 
-    const outcomes = this.getOutcomes();
+    const outcomes = this.getOutcomes()
+    const halfBoardRef = this.$refs.halfBoardRef
+    const initWidth = window.innerWidth * 0.09
+    const initHeight = window.innerHeight * 0.12
 
     halfBoardSpots = new HalfBoardSpots();
     halfBoardSpots
-        .parentHeight(100)
-        .parentWidth(175)
-        // .parentHeight(this.$refs.hitsChart.clientHeight - 30)
-        // .parentWidth(this.$refs.hitsChart.clientWidth - 40)
+        .parentHeight(initHeight)
+        .parentWidth(initWidth)
         .render(outcomes);
 
-    // const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
-    // useResizeObserver(this.$refs.hitsChart, debounceChartResize(hitsChart));
+    addEventListener('resize', chartResize(halfBoardSpots, halfBoardRef))
   },
   unmounted() {
     unsubscribe()
