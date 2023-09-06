@@ -14,21 +14,9 @@ export default {
     let chart
 
     const hits = store.getters['simulation/getOutcomes']
+    const hit = computed(() => store.getters['simulation/getSpin'])
 
-    console.log('hits::', hits)
-
-    const hit = computed(() => {
-      return store.getters['simulation/getSpin']
-    })
-
-    watch(hit, (newVal) => {
-      console.log('watching hit:::')
-      chart.update()
-    })
-
-    // const updateChart = () => {
-    //   chart.update(moreRandomeHits())
-    // }
+    watch(hit, (newVal) => chart.update())
 
     onMounted(() => {
       chart = new RadialWheelChart('#radial-wheel')
@@ -38,7 +26,3 @@ export default {
 }
 
 </script>
-
-<style scoped>
-
-</style>

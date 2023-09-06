@@ -6,9 +6,9 @@
 
     <div class="flex flex-col justify-start gap-4 p-3">
       <div class="font-lobster text-2xl text-gray-400">Spin History</div>
-<!--      <div class="flex justify-center w-full">-->
-<!--        <radial-wheel-chart />-->
-<!--      </div>-->
+      <div class="flex justify-center w-full">
+        <radial-wheel-chart />
+      </div>
       <span class="font-lobster text-gray-400 text-xl">Outside</span>
       <div class="flex flex-col gap-3 rounded">
         <div class="flex flex-row gap-3">
