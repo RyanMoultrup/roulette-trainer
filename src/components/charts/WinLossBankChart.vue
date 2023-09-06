@@ -25,6 +25,7 @@ export default {
   data () {
     return {
       showPlaceholder: true,
+      getChartSize: null
     }
   },
   methods: {
@@ -54,8 +55,7 @@ export default {
     let lastResizeWidth = window.innerWidth
     let lastResizeHeight = window.innerHeight
 
-    const getChartSize = (context, args) => {
-      console.log('WIN LOSS WINDOW RESIZE')
+    this.getChartSize = (context, args) => {
       const newWindowWidth = context.target.innerWidth
       const newWindowHeight = context.target.innerHeight
       let chartWidth
@@ -77,24 +77,12 @@ export default {
       winLossBankChart.rescale(chartWidth, chartHeight)
     }
 
-    // window.onresize = debounce(getChartSize, 300)
-
-    addEventListener('resize', debounce(getChartSize, 300))
-
-    // const debounceChartResize = chart => {
-    //   console.log('chart::', chart)
-    //   return debounce(([{ contentRect: { width, height }}]) => {
-    //     console.log('width::', width)
-    //     console.log('height::', height)
-    //     return chart.rescale(width, height)
-    //   }, 300)
-    // }
-    //
-    // useResizeObserver(this.$refs.winLossBankChart, debounceChartResize(winLossBankChart));
+    addEventListener('resize', debounce(this.getChartSize, 300))
   },
   unmounted() {
     unsubscribe()
     winLossBankChart.reset()
+    window.removeEventListener('resize', this.getChartSize)
   }
 }
 </script>

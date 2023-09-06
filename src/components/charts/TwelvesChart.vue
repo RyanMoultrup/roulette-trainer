@@ -22,6 +22,7 @@ export default {
   data () {
     return {
       showPlaceholder: true,
+      chartResizer: chartResize
     }
   },
   methods: {
@@ -46,11 +47,12 @@ export default {
         .parentWidth(initWidth)
         .render(outcomes)
 
-    addEventListener('resize', chartResize(twelvesChart, twelveChartRef))
+    addEventListener('resize', this.chartResizer(twelvesChart, twelveChartRef))
   },
   unmounted() {
     unsubscribe()
     twelvesChart.reset()
+    window.removeEventListener('resize', this.chartResizer)
   }
 }
 </script>

@@ -24,7 +24,8 @@ export default {
     return {
       showPlaceholder: true,
       height: null,
-      width: null
+      width: null,
+      chartResizer: chartResize
     }
   },
   methods: {
@@ -47,11 +48,12 @@ export default {
         .parentWidth(null)
         .render(outcomes);
 
-    addEventListener('resize', chartResize(hitsChart, hitsChartRef))
+    addEventListener('resize', this.chartResizer(hitsChart, hitsChartRef))
   },
   unmounted() {
     unsubscribe()
     hitsChart.reset()
+    window.removeEventListener('resize', this.chartResizer)
   }
 }
 </script>
