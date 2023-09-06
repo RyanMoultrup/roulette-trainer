@@ -40,7 +40,7 @@ export default {
     const initWidth = window.innerWidth * 0.09
     const initHeight = window.innerHeight * 0.12
 
-    evenOddChart = new EvenOdd()
+    evenOddChart = new EvenOdd("#even-odd-chart")
     evenOddChart
         .parentHeight(initHeight)
         .parentWidth(initWidth)

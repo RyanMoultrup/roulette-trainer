@@ -40,7 +40,7 @@ export default {
     const initWidth = window.innerWidth * 0.09
     const initHeight = window.innerHeight * 0.12
 
-    halfBoardSpots = new HalfBoardSpots();
+    halfBoardSpots = new HalfBoardSpots('#half-board-chart')
     halfBoardSpots
         .parentHeight(initHeight)
         .parentWidth(initWidth)

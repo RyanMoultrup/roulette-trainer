@@ -40,7 +40,7 @@ export default {
     const initWidth = window.innerWidth * 0.09
     const initHeight = window.innerHeight * 0.12
 
-    twelvesChart = new Twelves()
+    twelvesChart = new Twelves('#twelves-chart')
     twelvesChart
         .parentHeight(initHeight)
         .parentWidth(initWidth)
