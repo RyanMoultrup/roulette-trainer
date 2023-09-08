@@ -1,118 +1,10 @@
 <template>
   <div id="wheel">
     <div class="main">
-      <div class="plate" id="plate">
+      <div class="plate" id="plate" :style="{ '--dynamic-platesize': wheelSize + 'px' }">
         <ul class="inner">
-          <li class="wheel-number"><label><input type="radio" name="pit" value="32"/>
-            <span class="pit">32</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="15"/>
-            <span class="pit">15</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="19"/>
-            <span class="pit">19</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="4"/>
-            <span class="pit">4</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="21"/>
-            <span class="pit">21</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="2"/>
-            <span class="pit">2</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="25"/>
-            <span class="pit">25</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="17"/>
-            <span class="pit">17</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="34"/>
-            <span class="pit">34</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="6"/>
-            <span class="pit">6</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="27" />
-            <span class="pit">27</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="13"/>
-            <span class="pit">13</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="36"/>
-            <span class="pit">36</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="11" />
-            <span class="pit">11</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="30"/>
-            <span class="pit">30</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="8"/>
-            <span class="pit">8</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="23"/>
-            <span class="pit">23</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="10"/>
-            <span class="pit">10</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="5"/>
-            <span class="pit">5</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="24"/>
-            <span class="pit">24</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="16"/>
-            <span class="pit">16</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="33"/>
-            <span class="pit">33</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="1"/>
-            <span class="pit">1</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="20"/>
-            <span class="pit">20</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="14"/>
-            <span class="pit">14</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="31"/>
-            <span class="pit">31</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="9"/>
-            <span class="pit">9</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="22"/>
-            <span class="pit">22</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="18"/>
-            <span class="pit">18</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="29"/>
-            <span class="pit">29</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="7"/>
-            <span class="pit">7</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="28"/>
-            <span class="pit">28</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="12"/>
-            <span class="pit">12</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="35"/>
-            <span class="pit">35</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="3"/>
-            <span class="pit">3</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="26"/>
-            <span class="pit">26</span></label>
-          </li>
-          <li class="wheel-number"><label><input type="radio" name="pit" value="0"/>
-            <span class="pit">0</span></label>
+          <li v-for="num in wheelNums" class="wheel-number"><label><input type="radio" name="pit" :value="num"/>
+            <span class="pit">{{ num }}</span></label>
           </li>
         </ul>
         <div class="wheel-data reveal">
@@ -125,24 +17,21 @@
           </div>
         </div>
       </div>
-      <div class="previous-results">
-        <ol class="previous-list">
-          <li class='visuallyhidden placeholder'>No results yet.</li>
-        </ol>
-      </div>
     </div>
     <rounds-display class="flex justify-center gap-2" />
   </div> <!-- End Wheel -->
 </template>
 
 <script>
-import spots from '../lib/table/spots';
-import RoundsDisplay from "@/components/RoundsDisplay.vue";
+import spots from '../lib/table/spots'
+import RoundsDisplay from "@/components/RoundsDisplay.vue"
 
 export default {
   components: { RoundsDisplay },
   data () {
     return {
+      wheelNums: [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26],
+      wheelSize: 325,
       spin: null,
       color: '',
       colorHex: 'gray'
@@ -151,13 +40,241 @@ export default {
   watch: {
     '$store.state.simulation.spin': function (val) {
       if (spots[val].color === 'green') {
-        this.colorHex = spots[val].color;
+        this.colorHex = spots[val].color
       } else {
-        this.colorHex = spots[val].color === 'red' ? '#B91C1C' : 'black';
+        this.colorHex = spots[val].color === 'red' ? '#B91C1C' : 'black'
       }
-      this.color = spots[val].color;
-      this.spin = val === 37 ? 0 : val;
+      this.color = spots[val].color
+      this.spin = val === 37 ? 0 : val
     }
   }
 }
 </script>
+
+<style lang="less">
+@pitwidth: 30px;
+@rotate: (360/@to)+0deg;
+@rimsize: 6px;
+@trim: #B16938;
+@trimSecondary: silver;
+@spinButton: green;
+@resetButton: darkgreen;
+@spins: 8;
+@from: 1;
+@to: 37;
+
+.loop(@index) when (@index < @to) {
+  .wheel-number:nth-child(@{index}) {
+    transform: rotateZ(@rotate*@index);
+  }
+  .loop(@index + 1);
+}
+.loop(@from);
+
+.main {
+  width: calc(var(--dynamic-platesize) + 24px);
+  margin: 0 auto;
+}
+
+.plate {
+  background-color: gray;
+  width: var(--dynamic-platesize);
+  height: var(--dynamic-platesize);
+  margin: calc(@rimsize * 2);
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 48s infinite linear;
+
+  &:after,
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  &:after {
+    top: -@rimsize;
+    right: -@rimsize;
+    bottom: -@rimsize;
+    left: -@rimsize;
+    border: @rimsize solid @trim;
+    box-shadow: inset 0px 0px 0px (@rimsize/3) darken(@trim, 15%),
+    0px 0px 0px (@rimsize/3) lighten(@trim, 25%);
+  }
+
+  &:before {
+    background: rgba(0, 0, 0, .65);
+    border: 1px solid @trimSecondary;
+    box-shadow: inset 0px 0px 0px 2px darken(@trimSecondary, 25%);
+    top: 12%;
+    left: 12%;
+    right: 12%;
+    bottom: 12%;
+    z-index: 1;
+  }
+}
+
+.wheel-number {
+  width: @pitwidth;
+  height: calc(var(--dynamic-platesize) / 2);
+  display: inline-block;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: calc(50% - (@pitwidth / 2));
+  transform-origin: 50% 100%;
+  background-color: transparent;
+  border-left: (@pitwidth/2) solid transparent;
+  border-right: (@pitwidth/2) solid transparent;
+  border-top: calc(var(--dynamic-platesize) / 2) solid black;
+  box-sizing: border-box;
+
+  &:nth-child(odd) {
+    border-top-color: #520703;
+  }
+
+  &:nth-child(@{to}) {
+    border-top-color: green;
+  }
+}
+
+.pit {
+  color: #fff;
+  padding-top: 12px;
+  width: @pitwidth;
+  display: inline-block;
+  font-size: 12px;
+  transform: scale(1, 1.8);
+  position: absolute;
+  top: calc(var(--dynamic-platesize) / -2);
+  left: -(@pitwidth/2);
+}
+
+.inner {
+  display: block;
+  height: var(--dynamic-platesize);
+  width: var(--dynamic-platesize);
+  position: relative;
+
+  &:after,
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  &:after {
+    z-index: 3;
+    top: 24%;
+    right: 24%;
+    bottom: 24%;
+    left: 24%;
+    background-color: darken(@trimSecondary, 45%);
+    border: 3px solid darken(@trimSecondary, 25%);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.wheel-data {
+  display: block;
+  position: absolute;
+  top: 30%;
+  right: 30%;
+  bottom: 30%;
+  left: 30%;
+  border-radius: 50%;
+  animation: rotate 48s reverse linear infinite;
+  perspective: 2000px;
+  z-index: 100;
+
+
+  .data-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.72s;
+    transform-style: preserve-3d;
+
+  }
+
+  &.reveal .data-inner {
+    transform: rotateY(180deg);
+  }
+
+  .mask,
+  .wheel-result {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .mask {
+    color: #fff;
+    font-size: 24px;
+    margin: auto;
+    line-height: 1.4;
+    padding-top: 36px;
+  }
+
+  .wheel-result {
+    background-color: green;
+    color: white;
+    transform: rotateY(180deg);
+    align-items: center;
+    color: #fff;
+  }
+
+  .result-number {
+    font-size: 61px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 18px;
+  }
+
+  .result-color {
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 1;
+  }
+}
+
+.color-green {
+  background-color: green;
+}
+
+.color-black {
+  background-color: black;
+}
+
+.color-red {
+  background-color: #B91C1C;
+}
+
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+</style>

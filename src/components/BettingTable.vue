@@ -2,7 +2,7 @@
     <div :class="gridClass" class="mx-4 mb-4 mt-2 p-4 card-bg-border" style="z-index: 0;">
       <div class="flex flex-col justify-between h-full">
         <div class="flex flex-row items-center h-full">
-<!--          <wheel></wheel>-->
+          <wheel></wheel>
           <board
               :selected-chip="selectedChip"
               style="z-index: 0;"
