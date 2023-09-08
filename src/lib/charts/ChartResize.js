@@ -17,8 +17,6 @@ export const resize = (chart, ref) => {
 
         chartHeight = newWindowHeight * chartPercentOfHeight
 
-        console.log('chartWidth::', chartWidth)
-
         lastResizeWidth = newWindowWidth
         lastResizeHeight = newWindowHeight
 

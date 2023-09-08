@@ -35,7 +35,6 @@ export default class EvenOdd extends BaseRowChart {
             .on('preRender', this.adjustYAxisTicks(this.group))
             .on('preRedraw', this.adjustYAxisTicks(this.group))
             .on('renderlet', (chart) => {
-                console.log('chart::', chart)
                 const total = this.total
                 selectAll("#event-odd-chart.dc-chart g.row svg.icon").remove();
                 selectAll("#event-odd-chart.dc-chart g.row").each(function(d) {

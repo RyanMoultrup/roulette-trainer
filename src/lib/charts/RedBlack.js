@@ -25,7 +25,6 @@ export default class RedBlack extends BaseRowChart {
             .dimension(this.dimension)
             .group(this.group)
             .label(d => {
-                console.log('label this.total::', this.total)
                 const percent = Math.round((d.value.exceptionCount / this.total) * 100)
                 return `${d.key} - ${percent}%`
             })
@@ -35,7 +34,6 @@ export default class RedBlack extends BaseRowChart {
             .on('preRender', this.adjustYAxisTicks(this.group))
             .on('preRedraw', this.adjustYAxisTicks(this.group))
             .on('renderlet', (chart) => {
-                console.log('chart::', chart)
                 const total = this.total
                 selectAll("#red-black-chart.dc-chart g.row svg.icon").remove();
                 selectAll("#red-black-chart.dc-chart g.row").each(function(d) {

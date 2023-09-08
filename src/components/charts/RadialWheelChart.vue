@@ -6,8 +6,8 @@
 
 <script>
 import { useStore } from "vuex"
-import { onMounted, computed, watch, ref, nextTick } from "vue"
 import chartResize from "@/lib/charts/ChartResize"
+import { onMounted, computed, watch, ref } from "vue"
 import RadialWheelChart from "@/lib/charts/RadialWheelChart"
 
 export default {
@@ -29,10 +29,7 @@ export default {
       chart
           .domain(hits)
           .width(chartWidth.value)
-          // .width(275)
           .render()
-      await nextTick()
-      console.log('chartRef::', chartRef.value)
 
       addEventListener('resize', chartResizer(chart, chartRef.value))
     })

@@ -59,7 +59,12 @@ export default {
     return {
       isHovered: '',
       placements,
-      boardWidth: 0
+      boardWidth: 0,
+      elementWidth: 0,
+      elementHeight: 0,
+      hoverWidth: 0,
+      hoverHeight: 0,
+      resizeObserver: null
     }
   },
   computed: {
@@ -68,12 +73,41 @@ export default {
     ...mapGetters('bank', ['canBet', 'availableBalance']),
     bets () {
       return this.getStrategy
+    },
+    pPercent () {
+      const boardWidth = this.elementWidth
+      const partWidth = boardWidth / 27
+      const partHeight = this.elementHeight / 9
+
+      this.hoverWidth = `${partWidth}px`
+      this.hoverHeight = `${partHeight}px`
+
+      return Math.round((partWidth / boardWidth * 100) * 10) / 10
+    }
+  },
+  watch: {
+    pPercent (newVal) {
+      // this needs to be here
     }
   },
   mounted () {
-    this.boardWidth = this.$refs.boardTable.clientWidth
-    console.log('boardWidth::', this.boardWidth)
-    console.log('boardWidth::part', this.boardWidth / 27)
+    this.resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        this.elementWidth = entry.contentRect.width
+        this.elementHeight = entry.contentRect.height
+      }
+    })
+
+    this.$nextTick(() => {
+      const observedElement = this.$refs.boardTable
+      if (observedElement) {
+        this.resizeObserver.observe(observedElement);
+      }
+    })
+  },
+  beforeDestroy() {
+    // Don't forget to unobserve if you're done observing or if the component is destroyed
+    this.resizeObserver.unobserve(this.$refs.boardTable);
   },
   methods: {
     ...mapMutations('strategy', ['placeBet']),
@@ -170,5 +204,10 @@ export default {
 
 .text-large {
   @apply text-4xl
+}
+
+.spot-h {
+  height: v-bind(hoverHeight);
+  width: v-bind(hoverWidth);
 }
 </style>
