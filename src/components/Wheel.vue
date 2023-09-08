@@ -1,6 +1,6 @@
 <template>
   <div id="wheel">
-    <div class="main">
+    <div class="main" ref="wheelRef">
       <div class="plate" id="plate" :style="{ '--dynamic-platesize': wheelSize + 'px' }">
         <ul class="inner">
           <li v-for="num in wheelNums" class="wheel-number"><label><input type="radio" name="pit" :value="num"/>
@@ -19,11 +19,12 @@
       </div>
     </div>
     <rounds-display class="flex justify-center gap-2" />
-  </div> <!-- End Wheel -->
+  </div>
 </template>
 
 <script>
 import spots from '../lib/table/spots'
+import chartResize from "@/lib/charts/ChartResize"
 import RoundsDisplay from "@/components/RoundsDisplay.vue"
 
 export default {
@@ -31,10 +32,21 @@ export default {
   data () {
     return {
       wheelNums: [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26],
-      wheelSize: 325,
+      wheelSize: 0,
       spin: null,
       color: '',
-      colorHex: 'gray'
+      colorHex: 'gray',
+      chartResizer: chartResize,
+      resizeWheel: {
+        rescale: (width) => {
+          console.log('rescale width::', width)
+          this.wheelSize = width
+
+          // this.$nextTick(() => {
+          //   this.$refs.wheelRef.offsetHeight;
+          // })
+        }
+      }
     }
   },
   watch: {
@@ -47,6 +59,15 @@ export default {
       this.color = spots[val].color
       this.spin = val === 37 ? 0 : val
     }
+  },
+  mounted () {
+    this.wheelSize = window.innerWidth * 0.2
+    console.log('mounted width::', this.wheelSize)
+    console.log('ref width::', this.$refs.wheelRef.clientWidth)
+    this.$nextTick(() => {
+      console.log('ref width::nextTick', this.$refs.wheelRef.clientWidth)
+      addEventListener('resize', this.chartResizer(this.resizeWheel, this.$refs.wheelRef))
+    })
   }
 }
 </script>

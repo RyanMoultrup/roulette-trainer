@@ -14,7 +14,6 @@ export const resize = (chart, ref) => {
         const newWindowHeight = context.target.innerHeight
 
         chartWidth = newWindowWidth * chartPercentOfWidth
-
         chartHeight = newWindowHeight * chartPercentOfHeight
 
         lastResizeWidth = newWindowWidth
