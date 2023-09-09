@@ -43,7 +43,7 @@ import "vue-toastification/dist/index.css"
 import './styles/dc.css'
 import './styles/app.css'
 import './assets/main.css'
-import './styles/wheel.less'
+// import './styles/wheel.less'
 
 library.add(
     faGear, faBuildingColumns,

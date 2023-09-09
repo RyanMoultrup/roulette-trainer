@@ -53,7 +53,7 @@ export default class HitsChart {
     }
 
     rescale (width, height) {
-        this.chart.width(width-20).height(height-20);
+        this.chart.width(Math.round(width)).height(Math.round(height));
         this.chart.rescale();
         this.chart.redraw();
     }

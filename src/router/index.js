@@ -62,7 +62,7 @@ const router = createRouter({
     {
       path: '/table',
       name: 'table',
-      component: () => import('../components/charts/RadialWheelChart.vue'),
+      component: () => import('../views/Tablet.vue'),
       meta: { layout: 'default' }
     }
   ]

@@ -10,13 +10,13 @@
         <radial-wheel-chart />
       </div>
       <span class="font-lobster text-gray-400 text-xl">Outside</span>
-      <div class="flex flex-row gap-3 rounded">
-        <div class="flex flex-col gap-3">
+      <div class="flex flex-col gap-3 rounded">
+        <div class="flex flex-row gap-3">
           <red-black-chart />
-          <even-odd-chart />
-        </div>
-        <div class="flex flex-col gap-3">
           <twelves-chart />
+        </div>
+        <div class="flex flex-row gap-3">
+          <even-odd-chart />
           <half-board-chart />
         </div>
       </div>

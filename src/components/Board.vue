@@ -1,7 +1,8 @@
 <template>
-  <div class="betting-table">
+  <div class="h-full w-full">
+<!--  <div class="h-full">-->
     <table-limits />
-    <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-80">
+    <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-80" ref="boardTable">
       <div
           v-for="bet in bets"
           class="absolute w-28 mt-1 ml-1 backdrop-blur-sm"
@@ -23,7 +24,7 @@
         </div>
       </div>
 
-      <div v-for="placement in placements" :id="placement" :class="placement" class="absolute spot-h z-0" @click="place" @mouseover="hoverBet"></div>
+      <div v-if="getMode !== 'review'" v-for="placement in placements" :id="placement" :class="placement" class="absolute spot-h z-0" @click="place" @mouseover="hoverBet"></div>
 
       <div v-for="spot in tableSpots" :class="spot.class">{{ spot.text }}</div>
     </div>
@@ -31,13 +32,13 @@
 </template>
 
 <script>
-import Chip from '@/components/Chip.vue'
-import { mapMutations, mapGetters, mapActions } from 'vuex'
-import placements from '@/lib/table/BetPlacements'
-import { useToast } from "vue-toastification"
-import TableLimits from "@/components/TableLimits.vue"
 import formatter from "@/lib/formatter"
+import Chip from '@/components/Chip.vue'
+import { useToast } from "vue-toastification"
 import { tableSpots } from "@/lib/table/table"
+import placements from '@/lib/table/BetPlacements'
+import TableLimits from "@/components/TableLimits.vue"
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Board',
@@ -57,7 +58,14 @@ export default {
   data () {
     return {
       isHovered: '',
-      placements
+      placements,
+      boardWidth: 0,
+      maxBoardHeight: 0,
+      elementWidth: 0,
+      elementHeight: 0,
+      hoverWidth: 0,
+      hoverHeight: 0,
+      resizeObserver: null
     }
   },
   computed: {
@@ -66,7 +74,50 @@ export default {
     ...mapGetters('bank', ['canBet', 'availableBalance']),
     bets () {
       return this.getStrategy
+    },
+    pPercent () {
+      // this.$nextTick(() => {
+        const boardWidth = this.elementWidth
+        const partWidth = boardWidth / 27
+        const partHeight = this.elementHeight / 9
+
+
+        // console.log('boardHeight::', this.$refs.boardTable.clientHeight)
+        console.log('ratio::', this.elementWidth / 4 )
+        this.maxBoardHeight = this.elementHeight > (this.elementWidth / 4) ? `${Math.round(this.elementWidth / 4)}%` : `${this.elementHeight}%`
+
+        console.log('maxheight::', this.maxBoardHeight)
+
+
+        this.hoverWidth = `${partWidth}px`
+        this.hoverHeight = `${partHeight}px`
+
+        return Math.round((partWidth / boardWidth * 100) * 10) / 10
+      // })
     }
+  },
+  watch: {
+    pPercent (newVal) {
+      // this needs to be here
+    }
+  },
+  mounted () {
+    this.resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        this.elementWidth = entry.contentRect.width
+        this.elementHeight = entry.contentRect.height
+      }
+    })
+
+    this.$nextTick(() => {
+      const observedElement = this.$refs.boardTable
+      if (observedElement) {
+        this.resizeObserver.observe(observedElement);
+      }
+    })
+  },
+  beforeDestroy() {
+    this.resizeObserver.unobserve(this.$refs.boardTable);
   },
   methods: {
     ...mapMutations('strategy', ['placeBet']),
@@ -119,7 +170,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#table {
+  width: 100%;
+  height: 90%;
+  //max-height: v-bind(maxBoardHeight);
+}
+
+
+@media screen and (max-height: 927px) {
+  #table {
+    max-height: 20rem;
+  }
+}
+
 .chips-hover {
   @apply border bg-gray-100 bg-opacity-75 p-1 rounded z-50;
 }
@@ -153,10 +217,15 @@ export default {
 }
 
 .outside-cell {
-  @apply bg-accent-150 /* green-500 */
+  @apply bg-accent-150
 }
 
 .text-large {
   @apply text-4xl
+}
+
+.spot-h {
+  height: v-bind(hoverHeight);
+  width: v-bind(hoverWidth);
 }
 </style>

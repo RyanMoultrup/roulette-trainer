@@ -7,13 +7,13 @@ import { scaleOrdinal, scaleLinear, scaleSequential } from 'd3-scale'
 export default class RadialWheelChart {
     constructor(elementId) {
         this.elementId = elementId;
-        // Assuming a fixed set of numbers for a roulette wheel
         this.nums = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
         this.hits = new Array(this.nums.length).fill(0);  // Initialize hits to zero for each number
-        this.allHits = []
-
-        this.init();
-        this.setData();  // Set initial data state
+        this.allHits = [];
+        this._width = 275;
+        this._height = 275;
+        this._radiusMax = 120
+        this._radiusMin = 20
     }
 
     #clear() {
@@ -21,9 +21,11 @@ export default class RadialWheelChart {
     }
 
     init() {
+        select(this.elementId).select("svg").remove();
+
         this.svg = select(this.elementId).append('svg')
-            .attr('width', 275)
-            .attr('height', 275);
+            .attr('width', this._width)
+            .attr('height', this._height);
 
         this.width = +this.svg.attr('width');
         this.height = +this.svg.attr('height');
@@ -42,7 +44,8 @@ export default class RadialWheelChart {
         this.chartGroup = this.g.append('g')
 
         this.color = scaleOrdinal();
-        this.hitScale = scaleLinear().range([this.radius - 120, this.radius - 20]);
+        // this.hitScale = scaleLinear().range([this.radius - 120, this.radius - 20]);
+        this.hitScale = scaleLinear().range([this.radius - this._radiusMax, this.radius - this._radiusMin]);
 
         // Let's ensure that the domain and range have the same length
         const colorRange = ['green', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black', '#520703', 'black'];
@@ -64,7 +67,7 @@ export default class RadialWheelChart {
         return this
     }
 
-    render() {
+    draw() {
         this.#clear();
 
         // 1. Calculate the angular size of each segment.
@@ -84,11 +87,11 @@ export default class RadialWheelChart {
         const arcs = pie(this.data);
 
         // Define arcs
-        this.arc = arc().innerRadius(this.radius - 20).outerRadius(this.radius);
+        this.arc = arc().innerRadius(this.radius - this._radiusMin).outerRadius(this.radius);
 
         // Check for hits before defining dynamicArc
         if (max(this.hits) > 0) {
-            this.dynamicArc = arc().innerRadius(this.radius - 120).outerRadius(d => this.hitScale(d.data.hit));
+            this.dynamicArc = arc().innerRadius(this.radius - this._radiusMax).outerRadius(d => this.hitScale(d.data.hit));
         }
 
         // Append dynamic content to this.chartGroup instead of this.g
@@ -112,7 +115,7 @@ export default class RadialWheelChart {
 
         // Define a new arc generator for the outlined ring
         const outlineArc = arc()
-            .innerRadius(this.radius - 120)
+            .innerRadius(this.radius - this._radiusMax)
             .outerRadius(this.radius);
 
         // Adding spokes between sections
@@ -127,7 +130,7 @@ export default class RadialWheelChart {
             .attr('transform', d => {
                 const angle = (d.startAngle + d.endAngle) / 2 * 180 / Math.PI;
                 const rotateAngle = angle - 360;
-                const centroid = arc().innerRadius(this.radius - 20).outerRadius(this.radius).centroid(d);
+                const centroid = arc().innerRadius(this.radius - this._radiusMin).outerRadius(this.radius).centroid(d);
                 return `translate(${centroid}) rotate(${rotateAngle})`;
             })
             .attr('dy', '0.6em')
@@ -155,10 +158,35 @@ export default class RadialWheelChart {
 
         this.hits = newHits
         this.setData();
-        this.render();
+        this.draw();
+    }
+
+    width (width) {
+        this.#setDimensions(width)
+        return this;
+    }
+
+    rescale (width) {
+        this.#setDimensions(width)
+
+        this.init()
+        this.setData();
+        this.draw()
+    }
+
+    render () {
+        this.init();
+        this.setData();
+        this.draw();
     }
 
     clear () {
         this.data = []
+    }
+
+    #setDimensions (width) {
+        this._width = width;
+        this._height = width;
+        this._radiusMax = width * .43
     }
 }

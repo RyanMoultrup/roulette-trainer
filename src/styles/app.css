@@ -25,6 +25,51 @@
 @tailwind components;
 @tailwind utilities;
 
+html { min-height: 100vh; }
+
+body {
+    min-height: 100vh;
+    /*color: var(--color-text);*/
+    /*background: var(--color-background);*/
+    /*transition: color 0.5s, background-color 0.5s;*/
+    /*line-height: 1.6;*/
+    /*font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,*/
+    /*Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;*/
+    /*font-size: 15px;*/
+    /*text-rendering: optimizeLegibility;*/
+    /*-webkit-font-smoothing: antialiased;*/
+    /*-moz-osx-font-smoothing: grayscale;*/
+}
+
+
+@media screen and (min-width: 2000px), screen and (min-height: 1900px) {
+    html {
+        /*font-size: 20px;*/
+    }
+}
+
+@media screen and (max-width: 1888px) {
+    html {
+        font-size: 14px;
+    }
+    /*#table {*/
+    /*    max-height: 24rem;*/
+    /*}*/
+}
+
+@media screen and (max-width: 1600px) {
+    html {
+        font-size: 14px;
+    }
+    /*#table {*/
+    /*    max-height: 24rem;*/
+    /*}*/
+}
+
+@media screen and (min-width: 600px) and (max-width: 1200px) and (min-height: 400px) and (max-height: 800px) {
+    /* your styles here */
+}
+
 .card-bg-border {
     @apply rounded bg-gradient-to-br from-0% from-accent-150 via-20% via-green-800 border-green-600 border;
 }
@@ -36,7 +81,7 @@ html, .charts {
 .layout-container {
     display: grid;
     grid-template-columns: 1.6fr 0.4fr;
-    grid-template-rows: 0.4fr 1.6fr;
+    grid-template-rows: 0.5fr 1.5fr;
     gap: 0 0;
     grid-template-areas:
     "top-left side-pane"
@@ -75,17 +120,17 @@ html, .charts {
 .current-winnings { grid-area: current-winnings; }
 .spin-table { grid-area: spin-table; }
 
-.betting-area {
-    display: grid;
-    place-items: center;
-    grid-template-columns: 0.7fr 1.7fr;
-    grid-template-rows: 1.5fr 0.5fr;
-    gap: 0 0;
-    grid-template-areas:
-    "wheel betting-table"
-    "spin-buttons chips-panel";
-    grid-area: bottom-left;
-}
+/*.betting-area {*/
+/*    display: grid;*/
+/*    place-items: center;*/
+/*    grid-template-columns: 5rem 1fr;*/
+/*    grid-template-rows: 1.5fr 0.5fr;*/
+/*    gap: 0 0;*/
+/*    grid-template-areas:*/
+/*    "wheel betting-table"*/
+/*    "spin-buttons chips-panel";*/
+/*    grid-area: bottom-left;*/
+/*}*/
 .wheel { grid-area: wheel; }
 .betting-table { grid-area: betting-table; }
 
@@ -220,19 +265,13 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
     left: 100%;
 }
 
-#table {
-    max-height: 350px;
-}
 
-.spot-h {
-    height: 2.5rem;
-    width: 2.5rem;
-}
 
 .chip-spot {
     max-height: 25px;
     max-width: 25px;
     overflow: hidden;
+    /*transform: translateX(30%) translateY(25%);*/
 }
 
 .spot-h:hover {
@@ -513,7 +552,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .dbl_18_17,
 .dbl_17_16,
 .str_18_17_16 {
-    left: 44.1%;
+    left: 44.4%;
 }
 
 .dbl_18_21,
@@ -522,7 +561,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .sqr_17_20_16_19,
 .dbl_16_19,
 .line_18_21_17_20_16_19 {
-    left: 47.7%;
+    left: 47.8%;
 }
 
 .sgl_21,
@@ -540,7 +579,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .sqr_20_23_19_22,
 .dbl_19_22,
 .line_21_24_20_23_19_22 {
-    left: 54.5%;
+    left: 54.85%;
 }
 
 .sgl_24,
@@ -549,7 +588,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .dbl_24_23,
 .dbl_23_22,
 .str_24_23_22 {
-    left: 58%;
+    left: 58.5%;
 }
 
 .dbl_24_27,
@@ -558,7 +597,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .sqr_23_26_22_25,
 .dbl_22_25,
 .line_24_27_23_26_22_25 {
-    left: 61.5%;
+    left: 61.99%;
 }
 
 .sgl_27,
@@ -567,7 +606,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .dbl_27_26,
 .dbl_26_25,
 .str_27_26_25 {
-    left: 65%;
+    left: 65.56%;
 }
 
 .dbl_27_30,
@@ -576,7 +615,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .sqr_26_29_25_28,
 .dbl_25_28,
 .line_27_30_26_29_25_28 {
-    left: 68.5%;
+    left: 69%;
 }
 
 .sgl_30,
@@ -585,7 +624,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .dbl_30_29,
 .dbl_29_28,
 .str_30_29_28 {
-    left: 72%;
+    left: 72.4%;
 }
 
 .dbl_30_33,
@@ -594,7 +633,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .sqr_29_32_28_31,
 .dbl_28_31,
 .line_30_33_29_32_28_31 {
-    left: 75.25%;
+    left: 75.95%;
 }
 
 .sgl_33,
@@ -603,7 +642,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .dbl_33_32,
 .dbl_32_31,
 .str_33_32_31 {
-    left: 78.75%;
+    left: 79.4%;
 }
 
 .dbl_33_36,
@@ -612,7 +651,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .sqr_32_35_31_34,
 .dbl_31_34,
 .line_33_36_32_35_31_34 {
-    left: 82.25%;
+    left: 82.97%;
 }
 
 .sgl_36,
@@ -621,7 +660,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 .dbl_36_35,
 .dbl_35_34,
 .str_36_35_34 {
-    left: 85.5%;
+    left: 86.3%;
 }
 
 .twelve_first {
@@ -695,6 +734,7 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
     left: 92.5%;
     top: 44%
 }
+
 
 /* ------------- */
 ._zero:hover ~ ._0,

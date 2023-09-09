@@ -1,10 +1,13 @@
 <template>
+  <div ref="chartRef">
     <div id="radial-wheel"></div>
+  </div>
 </template>
 
 <script>
 import { useStore } from "vuex"
-import { onMounted, computed, watch } from "vue"
+import chartResize from "@/lib/charts/ChartResize"
+import { onMounted, computed, watch, ref } from "vue"
 import RadialWheelChart from "@/lib/charts/RadialWheelChart"
 
 export default {
@@ -12,33 +15,26 @@ export default {
   setup () {
     const store = useStore()
     let chart
+    let chartWidth = ref(window.innerWidth * 0.16)
+    const chartRef = ref(null)
+    const chartResizer = chartResize
 
     const hits = store.getters['simulation/getOutcomes']
+    const hit = computed(() => store.getters['simulation/getSpin'])
 
-    console.log('hits::', hits)
+    watch(hit, (newVal) => chart.update())
 
-    const hit = computed(() => {
-      return store.getters['simulation/getSpin']
-    })
-
-    watch(hit, (newVal) => {
-      console.log('watching hit:::')
-      chart.update()
-    })
-
-    // const updateChart = () => {
-    //   chart.update(moreRandomeHits())
-    // }
-
-    onMounted(() => {
+    onMounted(async () => {
       chart = new RadialWheelChart('#radial-wheel')
-      chart.domain(hits).render()
+      chart
+          .domain(hits)
+          .width(chartWidth.value)
+          .render()
+
+      addEventListener('resize', chartResizer(chart, chartRef.value))
     })
+
+    return { chartRef }
   }
 }
-
 </script>
-
-<style scoped>
-
-</style>

@@ -1,7 +1,7 @@
 <template>
   <section :class="gridClass" class="bg-opacity-0 mx-4 mt-4 mb-2">
     <base-card grid-class="win-loss-bank-chart" :top-full="true">
-      <div class="relative overflow-hidden flex flex-col gap-3">
+      <div class="relative overflow-hidden flex flex-col gap-3 h-full">
         <display-stats />
         <win-loss-bank-chart class="justify-self-center" />
       </div>
@@ -54,14 +54,6 @@ export default {
         redrawAll();
       }
     })
-
-    // const winLossChart = new WinLossChart();
-    // winLossChart
-    //     // .parentHeight(this.$refs.winLossPieChart.clientHeight - 30)
-    //     // .parentWidth(this.$refs.winLossPieChart.clientWidth - 30)
-    //     .parentHeight(100)
-    //     .parentWidth(null)
-    //     .render(outcomes);
   }
 }
 </script>

@@ -47,9 +47,7 @@ export default {
     const mode = computed(() => store.getters['simulation/getMode'])
 
     const showButtons = () => {
-      console.log('to show or not to show, that is the question::')
       return route.name !== 'home' && mode.value !== 'review'
-
     }
 
     return { username, showButtons }

@@ -15,12 +15,7 @@ const findChips = (value, newChips = []) => {
     return findChips(+value - +newChip.value, newChips)
 }
 
-const getNewChips = chips => {
-    console.log('aggregator::chips::', chips)
-    console.log('total chip values::', getTotalChipValues(chips))
-    console.log('new chips:::', findChips(getTotalChipValues(chips)))
-    return findChips(getTotalChipValues(chips))
-}
+const getNewChips = chips => findChips(getTotalChipValues(chips))
 
 export const getNewChipsFromValue = value => findChips(value)
 

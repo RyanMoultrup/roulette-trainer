@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="relative" ref="redBlackRef">
     <chart-placeholder
         icon="fa-solid fa-chart-column"
         :show-placeholder="showPlaceholder" >
@@ -7,13 +7,13 @@
     </chart-placeholder>
   </div>
 </template>
+
 <script>
-import { mapGetters } from "vuex";
-import { debounce } from "@/lib/Utils";
-import RedBlack from "@/lib/charts/RedBlack.js";
-import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
-import { redrawAll } from "dc";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { redrawAll } from "dc"
+import { mapGetters } from "vuex"
+import RedBlack from "@/lib/charts/RedBlack.js"
+import chartResize from "@/lib/charts/ChartResize"
+import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue"
 
 let unsubscribe
 let redBlackChart
@@ -23,6 +23,7 @@ export default {
   data () {
     return {
       showPlaceholder: true,
+      chartResizer: chartResize
     }
   },
   methods: {
@@ -31,27 +32,28 @@ export default {
   mounted () {
     unsubscribe = this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'simulation/addOutcome') {
-        this.showPlaceholder = false;
+        this.showPlaceholder = false
         redrawAll()
       }
     })
 
     const outcomes = this.getOutcomes();
+    const redBlackRef = this.$refs.redBlackRef
+    const initWidth = window.innerWidth * 0.09
+    const initHeight = window.innerHeight * 0.12
 
-    redBlackChart = new RedBlack();
+    redBlackChart = new RedBlack('#red-black-chart');
     redBlackChart
-        .parentHeight(100)
-        .parentWidth(175)
-        // .parentHeight(this.$refs.hitsChart.clientHeight - 30)
-        // .parentWidth(this.$refs.hitsChart.clientWidth - 40)
-        .render(outcomes);
+        .parentHeight(initHeight)
+        .parentWidth(initWidth)
+        .render(outcomes)
 
-    // const debounceChartResize = chart => debounce(([{ contentRect: { width, height }}]) => chart.rescale(width, height), 300)
-    // useResizeObserver(this.$refs.hitsChart, debounceChartResize(hitsChart));
+    addEventListener('resize', this.chartResizer(redBlackChart, redBlackRef))
   },
   unmounted() {
     unsubscribe()
     redBlackChart.reset()
+    window.removeEventListener('resize', this.chartResizer)
   }
 }
 </script>
