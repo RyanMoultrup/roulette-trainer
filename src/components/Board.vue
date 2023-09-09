@@ -32,13 +32,13 @@
 </template>
 
 <script>
-import Chip from '@/components/Chip.vue'
-import { mapMutations, mapGetters, mapActions } from 'vuex'
-import placements from '@/lib/table/BetPlacements'
-import { useToast } from "vue-toastification"
-import TableLimits from "@/components/TableLimits.vue"
 import formatter from "@/lib/formatter"
+import Chip from '@/components/Chip.vue'
+import { useToast } from "vue-toastification"
 import { tableSpots } from "@/lib/table/table"
+import placements from '@/lib/table/BetPlacements'
+import TableLimits from "@/components/TableLimits.vue"
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Board',
@@ -60,6 +60,7 @@ export default {
       isHovered: '',
       placements,
       boardWidth: 0,
+      maxBoardHeight: 0,
       elementWidth: 0,
       elementHeight: 0,
       hoverWidth: 0,
@@ -75,14 +76,24 @@ export default {
       return this.getStrategy
     },
     pPercent () {
-      const boardWidth = this.elementWidth
-      const partWidth = boardWidth / 27
-      const partHeight = this.elementHeight / 9
+      // this.$nextTick(() => {
+        const boardWidth = this.elementWidth
+        const partWidth = boardWidth / 27
+        const partHeight = this.elementHeight / 9
 
-      this.hoverWidth = `${partWidth}px`
-      this.hoverHeight = `${partHeight}px`
 
-      return Math.round((partWidth / boardWidth * 100) * 10) / 10
+        // console.log('boardHeight::', this.$refs.boardTable.clientHeight)
+        console.log('ratio::', this.elementWidth / 4 )
+        this.maxBoardHeight = this.elementHeight > (this.elementWidth / 4) ? `${Math.round(this.elementWidth / 4)}%` : `${this.elementHeight}%`
+
+        console.log('maxheight::', this.maxBoardHeight)
+
+
+        this.hoverWidth = `${partWidth}px`
+        this.hoverHeight = `${partHeight}px`
+
+        return Math.round((partWidth / boardWidth * 100) * 10) / 10
+      // })
     }
   },
   watch: {
@@ -106,7 +117,6 @@ export default {
     })
   },
   beforeDestroy() {
-    // Don't forget to unobserve if you're done observing or if the component is destroyed
     this.resizeObserver.unobserve(this.$refs.boardTable);
   },
   methods: {
@@ -164,6 +174,14 @@ export default {
 #table {
   width: 100%;
   height: 90%;
+  //max-height: v-bind(maxBoardHeight);
+}
+
+
+@media screen and (max-height: 927px) {
+  #table {
+    max-height: 20rem;
+  }
 }
 
 .chips-hover {

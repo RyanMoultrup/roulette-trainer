@@ -58,6 +58,45 @@ export default {
 .dashed-circle {
   position: relative;
   display: block;
+  width: 75px;
+  height: 75px;
+  border: 7px dashed white;
+  border-radius: 50%;
+  line-height: 60px;
+  text-align: center;
+  font-family: lobster;
+  color: white;
+}
+.dashed-circle:before {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: -11px;
+  border-radius: 50%;
+  background: orange;
+  content: '';
+  box-shadow: 0 0 0 5px #282828 inset, 0 0 0 8px #969696 inset, 0 0 4px rgba(255, 255, 255, 0.2);
+}
+.dashed-circle:after {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 4px;
+  border: 2px dashed white;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  content: '';
+}
+
+.xl.dashed-circle {
+  position: relative;
+  display: block;
   width: 100px;
   height: 100px;
   border: 13px dashed white;
@@ -67,7 +106,7 @@ export default {
   font-family: lobster;
   color: white;
 }
-.dashed-circle:before {
+.xl.dashed-circle:before {
   position: absolute;
   z-index: -1;
   top: 0;
@@ -80,7 +119,7 @@ export default {
   content: '';
   box-shadow: 0 0 0 5px #282828 inset, 0 0 0 10px #969696 inset, 0 0 6px rgba(255, 255, 255, 0.2);
 }
-.dashed-circle:after {
+.xl.dashed-circle:after {
   position: absolute;
   z-index: -1;
   top: 0;

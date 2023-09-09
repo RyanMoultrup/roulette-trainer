@@ -11,8 +11,10 @@
           <div class="data-inner">
             <div class="mask"></div>
             <div class="wheel-result font-roulette" :style="{'background-color': colorHex}">
-              <div class="result-number">{{ spin }}</div>
-              <div class="result-color">{{ color }}</div>
+              <div class="spin-result">
+                <div class="result-number">{{ spin }}</div>
+                <div class="result-color">{{ color }}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -31,7 +33,7 @@ export default {
   components: { RoundsDisplay },
   data () {
     return {
-      wheelNums: [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26],
+      wheelNums: [32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26, 0],
       wheelSize: 0,
       spin: null,
       color: '',
@@ -40,11 +42,7 @@ export default {
       resizeWheel: {
         rescale: (width) => {
           console.log('rescale width::', width)
-          this.wheelSize = width
-
-          // this.$nextTick(() => {
-          //   this.$refs.wheelRef.offsetHeight;
-          // })
+          this.wheelSize = width > 500 ? 500 : width
         }
       }
     }
@@ -61,19 +59,18 @@ export default {
     }
   },
   mounted () {
-    this.wheelSize = window.innerWidth * 0.2
-    console.log('mounted width::', this.wheelSize)
-    console.log('ref width::', this.$refs.wheelRef.clientWidth)
+    this.wheelSize = window.innerWidth * 0.15
     this.$nextTick(() => {
-      console.log('ref width::nextTick', this.$refs.wheelRef.clientWidth)
       addEventListener('resize', this.chartResizer(this.resizeWheel, this.$refs.wheelRef))
     })
+  },
+  unmounted() {
+    window.removeEventListener('resize', this.chartResizer)
   }
 }
 </script>
 
 <style lang="less">
-@pitwidth: 30px;
 @rotate: (360/@to)+0deg;
 @rimsize: 6px;
 @trim: #B16938;
@@ -101,7 +98,8 @@ export default {
   background-color: gray;
   width: var(--dynamic-platesize);
   height: var(--dynamic-platesize);
-  margin: calc(@rimsize * 2);
+  margin: calc(var(--dynamic-platesize) * 0.04);
+
   border-radius: 50%;
   position: relative;
   animation: rotate 48s infinite linear;
@@ -115,14 +113,17 @@ export default {
   }
 
   &:after {
-    top: -@rimsize;
-    right: -@rimsize;
-    bottom: -@rimsize;
-    left: -@rimsize;
-    border: @rimsize solid @trim;
-    box-shadow: inset 0px 0px 0px (@rimsize/3) darken(@trim, 15%),
-    0px 0px 0px (@rimsize/3) lighten(@trim, 25%);
+    top: calc(var(--dynamic-platesize) * -0.015);
+    right: calc(var(--dynamic-platesize) * -0.015);
+    bottom: calc(var(--dynamic-platesize) * -0.015);
+    left: calc(var(--dynamic-platesize) * -0.015);
+    border: calc(var(--dynamic-platesize) * 0.015) solid @trim;
+    // Separate the calc() and darken/lighten functions
+    @rimsizeCalc: calc(var(--dynamic-platesize) * 0.02 / 3);
+    box-shadow: inset 0px 0px 0px @rimsizeCalc darken(@trim, 15%),
+    0px 0px 0px @rimsizeCalc lighten(@trim, 25%);
   }
+
 
   &:before {
     background: rgba(0, 0, 0, .65);
@@ -137,17 +138,17 @@ export default {
 }
 
 .wheel-number {
-  width: @pitwidth;
+  width: calc(var(--dynamic-platesize) / 10); // Replacing @pitwidth
   height: calc(var(--dynamic-platesize) / 2);
   display: inline-block;
   text-align: center;
   position: absolute;
   top: 0;
-  left: calc(50% - (@pitwidth / 2));
+  left: calc(50% - (var(--dynamic-platesize) / 20)); // Replacing @pitwidth / 2
   transform-origin: 50% 100%;
   background-color: transparent;
-  border-left: (@pitwidth/2) solid transparent;
-  border-right: (@pitwidth/2) solid transparent;
+  border-left: calc(var(--dynamic-platesize) / 20) solid transparent; // Replacing @pitwidth / 2
+  border-right: calc(var(--dynamic-platesize) / 20) solid transparent; // Replacing @pitwidth / 2
   border-top: calc(var(--dynamic-platesize) / 2) solid black;
   box-sizing: border-box;
 
@@ -163,13 +164,13 @@ export default {
 .pit {
   color: #fff;
   padding-top: 12px;
-  width: @pitwidth;
+  width: calc(var(--dynamic-platesize) / 10); // Replacing @pitwidth
   display: inline-block;
   font-size: 12px;
   transform: scale(1, 1.8);
   position: absolute;
   top: calc(var(--dynamic-platesize) / -2);
-  left: -(@pitwidth/2);
+  left: calc(var(--dynamic-platesize) / -20); // Replacing -@pitwidth / 2
 }
 
 .inner {
@@ -259,20 +260,30 @@ export default {
     color: white;
     transform: rotateY(180deg);
     align-items: center;
-    color: #fff;
+  }
+
+  .spin-result {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
   }
 
   .result-number {
-    font-size: 61px;
+
+    font-size: 4rem;
     font-weight: 500;
-    line-height: 1.2;
-    margin-top: 18px;
+    //line-height: 1.2;
+    //margin-top: 18px;
+
   }
 
   .result-color {
     text-transform: uppercase;
     font-size: 13px;
     line-height: 1;
+    //margin-top: 25px;
+    //transform: translateY(50%)
   }
 }
 
