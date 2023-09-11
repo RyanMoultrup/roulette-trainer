@@ -40,7 +40,7 @@ export default {
     const outcomes = this.getOutcomes();
     const redBlackRef = this.$refs.redBlackRef
     const initWidth = window.innerWidth * 0.09
-    const initHeight = window.innerHeight * 0.12
+    const initHeight = window.innerHeight * 0.09
 
     redBlackChart = new RedBlack('#red-black-chart');
     redBlackChart

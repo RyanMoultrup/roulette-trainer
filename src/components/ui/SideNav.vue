@@ -1,5 +1,5 @@
 <template>
-  <nav aria-label="Sidebar" class="hidden bg-gradient-to-b from-accent-150 from-0% via-green-800 via-50% to-green-800 border-r border-green-700 md:block md:flex-shrink-0 md:overflow-y-auto">
+  <nav aria-label="Sidebar" class="block bg-gradient-to-b from-accent-150 from-0% via-green-800 via-50% to-green-800 border-r border-green-700 md:block md:flex-shrink-0 md:overflow-y-auto">
     <div class="relative w-20 flex flex-col p-3 space-y-3">
 
       <a href="#"

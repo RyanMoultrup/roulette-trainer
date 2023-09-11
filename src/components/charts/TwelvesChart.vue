@@ -39,7 +39,7 @@ export default {
     const outcomes = this.getOutcomes()
     const twelveChartRef = this.$refs.twelveChartRef
     const initWidth = window.innerWidth * 0.09
-    const initHeight = window.innerHeight * 0.12
+    const initHeight = window.innerHeight * 0.09
 
     twelvesChart = new Twelves('#twelves-chart')
     twelvesChart

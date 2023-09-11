@@ -39,7 +39,7 @@ export default {
     const outcomes = this.getOutcomes()
     const halfBoardRef = this.$refs.halfBoardRef
     const initWidth = window.innerWidth * 0.09
-    const initHeight = window.innerHeight * 0.12
+    const initHeight = window.innerHeight * 0.09
 
     halfBoardSpots = new HalfBoardSpots('#half-board-chart')
     halfBoardSpots

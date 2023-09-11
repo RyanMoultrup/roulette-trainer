@@ -44,7 +44,7 @@ export default {
 
     hitsChart = new HitsChart();
     hitsChart
-        .parentHeight(125)
+        .parentHeight(100)
         .parentWidth(null)
         .render(outcomes);
 

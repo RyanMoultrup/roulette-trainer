@@ -3,7 +3,7 @@
     <base-card grid-class="win-loss-bank-chart" :top-full="true">
       <div class="relative overflow-hidden flex flex-col gap-3 h-full">
         <display-stats />
-        <win-loss-bank-chart class="justify-self-center" />
+
       </div>
     </base-card>
 

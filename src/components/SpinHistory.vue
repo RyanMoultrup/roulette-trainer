@@ -4,13 +4,13 @@
       <spin-history-bar />
     </div>
 
-    <div class="flex flex-col justify-start gap-4 p-3">
+    <div class="flex flex-col justify-start gap-3 p-3">
       <div class="font-lobster text-2xl text-gray-400">Spin History</div>
       <div class="flex justify-center w-full">
         <radial-wheel-chart />
       </div>
       <span class="font-lobster text-gray-400 text-xl">Outside</span>
-      <div class="flex flex-col gap-3 rounded">
+      <div class="flex flex-col gap-2 rounded">
         <div class="flex flex-row gap-3">
           <red-black-chart />
           <twelves-chart />
@@ -23,6 +23,9 @@
       <span class="font-lobster text-gray-400 text-xl">Inside</span>
       <div class="bg-accent-150 rounded p-2">
         <hits-chart class="bet-display" />
+      </div>
+      <div>
+        <win-loss-bank-chart class="justify-self-center" />
       </div>
     </div>
   </div>
@@ -37,9 +40,11 @@ import RedBlackChart from "@/components/charts/RedBlackChart.vue"
 import HalfBoardChart from "@/components/charts/HalfBoardChart.vue"
 import RadialWheelChart from "@/components/charts/RadialWheelChart.vue"
 import SpinHistoryBar from "@/components/SpinHistoryBar.vue";
+import WinLossBankChart from "@/components/charts/WinLossBankChart.vue";
 
 export default {
   components: {
+    WinLossBankChart,
     SpinHistoryBar,
     HitsChart,
     EvenOddChart,

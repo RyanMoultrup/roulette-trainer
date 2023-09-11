@@ -1,8 +1,6 @@
 <template>
   <div class="h-full w-full">
-<!--  <div class="h-full">-->
-    <table-limits />
-    <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-xl opacity-80" ref="boardTable">
+    <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-sm opacity-80 md:text-xl" ref="boardTable">
       <div
           v-for="bet in bets"
           class="absolute w-28 mt-1 ml-1 backdrop-blur-sm"
@@ -76,24 +74,16 @@ export default {
       return this.getStrategy
     },
     pPercent () {
-      // this.$nextTick(() => {
         const boardWidth = this.elementWidth
         const partWidth = boardWidth / 27
         const partHeight = this.elementHeight / 9
 
-
-        // console.log('boardHeight::', this.$refs.boardTable.clientHeight)
-        console.log('ratio::', this.elementWidth / 4 )
         this.maxBoardHeight = this.elementHeight > (this.elementWidth / 4) ? `${Math.round(this.elementWidth / 4)}%` : `${this.elementHeight}%`
-
-        console.log('maxheight::', this.maxBoardHeight)
-
 
         this.hoverWidth = `${partWidth}px`
         this.hoverHeight = `${partHeight}px`
 
         return Math.round((partWidth / boardWidth * 100) * 10) / 10
-      // })
     }
   },
   watch: {
@@ -174,7 +164,6 @@ export default {
 #table {
   width: 100%;
   height: 90%;
-  //max-height: v-bind(maxBoardHeight);
 }
 
 
@@ -189,7 +178,7 @@ export default {
 }
 
 .cell {
-  @apply p-4 border border-gray-300 text-2xl text-gray-300 text-opacity-90 text-center align-middle
+  @apply p-4 border-r border-b border-gray-300 text-base text-gray-300 text-opacity-90 text-center align-middle md:text-2xl
 }
 
 .red-cell {
@@ -201,19 +190,19 @@ export default {
 }
 
 .top-border-cell {
-  @apply border-t-4
+  @apply border-t-2
 }
 
 .bottom-border-cell {
-  @apply border-b-4
+  @apply border-b-2
 }
 
 .right-border-cell {
-  @apply border-r-4
+  @apply border-r-2
 }
 
 .left-border-cell {
-  @apply border-l-4
+  @apply border-l-2
 }
 
 .outside-cell {

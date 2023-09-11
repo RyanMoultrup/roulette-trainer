@@ -10,12 +10,12 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import { redrawAll } from "dc";
-import WinLossBankChart from "@/lib/charts/WinLossBankChart";
-import { debounce } from "@/lib/Utils";
-import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
-import { useResizeObserver } from "@vueuse/core";
+import { redrawAll } from "dc"
+import { mapGetters } from "vuex"
+import { debounce } from "@/lib/Utils"
+import chartResize from "@/lib/charts/ChartResize"
+import WinLossBankChart from "@/lib/charts/WinLossBankChart"
+import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue"
 
 let unsubscribe
 let winLossBankChart
@@ -25,7 +25,8 @@ export default {
   data () {
     return {
       showPlaceholder: true,
-      getChartSize: null
+      getChartSize: null,
+      chartResizer: chartResize
     }
   },
   methods: {
@@ -46,38 +47,38 @@ export default {
     const winLossBankRef = this.$refs.winLossBankChart;
 
     winLossBankChart
-        .parentHeight(null)
+        .parentHeight(100)
         .parentWidth(null)
         .render(outcomes);
 
-    const chartPercentOfWidth = winLossBankRef.clientWidth / window.innerWidth
-    const chartPercentOfHeight = winLossBankRef.clientHeight / window.innerHeight
-    let lastResizeWidth = window.innerWidth
-    let lastResizeHeight = window.innerHeight
+    // const chartPercentOfWidth = winLossBankRef.clientWidth / window.innerWidth
+    // const chartPercentOfHeight = winLossBankRef.clientHeight / window.innerHeight
+    // let lastResizeWidth = window.innerWidth
+    // let lastResizeHeight = window.innerHeight
 
-    this.getChartSize = (context, args) => {
-      const newWindowWidth = context.target.innerWidth
-      const newWindowHeight = context.target.innerHeight
-      let chartWidth
-      let chartHeight
+    // this.getChartSize = (context, args) => {
+    //   const newWindowWidth = context.target.innerWidth
+    //   const newWindowHeight = context.target.innerHeight
+    //   let chartWidth
+    //   let chartHeight
+    //
+    //
+    //   chartWidth = (newWindowWidth < lastResizeWidth)
+    //       ? newWindowWidth * chartPercentOfWidth
+    //       : winLossBankRef.clientWidth
+    //
+    //   chartHeight = (newWindowHeight < lastResizeHeight)
+    //       ? newWindowHeight * chartPercentOfHeight
+    //       : winLossBankRef.clientHeight
+    //
+    //
+    //   lastResizeWidth = newWindowWidth
+    //   lastResizeHeight = newWindowHeight
+    //
+    //   winLossBankChart.rescale(chartWidth, chartHeight)
+    // }
 
-
-      chartWidth = (newWindowWidth < lastResizeWidth)
-          ? newWindowWidth * chartPercentOfWidth
-          : winLossBankRef.clientWidth
-
-      chartHeight = (newWindowHeight < lastResizeHeight)
-          ? newWindowHeight * chartPercentOfHeight
-          : winLossBankRef.clientHeight
-
-
-      lastResizeWidth = newWindowWidth
-      lastResizeHeight = newWindowHeight
-
-      winLossBankChart.rescale(chartWidth, chartHeight)
-    }
-
-    addEventListener('resize', debounce(this.getChartSize, 300))
+    addEventListener('resize', chartResize(winLossBankChart, winLossBankRef))
   },
   unmounted() {
     unsubscribe()

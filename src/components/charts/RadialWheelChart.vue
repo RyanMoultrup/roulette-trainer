@@ -15,7 +15,7 @@ export default {
   setup () {
     const store = useStore()
     let chart
-    let chartWidth = ref(window.innerWidth * 0.16)
+    let chartWidth = ref(window.innerWidth * 0.13)
     const chartRef = ref(null)
     const chartResizer = chartResize
 
