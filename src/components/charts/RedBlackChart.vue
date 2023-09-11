@@ -18,12 +18,34 @@ import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue"
 let unsubscribe
 let redBlackChart
 
+const calculateSizeFromScreen = (screenSize) => {
+  if (screenSize.includes('sm') || screenSize.includes('xs')) {
+    return {
+      width: window.innerWidth * 0.15,
+      height: window.innerHeight * 0.2
+    }
+  }
+
+  if (!screenSize.includes('sm')) {
+    return {
+      width: window.innerWidth * 0.09,
+      height: window.innerHeight * 0.09
+    }
+  }
+}
+
 export default {
   components: { ChartPlaceholder },
   data () {
     return {
       showPlaceholder: true,
       chartResizer: chartResize
+    }
+  },
+  props: {
+    screenSize: {
+      type: Array,
+      default: ['lg']
     }
   },
   methods: {
@@ -39,14 +61,17 @@ export default {
 
     const outcomes = this.getOutcomes();
     const redBlackRef = this.$refs.redBlackRef
-    const initWidth = window.innerWidth * 0.09
-    const initHeight = window.innerHeight * 0.09
+    const { width, height } = calculateSizeFromScreen(this.screenSize)
+
+    console.log('width::', width)
+    console.log('height::', height)
 
     redBlackChart = new RedBlack('#red-black-chart');
     redBlackChart
-        .parentHeight(initHeight)
-        .parentWidth(initWidth)
+        .parentHeight(height)
+        .parentWidth(width)
         .render(outcomes)
+
 
     addEventListener('resize', this.chartResizer(redBlackChart, redBlackRef))
   },

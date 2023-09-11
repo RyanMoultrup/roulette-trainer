@@ -17,12 +17,34 @@ import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue"
 let unsubscribe
 let evenOddChart
 
+const calculateSizeFromScreen = (screenSize) => {
+  if (screenSize.includes('sm') || screenSize.includes('xs')) {
+    return {
+      width: window.innerWidth * 0.15,
+      height: window.innerHeight * 0.2
+    }
+  }
+
+  if (!screenSize.includes('sm')) {
+    return {
+      width: window.innerWidth * 0.09,
+      height: window.innerHeight * 0.09
+    }
+  }
+}
+
 export default {
   components: { ChartPlaceholder },
   data () {
     return {
       showPlaceholder: true,
       chartResizer: chartResize
+    }
+  },
+  props: {
+    screenSize: {
+      type: Array,
+      default: ['lg']
     }
   },
   methods: {
@@ -38,13 +60,12 @@ export default {
 
     const outcomes = this.getOutcomes()
     const evenOddRef = this.$refs.evenOddRef
-    const initWidth = window.innerWidth * 0.09
-    const initHeight = window.innerHeight * 0.09
+    const { width, height } = calculateSizeFromScreen(this.screenSize)
 
     evenOddChart = new EvenOdd("#even-odd-chart")
     evenOddChart
-        .parentHeight(initHeight)
-        .parentWidth(initWidth)
+        .parentWidth(width)
+        .parentHeight(height)
         .render(outcomes)
 
     addEventListener('resize', this.chartResizer(evenOddChart, evenOddRef))

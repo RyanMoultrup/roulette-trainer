@@ -1,7 +1,6 @@
 <template>
   <section class="flex flex-col">
-<!--    <dl class="grid grid-cols-1 bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">-->
-    <div class="flex text-3xl font-normal text-gray-300 font-lobster gap-4">
+    <div class="flex text-xl font-normal text-gray-300 font-lobster gap-4 lg:text-3xl">
       <div>
         <font-awesome-icon icon="fa-solid fa-building-columns mr-2" />
         <span class="ml-3">Bank</span>
@@ -11,7 +10,7 @@
       </span>
     </div>
 
-    <div class="text-base text-gray-400  font-inter">
+    <div class="text-base text-gray-400 font-inter hidden lg:block">
       <span>
         Total Lost:
       </span>
@@ -20,7 +19,7 @@
       </span>
     </div>
 
-    <div class="text-base font-normal text-gray-400 font-inter">
+    <div class="text-base font-normal text-gray-400 font-inter hidden lg:block">
       <span>
         Total Won
       </span>
@@ -29,7 +28,7 @@
       </span>
     </div>
 
-    <div class="text-base font-normal text-gray-400 font-inter">
+    <div class="text-base font-normal text-gray-400 font-inter hidden lg:block">
       <span>
         Winnings
       </span>
@@ -37,8 +36,6 @@
         <span id="winnings"><span>{{ formatter.money(currentWinnings) }}</span></span>
       </span>
     </div>
-
-<!--    </dl>-->
   </section>
 </template>
 

@@ -16,14 +16,14 @@
 
 <script>
 import { redrawAll } from "dc"
+import { computed } from "vue"
 import { mapGetters, useStore } from "vuex"
 import DisplayStats from "@/components/DisplayStats.vue"
 import BaseCard from "@/components/ui/Base/BaseCard.vue"
+import { useGridProps } from "@/composables/useGridProp"
 import WinLossBankChart from "@/components/charts/WinLossBankChart.vue"
 import ThisRoundDisplay from "@/components/display/ThisRoundDisplay.vue"
 import ThisRoundDisplayReview from "@/components/display/ThisRoundDisplayReview.vue"
-import { computed } from "vue";
-import { useGridProps } from "@/composables/useGridProp";
 
 export default {
   components: { BaseCard, ThisRoundDisplay, ThisRoundDisplayReview, DisplayStats, WinLossBankChart },

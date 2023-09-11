@@ -1,12 +1,19 @@
 <template>
-  <div v-if="sm">
+  <div v-if="sm || xs">
     <div class="flex flex-row text-gray-300">
       <div class="spin-history">
         <spin-history-bar />
       </div>
-      <div class="flex flex-col">
-        <div class="header">The header</div>
-        <div class="board">
+      <div class="flex flex-col p-3">
+        <div class="header flex flex-row gap-6">
+          <display-stats />
+          <current-bet class="text-gray-200 text-xl lg:text-3xl" />
+        </div>
+        <div class="board flex flex-row">
+          <div class="flex flex-col gap-2">
+            <red-black-chart :screen-size="current" />
+            <even-odd-chart :screen-size="current" />
+          </div>
           <board :selected-chip="selectedChip" />
         </div>
         <div class="game-control flex">
@@ -46,24 +53,32 @@
 </template>
 
 <script>
-import {mapGetters, useStore} from "vuex";
-import { ref, onMounted, reactive } from 'vue'
-import SideNav from "@/components/ui/SideNav.vue";
-import SlidePanel from "@/components/slide-panes/Settings.vue";
-import BaseModal from "@/components/ui/Base/BaseModal.vue";
-import { default as AppHeader } from "@/components/ui/Header.vue";
-import { useBreakpoints } from "@vueuse/core";
-import Board from "@/components/Board.vue";
-import SpinHistoryBar from "@/components/SpinHistoryBar.vue";
-import SpinButton from "@/components/buttons/SpinButton.vue";
-import ChipSelectionPanel from "@/components/ChipSelectionPanel.vue";
-import ReplayLastBetButton from "@/components/buttons/ReplayLastBetButton.vue";
-import ClearBetsButton from "@/components/buttons/ClearBetsButton.vue";
-import DoubleBetButton from "@/components/buttons/DoubleBetButton.vue";
+import { ref, onMounted } from 'vue'
+import {mapGetters, useStore} from "vuex"
+import Board from "@/components/Board.vue"
+import { useBreakpoints } from "@vueuse/core"
+import SideNav from "@/components/ui/SideNav.vue"
+import BaseModal from "@/components/ui/Base/BaseModal.vue"
+import SpinHistoryBar from "@/components/SpinHistoryBar.vue"
+import SpinButton from "@/components/buttons/SpinButton.vue"
+import SlidePanel from "@/components/slide-panes/Settings.vue"
+import { default as AppHeader } from "@/components/ui/Header.vue"
+import ChipSelectionPanel from "@/components/ChipSelectionPanel.vue"
+import ClearBetsButton from "@/components/buttons/ClearBetsButton.vue"
+import DoubleBetButton from "@/components/buttons/DoubleBetButton.vue"
+import ReplayLastBetButton from "@/components/buttons/ReplayLastBetButton.vue"
+import DisplayStats from "@/components/DisplayStats.vue"
+import CurrentBet from "@/components/CurrentBet.vue";
+import RedBlackChart from "@/components/charts/RedBlackChart.vue";
+import EvenOddChart from "@/components/charts/EvenOddChart.vue";
 
 export default {
   name: 'App',
   components: {
+    EvenOddChart,
+    RedBlackChart,
+    CurrentBet,
+    DisplayStats,
     DoubleBetButton,
     ClearBetsButton,
     ReplayLastBetButton,
@@ -79,7 +94,7 @@ export default {
       lg: 1920
     })
 
-    // const current = breakpoints.current()
+    const current = breakpoints.current()
     // const xs = breakpoints.smallerOrEqual('xs')
     // const xse = breakpoints.smallerOrEqual('sm')
     // const sm = breakpoints.between('xs', 'sm')
@@ -88,13 +103,18 @@ export default {
     // const xl = breakpoints.between('xl', '2xl')
     // const xxl = breakpoints['2xl']
 
-    const xs =breakpoints.smallerOrEqual('xs')
-    const sm =breakpoints.between('xs', 'sm')
-    const md =breakpoints.between('md', 'lg')
-    const lg =breakpoints.greaterOrEqual('lg')
+    const xs = breakpoints.smallerOrEqual('xs')
+    const sm = breakpoints.between('xs', 'sm')
+    const md = breakpoints.between('md', 'lg')
+    const lg = breakpoints.greaterOrEqual('lg')
 
+    // const point = [xs, sm, md, lg].filter(b => b.value)
+    // console.log('current::filter', point)
+
+    console.log('screensize::xs', xs.value)
     console.log('screensize::sm', sm.value)
     console.log('screensize::lg', lg.value)
+    console.log('current::', current.value)
 
     onMounted(async () => {
       if (!store.getters['user/isAuthenticated']) {
@@ -104,11 +124,12 @@ export default {
 
     return {
       showPanel,
-      xs, sm, md, lg
+      xs, sm, md, lg,
+      current
     }
   },
   computed: {
     ...mapGetters('simulation', ['selectedChip'])
-  },
+  }
 }
 </script>
