@@ -178,7 +178,7 @@ export default {
 }
 
 .cell {
-  @apply p-4 border-r border-b border-gray-300 text-base text-gray-300 text-opacity-90 text-center align-middle md:text-2xl
+  @apply p-4 border-r border-b border-gray-300 text-base text-gray-300 text-opacity-90 text-center align-middle lg:text-2xl
 }
 
 .red-cell {
@@ -210,7 +210,7 @@ export default {
 }
 
 .text-large {
-  @apply text-4xl
+  @apply text-3xl lg:text-4xl
 }
 
 .spot-h {
