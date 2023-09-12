@@ -2,7 +2,7 @@ import store from '@/store/index';
 import spots from "@/lib/table/spots";
 import { range } from 'd3-array';
 import { odds } from "@/lib/table/BetPlacements";
-import chipAggregator from "@/lib/table/ChipAggregator";
+import chipAggregator, { getNewChipsFromValue } from "@/lib/table/ChipAggregator";
 
 export default class {
   spots = [];
@@ -12,6 +12,7 @@ export default class {
   _amount = 0;
   _category = '';
   _odds = 0;
+  lastChipAmts = [];
 
   // oneToEighteen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   oneToEighteen = range(1, 19);
@@ -76,127 +77,138 @@ export default class {
 
   strategy = {
     bet (amt) {
-      return amt;
+      return amt
     }
   }
 
   constructor (bet) {
-    this.chips.unshift(bet.chip);
-    this._amount = +bet.chip.value;
-    store.commit('bank/reduceAvailableBalance', +bet.chip.value);
-    this.#parse(bet.placement);
+    this.chips.unshift(bet.chip)
+    this._amount = +bet.chip.value
+    this.lastChipAmts.push(+bet.chip.value)
+    store.commit('bank/reduceAvailableBalance', +bet.chip.value)
+    this.#parse(bet.placement)
   }
 
   addChip (chip) {
-    this.chips.unshift(chip);
+    this.lastChipAmts.push(+chip.value)
+    this.chips.unshift(chip)
     this.chips = chipAggregator(this.chips)
-    console.log('this.chips::', this.chips)
-    this._amount = this._amount + +chip.value;
-    console.log('this._amount::', this._amount)
-    store.commit('bank/reduceAvailableBalance', +chip.value);
+    this._amount = this._amount + +chip.value
+    store.commit('bank/reduceAvailableBalance', +chip.value)
+  }
+
+  undoLastChip () {
+    if (this.lastChipAmts.length === 1) {
+      store.commit('strategy/removeBet', this.betPlacement)
+      return
+    }
+    const lastChipAmt = this.lastChipAmts.pop()
+    this._amount -= lastChipAmt
+    this.chips = getNewChipsFromValue(this._amount)
+    store.commit('bank/increaseAvailableBalance', lastChipAmt)
   }
 
   removeChip (index) {
-    const chip = this.chips.splice(index, 1);
-    this._amount = this._amount - +chip[0].value;
-    store.commit('bank/increaseAvailableBalance', +chip[0].value);
+    const chip = this.chips.splice(index, 1)
+    this._amount = this._amount - +chip[0].value
+    store.commit('bank/increaseAvailableBalance', +chip[0].value)
   }
 
   removeChips () {
     this.chips.forEach(chip => {
-      store.commit('bank/increaseAvailableBalance', +chip.value);
+      store.commit('bank/increaseAvailableBalance', +chip.value)
     })
   }
 
   replaceBet () {
     this.chips.forEach(chip => {
-      store.commit('bank/reduceAvailableBalance', +chip.value);
+      store.commit('bank/reduceAvailableBalance', +chip.value)
     })
   }
 
   get amount () {
-    return this._amount;
+    return this._amount
   }
 
   get chips () {
-    return this.chips;
+    return this.chips
   }
 
   dbl (hit) {
     if (this.spots.includes(hit)) {
-      return (this.get() * 17) + this.get();
+      return (this.get() * 17) + this.get()
     }
   }
 
   sqr (hit) {
     if (this.spots.includes(hit)) {
-      return (this.get() * 8) + this.get();
+      return (this.get() * 8) + this.get()
     }
   }
 
   str (hit) {
     if (this.spots.includes(hit)) {
-      return (this.get() * 11) + this.get();
+      return (this.get() * 11) + this.get()
     }
   }
 
   line (hit) {
     if (this.spots.includes(hit)) {
-      return (this.get() * 5) + this.get();
+      return (this.get() * 5) + this.get()
     }
   }
 
   twelve (hit) {
     if (this.spots.includes(hit)) {
-      return this.get() * 3;
+      return this.get() * 3
     }
   }
 
   odd (hit) {
     if (this.spots.includes(hit)) {
-      return this.get() * 2;
+      return this.get() * 2
     }
   }
 
   even (hit) {
     if (this.spots.includes(hit)) {
-      return this.get() * 2;
+      return this.get() * 2
     }
   }
 
   red (hit) {
     if (this.spots.includes(hit)) {
-      return this.get() * 2;
+      return this.get() * 2
     }
   }
 
   black (hit) {
     if (this.spots.includes(hit)) {
-      return this.get() * 2;
+      return this.get() * 2
     }
   }
 
   row (hit) {
     if (this.spots.includes(hit)) {
-      return (this.get() * 2) + this.get();
+      return (this.get() * 2) + this.get()
     }
   }
 
   one (hit) {
     if (this.spots.includes(hit)) {
-      return this.get() * 2;
+      return this.get() * 2
     }
   }
 
   nineteen (hit) {
     if (this.spots.includes(hit)) {
-      return this.get() * 2;
+      return this.get() * 2
     }
   }
 
   sgl (hit) {
     if (this.spots.includes(hit)) {
-      return (this.get() * 35) + this.get();
+      return (this.get() * 35) + this.get()
     }
   }
 

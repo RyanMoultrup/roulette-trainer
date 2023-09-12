@@ -36,7 +36,8 @@ import {
     faGraduationCap,
     faBroom,
     faRotateRight,
-    faChessKnight
+    faChessKnight,
+    faKeyboard
 } from '@fortawesome/free-solid-svg-icons'
 import { faXmarkCircle, faFloppyDisk } from "@fortawesome/free-regular-svg-icons"
 import "vue-toastification/dist/index.css"
@@ -59,7 +60,7 @@ library.add(
     faArrowDownShortWide, faArrowsUpDown,
     faCircleChevronLeft, faCircleChevronRight,
     faGraduationCap, faBroom, faRotateRight,
-    faChessKnight
+    faChessKnight, faKeyboard
 )
 
 const app = createApp(App)

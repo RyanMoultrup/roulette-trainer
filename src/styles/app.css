@@ -274,13 +274,6 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
     /*transform: translateX(30%) translateY(25%);*/
 }
 
-.spot-h:hover {
-    max-height: 100%;
-    max-width: 200%;
-    overflow: auto;
-    border: solid 1px red;
-}
-
 .sgl_37 {
     height: 46%;
     left: 3.25%;

@@ -9,7 +9,7 @@
           <display-stats />
           <current-bet class="text-gray-200 text-xl lg:text-3xl" />
         </div>
-        <div class="board flex flex-row basis-0">
+        <div class="board flex flex-row basis-0 gap-4">
           <div class="flex flex-col gap-2">
             <red-black-chart :screen-size="current" />
             <even-odd-chart :screen-size="current" />
@@ -18,10 +18,17 @@
           </div>
           <div class="flex flex-col">
             <table-limits-mobile />
-            <board :selected-chip="selectedChip" />
+            <div class="relative">
+              <board :selected-chip="selectedChip" :screen-size="current" />
+              <div class="absolute bottom-10 right-3 flex flex-col gap-5">
+                <font-awesome-icon class="text-2xl icon-shadow" icon="fa-solid fa-keyboard" />
+                <font-awesome-icon class="text-2xl icon-shadow" icon="fa-solid fa-chart-column" />
+              </div>
+            </div>
             <div class="game-control flex justify-end gap-5">
-              <div class="flex flex-col">
+              <div class="flex flex-col gap-4">
                 <clear-bets-button />
+                <undo-last-bet-button />
               </div>
               <chip-selection-panel />
               <div class="flex flex-col gap-4">
@@ -81,10 +88,12 @@ import TableLimitsMobile from "@/components/TableLimitsMobile.vue";
 import RadialWheelChart from "@/components/charts/RadialWheelChart.vue";
 import SpinRoundsMobile from "@/components/SpinRoundsMobile.vue";
 import TwelvesChart from "@/components/charts/TwelvesChart.vue";
+import UndoLastBetButton from "@/components/buttons/UndoLastBetButton.vue";
 
 export default {
   name: 'App',
   components: {
+    UndoLastBetButton,
     TwelvesChart,
     SpinRoundsMobile,
     RadialWheelChart,

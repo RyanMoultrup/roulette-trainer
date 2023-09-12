@@ -37,6 +37,7 @@ import { tableSpots } from "@/lib/table/table"
 import placements from '@/lib/table/BetPlacements'
 import TableLimits from "@/components/TableLimits.vue"
 import { mapMutations, mapGetters, mapActions } from 'vuex'
+import { useScreenSize, getScreenSize } from "@/composables/useScreenSize";
 
 export default {
   name: 'Board',
@@ -47,11 +48,14 @@ export default {
       default: () => {
         return { color: 'red', value: 5 };
       }
-    }
+    },
+    ...useScreenSize()
   },
-  setup () {
+  setup (props) {
+    const currenScreenSize = getScreenSize(props.screenSize)
+    console.log('screenSize::', currenScreenSize)
     const toast = useToast();
-    return { toast, formatter, tableSpots };
+    return { toast, formatter, tableSpots, currenScreenSize };
   },
   data () {
     return {
@@ -143,6 +147,7 @@ export default {
       this.toast.error("You don't have enough in the bank to place your bet");
     },
     hoverBet (event) {
+      if (this.currenScreenSize ===  'sm' || this.currenScreenSize === 'xs') return ''
       this.isHovered = event.target.id;
     },
     leaveHoverBet () {
@@ -211,6 +216,15 @@ export default {
 
 .text-large {
   @apply text-3xl lg:text-4xl
+}
+
+@media screen and (min-height: 927px) {
+  .spot-h:hover {
+    max-height: 100%;
+    max-width: 200%;
+    overflow: auto;
+    border: solid 1px red;
+  }
 }
 
 .spot-h {

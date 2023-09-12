@@ -6,6 +6,7 @@ import { odds } from '@/lib/table/BetPlacements'
 const toast = useToast();
 
 let currentBetSpots = [];
+let lastBetPlacements = []
 
 const allInsideBets = bets => {
     return Object.values(bets)
@@ -38,11 +39,15 @@ const mutations = {
     async placeBet (state, bet) {
         if (currentBetSpots.includes(bet.placement)) {
             await state.strategy[bet.placement].addChip(bet.chip)
+            lastBetPlacements.push(bet.placement)
             return
         }
 
-        currentBetSpots.push(bet.placement);
+        currentBetSpots.push(bet.placement)
+        lastBetPlacements.push(bet.placement)
+        console.log('currentBetSpots::', currentBetSpots)
         state.strategy[bet.placement] = new Bet(bet)
+        state.lastBetPlacement = bet.placement
     },
     removeBet (state, placement) {
         removeFromCurrentBets(placement)
@@ -53,6 +58,9 @@ const mutations = {
     },
     removeChip (state, { placement, chipIndex }) {
         state.strategy[placement].removeChip(chipIndex)
+    },
+    undoChip (state, placement) {
+        state.strategy[placement].undoLastChip()
     },
     replayBet (state, bets) {
         state.strategy = bets
@@ -65,9 +73,10 @@ const mutations = {
         state.strategy = {};
     },
     reset (state) {
-        state.strategy = {};
-        state.lastBets = {};
-        currentBetSpots = [];
+        state.lastBetIndex = null
+        state.strategy = {}
+        state.lastBets = {}
+        currentBetSpots = []
     },
     minInsideBetMet (state, value) {
         state.minInsideBetMet = value
@@ -75,6 +84,9 @@ const mutations = {
 }
 
 const actions = {
+    undoLastBet ({ commit, state }) {
+        commit('undoChip', lastBetPlacements.pop())
+    },
     placeBet ({ commit, rootGetters, state }, bet) {
         const tableLimit = rootGetters['settings/hasTableLimit']
 
