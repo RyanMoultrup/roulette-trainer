@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full">
+  <div class="relative w-[50%] lg:w-full">
     <div class="absolute chips-container bg-accent-150 border border-green-800 border-1 p-3 rounded-md">
       <swiper
           v-if="chips.length"
@@ -49,6 +49,11 @@ export default {
 .chips-container {
   min-width: 0;
   width: 95%;
+}
+@media screen and (max-height: 927px) {
+  .chips-container {
+    width: 100%
+  }
 }
 </style>
 <style scoped>

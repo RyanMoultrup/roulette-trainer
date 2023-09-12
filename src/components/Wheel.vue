@@ -41,7 +41,6 @@ export default {
       chartResizer: chartResize,
       resizeWheel: {
         rescale: (width) => {
-          console.log('rescale width::', width)
           this.wheelSize = width > 500 ? 500 : width
         }
       }
@@ -72,7 +71,6 @@ export default {
 
 <style lang="less">
 @rotate: (360/@to)+0deg;
-@rimsize: 6px;
 @trim: #B16938;
 @trimSecondary: silver;
 @spinButton: green;
@@ -138,17 +136,17 @@ export default {
 }
 
 .wheel-number {
-  width: calc(var(--dynamic-platesize) / 10); // Replacing @pitwidth
+  width: calc(var(--dynamic-platesize) / 10);
   height: calc(var(--dynamic-platesize) / 2);
   display: inline-block;
   text-align: center;
   position: absolute;
   top: 0;
-  left: calc(50% - (var(--dynamic-platesize) / 20)); // Replacing @pitwidth / 2
+  left: calc(50% - (var(--dynamic-platesize) / 20));
   transform-origin: 50% 100%;
   background-color: transparent;
-  border-left: calc(var(--dynamic-platesize) / 20) solid transparent; // Replacing @pitwidth / 2
-  border-right: calc(var(--dynamic-platesize) / 20) solid transparent; // Replacing @pitwidth / 2
+  border-left: calc(var(--dynamic-platesize) / 20) solid transparent;
+  border-right: calc(var(--dynamic-platesize) / 20) solid transparent;
   border-top: calc(var(--dynamic-platesize) / 2) solid black;
   box-sizing: border-box;
 
@@ -164,13 +162,13 @@ export default {
 .pit {
   color: #fff;
   padding-top: 12px;
-  width: calc(var(--dynamic-platesize) / 10); // Replacing @pitwidth
+  width: calc(var(--dynamic-platesize) / 10);
   display: inline-block;
   font-size: 12px;
   transform: scale(1, 1.8);
   position: absolute;
   top: calc(var(--dynamic-platesize) / -2);
-  left: calc(var(--dynamic-platesize) / -20); // Replacing -@pitwidth / 2
+  left: calc(var(--dynamic-platesize) / -20);
 }
 
 .inner {
@@ -270,20 +268,16 @@ export default {
   }
 
   .result-number {
-
     font-size: 4rem;
     font-weight: 500;
     //line-height: 1.2;
     //margin-top: 18px;
-
   }
 
   .result-color {
     text-transform: uppercase;
     font-size: 13px;
     line-height: 1;
-    //margin-top: 25px;
-    //transform: translateY(50%)
   }
 }
 

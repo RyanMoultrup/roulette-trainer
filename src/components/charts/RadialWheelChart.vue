@@ -7,15 +7,39 @@
 <script>
 import { useStore } from "vuex"
 import chartResize from "@/lib/charts/ChartResize"
-import { onMounted, computed, watch, ref } from "vue"
 import RadialWheelChart from "@/lib/charts/RadialWheelChart"
+import { onMounted, onUnmounted, computed, watch, ref } from "vue"
+
+const calculateSizeFromScreen = (screenSize) => {
+  if (screenSize.includes('sm') || screenSize.includes('lg')) {
+    return {
+      width: window.innerWidth * 0.13,
+      height: window.innerHeight * 0.13
+    }
+  }
+
+  if (screenSize.includes('sm') || screenSize.includes('xs')) {
+    return {
+      width: window.innerWidth * 0.19,
+      height: window.innerHeight * 0.2
+    }
+  }
+}
 
 export default {
   components: {  },
-  setup () {
+  props: {
+    screenSize: {
+      type: Array,
+      default: ['lg']
+    }
+  },
+  setup (props) {
     const store = useStore()
     let chart
-    let chartWidth = ref(window.innerWidth * 0.13)
+    const { width } = calculateSizeFromScreen(props.screenSize)
+
+    let chartWidth = ref(width)
     const chartRef = ref(null)
     const chartResizer = chartResize
 
@@ -32,6 +56,10 @@ export default {
           .render()
 
       addEventListener('resize', chartResizer(chart, chartRef.value))
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('resize', chartResizer)
     })
 
     return { chartRef }

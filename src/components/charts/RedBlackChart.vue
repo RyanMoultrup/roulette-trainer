@@ -19,17 +19,17 @@ let unsubscribe
 let redBlackChart
 
 const calculateSizeFromScreen = (screenSize) => {
-  if (screenSize.includes('sm') || screenSize.includes('xs')) {
-    return {
-      width: window.innerWidth * 0.15,
-      height: window.innerHeight * 0.2
-    }
-  }
-
-  if (!screenSize.includes('sm')) {
+  if (screenSize.includes('md') || screenSize.includes('lg')) {
     return {
       width: window.innerWidth * 0.09,
       height: window.innerHeight * 0.09
+    }
+  }
+
+  if (screenSize.includes('sm') || screenSize.includes('xs')) {
+    return {
+      width: window.innerWidth * 0.14,
+      height: window.innerHeight * 0.2
     }
   }
 }
@@ -63,15 +63,11 @@ export default {
     const redBlackRef = this.$refs.redBlackRef
     const { width, height } = calculateSizeFromScreen(this.screenSize)
 
-    console.log('width::', width)
-    console.log('height::', height)
-
     redBlackChart = new RedBlack('#red-black-chart');
     redBlackChart
         .parentHeight(height)
         .parentWidth(width)
         .render(outcomes)
-
 
     addEventListener('resize', this.chartResizer(redBlackChart, redBlackRef))
   },

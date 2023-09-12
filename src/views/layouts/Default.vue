@@ -9,24 +9,29 @@
           <display-stats />
           <current-bet class="text-gray-200 text-xl lg:text-3xl" />
         </div>
-        <div class="board flex flex-row">
+        <div class="board flex flex-row basis-0">
           <div class="flex flex-col gap-2">
             <red-black-chart :screen-size="current" />
             <even-odd-chart :screen-size="current" />
+            <spin-rounds-mobile />
           </div>
-          <board :selected-chip="selectedChip" />
-        </div>
-        <div class="game-control flex">
           <div class="flex flex-col">
-            <clear-bets-button />
+            <table-limits-mobile />
+            <board :selected-chip="selectedChip" />
+            <div class="game-control flex justify-end gap-5">
+              <div class="flex flex-col">
+                <clear-bets-button />
+              </div>
+              <chip-selection-panel />
+              <div class="flex flex-col gap-4">
+                <replay-last-bet-button />
+                <double-bet-button />
+              </div>
+              <spin-button />
+            </div>
           </div>
-          <chip-selection-panel />
-          <div class="flex flex-col">
-            <replay-last-bet-button />
-            <double-bet-button />
-          </div>
-          <spin-button />
         </div>
+
       </div>
     </div>
   </div>
@@ -71,10 +76,16 @@ import DisplayStats from "@/components/DisplayStats.vue"
 import CurrentBet from "@/components/CurrentBet.vue";
 import RedBlackChart from "@/components/charts/RedBlackChart.vue";
 import EvenOddChart from "@/components/charts/EvenOddChart.vue";
+import TableLimitsMobile from "@/components/TableLimitsMobile.vue";
+import RadialWheelChart from "@/components/charts/RadialWheelChart.vue";
+import SpinRoundsMobile from "@/components/SpinRoundsMobile.vue";
 
 export default {
   name: 'App',
   components: {
+    SpinRoundsMobile,
+    RadialWheelChart,
+    TableLimitsMobile,
     EvenOddChart,
     RedBlackChart,
     CurrentBet,

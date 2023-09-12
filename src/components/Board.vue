@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full">
-    <div id="table" class="relative p-5 pl-3 grid grid-rows-5 grid-cols-14 font-roulette text-sm opacity-80 md:text-xl" ref="boardTable">
+    <div id="table" class="relative grid grid-rows-5 grid-cols-14 font-roulette text-sm opacity-80 md:text-xl" ref="boardTable">
       <div
           v-for="bet in bets"
           class="absolute w-28 mt-1 ml-1 backdrop-blur-sm"

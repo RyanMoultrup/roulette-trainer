@@ -14,7 +14,7 @@ export default class EvenOdd extends BaseRowChart {
         this.chart
             .width(this._width)
             .height(this._height)
-            .margins({top: 10, right: 10, bottom: 20, left: 30})
+            .margins({top: 10, right: 10, bottom: 10, left: 30})
             .gap(2)
             .colors(
                 scaleOrdinal()

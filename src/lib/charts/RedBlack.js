@@ -13,7 +13,7 @@ export default class RedBlack extends BaseRowChart {
         this.chart
             .width(this._width)
             .height(this._height)
-            .margins({top: 10, right: 10, bottom: 20, left: 30})
+            .margins({top: 10, right: 10, bottom: 0, left: 30})
             .gap(2)
             .colors(
                 scaleOrdinal()

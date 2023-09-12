@@ -18,17 +18,17 @@ let unsubscribe
 let evenOddChart
 
 const calculateSizeFromScreen = (screenSize) => {
-  if (screenSize.includes('sm') || screenSize.includes('xs')) {
-    return {
-      width: window.innerWidth * 0.15,
-      height: window.innerHeight * 0.2
-    }
-  }
-
-  if (!screenSize.includes('sm')) {
+  if (screenSize.includes('md') || screenSize.includes('lg')) {
     return {
       width: window.innerWidth * 0.09,
       height: window.innerHeight * 0.09
+    }
+  }
+
+  if (screenSize.includes('sm') || screenSize.includes('xs')) {
+    return {
+      width: window.innerWidth * 0.14,
+      height: window.innerHeight * 0.2
     }
   }
 }

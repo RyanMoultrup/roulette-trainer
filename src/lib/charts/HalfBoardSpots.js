@@ -22,7 +22,7 @@ export default class HalfBoardSpots extends BaseRowChart {
         this.chart
             .width(this._width)
             .height(this._height)
-            .margins({top: 10, right: 10, bottom: 20, left: 30})
+            .margins({top: 10, right: 10, bottom: 10, left: 30})
             .x(scaleOrdinal().domain(range(1, 38)))
             .gap(2)
             .colors(
