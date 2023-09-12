@@ -28,7 +28,7 @@ const calculateSizeFromScreen = (screenSize) => {
   if (screenSize.includes('sm') || screenSize.includes('xs')) {
     return {
       width: window.innerWidth * 0.14,
-      height: window.innerHeight * 0.2
+      height: window.innerHeight * 0.15
     }
   }
 }

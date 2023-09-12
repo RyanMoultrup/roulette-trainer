@@ -17,12 +17,34 @@ import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue"
 let unsubscribe
 let twelvesChart
 
+const calculateSizeFromScreen = (screenSize) => {
+  if (screenSize.includes('md') || screenSize.includes('lg')) {
+    return {
+      width: window.innerWidth * 0.09,
+      height: window.innerHeight * 0.09
+    }
+  }
+
+  if (screenSize.includes('sm') || screenSize.includes('xs')) {
+    return {
+      width: window.innerWidth * 0.14,
+      height: window.innerHeight * 0.15
+    }
+  }
+}
+
 export default {
   components: { ChartPlaceholder },
   data () {
     return {
       showPlaceholder: true,
       chartResizer: chartResize
+    }
+  },
+  props: {
+    screenSize: {
+      type: Array,
+      default: ['lg']
     }
   },
   methods: {
@@ -38,13 +60,12 @@ export default {
 
     const outcomes = this.getOutcomes()
     const twelveChartRef = this.$refs.twelveChartRef
-    const initWidth = window.innerWidth * 0.09
-    const initHeight = window.innerHeight * 0.09
+    const { width, height } = calculateSizeFromScreen(this.screenSize)
 
     twelvesChart = new Twelves('#twelves-chart')
     twelvesChart
-        .parentHeight(initHeight)
-        .parentWidth(initWidth)
+        .parentHeight(height)
+        .parentWidth(width)
         .render(outcomes)
 
     addEventListener('resize', this.chartResizer(twelvesChart, twelveChartRef))

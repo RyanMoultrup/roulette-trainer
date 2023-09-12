@@ -13,6 +13,7 @@
           <div class="flex flex-col gap-2">
             <red-black-chart :screen-size="current" />
             <even-odd-chart :screen-size="current" />
+            <twelves-chart :screen-size="current" />
             <spin-rounds-mobile />
           </div>
           <div class="flex flex-col">
@@ -79,10 +80,12 @@ import EvenOddChart from "@/components/charts/EvenOddChart.vue";
 import TableLimitsMobile from "@/components/TableLimitsMobile.vue";
 import RadialWheelChart from "@/components/charts/RadialWheelChart.vue";
 import SpinRoundsMobile from "@/components/SpinRoundsMobile.vue";
+import TwelvesChart from "@/components/charts/TwelvesChart.vue";
 
 export default {
   name: 'App',
   components: {
+    TwelvesChart,
     SpinRoundsMobile,
     RadialWheelChart,
     TableLimitsMobile,
