@@ -1,20 +1,29 @@
 <template>
-  <div v-if="sm || xs">
+  <div v-if="sm || xs" class="bg-gradient-to-bl from-accent-150 via-green-700 to-green-800 h-full">
     <div class="flex flex-row text-gray-300">
-      <div class="spin-history">
+      <div class="spin-history" style="min-width: 21px;">
         <spin-history-bar />
       </div>
-      <div class="flex flex-col p-3">
-        <div class="header flex flex-row gap-6">
+      <div class="flex flex-col w-full">
+
+        <div class="header py-2 px-3 flex flex-row justify-between items-center gap-6 bg-gradient-to-tr from-green-700 via-green-800 to-green-800">
           <display-stats />
-          <current-bet class="text-gray-200 text-xl lg:text-3xl" />
+          <current-bet class="font-lobster text-gray-200 text-xl lg:text-3xl" />
+          <div class="flex gap-4 text-lg">
+            <font-awesome-icon icon="fa-solid fa-house" />
+            <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+            <font-awesome-icon icon="fa-solid fa-plus" />
+            <font-awesome-icon icon="fa-solid fa-gear" />
+          </div>
         </div>
+
         <div class="board flex flex-row basis-0 gap-4">
           <div class="flex flex-col gap-2">
             <red-black-chart :screen-size="current" />
             <even-odd-chart :screen-size="current" />
             <twelves-chart :screen-size="current" />
             <spin-rounds-mobile />
+
           </div>
           <div class="flex flex-col">
             <table-limits-mobile />
@@ -89,10 +98,14 @@ import RadialWheelChart from "@/components/charts/RadialWheelChart.vue";
 import SpinRoundsMobile from "@/components/SpinRoundsMobile.vue";
 import TwelvesChart from "@/components/charts/TwelvesChart.vue";
 import UndoLastBetButton from "@/components/buttons/UndoLastBetButton.vue";
+import SaveGameButton from "@/components/buttons/SaveGameButton.vue";
+import NewGameButton from "@/components/buttons/NewGameButton.vue";
 
 export default {
   name: 'App',
   components: {
+    NewGameButton,
+    SaveGameButton,
     UndoLastBetButton,
     TwelvesChart,
     SpinRoundsMobile,

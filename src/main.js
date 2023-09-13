@@ -37,9 +37,10 @@ import {
     faBroom,
     faRotateRight,
     faChessKnight,
-    faKeyboard
+    faKeyboard,
+    faFloppyDisk
 } from '@fortawesome/free-solid-svg-icons'
-import { faXmarkCircle, faFloppyDisk } from "@fortawesome/free-regular-svg-icons"
+import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons"
 import "vue-toastification/dist/index.css"
 import './styles/dc.css'
 import './styles/app.css'

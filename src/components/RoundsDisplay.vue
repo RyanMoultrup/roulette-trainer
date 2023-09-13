@@ -1,5 +1,5 @@
 <template>
-  <div class="text-gray-300 opacity-90 font-lobster text-3xl" id="rounds">
+  <div class="text-gray-300 opacity-90 font-lobster text-2xl lg:text-3xl" id="rounds">
     Rounds: <span>{{ rounds }}</span
   ></div>
 </template>
