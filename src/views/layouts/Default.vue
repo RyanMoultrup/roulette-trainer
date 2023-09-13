@@ -1,5 +1,5 @@
 <template>
-  <div v-if="sm || xs" class="bg-gradient-to-bl from-accent-150 via-green-700 to-green-900 h-screen">
+  <div v-if="isMobile" class="bg-gradient-to-bl from-accent-150 via-green-700 to-green-900 h-screen">
     <div class="flex flex-row text-gray-300">
       <div class="spin-history bg-green-900" style="min-width: 21px;">
         <spin-history-bar />
@@ -50,6 +50,13 @@
 
       </div>
     </div>
+
+    <slide-panel
+        class="relative"
+        :show="showPanel"
+        @close="showPanel = !showPanel"
+    />
+
   </div>
   <div v-else>
     <div class="h-screen overflow-hidden flex flex-col">
@@ -74,10 +81,9 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 import {mapGetters, useStore} from "vuex"
 import Board from "@/components/Board.vue"
-import { useBreakpoints } from "@vueuse/core"
 import SideNav from "@/components/ui/SideNav.vue"
 import BaseModal from "@/components/ui/Base/BaseModal.vue"
 import SpinHistoryBar from "@/components/SpinHistoryBar.vue"
@@ -99,6 +105,8 @@ import TwelvesChart from "@/components/charts/TwelvesChart.vue";
 import UndoLastBetButton from "@/components/buttons/UndoLastBetButton.vue";
 import SaveGameButton from "@/components/buttons/SaveGameButton.vue";
 import NewGameButton from "@/components/buttons/NewGameButton.vue";
+import { useBreakpoints, useScreenOrientation, useMediaQuery } from "@vueuse/core"
+
 
 export default {
   name: 'App',
@@ -121,6 +129,7 @@ export default {
   setup () {
     const showPanel = ref(false)
     const store = useStore()
+    const isMobile = inject('isMobile')
 
     const breakpoints =  useBreakpoints({
       xs: 640,
@@ -146,10 +155,27 @@ export default {
     // const point = [xs, sm, md, lg].filter(b => b.value)
     // console.log('current::filter', point)
 
-    console.log('screensize::xs', xs.value)
-    console.log('screensize::sm', sm.value)
-    console.log('screensize::lg', lg.value)
-    console.log('current::', current.value)
+    // console.log('screensize::xs', xs.value)
+    // console.log('screensize::sm', sm.value)
+    // console.log('screensize::lg', lg.value)
+    // console.log('current::', current.value)
+
+    console.log('isMobile:::::', isMobile)
+
+    if (isMobile) {
+      const {
+        isSupported,
+        orientation,
+        angle,
+        lockOrientation,
+        unlockOrientation,
+      } = useScreenOrientation()
+
+      // console.log('isSupported::', isSupported)
+      console.log('orientation::', orientation)
+
+      // lockOrientation('portrait-primary')
+    }
 
     onMounted(async () => {
       if (!store.getters['user/isAuthenticated']) {
@@ -160,7 +186,8 @@ export default {
     return {
       showPanel,
       xs, sm, md, lg,
-      current
+      current,
+      isMobile
     }
   },
   computed: {
