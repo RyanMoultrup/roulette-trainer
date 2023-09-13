@@ -1,10 +1,10 @@
 <template>
-  <div v-if="sm || xs" class="bg-gradient-to-bl from-accent-150 via-green-700 to-green-800 h-full">
+  <div v-if="sm || xs" class="bg-gradient-to-bl from-accent-150 via-green-700 to-green-900 h-screen">
     <div class="flex flex-row text-gray-300">
-      <div class="spin-history" style="min-width: 21px;">
+      <div class="spin-history bg-green-900" style="min-width: 21px;">
         <spin-history-bar />
       </div>
-      <div class="flex flex-col w-full">
+      <div class="flex flex-col w-full h-screen pb-4">
 
         <div class="header py-2 px-3 flex flex-row justify-between items-center gap-6 bg-gradient-to-tr from-green-700 via-green-800 to-green-800">
           <display-stats />
@@ -17,13 +17,12 @@
           </div>
         </div>
 
-        <div class="board flex flex-row basis-0 gap-4">
+        <div class="board flex flex-row basis-0 gap-4 pr-4 pt-2">
           <div class="flex flex-col gap-2">
             <red-black-chart :screen-size="current" />
             <even-odd-chart :screen-size="current" />
             <twelves-chart :screen-size="current" />
             <spin-rounds-mobile />
-
           </div>
           <div class="flex flex-col">
             <table-limits-mobile />

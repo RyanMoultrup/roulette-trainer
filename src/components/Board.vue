@@ -53,7 +53,6 @@ export default {
   },
   setup (props) {
     const currenScreenSize = getScreenSize(props.screenSize)
-    console.log('screenSize::', currenScreenSize)
     const toast = useToast();
     return { toast, formatter, tableSpots, currenScreenSize };
   },
@@ -174,7 +173,7 @@ export default {
 
 @media screen and (max-height: 927px) {
   #table {
-    max-height: 20rem;
+    max-height: 19.5rem;
   }
 }
 
