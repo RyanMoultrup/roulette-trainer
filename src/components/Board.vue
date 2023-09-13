@@ -173,7 +173,7 @@ export default {
 
 @media screen and (max-height: 927px) {
   #table {
-    max-height: 19.5rem;
+    max-height: 18rem;
   }
 }
 
