@@ -268,8 +268,8 @@ g.axis, g.axis.y, g.axis.x, g.axis.yr { color: #858F97; }
 
 
 .chip-spot {
-    max-height: 25px;
-    max-width: 25px;
+    max-height: 29px;
+    max-width: 31px;
     overflow: hidden;
     /*transform: translateX(30%) translateY(25%);*/
 }

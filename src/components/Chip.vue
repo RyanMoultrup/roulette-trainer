@@ -152,11 +152,14 @@ export default {
   border-radius: 50%;
 }
 
-.sm .chip-value { display: none }
+.sm .chip-value {
+  font-size: .75rem;
+  font-family: 'inter';
+}
 
 .sm.dashed-circle {
-  width: 25px;
-  height: 25px;
+  width: 29px;
+  height: 29px;
   border: 3px dashed white;
   border-radius: 50%;
   line-height: 17px;
@@ -169,7 +172,7 @@ export default {
 }
 
 .sm.dashed-circle:after {
-  margin: 2px;
+  margin: 1px;
   border: 1px dashed white;
   border-radius: 50%;
 }
