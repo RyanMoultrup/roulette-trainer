@@ -217,7 +217,7 @@ export default {
   @apply text-3xl lg:text-4xl
 }
 
-@media screen and (min-height: 927px) {
+@media screen and (max-height: 927px) {
   .spot-h:hover {
     max-height: 100%;
     max-width: 200%;
