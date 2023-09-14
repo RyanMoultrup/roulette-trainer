@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col">
+  <section class="flex flex items-end gap-4">
     <div class="flex text-xl font-normal text-gray-300 font-lobster gap-4 lg:text-3xl">
       <div>
         <font-awesome-icon icon="fa-solid fa-building-columns mr-2" />

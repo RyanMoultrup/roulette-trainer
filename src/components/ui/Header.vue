@@ -15,6 +15,9 @@
         <new-game-button v-if="showButtons()" />
         <save-game-button v-if="showButtons()" />
       </div>
+      <div>
+        <display-stats />
+      </div>
       <div class="ml-10 pr-4 flex-shrink-0 flex items-center space-x-10 text-gray-200">
         <nav aria-label="Global" class="flex space-x-10">
           <a href="#" @click="showSettings" class="text-2xl font-medium"><font-awesome-icon icon="fa-solid fa-gear"></font-awesome-icon></a>
