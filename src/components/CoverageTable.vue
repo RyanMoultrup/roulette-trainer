@@ -4,24 +4,20 @@
     </div>
 </template>
 <script>
-import { insideTable } from "@/lib/table/table"
-import formatter from "@/lib/formatter"
 import { computed } from "vue"
+import { useStore } from "vuex"
+import formatter from "@/lib/formatter"
+import { insideTable } from "@/lib/table/table"
 
 export default {
-  props: {
-    payouts: {
-      type: Array,
-      default: []
-    },
-    totalBet: {
-      type: Number,
-      default: 0
-    }
-  },
-  setup (props) {
+  setup () {
+    const store = useStore()
+
+    const payouts = computed(() => store.getters['strategy/getHighestPayouts'])
+    const totalBet = computed(() => store.getters['strategy/getCurrentBetTotal'])
+
     const keyedPayouts = computed(() => {
-      return props.payouts.reduce((r, p) => {
+      return payouts.value.reduce((r, p) => {
         r[p.spot] = p.profit
         return r
       }, {})
@@ -31,7 +27,7 @@ export default {
       if (keyedPayouts.value[spot] || keyedPayouts.value[spot] === 0) {
         return keyedPayouts.value[spot];
       } else {
-        return props.totalBet * -1;
+        return totalBet.value * -1;
       }
     }
 
@@ -65,6 +61,10 @@ export default {
 
 #coverage-table .red-cell {
   @apply bg-accent-375
+}
+
+#coverage-table .black-cell {
+  @apply bg-black
 }
 
 .borders {

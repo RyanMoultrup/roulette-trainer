@@ -66,7 +66,7 @@
         <span class="font-lobster text-xl">Max Profit: {{ formatter.money(getBetMax) }}</span>
         <span class="font-lobster text-xl">Min Profit: {{ formatter.money(getBetMin) }}</span>
       </div>
-      <coverage-table :payouts="getHighestPayouts" :total-bet="currentBet" />
+      <coverage-table :payouts="getHighestPayouts" :total-bet="getCurrentBetTotal" />
     </div>
   </div>
 </template>
@@ -82,11 +82,6 @@ export default {
   setup () {
     return { formatter }
   },
-  data () {
-    return {
-      currentBet: 0
-    }
-  },
   computed: {
     ...mapGetters('strategy', [
         'getStrategy',
@@ -95,20 +90,11 @@ export default {
         'getBetMin',
         'getNegativeProfit',
         'getPositiveProfit',
-        'getHighestPayouts'
+        'getHighestPayouts',
+        'getCurrentBetTotal'
     ]),
     allBets () {
       return this.getStrategy.reverse();
-    },
-    currentBetTotal () {
-      let bets = this.getStrategy;
-      if (bets.length) return bets.reduce((accumulator, item) => accumulator + +item.get(), 0);
-      return 0;
-    },
-  },
-  watch: {
-    currentBetTotal (newVal, oldVal) {
-      this.currentBet = newVal
     }
   },
   methods: {

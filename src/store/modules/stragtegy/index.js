@@ -97,10 +97,23 @@ const mutations = {
     },
     setBetStats (state, stats) {
         Object.assign(state, stats)
+    },
+    setCurrentBet (state, betTotal) {
+        state.currentBetTotal = betTotal
     }
 }
 
 const actions = {
+    currentBetTotal ({ commit, state }) {
+        const bets = Object.values(state.strategy);
+        let betsTotal
+        if (bets.length) {
+            betsTotal = bets.reduce((accumulator, item) => accumulator + +item.get(), 0)
+            commit('setCurrentBet', betsTotal)
+        } else {
+            commit('setCurrentBet', 0)
+        }
+    },
     undoLastBet ({ commit }) {
         commit('undoChip', lastBetPlacements.pop())
     },
@@ -154,6 +167,7 @@ const actions = {
 
         await commit('placeBet', bet)
         dispatch('betStats')
+        dispatch('currentBetTotal')
         return { success: true, msg: 'Bet placed' }
     },
     betStats ({ commit, state }) {
@@ -179,6 +193,7 @@ const actions = {
     async removeBet ({ commit, dispatch, state, rootGetters }, placement) {
         await commit('removeBet', placement)
         dispatch('betStats')
+        dispatch('currentBetTotal')
 
         const betCategory = placementCategory(placement)
         const { minInside } = rootGetters['settings/getBetLimits']
@@ -211,6 +226,7 @@ const actions = {
                 : await commit('removeBet', placement)
 
             dispatch('betStats')
+            dispatch('currentBetTotal')
 
             return {
                 success: true,
@@ -223,6 +239,7 @@ const actions = {
             : await commit('removeBet', placement)
 
         dispatch('betStats')
+        dispatch('currentBetTotal')
 
         // Need to get the total inside bets after removing the bet
         // and compare that against the min inside bet
@@ -257,7 +274,10 @@ const actions = {
             }
 
             await commit('replayBet', { ...state.lastBets })
+
             dispatch('betStats')
+            dispatch('currentBetTotal')
+
             currentBetSpots = Object.keys(state.lastBets)
             return true
         }
@@ -323,6 +343,7 @@ const actions = {
             })
 
             dispatch('betStats')
+            dispatch('currentBetTotal')
 
             return true
         }
@@ -334,6 +355,7 @@ const actions = {
         })
 
         dispatch('betStats')
+        dispatch('currentBetTotal')
 
         return true
     },
@@ -369,7 +391,8 @@ const getters = {
     getBetMin: state => state.min,
     getPositiveProfit: state => state.positiveProfit,
     getNegativeProfit: state => state.negativeProfit,
-    getHighestPayouts: state => state.highestPayouts
+    getHighestPayouts: state => state.highestPayouts,
+    getCurrentBetTotal: state => state.currentBetTotal
 }
 
 export default {
