@@ -3,7 +3,8 @@
     <base-card grid-class="win-loss-bank-chart" :top-corner-gradient="true">
       <div class="relative overflow-hidden flex flex-col gap-3 h-full">
 <!--        <display-stats />-->
-
+        <win-probability />
+        <coverage-table />
       </div>
     </base-card>
 
@@ -24,9 +25,12 @@ import { useGridProps } from "@/composables/useGridProp"
 import WinLossBankChart from "@/components/charts/WinLossBankChart.vue"
 import ThisRoundDisplay from "@/components/display/ThisRoundDisplay.vue"
 import ThisRoundDisplayReview from "@/components/display/ThisRoundDisplayReview.vue"
+import WinProbability from "@/components/WinProbability.vue";
+import CoverageTable from "@/components/CoverageTable.vue";
 
 export default {
-  components: { BaseCard, ThisRoundDisplay, ThisRoundDisplayReview, DisplayStats, WinLossBankChart },
+  components: {
+    CoverageTable, WinProbability, BaseCard, ThisRoundDisplay, ThisRoundDisplayReview, DisplayStats, WinLossBankChart },
   props: {
     ...useGridProps()
   },

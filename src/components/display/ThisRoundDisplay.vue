@@ -16,7 +16,7 @@
               <span>Bet</span>
               <span>Payout</span>
             </div>
-            <div class="relative px-2 pb-2 pt-1 max-h-32 overflow-y-auto">
+            <div class="relative px-2 pb-2 pt-1 h-32 overflow-y-auto">
               <div v-for="bet in allBets" :key="bet.type" class="border-b border-b-accent-100">
                 <div class="grid grid-cols-[1.3fr,0.9fr,0.9fr,0.9fr] justify-between">
                   <span style="color: #D49228;" class="mr-2 ">{{ bet.name() }}</span>
@@ -44,7 +44,7 @@
             <span>Payout</span>
             <span>Profit</span>
           </div>
-          <div class="w-80 p-2 max-h-32 overflow-y-auto">
+          <div class="w-80 p-2 h-32 overflow-y-auto">
             <div v-for="spot in getHighestPayouts" :key="spot" class="flex flex-col border-b border-b-accent-100 py-0.5">
               <div class="grid grid-cols-3 justify-between">
                 <span
@@ -61,12 +61,6 @@
         </div>
       </div>
 
-      <div class="flex gap-4 items-center">
-        <span class="font-lobster text-2xl">{{ getProbability }}% Chance of profit</span>
-        <span class="font-lobster text-xl">Max Profit: {{ formatter.money(getBetMax) }}</span>
-        <span class="font-lobster text-xl">Min Profit: {{ formatter.money(getBetMin) }}</span>
-      </div>
-      <coverage-table :payouts="getHighestPayouts" :total-bet="getCurrentBetTotal" />
     </div>
   </div>
 </template>
@@ -76,22 +70,19 @@ import formatter from "@/lib/formatter"
 import { mapActions, mapGetters } from "vuex"
 import BasePill from "@/components/ui/Base/BasePill.vue"
 import CoverageTable from "@/components/CoverageTable.vue"
+import WinProbability from "@/components/WinProbability.vue";
 
 export default {
-  components: { CoverageTable, BasePill },
+  components: { WinProbability, CoverageTable, BasePill },
   setup () {
     return { formatter }
   },
   computed: {
     ...mapGetters('strategy', [
         'getStrategy',
-        'getProbability',
-        'getBetMax',
-        'getBetMin',
         'getNegativeProfit',
         'getPositiveProfit',
-        'getHighestPayouts',
-        'getCurrentBetTotal'
+        'getHighestPayouts'
     ]),
     allBets () {
       return this.getStrategy.reverse();
@@ -109,4 +100,3 @@ export default {
 .negative-profit { color: #9e4d4d; transform: translateX(-0.7rem)}
 .danger { color: #9e4d4d }
 </style>
-
