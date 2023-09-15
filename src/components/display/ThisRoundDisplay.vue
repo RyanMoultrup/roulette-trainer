@@ -33,9 +33,9 @@
           <div class="font-lobster text-2xl">Winning Numbers</div>
           <div class="flex items-baseline gap-3">
             <span>Total: {{ getHighestPayouts.length }}</span>
-            <div v-if="negativeProfit > 0" class="flex gap-1 items-center danger">
+            <div v-if="getNegativeProfit > 0" class="flex gap-1 items-center danger">
               <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />
-              <span  class="text-sm danger">{{ negativeProfit }} bets have zero or negative payout</span>
+              <span  class="text-sm danger">{{ getNegativeProfit }} bets have zero or negative payout</span>
             </div>
           </div>
 
@@ -62,9 +62,9 @@
       </div>
 
       <div class="flex gap-4 items-center">
-        <span class="font-lobster text-2xl">{{ probability }}% Chance of profit</span>
-        <span class="font-lobster text-xl">Max Profit: {{ formatter.money(max) }}</span>
-        <span class="font-lobster text-xl">Min Profit: {{ formatter.money(min) }}</span>
+        <span class="font-lobster text-2xl">{{ getProbability }}% Chance of profit</span>
+        <span class="font-lobster text-xl">Max Profit: {{ formatter.money(getBetMax) }}</span>
+        <span class="font-lobster text-xl">Min Profit: {{ formatter.money(getBetMin) }}</span>
       </div>
       <coverage-table :payouts="getHighestPayouts" :total-bet="currentBet" />
     </div>
@@ -72,11 +72,10 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
-import formatter from "@/lib/formatter";
-import highestPayout from "@/lib/stats/HighestPayoutSpots";
-import BasePill from "@/components/ui/Base/BasePill.vue";
-import CoverageTable from "@/components/CoverageTable.vue";
+import formatter from "@/lib/formatter"
+import { mapActions, mapGetters } from "vuex"
+import BasePill from "@/components/ui/Base/BasePill.vue"
+import CoverageTable from "@/components/CoverageTable.vue"
 
 export default {
   components: { CoverageTable, BasePill },
@@ -85,21 +84,21 @@ export default {
   },
   data () {
     return {
-      max: 0,
-      min: 0,
-      probability: 0,
-      positiveProfit: 0,
-      negativeProfit: 0,
       currentBet: 0
     }
   },
   computed: {
-    ...mapGetters('strategy', ['getStrategy']),
+    ...mapGetters('strategy', [
+        'getStrategy',
+        'getProbability',
+        'getBetMax',
+        'getBetMin',
+        'getNegativeProfit',
+        'getPositiveProfit',
+        'getHighestPayouts'
+    ]),
     allBets () {
       return this.getStrategy.reverse();
-    },
-    getHighestPayouts () {
-      return highestPayout(this.getStrategy)
     },
     currentBetTotal () {
       let bets = this.getStrategy;
@@ -108,17 +107,6 @@ export default {
     },
   },
   watch: {
-    getHighestPayouts (newVal) {
-      const highestPay = this.getHighestPayouts;
-      const positiveWinningSpots = highestPay.filter(bet => bet.profit > 0);
-      const winProbability =  (positiveWinningSpots.length / 37) * 100;
-
-      this.probability = winProbability.toFixed(1);
-      this.max = positiveWinningSpots[0]?.profit ?? 0;
-      this.min = positiveWinningSpots[positiveWinningSpots.length - 1]?.profit ?? 0;
-      this.positiveProfit = positiveWinningSpots.length;
-      this.negativeProfit = highestPay.length - positiveWinningSpots.length;
-    },
     currentBetTotal (newVal, oldVal) {
       this.currentBet = newVal
     }

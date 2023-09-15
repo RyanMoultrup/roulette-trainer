@@ -8,7 +8,6 @@ export function useScreenSize () {
 }
 
 export function getScreenSize (screenSize) {
-    console.log('getScreenSize::', screenSize)
     if (screenSize.includes('xl')) {
         return 'xl'
     }

@@ -2,6 +2,7 @@ import Bet from '@/lib/table/Bet'
 import formatter from "@/lib/formatter"
 import { useToast } from "vue-toastification"
 import { odds } from '@/lib/table/BetPlacements'
+import highestPayout from "@/lib/stats/HighestPayoutSpots";
 
 const toast = useToast();
 
@@ -25,7 +26,14 @@ const placementCategory = placement => {
 const state = () => ({
     strategy: {},
     lastBets: {},
-    minInsideBetMet: true
+    minInsideBetMet: true,
+    probability: 0,
+    max: 0,
+    min: 0,
+    positiveProfit: 0,
+    negativeProfit: 0,
+    highestPayouts: [],
+    currentBetTotal: 0
 });
 
 const removeFromCurrentBets = function (value) {
@@ -45,7 +53,6 @@ const mutations = {
 
         currentBetSpots.push(bet.placement)
         lastBetPlacements.push(bet.placement)
-        console.log('currentBetSpots::', currentBetSpots)
         state.strategy[bet.placement] = new Bet(bet)
         state.lastBetPlacement = bet.placement
     },
@@ -76,18 +83,28 @@ const mutations = {
         state.lastBetIndex = null
         state.strategy = {}
         state.lastBets = {}
+        state.probability = 0
+        state.max = 0
+        state.min = 0
+        state.negativeProfit = 0
+        state.positiveProfit = 0
+        state.highestPayouts = []
+        state.currentBetTotal = 0
         currentBetSpots = []
     },
     minInsideBetMet (state, value) {
         state.minInsideBetMet = value
+    },
+    setBetStats (state, stats) {
+        Object.assign(state, stats)
     }
 }
 
 const actions = {
-    undoLastBet ({ commit, state }) {
+    undoLastBet ({ commit }) {
         commit('undoChip', lastBetPlacements.pop())
     },
-    placeBet ({ commit, rootGetters, state }, bet) {
+    async placeBet ({ commit, dispatch, rootGetters, state }, bet) {
         const tableLimit = rootGetters['settings/hasTableLimit']
 
         if (tableLimit) {
@@ -135,11 +152,33 @@ const actions = {
             }
         }
 
-        commit('placeBet', bet);
+        await commit('placeBet', bet)
+        dispatch('betStats')
         return { success: true, msg: 'Bet placed' }
     },
-    async removeBet ({ commit, state, rootGetters }, placement) {
+    betStats ({ commit, state }) {
+        const highestPay = highestPayout(Object.values(state.strategy))
+        const positiveWinningSpots = highestPay.filter(bet => bet.profit > 0)
+        const winProbability =  (positiveWinningSpots.length / 37) * 100
+
+        const probability = winProbability.toFixed(1)
+        const max = positiveWinningSpots[0]?.profit ?? 0
+        const min = positiveWinningSpots[positiveWinningSpots.length - 1]?.profit ?? 0
+        const positiveProfit = positiveWinningSpots.length
+        const negativeProfit = highestPay.length - positiveWinningSpots.length
+
+        commit('setBetStats', {
+            highestPayouts: highestPay,
+            probability,
+            max,
+            min,
+            positiveProfit,
+            negativeProfit
+        })
+    },
+    async removeBet ({ commit, dispatch, state, rootGetters }, placement) {
         await commit('removeBet', placement)
+        dispatch('betStats')
 
         const betCategory = placementCategory(placement)
         const { minInside } = rootGetters['settings/getBetLimits']
@@ -154,7 +193,7 @@ const actions = {
                 : commit('minInsideBetMet', true);
         }
     },
-    async removeChip({ commit, state, rootGetters }, { placement, chipIndex, chip }) {
+    async removeChip({ commit, dispatch, state, rootGetters }, { placement, chipIndex, chip }) {
         const betCategory = placementCategory(placement)
         const placementBetAmount = state.strategy[placement].amount - +chip.value
         const { minOutside, minInside } = rootGetters['settings/getBetLimits']
@@ -167,7 +206,11 @@ const actions = {
                 }
             }
 
-            placementBetAmount > 0 ? commit('removeChip', { placement, chipIndex }) : commit('removeBet', placement)
+            placementBetAmount > 0
+                ? await commit('removeChip', { placement, chipIndex })
+                : await commit('removeBet', placement)
+
+            dispatch('betStats')
 
             return {
                 success: true,
@@ -178,6 +221,8 @@ const actions = {
         placementBetAmount > 0
             ? await commit('removeChip', { placement, chipIndex })
             : await commit('removeBet', placement)
+
+        dispatch('betStats')
 
         // Need to get the total inside bets after removing the bet
         // and compare that against the min inside bet
@@ -195,7 +240,7 @@ const actions = {
     setLastBet ({ commit }, bets) {
         commit('lastBet', bets);
     },
-    async replayBet ({ commit, state, rootGetters }) {
+    async replayBet ({ commit, dispatch, state, rootGetters }) {
         let totalBetAmount = 0;
 
         for (const placement in state.lastBets) {
@@ -212,6 +257,7 @@ const actions = {
             }
 
             await commit('replayBet', { ...state.lastBets })
+            dispatch('betStats')
             currentBetSpots = Object.keys(state.lastBets)
             return true
         }
@@ -276,6 +322,8 @@ const actions = {
                 [...bet.chips].forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
             })
 
+            dispatch('betStats')
+
             return true
         }
 
@@ -284,6 +332,8 @@ const actions = {
         [...bets].forEach(bet => {
             [...bet.chips].forEach(async chip => await dispatch('placeBet', { placement: bet.placement, chip }))
         })
+
+        dispatch('betStats')
 
         return true
     },
@@ -313,7 +363,13 @@ const getters = {
         return rootState['settings'].tableLimit
             ? !!Object.keys(state.strategy).length && state.minInsideBetMet
             : !!Object.keys(state.strategy).length
-    }
+    },
+    getProbability: state => state.probability,
+    getBetMax: state => state.max,
+    getBetMin: state => state.min,
+    getPositiveProfit: state => state.positiveProfit,
+    getNegativeProfit: state => state.negativeProfit,
+    getHighestPayouts: state => state.highestPayouts
 }
 
 export default {

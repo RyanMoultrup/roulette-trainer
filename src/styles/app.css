@@ -143,11 +143,11 @@ html, .charts {
 .chips-panel { grid-area: chips-panel; }
 .charts {
     display: grid;
-    grid-template-columns: 1.1fr 1.3fr 0.6fr;
+    grid-template-columns: 1.1fr 0.9fr;
     grid-template-rows: 1fr;
     gap: 0 1rem;
     grid-template-areas:
-    "win-loss-bank-chart this-round this-round";
+    "this-round win-loss-bank-chart";
     grid-area: top-left;
 }
 .hits-chart { grid-area: chips-panel; }

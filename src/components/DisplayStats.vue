@@ -65,11 +65,14 @@ export default {
   },
   watch: {
     availableBalance (newVal, oldVal) {
-      this.balance = newVal
-      // tween('#bank')
-      //     .initValue(oldVal)
-      //     .onRender(val => this.balance = val)
-      //     .render(newVal)
+      if (newVal > oldVal) {
+        tween('#bank')
+            .initValue(oldVal)
+            .onRender(val => this.balance = val)
+            .render(newVal)
+      } else {
+        this.balance = newVal
+      }
     }
   },
   methods: {
