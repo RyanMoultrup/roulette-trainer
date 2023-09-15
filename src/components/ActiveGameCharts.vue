@@ -2,7 +2,7 @@
   <section :class="gridClass" class="bg-opacity-0 mx-4 mt-4 mb-2">
     <base-card grid-class="win-loss-bank-chart" :top-corner-gradient="true">
       <div class="relative overflow-hidden flex flex-col gap-3 h-full">
-<!--        <display-stats />-->
+        <span class="font-lobster text-2xl">Bet Coverage & Win Probability</span>
         <win-probability />
         <coverage-table />
       </div>
