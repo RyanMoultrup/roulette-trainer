@@ -1,5 +1,5 @@
 <template>
-  <aside :class="gridClass" class="bg-green-800 border-t border-green-800 text-gray-400 block flex-shrink-0 order-last flex flex-col h-full overflow-hidden z-0">
+  <aside :class="gridClass" class="bg-green-800 border-t border-green-800 text-gray-400 block flex-shrink-0 flex flex-col h-full overflow-hidden z-0">
     <swiper
         ref="hitsSwipe"
         v-if="outcomes.length"
@@ -71,9 +71,7 @@ export default {
       }
     },
     redraw () {
-      console.log('spin history redrawing::')
       this.outcomes = [...removeEmptyBins(spinTableEmptyBinCallback, spinTable(this.getOutcomes)).all()].reverse()
-      console.log('this.outcomes::', this.outcomes)
     },
     initOutcomes () {
       this.outcomes = [...spinTable(this.getOutcomes).top(Infinity)].reverse()

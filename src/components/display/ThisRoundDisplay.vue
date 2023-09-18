@@ -5,17 +5,11 @@
         <this-round />
         <winning-numbers />
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
-import formatter from "@/lib/formatter"
-import { mapActions, mapGetters } from "vuex"
-import BasePill from "@/components/ui/Base/BasePill.vue"
-import CoverageTable from "@/components/CoverageTable.vue"
-import WinProbability from "@/components/WinProbability.vue"
 import ThisRound from "@/components/ThisRound.vue";
 import WinningNumbers from "@/components/WinningNumbers.vue";
 

@@ -65,20 +65,48 @@
           @show="showPanel = true"
       />
       <!-- Bottom section -->
-      <div class="min-h-0 flex-1 flex overflow-auto text-2xl text-gray-300 font-lobster">
+      <div class="min-h-0 flex-1 flex overflow-auto text-gray-300">
         <!-- Narrow sidebar-->
         <side-nav />
         <div class="flex flex-col">
           <div class="flex">
             <div class="flex flex-col">
-              left side
+              <this-round />
+              <winning-numbers />
             </div>
             <div class="flex flex-col">
-              Right side
+              <div class="flex">
+                <spin-rounds-mobile />
+                <spin-history-bar />
+                <radial-wheel-chart />
+                <div class="flex flex-col">
+                  <red-black-chart  />
+                  <even-odd-chart  />
+                </div>
+                <div class="flex flex-col">
+                  <twelves-chart />
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <win-probability />
+                <coverage-table />
+              </div>
+              <div class="flex flex-col">
+                <table-limits />
+                <div>
+                  <board :selected-chip="selectedChip" :screen-size="current" />
+                </div>
+              </div>
             </div>
           </div>
           <div>
             Bottom
+            <spin-button />
+            <clear-bets-button />
+            <replay-last-bet-button />
+            <double-bet-button />
+            <undo-last-bet-button />
+            <chip-selection-panel />
           </div>
         </div>
       </div>
@@ -139,11 +167,23 @@ import UndoLastBetButton from "@/components/buttons/UndoLastBetButton.vue";
 import SaveGameButton from "@/components/buttons/SaveGameButton.vue";
 import NewGameButton from "@/components/buttons/NewGameButton.vue";
 import { useBreakpoints, useScreenOrientation, useMediaQuery } from "@vueuse/core"
+import ThisRound from "@/components/ThisRound.vue";
+import WinningNumbers from "@/components/WinningNumbers.vue";
+import TableLimits from "@/components/TableLimits.vue";
+import CoverageTable from "@/components/CoverageTable.vue";
+import SpinHistory from "@/components/SpinHistory.vue";
+import WinProbability from "@/components/WinProbability.vue";
 
 
 export default {
   name: 'App',
   components: {
+    WinProbability,
+    SpinHistory,
+    CoverageTable,
+    TableLimits,
+    WinningNumbers,
+    ThisRound,
     NewGameButton,
     SaveGameButton,
     UndoLastBetButton,

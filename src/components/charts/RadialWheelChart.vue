@@ -11,7 +11,7 @@ import RadialWheelChart from "@/lib/charts/RadialWheelChart"
 import { onMounted, onUnmounted, computed, watch, ref } from "vue"
 
 const calculateSizeFromScreen = (screenSize) => {
-  if (screenSize.includes('sm') || screenSize.includes('lg')) {
+  if (screenSize.includes('md') || screenSize.includes('lg')) {
     return {
       width: window.innerWidth * 0.13,
       height: window.innerHeight * 0.13
