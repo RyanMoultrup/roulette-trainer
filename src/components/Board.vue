@@ -173,10 +173,32 @@ export default {
 
 @media screen and (max-height: 927px) {
   #table {
-    //max-height: 18rem;
     max-height: 90%;
   }
 }
+
+@media screen and (min-width: 1655px) {
+  #table {
+    max-height: 75%;
+  }
+}
+
+
+@media screen and (max-width: 1685px) {
+  .cell._19_to_36, .cell._1_to_18 {
+    @apply text-lg
+  }
+}
+
+@media screen and (max-width: 1480px) {
+  #table .cell._19_to_36, #table .cell._1_to_18 {
+    @apply text-sm
+  }
+  #table .cell {
+    @apply text-lg
+  }
+}
+
 
 .chips-hover {
   @apply border bg-gray-100 bg-opacity-75 p-1 rounded z-50;

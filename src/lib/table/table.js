@@ -185,7 +185,7 @@ export const outsideSpots = [
     },
 
     {
-        class: 'spot cell pt-4 outside-cell text-xl col-span-2 col-start-2 rounded-bl bottom-border-cell left-border-cell',
+        class: 'spot _1_to_18 cell pt-4 outside-cell text-xl col-span-2 col-start-2 rounded-bl bottom-border-cell left-border-cell',
         text: '1 TO 18'
     },
     {
@@ -206,7 +206,7 @@ export const outsideSpots = [
         text: 'ODD'
     },
     {
-        class: 'spot cell p-2 pt-4 outside-cell text-xl col-span-2 rounded-br right-border-cell bottom-border-cell',
+        class: 'spot _19_to_36 cell p-2 pt-4 outside-cell text-xl col-span-2 rounded-br right-border-cell bottom-border-cell',
         text: '19 TO 36'
     }
 ]

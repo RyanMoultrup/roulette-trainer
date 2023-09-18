@@ -9,7 +9,7 @@
           class="mySwiper"
       >
         <swiper-slide v-for="chip in chips">
-            <chip class="text-2xl" :color="chip.color" size="md" :chipValue="chip.value" @chipSelected="chipSelected"></chip>
+            <chip class="text-2xl" :color="chip.color" :size="currentScreen()" :chipValue="chip.value" @chipSelected="chipSelected"></chip>
         </swiper-slide>
       </swiper>
     </div>
@@ -21,11 +21,15 @@ import chips from '@/lib/table/chips'
 import Chip from '@/components/Chip.vue'
 import { mapGetters, mapMutations } from "vuex"
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import { useScreenSize, getScreenSize } from "@/composables/useScreenSize"
 // Import Swiper styles
 import 'swiper/css'
 
 export default {
   components: { Chip, Swiper, SwiperSlide },
+  props: {
+    ...useScreenSize()
+  },
   data () {
     return {
       allChips: chips
@@ -37,10 +41,16 @@ export default {
       return this.allChips.filter(c => c.value <= this.balance || c.value <= 100)
     }
   },
+  mounted () {
+    console.log('c selection:: ', getScreenSize(this.screenSize))
+  },
   methods: {
     ...mapMutations('simulation', ['updateSelectedChip']),
     chipSelected (chip) {
       this.updateSelectedChip(chip);
+    },
+    currentScreen () {
+      return getScreenSize(this.screenSize) === 'lg' || getScreenSize(this.screenSize) === 'xl' ? 'lg' : 'md'
     }
   }
 }

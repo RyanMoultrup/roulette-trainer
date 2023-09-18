@@ -1,7 +1,7 @@
 <template>
     <div :class="gridClass" class="mx-4 mb-4 mt-2 p-4 card-bg-border" style="z-index: 0;">
       <div class="flex flex-col justify-between h-full">
-        <div class="flex flex-row items-center h-full">
+        <div class="flex flex-row items-center gap-4 h-full">
           <wheel></wheel>
             <div class="flex flex-col w-full h-full">
             <table-limits />

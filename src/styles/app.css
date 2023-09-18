@@ -66,6 +66,15 @@ body {
     /*}*/
 }
 
+@media screen and (max-width: 1480px) {
+    html {
+        font-size: 13px;
+    }
+    /*#table {*/
+    /*    max-height: 24rem;*/
+    /*}*/
+}
+
 @media screen and (min-width: 600px) and (max-width: 1200px) and (min-height: 400px) and (max-height: 800px) {
     /* your styles here */
 }

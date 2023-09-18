@@ -58,12 +58,45 @@
     />
 
   </div>
+  <div v-else-if="isTabletDimensions">
+    <div class="h-screen overflow-hidden flex flex-col">
+      <!-- Top nav-->
+      <app-header
+          @show="showPanel = true"
+      />
+      <!-- Bottom section -->
+      <div class="min-h-0 flex-1 flex overflow-auto text-2xl text-gray-300 font-lobster">
+        <!-- Narrow sidebar-->
+        <side-nav />
+        <div class="flex flex-col">
+          <div class="flex">
+            <div class="flex flex-col">
+              left side
+            </div>
+            <div class="flex flex-col">
+              Right side
+            </div>
+          </div>
+          <div>
+            Bottom
+          </div>
+        </div>
+      </div>
+      <slide-panel
+          class="relative"
+          :show="showPanel"
+          @close="showPanel = !showPanel"
+      />
+      <!--      <base-modal/>-->
+    </div>
+  </div>
   <div v-else>
     <div class="h-screen overflow-hidden flex flex-col">
       <!-- Top nav-->
       <app-header
           @show="showPanel = true"
       />
+      <h2 v-if="isTabletDimensions" class="text-gray-200">You can see me!</h2>
       <!-- Bottom section -->
       <div class="min-h-0 flex-1 flex overflow-auto">
         <!-- Narrow sidebar-->
@@ -81,7 +114,7 @@
 </template>
 
 <script>
-import { ref, onMounted, inject } from 'vue'
+import { ref, onMounted, inject, computed } from 'vue'
 import {mapGetters, useStore} from "vuex"
 import Board from "@/components/Board.vue"
 import SideNav from "@/components/ui/SideNav.vue"
@@ -183,11 +216,25 @@ export default {
       }
     })
 
+    const isTabletWidth = useMediaQuery('(max-width: 1180px')
+    const isTabletHeight = useMediaQuery('(max-height: 820px')
+
+    console.log('isTabletWidth::', isTabletWidth.value)
+    console.log('isTabletHeight::', isTabletHeight.value)
+
+    const isTabletDimensions = computed(() => {
+      console.log('isTabletDimension::computed', isTabletWidth.value && isTabletHeight.value)
+      return isTabletWidth.value && isTabletHeight.value
+    })
+
+    console.log('isTabletDimensions::', isTabletDimensions.value)
+
     return {
       showPanel,
       xs, sm, md, lg,
       current,
-      isMobile
+      isMobile,
+      isTabletDimensions
     }
   },
   computed: {

@@ -1,5 +1,5 @@
 <template>
-    <div id="coverage-table" class="relative grid grid-rows-3 grid-cols-13 font-roulette w-full h-full" style=" height: 90px">
+    <div id="coverage-table" class="relative grid grid-rows-3 grid-cols-13 font-roulette w-full h-full">
       <div v-for="spot in table" :class="spot.class" class="text-xs p-1 font-inter font-bold borders">{{ formatter.number(spot.text) }}</div>
     </div>
 </template>
