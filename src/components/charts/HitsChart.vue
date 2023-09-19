@@ -8,18 +8,39 @@
   </div>
 </template>
 <script>
-import { redrawAll } from "dc";
-import { mapGetters } from "vuex";
-import { debounce } from "@/lib/Utils";
-import HitsChart from "@/lib/charts/HitsChart.js";
-import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue";
-import chartResize from "@/lib/charts/ChartResize";
+import { redrawAll } from "dc"
+import { mapGetters } from "vuex"
+import HitsChart from "@/lib/charts/HitsChart.js"
+import chartResize from "@/lib/charts/ChartResize"
+import ChartPlaceholder from "@/components/charts/ChartPlaceholder.vue"
+import { useScreenSize } from "@/composables/useScreenSize";
 
 let unsubscribe
 let hitsChart
 
+const calculateSizeFromScreen = (screenSize) => {
+  if (screenSize.includes('md') || screenSize.includes('lg')) {
+    console.log('large screen')
+    return {
+      width: window.innerWidth * 0.09,
+      height: window.innerHeight * 0.09
+    }
+  }
+
+  if (screenSize.includes('sm') || screenSize.includes('xs')) {
+    console.log('small SCREEN::')
+    return {
+      width: window.innerWidth * 0.18,
+      height: window.innerHeight * 0.15
+    }
+  }
+}
+
 export default {
   components: { ChartPlaceholder },
+  props: {
+    ...useScreenSize()
+  },
   data () {
     return {
       showPlaceholder: true,
@@ -42,10 +63,15 @@ export default {
     const outcomes = this.getOutcomes();
     const hitsChartRef = this.$refs.hitsChartRef;
 
+    const { width, height } = calculateSizeFromScreen(this.screenSize)
+
+    console.log('hitschart::width', width)
+    console.log('hitschart::height', height)
+
     hitsChart = new HitsChart();
     hitsChart
         .parentHeight(100)
-        .parentWidth(null)
+        .parentWidth(width)
         .render(outcomes);
 
     addEventListener('resize', this.chartResizer(hitsChart, hitsChartRef))

@@ -68,25 +68,33 @@
       <div class="min-h-0 flex-1 flex overflow-auto text-gray-300">
         <!-- Narrow sidebar-->
         <side-nav />
-        <div class="flex flex-col">
-          <div class="flex">
-            <div class="flex flex-col">
-              <this-round />
-              <winning-numbers />
-            </div>
-            <div class="flex flex-col">
+        <div class="flex flex-col p-5 justify-between w-full">
+          <div class="flex gap-5">
+            <div class="flex flex-col gap-5">
               <div class="flex">
-                <spin-rounds-mobile />
-                <spin-history-bar />
                 <radial-wheel-chart />
-                <div class="flex flex-col">
-                  <red-black-chart  />
-                  <even-odd-chart  />
-                </div>
-                <div class="flex flex-col">
-                  <twelves-chart />
-                </div>
+                <spin-history-bar />
               </div>
+              <div class="flex flex">
+                <red-black-chart  />
+                <even-odd-chart  />
+              </div>
+              <div class="flex flex">
+                <twelves-chart />
+              </div>
+              <div class="flex flex-col">
+                <hits-chart :screen-size="['sm']" />
+<!--                <win-loss-bank-chart />-->
+              </div>
+            </div>
+            <div class="flex flex-col gap-5 grow">
+              <div class="flex flex justify-between">
+                <this-round />
+                <spin-rounds-mobile />
+                <winning-numbers />
+              </div>
+
+
               <div class="flex flex-col">
                 <win-probability />
                 <coverage-table />
@@ -99,14 +107,17 @@
               </div>
             </div>
           </div>
-          <div>
-            Bottom
+          <div class="game-control flex justify-end gap-5">
+            <div class="flex flex-col gap-4">
+              <clear-bets-button />
+              <undo-last-bet-button />
+            </div>
+            <chip-selection-panel :screen-size="isTabletDimensions ? ['sm'] : ['lg']" />
+            <div class="flex flex-col gap-4">
+              <replay-last-bet-button />
+              <double-bet-button />
+            </div>
             <spin-button />
-            <clear-bets-button />
-            <replay-last-bet-button />
-            <double-bet-button />
-            <undo-last-bet-button />
-            <chip-selection-panel />
           </div>
         </div>
       </div>
@@ -173,11 +184,14 @@ import TableLimits from "@/components/TableLimits.vue";
 import CoverageTable from "@/components/CoverageTable.vue";
 import SpinHistory from "@/components/SpinHistory.vue";
 import WinProbability from "@/components/WinProbability.vue";
+import WinLossBankChart from "@/components/charts/WinLossBankChart.vue";
+import HitsChart from "@/components/charts/HitsChart.vue";
 
 
 export default {
   name: 'App',
   components: {
+    HitsChart, WinLossBankChart,
     WinProbability,
     SpinHistory,
     CoverageTable,

@@ -21,7 +21,7 @@
 
     <div class="text-base font-normal text-gray-400 font-inter hidden lg:block">
       <span>
-        Total Won
+        Total Won:
       </span>
       <span class="text-base text-gray-400">
         <span id="won"><span>{{ formatter.money(won) }}</span></span>
@@ -30,7 +30,7 @@
 
     <div class="text-base font-normal text-gray-400 font-inter hidden lg:block">
       <span>
-        Winnings
+        Winnings:
       </span>
       <span>
         <span id="winnings"><span>{{ formatter.money(currentWinnings) }}</span></span>
@@ -83,21 +83,6 @@ export default {
       this.won = displayFacts.won
       this.loss = displayFacts.loss
       this.currentWinnings = currentWinnings
-
-      // tween('#won')
-      //     .initValue(this.won)
-      //     .onRender(val => this.won = val)
-      //     .render(displayFacts.won)
-      //
-      // tween('#loss')
-      //     .initValue(this.loss)
-      //     .onRender(val => this.loss = val)
-      //     .render(displayFacts.loss)
-      //
-      // tween('#winnings')
-      //     .initValue(this.currentWinnings)
-      //     .onRender(val => this.currentWinnings = val)
-      //     .render(currentWinnings)
     }
   },
   mounted () {

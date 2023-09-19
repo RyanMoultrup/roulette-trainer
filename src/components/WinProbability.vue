@@ -8,7 +8,7 @@
 <script setup>
 import { computed } from "vue"
 import { useStore } from "vuex"
-import formatter from "@/lib/formatter";
+import formatter from "@/lib/formatter"
 
 const store = useStore()
 const probability = computed(() => store.getters['strategy/getProbability'])

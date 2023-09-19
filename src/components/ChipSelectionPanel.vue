@@ -50,6 +50,8 @@ export default {
       this.updateSelectedChip(chip);
     },
     currentScreen () {
+      // console.log('getScreenSize(this.screenSize)', getScreenSize(this.screenSize))
+      // console.log('-------', this.screenSize)
       return getScreenSize(this.screenSize) === 'lg' || getScreenSize(this.screenSize) === 'xl' ? 'lg' : 'md'
     }
   }
