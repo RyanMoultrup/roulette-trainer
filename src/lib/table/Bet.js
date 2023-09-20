@@ -100,6 +100,7 @@ export default class {
   undoLastChip () {
     if (this.lastChipAmts.length === 1) {
       store.commit('strategy/removeBet', this.betPlacement)
+      store.dispatch('strategy/betStats')
       return
     }
     const lastChipAmt = this.lastChipAmts.pop()

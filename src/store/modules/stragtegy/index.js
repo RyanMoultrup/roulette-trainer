@@ -77,7 +77,14 @@ const mutations = {
     },
     clear (state) {
         // currentBetSpots = [];
-        state.strategy = {};
+        state.strategy = {}
+        state.probability = 0
+        state.max = 0
+        state.min = 0
+        state.negativeProfit = 0
+        state.positiveProfit = 0
+        state.highestPayouts = []
+        state.currentBetTotal = 0
     },
     reset (state) {
         state.lastBetIndex = null
@@ -368,9 +375,7 @@ const actions = {
         })
     },
     async clearAll ({ commit, state }) {
-        for (const bet in state.strategy) {
-            await commit('removeBet', bet)
-        }
+        commit('clear')
     },
     reset ({ commit }) {
         commit('reset')

@@ -1,6 +1,6 @@
 <template>
   <div class="rounded text-gray-400">
-    <div class="flex flex-col justify-between h-full">
+    <div class="flex flex-col justify-between h-full grow">
       <div class="flex flex-row">
         <this-round />
         <winning-numbers />

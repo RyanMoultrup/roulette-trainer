@@ -1,5 +1,5 @@
 <template>
-  <div class="border-r border-r-green-700 pr-4">
+  <div class="border-r border-r-green-700 grow pr-4">
     <div class="font-lobster text-2xl">This Round</div>
     <div class="flex items-center gap-3 group">
       <span>Bets: {{ allBets.length }}</span>

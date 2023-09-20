@@ -1,5 +1,5 @@
 <template>
-  <div class="border-l border-l-green-900 px-4 pb-4">
+  <div class="border-l border-l-green-900 px-4 pb-4 grow">
     <div class="font-lobster text-2xl">Winning Numbers</div>
     <div class="flex items-baseline gap-3">
       <span>Total: {{ getHighestPayouts.length }}</span>

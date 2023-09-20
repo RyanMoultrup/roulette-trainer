@@ -18,10 +18,17 @@ let unsubscribe
 let twelvesChart
 
 const calculateSizeFromScreen = (screenSize) => {
-  if (screenSize.includes('md') || screenSize.includes('lg')) {
+  if (screenSize.includes('lg')) {
     return {
       width: window.innerWidth * 0.09,
       height: window.innerHeight * 0.09
+    }
+  }
+
+  if (screenSize.includes('md')) {
+    return {
+      width: window.innerWidth * 0.15,
+      height: window.innerHeight * 0.1
     }
   }
 

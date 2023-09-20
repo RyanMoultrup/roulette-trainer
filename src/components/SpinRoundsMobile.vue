@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center gap-3 justify-self-end">
-    <div class="font-roulette relative w-28 h-28 rounded-full" :style="{'background-color': colorHex}">
+    <div class="font-roulette relative rounded-full" :class="sizeCss()" :style="{'background-color': colorHex}">
       <div class="spin-result flex flex-col items-center">
         <div class="result-number">{{ spin }}</div>
         <div class="result-color">{{ color }}</div>
@@ -14,15 +14,20 @@
 import spots from '../lib/table/spots'
 import chartResize from "@/lib/charts/ChartResize"
 import RoundsDisplay from "@/components/RoundsDisplay.vue"
+import { useScreenSize, getScreenSize } from "@/composables/useScreenSize"
 
 export default {
   components: { RoundsDisplay },
+  props: {
+    ...useScreenSize()
+  },
   data () {
     return {
       spin: null,
       color: '',
       colorHex: '#0C4F4C',
       chartResizer: chartResize,
+      currentScreen: getScreenSize(this.screenSize)
     }
   },
   watch: {
@@ -35,31 +40,44 @@ export default {
       this.color = spots[val].color
       this.spin = val === 37 ? 0 : val
     }
+  },
+  methods: {
+    sizeCss () {
+      return {
+        'display-sm': this.currentScreen === 'sm',
+        'display-md': this.currentScreen === 'md'
+      }
+    },
   }
 }
 </script>
 
 <style>
-  .spin-result {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%)
-  }
+.display-sm {
+  @apply w-28 h-28
+}
 
-  .result-number {
-    font-size: 2.5rem;
-    font-weight: 500;
-    //line-height: 1.2;
-    //margin-top: 18px;
-  }
+.display-md {
+  @apply w-32 h-32
+}
 
-  .result-color {
-    text-transform: uppercase;
-    font-size: 13px;
-    line-height: 1;
-  }
+.spin-result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
 
+.result-number {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.result-color {
+  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 1;
+}
 
 .color-green {
   background-color: green;
