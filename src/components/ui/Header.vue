@@ -15,7 +15,7 @@
         <new-game-button v-if="showButtons()" />
         <save-game-button v-if="showButtons()" />
       </div>
-      <div>
+      <div v-if="showBank()">
         <display-stats />
       </div>
       <div class="ml-10 pr-4 flex-shrink-0 flex items-center space-x-10 text-gray-200">
@@ -49,11 +49,10 @@ export default {
 
     const mode = computed(() => store.getters['simulation/getMode'])
 
-    const showButtons = () => {
-      return route.name !== 'home' && mode.value !== 'review'
-    }
+    const showButtons = () => route.name !== 'home' && mode.value !== 'review'
+    const showBank = () => route.name !== 'home'
 
-    return { username, showButtons }
+    return { username, showButtons, showBank }
   },
   methods: {
     showSettings () {
